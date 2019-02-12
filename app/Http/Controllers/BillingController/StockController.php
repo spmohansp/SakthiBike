@@ -8,10 +8,10 @@ use App\Http\Controllers\Controller;
 class StockController extends Controller
 {
    public function addStock(){
-   return view('admin.billing.stock.add_stock');
+   return view('admin.stock.add');
    }
 
    public function viewStock(){
-   return view('admin.billing.stock.view_stock');
+   return view('admin.stock.view');
    }
 }
