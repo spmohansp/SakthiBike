@@ -20,7 +20,7 @@ View Clients
 
           </div>
           <div class="col-lg-2">
-            <button class="btn btn-primary" type="button" onclick="window.location.href='{{ url('admin/client/add') }}'">Add Clients</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href=">Add Clients</button>
           </div>
         </div><br>
         <div class="row">
@@ -42,22 +42,22 @@ View Clients
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach($Clients as $key=>$Client)
+                   
                       <tr>
-                        <td>{{ ++$key }}</td>
-                        <td>{{ $Client->name }}</td>
-                        <td>{{ $Client->business_name }}</td>
-                        <td>{{ $Client->email }}</td>
-                        <td>{{ $Client->phone_no }}</td>
-                        <td>{{ $Client->address }}</td>
-                        <td>{{ $Client->notes }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td>
-                          <a href="{{ route('admin.editClient',$Client->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
-                          <a href="{{ route('admin.deleteClient',$Client->id) }}"> <button class="btn btn-primary" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></a>
+                          <a href=""><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
+                          <a href=""> <button class="btn btn-primary" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></a>
                         </td>
                       </tr>
-                   @endforeach
+                   
                 </tbody>
               </table>
             </div>

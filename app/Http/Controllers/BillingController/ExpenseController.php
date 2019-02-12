@@ -12,7 +12,7 @@ class ExpenseController extends Controller
     }
 
    public function viewExpense(){
-   	return view('admin.expenses.view_expenses');
-   }
+	return view('admin.expenses.view_expenses');
+	}
     
 }
