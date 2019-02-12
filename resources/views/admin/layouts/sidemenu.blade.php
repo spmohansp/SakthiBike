@@ -1,4 +1,4 @@
-<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
 <ul class="app-menu">
   <li class="treeview">
@@ -25,15 +25,15 @@
   <li class="treeview">
     <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-exchange"></i><span class="app-menu__label">Transactions</span><i class="treeview-indicator fa fa-angle-right"></i></a>
     <ul class="treeview-menu">
-      <li><a class="treeview-item" href="{{ url('admin/add_deposit') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Deposit</a></li>
-      <li><a class="treeview-item" href="{{ url('admin/view_deposit') }}"><i class="icon fa fa-chevron-circle-right"></i> View Deposit</a></li>
+      <li><a class="treeview-item" href="{{ url('admin/deposit/add') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Deposit</a></li>
+      <li><a class="treeview-item" href="{{ url('admin/deposit') }}"><i class="icon fa fa-chevron-circle-right"></i> View Deposit</a></li>
     </ul>
   </li>
   <li class="treeview">
     <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-print"></i><span class="app-menu__label">Print</span><i class="treeview-indicator fa fa-angle-right"></i></a>
     <ul class="treeview-menu">
-      <li><a class="treeview-item" href="{{ url('admin/add_print') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Print</a></li>
-      <li><a class="treeview-item" href="{{ url('admin/view_stock') }}"><i class="icon fa fa-chevron-circle-right"></i>View Print</a></li>
+      <li><a class="treeview-item" href="{{ url('admin/print/add') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Print</a></li>
+      <li><a class="treeview-item" href="{{ url('admin/prints') }}"><i class="icon fa fa-chevron-circle-right"></i>View Print</a></li>
     </ul>
   </li>
   <li class="treeview">

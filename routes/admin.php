@@ -13,12 +13,12 @@ Route::get('/home', function () {
 })->name('home');
 
 //Deposit
-Route::get('/add_deposit','BillingController\DepositController@addDeposit');
-Route::get('/view_deposit','BillingController\DepositController@viewDeposit');
+Route::get('/deposit/add','BillingController\DepositController@addDeposit');
+Route::get('/deposits','BillingController\DepositController@viewDeposit');
 
 //Expenses
-Route::get('/add_expenses','BillingController\ExpenseController@addExpense');
-Route::get('/view_expenses','BillingController\ExpenseController@viewExpense');
+Route::get('/expense/add','BillingController\ExpenseController@addExpense');
+Route::get('/expenses','BillingController\ExpenseController@viewExpense');
 
 //Ledger
 Route::get('/ledgers', 'BillingController\LedgerController@viewLedger');
@@ -29,12 +29,12 @@ Route::get('/ledger/{id}/delete', 'BillingController\LedgerController@deleteLedg
 
 
 //Stock
-Route::get('/add_stock','BillingController\StockController@addStock');
-Route::get('/view_stock', 'BillingController\StockController@viewStock');
+Route::get('/stock/add','BillingController\StockController@addStock');
+Route::get('/stock', 'BillingController\StockController@viewStock');
 
 //Print
-Route::get('/add_print','BillingController\PrintController@addPrint');
-Route::get('/view_print','BillingController\PrintController@viewPrint');
+Route::get('/print/add','BillingController\PrintController@addPrint');
+Route::get('/prints','BillingController\PrintController@viewPrint');
 
 //Clients
 Route::get('/client/add','BillingController\ClientController@addClient');

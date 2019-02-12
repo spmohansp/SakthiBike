@@ -1,4 +1,4 @@
-@extends('admin.billing.layouts.master')
+@extends('admin.layouts.master')
 
 @section('Current-Page')
 Add Expenses 

@@ -9,11 +9,11 @@ class DepositController extends Controller
 {
 
 	public function addDeposit(){
-   	return view('admin.billing.deposit.add_deposit');
+   	return view('admin.deposit.add_deposit');
      }
 
 
     public function viewDeposit(){
-   	return view('admin.billing.deposit.view_deposit');
+   	return view('admin.deposit.view_deposit');
      }
 }
