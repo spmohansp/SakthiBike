@@ -1,4 +1,4 @@
-@extends('admin.billing.layouts.master')
+@extends('admin.layouts.master')
 
 @section('Current-Page')
     Dashboard
@@ -11,12 +11,4 @@
 @endsection
 
 @section('content')
-
-
-    <div class="app-title">
-
-
-
-
-    </div>
 @endsection

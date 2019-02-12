@@ -1,4 +1,4 @@
-@include('admin.billing.layouts.header')
+@include('admin.layouts.header')
  <title>logo</title>
 </head>
 <body class="app sidebar-mini rtl">
@@ -12,9 +12,10 @@
             <li class="breadcrumb-item"><a href="#">@yield('Menu')</a></li>
           </ul>
       </div>
-@include('admin.billing.layouts.sidemenu')
-@include('admin.billing.layouts.menu')
-@include('admin.billing.layouts.errors')	
+@include('admin.layouts.sidemenu')
+@include('admin.layouts.menu')
+@include('admin.layouts.errors')
 @yield('content')
-@include('admin.billing.layouts.script')
-@include('admin.billing.layouts.footer')
+@include('admin.layouts.script')
+@include('admin.layouts.footer')
+@yield('loadMore')

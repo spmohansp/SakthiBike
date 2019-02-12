@@ -8,18 +8,16 @@ use App\Http\Controllers\Controller;
 class ClientController extends Controller
 {
     public function addClient(){
-    	return view('admin.billing.client.add_clients');
+    	return view('admin.client.add_clients');
     }
 
     public function saveClient(Request $request){
     	$request->validate([
     		'name'=>'required',
     		'business_name'=>'required',
-    		'email'=>'required',
-    		'phone_no'=>'required',
+    		'email'=>'required|email|unique:clients',
+    		'phone_no'=>'required|min:10|max:10|unique:clients',
     		'address'=>'required',
-    		'gst'=>'required',
-    		'notes'=>'required',
     	]);
     	try{
 	    	$Client = new Client;
@@ -40,16 +38,23 @@ class ClientController extends Controller
 
 
     public function viewClient(){
-    	$Client = Client::all();
-    	return view('admin.billing.client.view_clients',compact('Client'));
+    	$Clients = Client::all();
+    	return view('admin.client.view_clients',compact('Clients'));
     }
 
     public function editClient($id){
     	$Client = Client::FindorFail($id);
-    	return view('admin.billing.client.edit_clients',compact('Client'));
+    	return view('admin.client.edit_clients',compact('Client'));
     }
 
-    public function updateClient($id){
+    public function updateClient($id,Request $request){
+        $request->validate([
+            'name'=>'required',
+            'business_name'=>'required',
+            'email'=>'required|email',
+            'phone_no'=>'required|min:10|max:10',
+            'address'=>'required',
+        ]);
 	    try{
 	    	$Client = Client::FindorFail($id);
 	    	$Client->name = request('name');
@@ -68,8 +73,7 @@ class ClientController extends Controller
 
     public function deleteClient($id){
     	try{
-	    	$Client = Client::FindorFail($id);
-	    	$Client->delete();
+	    	Client::FindorFail($id)->delete();
 	    	return back()->with('success','Client Deleted Successfully');
     	}catch(Exception $e){
     		return back()->with('danger','Something went wrong');

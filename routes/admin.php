@@ -37,9 +37,9 @@ Route::get('/add_print','BillingController\PrintController@addPrint');
 Route::get('/view_print','BillingController\PrintController@viewPrint');
 
 //Clients
-Route::get('add_clients','BillingController\ClientController@addClient');
-Route::post('add_clients','BillingController\ClientController@saveClient')->name('saveClient');
-Route::get('view_clients','BillingController\ClientController@viewClient');
-Route::get('edit_clients/{id}','BillingController\ClientController@editClient')->name('editClient');
-Route::post('update_clients/{id}','BillingController\ClientController@updateClient')->name('updateClient');
-Route::get('delete_clients/{id}','BillingController\ClientController@deleteClient')->name('deleteClient');
+Route::get('/client/add','BillingController\ClientController@addClient');
+Route::post('/client/add','BillingController\ClientController@saveClient')->name('saveClient');
+Route::get('/clients','BillingController\ClientController@viewClient');
+Route::get('/client/{id}/edit','BillingController\ClientController@editClient')->name('editClient');
+Route::post('/client/{id}/update','BillingController\ClientController@updateClient')->name('updateClient');
+Route::get('/client/{id}/delete','BillingController\ClientController@deleteClient')->name('deleteClient');

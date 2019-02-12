@@ -1,4 +1,4 @@
-@extends('admin.billing.layouts.master')
+@extends('admin.layouts.master')
 
 @section('Current-Page')
 Add Clients
@@ -16,24 +16,22 @@ Add Clients
     
     <div class="tile">
       <div class="pad">
-        <div class="row section-gap">
+        <div class="row">
           <div class="col-lg-8">
-
           </div>
           <div class="col-lg-4">
-            <button class="btn btn-primary" type="button" onclick="window.location.href='{{ url('admin/view_clients') }}'">View Deposit</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='{{ url('/admin/clients') }}'">View Clients</button>
           </div>
         </div><br>
         <div class="row">
         <div class="col-md-2">
-
         </div>
         <div class="col-md-8 ">
           <div class="">
             <div class="row">
               <div class="col-lg-12">
                 <form action="{{ route('admin.saveClient') }}" method="post" enctype="multipart/form-data">
-                  @csrf
+                  {{ csrf_field() }}
                   <div class="form-group">
                     <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Client Name" name="name">
                   </div>
@@ -61,11 +59,9 @@ Add Clients
                   <div class="form-group">
                     <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Notes" name="notes">
                   </div>
-            </div>
-            </div>
-            <div class="">
-              <button class="btn btn-primary" type="submit">Submit</button>
-            </div>
+              <div class="">
+                <button class="btn btn-primary" type="submit">Add Client</button>
+              </div>
             </form>
           </div>
         </div>
@@ -73,6 +69,8 @@ Add Clients
 
         </div>
       </div>
+      </div>
+    </div>
       </div>
     </div>
   @endsection
