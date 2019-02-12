@@ -20,7 +20,7 @@ Add Products
           <div class="col-lg-8">
           </div>
           <div class="col-lg-4">
-            <button class="btn btn-primary" type="button" onclick="window.location.href='{{ url('/admin/clients') }}'">View Clients</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='{{ route('admin.viewProducts') }}'">View Product</button>
           </div>
         </div><br>
         <div class="row">

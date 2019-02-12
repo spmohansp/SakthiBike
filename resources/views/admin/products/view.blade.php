@@ -1,15 +1,15 @@
 @extends('admin.layouts.master')
 
 @section('Current-Page')
-View Clients
+View Products
 @endsection
 
 @section('Parent-Menu')
-Clients
+Products
 @endsection
 
 @section('Menu')
-View Clients
+View Products
 @endsection
 
 @section('content')

@@ -13,9 +13,9 @@ Route::get('/home', function () {
 })->name('home');
 
 //Product
-Route::get('/product/add', 'BillingController\ProductController@addproduct');
-Route::get('/product/view', 'BillingController\ProductController@viewproduct');
-Route::POSt('/product/saveproduct', 'BillingController\ProductController@storeproduct')->name('storeproduct');
+Route::get('/product/add', 'BillingController\ProductController@addproduct')->name('addProduct');
+Route::get('/products', 'BillingController\ProductController@viewproduct')->name('viewProducts');
+Route::post('/product/add', 'BillingController\ProductController@storeproduct')->name('storeproduct');
 
 Route::get('/deposit/add','BillingController\DepositController@addDeposit');
 Route::get('/deposits','BillingController\DepositController@viewDeposit');
