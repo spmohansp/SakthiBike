@@ -15,6 +15,7 @@ Route::get('/home', function () {
 //Product
 Route::get('/product/add', 'BillingController\ProductController@addproduct');
 Route::get('/product/view', 'BillingController\ProductController@viewproduct');
+Route::POSt('/product/saveproduct', 'BillingController\ProductController@storeproduct')->name('storeproduct');
 
 Route::get('/deposit/add','BillingController\DepositController@addDeposit');
 Route::get('/deposits','BillingController\DepositController@viewDeposit');

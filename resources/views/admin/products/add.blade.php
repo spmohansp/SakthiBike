@@ -30,34 +30,66 @@ Add Clients
           <div class="">
             <div class="row">
               <div class="col-lg-12">
-                <form action="{{ route('admin.saveClient') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.storeproduct') }}" method="post" enctype="multipart/form-data">
                   {{ csrf_field() }}
                   <div class="form-group">
-                    <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Client Name" name="name">
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Business Name" name="business_name">
+                    <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Product ID" name="Product_ID">
                   </div>
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <input class="form-control form-control-lg" id="" type="email" aria-describedby="emailHelp" placeholder="Enter Email Id" name="email">
+                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Product Name (English)" name="Product_Name_(English)">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Phone number" name="phone_no">
+                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Product Name (Tamil)" name="Product_Name_(Tamil)">
                       </div>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <textarea class="form-control form-control-lg" id="exampleTextarea" placeholder="Enter Address" rows="3" name="address"></textarea>
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Cost Price" name="Cost_Price">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Expense" name="Expense">
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Enter GST Number" name="gst" >
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Selling Price" name="Selling_Price">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Selling Price With Tax" name="Selling_Price_With_Tax">
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Notes" name="notes">
+
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="CGST" name="CGST">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="SGST" name="SGST">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="CESS" name="CESS">
+                      </div>
+                    </div>
                   </div>
               <div class="">
                 <button class="btn btn-primary" type="submit">Add Client</button>
