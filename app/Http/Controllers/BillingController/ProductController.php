@@ -30,6 +30,7 @@ class ProductController extends Controller
             $Product->CGST = request('CGST');
             $Product->SGST = request('SGST');
             $Product->CESS = request('CESS');
+            $Product->minimun_quantity = request('minimun_quantity');
             $Product->save();
             return back()->with('success', 'Product Added Successfully');
         } catch (Exception $e) {
@@ -55,11 +56,18 @@ class ProductController extends Controller
             $Product->CGST = request('CGST');
             $Product->SGST = request('SGST');
             $Product->CESS = request('CESS');
+            $Product->minimun_quantity = request('minimun_quantity');
             $Product->save();
             return back()->with('success', 'Product Updated Successfully');
         } catch (Exception $e) {
             return back()->with('danger', 'Something went wrong');
         }
+    }
+
+    public function deleteProduct($id)
+    {
+        Products::findorfail($id)->delete();
+        return back()->with('success', 'Product Deleted Successfully');
     }
 
 }

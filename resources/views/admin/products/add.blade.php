@@ -30,9 +30,18 @@ Add Products
               <div class="col-lg-12">
                 <form action="{{ route('admin.storeproduct') }}" method="post" enctype="multipart/form-data">
                   {{ csrf_field() }}
+                    <div class="row">
+                    <div class="col-lg-6">
                   <div class="form-group">
-                    <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Product ID" name="Product_ID">
+                    <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Product ID" name="Product_ID">
                   </div>
+                    </div>
+                    <div class="col-lg-6">
+                  <div class="form-group">
+                    <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Product Min Quantity" name="minimun_quantity">
+                  </div>
+                    </div>
+                    </div>
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
@@ -89,6 +98,8 @@ Add Products
                       </div>
                     </div>
                   </div>
+
+                  
               <div class="">
                 <button class="btn btn-primary" type="submit">Add Product</button>
               </div>

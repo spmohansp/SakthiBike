@@ -18,6 +18,8 @@ Route::get('/products', 'BillingController\ProductController@viewproduct')->name
 Route::post('/product/add', 'BillingController\ProductController@storeproduct')->name('storeproduct');
 Route::get('/product/{id}/edit', 'BillingController\ProductController@editProduct')->name('editProduct');
 Route::post('/product/{id}/update', 'BillingController\ProductController@updateProduct')->name('updateProduct');
+Route::get('/product/{id}/delete', 'BillingController\ProductController@deleteProduct')->name('deleteProduct');
+
 
 
 
