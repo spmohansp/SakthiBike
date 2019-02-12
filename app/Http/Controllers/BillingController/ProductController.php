@@ -13,7 +13,8 @@ class ProductController extends Controller
     }
 
     public function viewproduct(){
-        return view('admin.products.view');
+        $details = Products::all();
+        return view('admin.products.view',compact('details'));
     }
 
     public function storeproduct(){
@@ -29,10 +30,44 @@ class ProductController extends Controller
             $Product->CGST = request('CGST');
             $Product->SGST = request('SGST');
             $Product->CESS = request('CESS');
+            $Product->minimun_quantity = request('minimun_quantity');
             $Product->save();
             return back()->with('success', 'Product Added Successfully');
         } catch (Exception $e) {
             return back()->with('danger', 'Something went wrong');
         }
     }
+
+    public function editProduct($id){
+        $Product = Products::findorfail($id);
+        return view('admin.products.edit',compact('Product'));
+    }
+
+    public function updateProduct($id){
+        try {
+            $Product = Products::findorfail($id);
+            $Product->Product_ID = request('Product_ID');
+            $Product->Product_Name_English = request('Product_Name_English');
+            $Product->Product_Name_Tamil = request('Product_Name_Tamil');
+            $Product->Cost_Price = request('Cost_Price');
+            $Product->Expense = request('Expense');
+            $Product->Selling_Price = request('Selling_Price');
+            $Product->Selling_Price_With_Tax = request('Selling_Price_With_Tax');
+            $Product->CGST = request('CGST');
+            $Product->SGST = request('SGST');
+            $Product->CESS = request('CESS');
+            $Product->minimun_quantity = request('minimun_quantity');
+            $Product->save();
+            return back()->with('success', 'Product Updated Successfully');
+        } catch (Exception $e) {
+            return back()->with('danger', 'Something went wrong');
+        }
+    }
+
+    public function deleteProduct($id)
+    {
+        Products::findorfail($id)->delete();
+        return back()->with('success', 'Product Deleted Successfully');
+    }
+
 }

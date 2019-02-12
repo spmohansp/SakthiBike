@@ -1,15 +1,15 @@
 @extends('admin.layouts.master')
 
 @section('Current-Page')
-View Clients
+View Products
 @endsection
 
 @section('Parent-Menu')
-Clients
+Products
 @endsection
 
 @section('Menu')
-View Clients
+View Products
 @endsection
 
 @section('content')
@@ -32,25 +32,26 @@ View Clients
                   <tr>
                     <th>S.No</th>
                     <th>Product Id</th>
-                    <th>Quantity</th>
+                    <th>Product Name</th>
+                    <th>Remaining Quantity</th>
                     <th>Amount</th>
-                    <th>Date</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($details as $key=>$detail)
                       <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td> {{ ++$key }}</td>
+                        <td> {{ $detail->Product_ID }}</td>
+                        <td> {{ $detail->Product_Name_English }}</td>
+                        <td>-</td>
+                        <td> {{ $detail->Cost_Price }}</td>
                         <td>
-                          <a href=""><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
-                          <a href=""> <button class="btn btn-primary" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></a>
+                          <a href="{{ route('admin.editProduct',$detail->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
+                          <a href="{{ route('admin.deleteProduct',$detail->id) }}"> <button class="btn btn-primary" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></a>
                         </td>
                       </tr>
-                   
+                   @endforeach
                 </tbody>
               </table>
             </div>
