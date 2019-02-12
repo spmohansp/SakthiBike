@@ -11,6 +11,10 @@ class StockController extends Controller
    return view('admin.stock.add');
    }
 
+   public function saveStock(){
+   return 1;
+   }
+
    public function viewStock(){
    return view('admin.stock.view');
    }

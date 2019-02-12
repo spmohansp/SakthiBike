@@ -20,7 +20,7 @@ View Clients
 
           </div>
           <div class="col-lg-2">
-            <button class="btn btn-primary" type="button" onclick="window.location.href=">Add Clients</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='{{ url('admin/product/add') }}'">Add Product</button>
           </div>
         </div><br>
         <div class="row">
@@ -31,22 +31,15 @@ View Clients
                 <thead>
                   <tr>
                     <th>S.No</th>
-                    <th>Name</th>
-                    <th>Business Name</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
-                    <th>Notes</th>
-                    <th>Status</th>
+                    <th>Product Id</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                    <th>Date</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                   
                       <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

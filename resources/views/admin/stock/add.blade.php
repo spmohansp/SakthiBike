@@ -15,89 +15,60 @@ Add Stock
 @section('content')
     <div class="tile">
       <div class="pad">
-        <div class="row ">
+        <div class="row">
           <div class="col-lg-8">
-
           </div>
           <div class="col-lg-4">
-            <button class="btn btn-primary" type="button" onclick="window.location.href='view_deposit.php'">View Deposit</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='{{ url('/admin/stock/view') }}'">View Stock</button>
           </div>
         </div><br>
         <div class="row">
-          <div class="col-lg-2 "></div>
-          <div class="col-lg-4 col-xs-4 w3-center">
-            <div class="form-group">
-                <label class="col-form-label col-form-label-lg" for="inputLarge">Product ID</label>
-                <input class="form-control form-control" id="inputLarge" type="text">
-            </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8 ">
+          <div class="">
+            <div class="row">
+              <div class="col-lg-12">
+                <form action="{{ route('admin.saveStock') }}" method="post">
+                  {{ csrf_field() }}
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <select class="form-control form-control-lg" name="product_id" required="">
+                          <option value="">Select Product</option>
+                          <option>hjh</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Quantity" name="quantity" required="">
+                      </div>
+                    </div>
+                  <div class="col-lg-6">
+                  <div class="form-group">
+                    <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Amount" name="amount" required="">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input class="form-control form-control-lg" id="" type="date" aria-describedby="emailHelp" placeholder="" name="date" required="">
+                  </div>
+                  </div>
 
-          </div>
-          <div class="col-lg-4 col-xs-4 w3-center">
-            <div class="form-group">
-              <label class="col-form-label col-form-label-lg " for="inputLarge">Date</label>
-              <input class="form-control form-control" id="inputLarge" type="date">
-            </div>
+                </div>
+              <div class="">
+                <button class="btn btn-primary" type="submit">Add Stock</button>
+              </div>
+            </form>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-2 "></div>
-          <div class="col-lg-4 col-xs-4 w3-center">
-            <div class="form-group">
-                <label class="col-form-label col-form-label-lg " for="inputLarge">Product Name (English)</label>
-                <input class="form-control form-control" id="inputLarge" type="text">
-            </div>
-          </div>
-          <div class="col-lg-4 col-xs-4 w3-center">
-            <div class="form-group">
-                <label class="col-form-label col-form-label-lg " for="inputLarge">Product Name (Tamil)</label>
-                <input class="form-control form-control" id="inputLarge" type="text">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-4 col-xs-4 w3-center">
-            <div class="form-group">
-                <label class="col-form-label col-form-label-lg " for="inputLarge">Cost Price</label>
-                <input class="form-control form-control" id="inputLarge" type="number">
-            </div>
-          </div>
+        <div class="col-md-2">
 
-          <div class="col-lg-4 col-xs-4 w3-center">
-            <div class="form-group">
-                <label class="col-form-label col-form-label-lg" for="inputLarge">Selling Price</label>
-                <input class="form-control form-control" id="inputLarge" type="number">
-            </div>
-
-          </div>
         </div>
-        <div class="row">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-4 col-xs-4 w3-center">
-            <div class="form-group">
-                <label class="col-form-label col-form-label-lg " for="inputLarge">Quantity</label>
-                <input class="form-control form-control" id="inputLarge" type="number">
-            </div>
-          </div>
-          <div class="col-lg-4 col-xs-4 w3-center">
-            <div class="form-group">
-                <label class="col-form-label col-form-label-lg" for="inputLarge">Enter Amount</label>
-                <input class="form-control form-control" id="inputLarge" type="number">
-            </div>
-
-          </div>
-          <div class="col-lg-7"></div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2">
-
-          </div>
-          <div class="col-lg-10">
-            <div class="tile-footer">
-              <button class="btn btn-primary"style="margin-left:62.8%" type="submit" >Submit</button>
-            </div>
-          </div>
-        </div>
+      </div>
+      </div>
+    </div>
       </div>
     </div>
   @endsection
