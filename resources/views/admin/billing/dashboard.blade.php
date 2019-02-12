@@ -1,4 +1,4 @@
-@extends('billing.layouts.master')
+@extends('admin.billing.layouts.master')
 
 @section('Current-Page')
 Dashboard

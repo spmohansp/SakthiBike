@@ -13,27 +13,22 @@ Ledger
 @endsection
 
 @section('content')
-    <div class="app-title">
-        <div>
-          <h1><i class="fa fa-user" style="color:#663ab7"></i>  &nbsp Ledger </h1>
-        </div>
-        <ul class="app-breadcrumb breadcrumb">
-          <li class="breadcrumb-item"><i class="fa fa-home fa-lg" ></i></li>
-          <li class="breadcrumb-item"><a href="add_deposit.php">Add Deposit</a></li>
-        </ul>
-    </div>
+    
     <div class="tile">
       <div class="pad">
         <div class="row section-gap">
           <div class="col-lg-2 col-xs-1"></div>
           <div class="col-lg-3 col-xs-4 ">
+            <form action="{{ route('admin.addLedger') }}" method="post" enctype="multipart/form-data">
+              @csrf
             <div class="form-group">
                 <label class="col-form-label col-form-label-lg" for="inputLarge">Enter Name</label>
-                <input class="form-control form-control-lg" id="inputLarge" type="text">
+                <input class="form-control form-control-lg" id="inputLarge" type="text" name="name">
             </div>
             <div class="tile-footer">
               <button class="btn btn-primary" type="submit" >Submit</button>
             </div>
+          </form>
           </div>
           <div class="col-lg-7"></div>
         </div>
@@ -48,26 +43,25 @@ Ledger
                     <tr>
                       <th>S.No</th>
                       <th>Name</th>
-
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @if(!empty($ledger))
+                    @foreach($Ledger as $Ledgers)
                     <tr>
-                      <td>1</td>
-                      <td>Mark</td>
-
+                      <td>{{ $Ledgers->id }}</td>
+                      <td>{{ $Ledgers->name }}</td>
+                      <td>
+                           <a href="{{ route('admin.editLedger',$Ledgers->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
+                            <a href="{{ route('admin.deleteLedger',$Ledgers->id) }}"> <button class="btn btn-primary" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></a>
+                      </td>
                     </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Jacob</td>
-
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Larry</td>
-
-                    </tr>
-                  </tbody>
+                    @endforeach
+                    @else
+                    <td colspan="3">No Record Found(s)</td>
+                    @endif
+                   </tbody>
                 </table>
               </div>
             </div>

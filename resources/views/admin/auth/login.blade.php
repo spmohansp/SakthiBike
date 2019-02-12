@@ -1,6 +1,5 @@
-@extends('admin.layout.master')
+@include('admin.billing.layouts.header')
 
-@section('content')
 
   <section class="material-half-bg">
     <div class="cover"></div>
@@ -41,5 +40,5 @@
             </form>
          </div>
     </section>
-
-@endsection
+@include('admin.billing.layouts.script')
+@include('admin.billing.layouts.footer')

@@ -1,4 +1,4 @@
-<header class="app-header"><a class="app-header__logo" href="dashboard.php"><!--<img class="imglogo" src="url('/images/logo.png')"" alt="User Image">--><h1>Logo</h1></a>
+<header class="app-header"><a class="app-header__logo" href="#"><!--<img class="imglogo" src="url('/images/logo.png')"" alt="User Image">--><h1>Logo</h1></a>
   <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
   <!-- Navbar Right Menu-->
   <ul class="app-nav">
@@ -16,6 +16,6 @@
         </form>
       </ul>
     </li>
-    
+
   </ul>
 </header>
