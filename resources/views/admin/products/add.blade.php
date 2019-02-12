@@ -1,15 +1,15 @@
 @extends('admin.layouts.master')
 
 @section('Current-Page')
-Add Clients
+Add Products
 @endsection
 
 @section('Parent-Menu')
-Clients
+Products
 @endsection
 
 @section('Menu')
-Add Clients
+Add Products
 @endsection
 
 @section('content')
@@ -38,12 +38,12 @@ Add Clients
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Product Name (English)" name="Product_Name_(English)">
+                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Product Name (English)" name="Product_Name_English">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Product Name (Tamil)" name="Product_Name_(Tamil)">
+                          <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Product Name (Tamil)" name="Product_Name_Tamil">
                       </div>
                     </div>
                   </div>
