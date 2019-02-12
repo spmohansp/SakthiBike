@@ -12,6 +12,10 @@ Route::get('/home', function () {
     return view('admin.home');
 })->name('home');
 
+//Product
+Route::get('/product/add', 'BillingController\ProductController@addproduct');
+Route::get('/product/view', 'BillingController\ProductController@viewproduct');
+
 //Deposit
 Route::get('/add_deposit','BillingController\DepositController@addDeposit');
 Route::get('/view_deposit','BillingController\DepositController@viewDeposit');
@@ -29,8 +33,8 @@ Route::get('/ledger/{id}/delete', 'BillingController\LedgerController@deleteLedg
 
 
 //Stock
-Route::get('/add_stock','BillingController\StockController@addStock');
-Route::get('/view_stock', 'BillingController\StockController@viewStock');
+Route::get('/stock/add','BillingController\StockController@addStock');
+Route::get('/stock/view', 'BillingController\StockController@viewStock');
 
 //Print
 Route::get('/add_print','BillingController\PrintController@addPrint');

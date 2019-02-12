@@ -8,11 +8,11 @@ use App\Http\Controllers\Controller;
 class ExpenseController extends Controller
 {
     public function addExpense(){
-    	return view('admin.billing.expenses.add_expenses');
+    	return view('admin.expenses.add_expenses');
     }
 
    public function viewExpense(){
-   	return view('admin.billing.expenses.view_expenses');
+   	return view('admin.expenses.view_expenses');
    }
     
 }
