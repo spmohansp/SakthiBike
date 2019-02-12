@@ -1,0 +1,6 @@
+@include('admin.billing.layouts.header')
+@include('admin.billing.layouts.sidemenu')
+@include('admin.billing.layouts.menu')
+@yield('content')
+@include('admin.billing.layouts.script')
+@include('admin.billing.layouts.footer')
