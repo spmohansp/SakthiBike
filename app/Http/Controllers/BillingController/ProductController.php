@@ -13,7 +13,8 @@ class ProductController extends Controller
     }
 
     public function viewproduct(){
-        return view('admin.products.view');
+        $details = Products::all();
+        return view('admin.products.view',compact('details'));
     }
 
     public function storeproduct(){
@@ -35,4 +36,5 @@ class ProductController extends Controller
             return back()->with('danger', 'Something went wrong');
         }
     }
+    
 }
