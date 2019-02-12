@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('CGST')->nullable();
             $table->string('SGST')->nullable();
             $table->string('CESS')->nullable();
+            $table->string('minimun_quantity')->nullable();
             $table->timestamps();
         });
     }
