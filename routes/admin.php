@@ -15,6 +15,7 @@ Route::get('/home', function () {
 //Product
 Route::get('/product/add', 'BillingController\ProductController@addproduct');
 Route::get('/product/view', 'BillingController\ProductController@viewproduct');
+Route::POSt('/product/saveproduct', 'BillingController\ProductController@storeproduct')->name('storeproduct');
 
 Route::get('/deposit/add','BillingController\DepositController@addDeposit');
 Route::get('/deposits','BillingController\DepositController@viewDeposit');
@@ -53,5 +54,9 @@ Route::get('/client/{id}/delete','BillingController\ClientController@deleteClien
 
 
 //EXPENSE
-Route::get('/expense/add','BillingController\ExpenseController@addExpense');
-Route::get('/expenses','BillingController\ExpenseController@viewExpense');
+Route::get('/expense/add','BillingController\ExpenseController@addExpense')->name('addExpense');
+Route::get('/expenses','BillingController\ExpenseController@viewExpense')->name('viewExpense');
+Route::post('/expense/add','BillingController\ExpenseController@saveExpense')->name('saveExpense');
+Route::get('/expense/{id}/edit','BillingController\ExpenseController@editExpense')->name('editExpense');
+Route::post('/expense/{id}/update','BillingController\ExpenseController@updateExpense')->name('updateExpense');
+Route::get('/expense/{id}/delete','BillingController\ExpenseController@deleteExpense')->name('deleteExpense');

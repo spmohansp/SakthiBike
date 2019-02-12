@@ -5,7 +5,7 @@ View Expenses
 @endsection
 
 @section('Parent-Menu')
-Transactions
+Expense
 @endsection
 
 @section('Menu')
@@ -16,34 +16,42 @@ View Expenses
      
     <div class="tile">
       <div class="pad">
-        <div class="row section-gap">
+        <div class="row">
           <div class="col-lg-10">
 
           </div>
           <div class="col-lg-2">
-            <button class="btn btn-primary" type="button" onclick="window.location.href='add_expenses.php'">Add Expenses</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='{{ route('admin.addExpense') }}'">Add Expenses</button>
           </div>
         </div><br>
         <div class="row ">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-10 col-xs-12">
+          <div class="col-lg-12 col-xs-12">
               <div class="tile">
                 <table class="table">
                   <thead>
                     <tr>
                       <th>S.No</th>
                       <th>Date</th>
+                      <th>Expense</th>
                       <th>Amount</th>
                       <th>Description</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                  @foreach($Expenses as $key=>$Expense)
                     <tr>
-                      <td>1</td>
-                      <td>12.01.2019</td>
-                      <td>$121</td>
-                      <td>Lorem Ipsum is simply dummy text of the printing </td>
+                      <td>{{ ++$key }}</td>
+                      <td>{{ @$Expense->date }}</td>
+                      <td>{{ @$Expense->Ledger->name }}</td>
+                      <td>{{ @$Expense->amount }}</td>
+                      <td>{{ @$Expense->description }}</td>
+                      <td>
+                        <a href="{{ route('admin.editExpense',$Expense->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
+                        <a href="{{ route('admin.deleteExpense',$Expense->id) }}"> <button class="btn btn-primary" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></a>
+                      </td>
                     </tr>
+                    @endforeach
 
                   </tbody>
                 </table>
