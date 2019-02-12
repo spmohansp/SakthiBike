@@ -15,7 +15,7 @@ Add Stock
 @section('content')
     <div class="tile">
       <div class="pad">
-        <div class="row section-gap">
+        <div class="row ">
           <div class="col-lg-8">
 
           </div>
