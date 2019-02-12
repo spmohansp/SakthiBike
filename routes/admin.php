@@ -21,8 +21,8 @@ Route::get('/add_expenses','BillingController\ExpenseController@addExpense');
 Route::get('/view_expenses','BillingController\ExpenseController@viewExpense');
 
 //Ledger
-Route::get('/ledger', 'BillingController\LedgerController@viewLedger');
-Route::post('/saveLedger','BillingController\LedgerController@addLedger')->name('addLedger');
+Route::get('/ledgers', 'BillingController\LedgerController@viewLedger');
+Route::post('/ledger/add','BillingController\LedgerController@addLedger')->name('addLedger');
 Route::get('/ledger/{id}/edit', 'BillingController\LedgerController@editLedger')->name('editLedger');
 Route::post('/ledger/{id}/update', 'BillingController\LedgerController@updateLedger')->name('updateLedger');
 Route::get('/ledger/{id}/delete', 'BillingController\LedgerController@deleteLedger')->name('deleteLedger');
