@@ -35,4 +35,31 @@ class ProductController extends Controller
             return back()->with('danger', 'Something went wrong');
         }
     }
+
+
+    public function editProduct($id){
+        $Product = Products::findorfail($id);
+        return view('admin.products.edit',compact('Product'));
+    }
+
+    public function updateProduct($id){
+        try {
+            $Product = Products::findorfail($id);
+            $Product->Product_ID = request('Product_ID');
+            $Product->Product_Name_English = request('Product_Name_English');
+            $Product->Product_Name_Tamil = request('Product_Name_Tamil');
+            $Product->Cost_Price = request('Cost_Price');
+            $Product->Expense = request('Expense');
+            $Product->Selling_Price = request('Selling_Price');
+            $Product->Selling_Price_With_Tax = request('Selling_Price_With_Tax');
+            $Product->CGST = request('CGST');
+            $Product->SGST = request('SGST');
+            $Product->CESS = request('CESS');
+            $Product->save();
+            return back()->with('success', 'Product Updated Successfully');
+        } catch (Exception $e) {
+            return back()->with('danger', 'Something went wrong');
+        }
+    }
+
 }
