@@ -5,7 +5,7 @@ Edit Ledger
 @endsection
 
 @section('Parent-Menu')
-Transactions
+  Ledger
 @endsection
 
 @section('Menu')
