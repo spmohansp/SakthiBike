@@ -75,7 +75,7 @@ Add Print
               <select class="form-control" id="exampleSelect1">
                 <option>Paid</option>
                 <option>Not Paid</option>
-                <option>Pending</otion>
+                <option>Pending</option>
               </select>
           </div>
           </div>
@@ -177,33 +177,29 @@ Add Print
         </div>
       </div>
     </div>
- 
-  <script src="js/jquery-3.2.1.min.js"></script>
 
 
-    <!-- The javascript plugin to display page loading on top-->
+   @endsection
 
-    <!-- Page specific javascripts-->
-    <script type="text/javascript" src="js/plugins/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="js/plugins/select2.min.js"></script>
-    <script type="text/javascript">
-      $('#sl').click(function(){
-      	$('#tl').loadingBtn();
-      	$('#tb').loadingBtn({ text : "Signing In"});
-      });
+@section('loadMore')
 
-      $('#el').click(function(){
-      	$('#tl').loadingBtnComplete();
-      	$('#tb').loadingBtnComplete({ html : "Sign In"});
-      });
+  <script type="text/javascript">
+    $('#sl').click(function(){
+      $('#tl').loadingBtn();
+      $('#tb').loadingBtn({ text : "Signing In"});
+    });
 
-      $('#demoDate').datepicker({
-      	format: "dd/mm/yyyy",
-      	autoclose: true,
-      	todayHighlight: true
-      });
+    $('#el').click(function(){
+      $('#tl').loadingBtnComplete();
+      $('#tb').loadingBtnComplete({ html : "Sign In"});
+    });
 
-      $('#demoSelect').select2();
-    </script>
+    $('#demoDate').datepicker({
+      format: "dd/mm/yyyy",
+      autoclose: true,
+      todayHighlight: true
+    });
 
-   @endsection 
+    $('#demoSelect').select2();
+  </script>
+@endsection
