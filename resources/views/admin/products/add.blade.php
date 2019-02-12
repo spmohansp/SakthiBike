@@ -24,9 +24,7 @@ Add Products
           </div>
         </div><br>
         <div class="row">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-8 ">
+        <div class="col-md-12">
           <div class="">
             <div class="row">
               <div class="col-lg-12">
@@ -92,7 +90,7 @@ Add Products
                     </div>
                   </div>
               <div class="">
-                <button class="btn btn-primary" type="submit">Add Client</button>
+                <button class="btn btn-primary" type="submit">Add Product</button>
               </div>
             </form>
           </div>

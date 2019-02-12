@@ -16,14 +16,13 @@ Route::get('/home', function () {
 Route::get('/product/add', 'BillingController\ProductController@addproduct')->name('addProduct');
 Route::get('/products', 'BillingController\ProductController@viewproduct')->name('viewProducts');
 Route::post('/product/add', 'BillingController\ProductController@storeproduct')->name('storeproduct');
+Route::get('/product/{id}/edit', 'BillingController\ProductController@editProduct')->name('editProduct');
+Route::post('/product/{id}/update', 'BillingController\ProductController@updateProduct')->name('updateProduct');
+
+
 
 Route::get('/deposit/add','BillingController\DepositController@addDeposit');
 Route::get('/deposits','BillingController\DepositController@viewDeposit');
-
-//Expenses
-Route::get('/expense/add','BillingController\ExpenseController@addExpense');
-Route::get('/expenses','BillingController\ExpenseController@viewExpense');
-
 
 //Ledger
 Route::get('/ledgers', 'BillingController\LedgerController@viewLedger');
