@@ -37,7 +37,9 @@ Route::get('/ledger/{id}/delete', 'BillingController\LedgerController@deleteLedg
 Route::get('/stock/add','BillingController\StockController@addStock');
 Route::post('/stock/add','BillingController\StockController@saveStock')->name('saveStock');
 Route::get('/stock/view', 'BillingController\StockController@viewStock');
-
+Route::get('/stock/{id}/edit','BillingController\StockController@editStock')->name('editStock');
+Route::post('/stock/{id}/update','BillingController\StockController@updateStock')->name('updateStock');
+Route::get('/stock/{id}/delete','BillingController\StockController@deleteStock')->name('deleteStock');
 
 //Print
 Route::get('/print/add','BillingController\PrintController@addPrint');

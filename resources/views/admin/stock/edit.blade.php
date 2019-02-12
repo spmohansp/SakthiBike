@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('Current-Page')
-Add Stock
+Edit Stock
 @endsection
 
 @section('Parent-Menu')
@@ -9,7 +9,7 @@ Transactions
 @endsection
 
 @section('Menu')
-Add Stock
+Edit Stock
 @endsection
 
 @section('content')
@@ -29,32 +29,32 @@ Add Stock
           <div class="">
             <div class="row">
               <div class="col-lg-12">
-                <form action="{{ route('admin.saveStock') }}" method="post">
+                <form action="{{ route('admin.updateStock',$Stock->id) }}" method="post">
                   {{ csrf_field() }}
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
                         <select class="form-control form-control-lg" name="product_id" required="">
                           <option value="">Select Product</option>
-                          @foreach($Stock as $Stocks)
-                          <option value={{ $Stocks->id }}>{{ $Stocks->Product_Name_English}} </option>
+                          @foreach($Products as $Product)
+                          <option value={{ $Product->id }} {{ $Product->id==$Stock->product_id?'selected':'' }}>{{ $Product->Product_Name_English}} </option>
                           @endforeach
                         </select>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Quantity" name="quantity" required="">
+                        <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Quantity" name="quantity" value="{{ $Stock->quantity }}" required="">
                       </div>
                     </div>
                   <div class="col-lg-6">
                   <div class="form-group">
-                    <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Amount" name="amount" required="">
+                    <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Amount" name="amount" value="{{ $Stock->amount }}" required="">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <input class="form-control form-control-lg" id="" type="date" aria-describedby="emailHelp" placeholder="" name="date" required="">
+                    <input class="form-control form-control-lg" id="" type="date" aria-describedby="emailHelp" placeholder="" name="date" required="" value="{{ $Stock->date }}">
                   </div>
                   </div>
 

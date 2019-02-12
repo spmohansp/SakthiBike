@@ -39,18 +39,19 @@ View Stock
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($Stock as $Stocks)
                       <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ $Stocks->id }}</td>
+                        <td>{{ $Stocks->Products->Product_Name_English }}</td>
+                        <td>{{ $Stocks->quantity }}</td>
+                        <td>{{ $Stocks->amount }}</td>
+                        <td>{{ $Stocks->date }}</td>
                         <td>
-                          <a href=""><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
-                          <a href=""> <button class="btn btn-primary" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></a>
+                          <a href="{{ route('admin.editStock',$Stocks->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
+                          <a href="{{ route('admin.deleteStock',$Stocks->id) }}"> <button class="btn btn-primary" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></a>
                         </td>
                       </tr>
-                   
+                  @endforeach
                 </tbody>
                 </table>
               </div>
