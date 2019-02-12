@@ -16,10 +16,6 @@ Route::get('/home', function () {
 Route::get('/add_deposit','BillingController\DepositController@addDeposit');
 Route::get('/view_deposit','BillingController\DepositController@viewDeposit');
 
-//Expenses
-Route::get('/add_expenses','BillingController\ExpenseController@addExpense');
-Route::get('/view_expenses','BillingController\ExpenseController@viewExpense');
-
 //Ledger
 Route::get('/ledgers', 'BillingController\LedgerController@viewLedger');
 Route::post('/ledger/add','BillingController\LedgerController@addLedger')->name('addLedger');
@@ -43,3 +39,8 @@ Route::get('/clients','BillingController\ClientController@viewClient');
 Route::get('/client/{id}/edit','BillingController\ClientController@editClient')->name('editClient');
 Route::post('/client/{id}/update','BillingController\ClientController@updateClient')->name('updateClient');
 Route::get('/client/{id}/delete','BillingController\ClientController@deleteClient')->name('deleteClient');
+
+
+//EXPENSE
+Route::get('/expense/add','BillingController\ExpenseController@addExpense');
+Route::get('/expenses','BillingController\ExpenseController@viewExpense');
