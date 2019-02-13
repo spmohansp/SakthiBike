@@ -189,7 +189,7 @@ Add Print
                                                 <h4 class="pull-right"><b>Cash Given</b> :</h4>
                                             </th>
                                             <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i><b id="discountdiv"></b></b></h4>
+                                                <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" name="paid_amount" required></b></h4>
                                             </th>
 
                                             </thead>
@@ -198,7 +198,7 @@ Add Print
                                                 <h4 class="pull-right"><b>Balance</b> :  </h4>
                                             </th>
                                             <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i><b id="gtotal"></b></b></h4>
+                                                <h4><b><i class="fa fa-inr"></i><b id="BalanceAmount"></b></b></h4>
                                             </th>
                                             </thead>
                                         </table>
@@ -253,8 +253,8 @@ Add Print
                             url: '/admin/product/getProduct',
                             data:{product_id:product_id,qty:qty},
                             success:function (data) {
-
                                 $('#productbilltable').append(data);
+                                calculateTotal();
                             }
                         });
                     }
@@ -263,9 +263,24 @@ Add Print
                 $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
                     e.preventDefault();
                     $(this).parent().parent().remove();
+                    calculateTotal();
                 });
+                $('#total_paid_amount').on('keyup',function (e) {
+                    e.preventDefault();
+                    calculateTotal()
+                });
+
             });
 
+
+            function calculateTotal() {
+                var total=0;
+                $(".total_amount").each(function() {
+                    total = parseInt($(this).val()) + parseInt(total);
+                });
+                $('#TOTALBILL').html(total);
+                $('#BalanceAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()));
+            }
     </script>
 
 @endsection
