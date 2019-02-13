@@ -47,6 +47,7 @@ Route::get('/print/add','BillingController\PrintController@addPrint');
 Route::get('/prints','BillingController\PrintController@viewPrint');
 Route::post('/bill/add','BillingController\PrintController@saveBill')->name('saveBill');
 Route::get('/print/{id}/edit', 'BillingController\PrintController@editPrint')->name('editPrint');
+Route::post('/print/{id}/update', 'BillingController\PrintController@UpdateBill')->name('UpdateBill');
 
 
 
