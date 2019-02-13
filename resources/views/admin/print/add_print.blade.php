@@ -13,193 +13,237 @@ Add Print
 @endsection
 
 @section('content')
-    <div class="tile">
-      <div class="pad">
-        <div class="row  ">
-          <div class="col-lg-8">
 
-          </div>
-          <div class="col-lg-4">
-            <button class="btn btn-primary" type="button" >Save Invoice</button>
-          </div>
-        </div><br>
-        <div class="row">
-          <div class="col-lg-2 "></div>
+        <div class="">
+            <div class="pad">
+                <div class="row">
+                    <div class="col-md-2">
 
-          <div class="col-lg-4 col-xs-4 w3-center">
-            <div class="tile-body">
-              <label class="col-form-label col-form-label-lg" for="inputLarge">Customer Mobile Number</label>
-                <select class="form-control" id="demoSelect" multiple="">
-                  <optgroup label="Select Cities">
-                    <option>9876543210</option>
-                    <option>9876543211</option>
-                    <option>9876543213</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9811265410</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                    <option>9876543210</option>
-                  </optgroup>
-                </select>
-              </div>
-          </div>
-          <div class="col-lg-4 col-xs-4 w3-center">
-            <div class="form-group">
-                <label class="col-form-label col-form-label-lg" for="inputLarge">Customer Name</label>
+                    </div>
+                    <div class="col-md-12" style="padding:5px;">
 
+                        <form action="{{ route('admin.saveBill') }}" method="post">
+                            {{ csrf_field() }}
+                        <div class="tile">
+                            <h3 style="margin-top:0px;">Customer Details</h3>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Enter Customer name</label>
+                                        <select class="form-control Selectpicker" onchange="showclientname()"  id="client_id" style="width:100% !important">
+                                            <optgroup label="Select Client" >
+                                                @foreach($Clients as $Client)
+                                                    <option value="{{ $Client->id }}">{{ $Client->name }}</option>
+                                                @endforeach
+
+
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Customer Name</label>
+                                        <br>
+                                        <span id="client_name"></span>
+                                        <!--<select class="form-control Selectpicker" style="width:100% !important">
+                                            <option>Enter Customer Phone Number</option>
+                                            <option>Product1</option>
+                                            <option>Product2</option>
+                                        </select>-->
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <button type="submit"  class="btn btn-success "  style="padding:10px 20px;" >
+                                        Save Bill
+                                    </button>
+                                    <!--
+                                    <div class="form-group">
+                                      <label>Bill No</label>
+                                        <input class="form-control mobilenumber" type="text" placeholder="Enter Bill No" disabled>
+                                    </div>-->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Payment type</label>
+                                        <div class="form-group" >
+                                            <select class="form-control Selectpicker"  onchange="showbilltable()" id="discount_type" style="width:100% !important">
+                                                <optgroup label="Select Discount type" >
+                                                    <option value="" price="" >Cash</option>
+                                                    <option value="1"  ></option>
+                                                    <option value="2"  >Cheque</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Payment status</label>
+                                        <select class="form-control Selectpicker" onchange="showpaymentstatus()"  id="payment_status" style="width:100% !important">
+                                            <optgroup label="Select Payment" >
+                                                <option value="1" selected>Paid</option>
+                                                <option value="2">Partially Paid</option>
+                                                <option value="3">Due</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 payment2" style="display:none">
+                                    <div class="form-group">
+                                        <label>Paid Amount</label>
+                                        <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" id="paid_amount" onchange="showdueamount()">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 payment2" style="display:none">
+                                    <div class="form-group">
+                                        <label>Due Amount</label><br>
+                                        <span id="due_amount"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tile">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Add Products</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Quantity </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                                <div id="productsbilllist">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group" >
+                                                <select class="form-control Selectpicker"  id="product_id" style="width:100% !important">
+                                                    <optgroup label="Select Product" >
+                                                        @foreach($Products as $Product)
+                                                            <option value="{{ $Product->id }}">{{ $Product->Product_Name_English }}</option>
+                                                        @endforeach
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input class="form-control nextrow " type="text" placeholder="Enter Quantity" min="1" id="qty">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <button type="button" onclick="addbillproducts()"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="tile">
+                                    <div class="-body table-responsive">
+                                        <table class="table table-hover table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>S.no</th>
+                                                <th>Items</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>CGST</th>
+                                                <th>SGST</th>
+                                                <th>CESS</th>
+                                                <th>Total Cost</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="productbilltable">
+                                            </tbody>
+                                            <thead>
+                                            <th colspan="7">
+                                                <h4 class="pull-right"><b>Total</b> :</h4>
+                                            </th>
+                                            <th colspan="2">
+                                                <h4><b><i class="fa fa-inr"></i><b id="total"></b></b></h4>
+                                            </th>
+
+                                            </thead>
+                                            <thead>
+                                            <th colspan="7">
+                                                <h4 class="pull-right"><b>Cash Given</b> :</h4>
+                                            </th>
+                                            <th colspan="2">
+                                                <h4><b><i class="fa fa-inr"></i><b id="discountdiv"></b></b></h4>
+                                            </th>
+
+                                            </thead>
+                                            <thead>
+                                            <th colspan="7">
+                                                <h4 class="pull-right"><b>Balance</b> :</h4>
+                                            </th>
+                                            <th colspan="2">
+                                                <h4><b><i class="fa fa-inr"></i><b id="gtotal"></b></b></h4>
+                                            </th>
+
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-
-          </div>
         </div>
-        <div class="row">
-          <div class="col-lg-2">
-
-          </div>
-          <div class="col-lg-4 col-xs-4">
-            <div class="form-group">
-              <label class="col-form-label col-form-label-lg" for="exampleSelect1">Payment Status</label>
-              <select class="form-control" id="exampleSelect1">
-                <option>Paid</option>
-                <option>Not Paid</option>
-                <option>Pending</option>
-              </select>
-          </div>
-          </div>
-          <div class="col-lg-7"></div>
-        </div>
-
-      </div>
-    </div>
-    <div class="tile">
-      <div class="pad">
-
-        <div class="row">
-          <div class="col-lg-2 "></div>
-
-          <div class="col-lg-2 col-xs-4 w3-center">
-            <div class="tile-body">
-              <label class="col-form-label col-form-label-lg" for="exampleSelect1"></label>
-              <input class="form-control form-control" id="inputLarge" placeholder="Enter Name" type="text">
-
-              </div>
-          </div>
-          <div class="col-lg-2 col-xs-4 w3-center">
-            <div class="form-group">
-              <label class="col-form-label col-form-label-lg" for="exampleSelect1"></label>
-                <input class="form-control form-control" id="inputLarge" placeholder="Enter Quantity" type="text">
-
-            </div>
-
-          </div>
-          <div class="col-lg-2 col-xs-4 w3-center">
-            <div class="form-group">
-                <label class="col-form-label col-form-label-lg" for="inputLarge">CGST</label>
-
-            </div>
-
-          </div>
-          <div class="col-lg-2 col-xs-4 w3-center">
-            <div class="form-group">
-                <label class="col-form-label col-form-label-lg" for="inputLarge">SGST</label>
-
-            </div>
-
-          </div>
-          <div class="col-lg-2 col-xs-4 w3-center">
-            <div class="form-group">
-                <label class="col-form-label col-form-label-lg" for="inputLarge">CESS</label>
-
-            </div>
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-10">
-
-          </div>
-          <div class="col-lg-2">
-            <button class="btn btn-primary"style="margin-left:62.8%" type="submit" > <i class="fa fa-plus"></i> Add</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <div class="tile">
-      <div class="pad">
-        <div class="row">
-          <div class="col-lg-12 col-xs-12">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th >S.No</th>
-                  <th> Name</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>CGST</th>
-                  <th>SGST</th>
-                  <th>CESS</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th colspan="2"></th>
-                  <th colspan="5" style="text-align:right"> <h4>Total : </h4> </th>
-                  <th></th>
-                </tr>
-                <tr>
-                  <th colspan="2"></th>
-                  <th colspan="5" style="text-align:right"> <h4>Discount : </h4> </th>
-                  <th></th>
-                </tr>
-                <tr>
-                  <th colspan="2"></th>
-                  <th colspan="5" style="text-align:right"> <h4>Grand Total : </h4> </th>
-                  <th></th>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
+        </form>
 
    @endsection
 
 @section('loadMore')
 
-  <script type="text/javascript">
-    $('#sl').click(function(){
-      $('#tl').loadingBtn();
-      $('#tb').loadingBtn({ text : "Signing In"});
-    });
+    <script src="{{ url('billing/js/jquery-3.2.1.min.js') }}"></script>
 
-    $('#el').click(function(){
-      $('#tl').loadingBtnComplete();
-      $('#tb').loadingBtnComplete({ html : "Sign In"});
-    });
 
-    $('#demoDate').datepicker({
-      format: "dd/mm/yyyy",
-      autoclose: true,
-      todayHighlight: true
-    });
+    <!-- The javascript plugin to display page loading on top-->
 
-    $('#demoSelect').select2();
-  </script>
+    <!-- Page specific javascripts-->
+    <script type="text/javascript" src="{{ url('billing/js/plugins/bootstrap-datepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('billing/js/plugins/select2.min.js') }}"></script>
+    <script type="text/javascript">
+        $('#sl').click(function(){
+            $('#tl').loadingBtn();
+            $('#tb').loadingBtn({ text : "Signing In"});
+        });
+
+        $('#el').click(function(){
+            $('#tl').loadingBtnComplete();
+            $('#tb').loadingBtnComplete({ html : "Sign In"});
+        });
+
+        $('#demoDate').datepicker({
+            format: "dd/mm/yyyy",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('#demoSelect').select2();
+    </script>
+
 @endsection
