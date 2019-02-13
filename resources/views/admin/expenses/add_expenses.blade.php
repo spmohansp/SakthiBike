@@ -37,7 +37,7 @@ Add Expenses
                       <input class="form-control" name="amount" id="inputLarge" type="number" required>
                   </div>
                     <div class="form-group">
-                        <label class="col-form-label col-form-label-lg " for="inputLarge">Enter Amount</label>
+                        <label class="col-form-label col-form-label-lg " for="inputLarge">Ledger Type</label>
                         <select name="expense_id" id="" class="form-control" required>
                             <option value="">Select Expense</option>
                             @foreach($Legers as $Leger)

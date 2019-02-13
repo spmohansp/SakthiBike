@@ -45,9 +45,7 @@ Route::get('/stock/{id}/delete','BillingController\StockController@deleteStock')
 //Print
 Route::get('/print/add','BillingController\PrintController@addPrint');
 Route::get('/prints','BillingController\PrintController@viewPrint');
-Route::post('/bill/add',function (){
-    return request()->all();
-})->name('saveBill');
+Route::post('/bill/add','BillingController\PrintController@saveBill')->name('saveBill');
 
 
 //Clients
