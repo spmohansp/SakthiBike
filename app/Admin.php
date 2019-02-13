@@ -38,4 +38,10 @@ class Admin extends Authenticatable
     {
         $this->notify(new AdminResetPassword($token));
     }
+
+    public function RemainingProducts($Product_id){
+        $TotalStock =  Stock::where('product_id',$Product_id)->sum('quantity');
+        $SalseStock =  BillProduct::where('product_id',$Product_id)->sum('quantity');
+        return $TotalStock-$SalseStock;
+    }
 }

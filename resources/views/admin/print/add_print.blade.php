@@ -163,7 +163,6 @@ Add Print
                                         <table class="table table-hover table-bordered">
                                             <thead>
                                             <tr>
-                                                <th>S.no</th>
                                                 <th>Items</th>
                                                 <th>Quantity</th>
                                                 <th>Price</th>
@@ -181,7 +180,7 @@ Add Print
                                                 <h4 class="pull-right"><b>Total</b> :</h4>
                                             </th>
                                             <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i><b id="total"></b></b></h4>
+                                                <h4><b><i class="fa fa-inr"></i> <b id="TOTALBILL"></b></b></h4>
                                             </th>
 
                                             </thead>
@@ -196,12 +195,11 @@ Add Print
                                             </thead>
                                             <thead>
                                             <th colspan="7">
-                                                <h4 class="pull-right"><b>Balance</b> :</h4>
+                                                <h4 class="pull-right"><b>Balance</b> :  </h4>
                                             </th>
                                             <th colspan="2">
                                                 <h4><b><i class="fa fa-inr"></i><b id="gtotal"></b></b></h4>
                                             </th>
-
                                             </thead>
                                         </table>
                                     </div>
@@ -242,5 +240,32 @@ Add Print
 
         $('#demoSelect').select2();
     </script>
-    
+
+    <script type="text/javascript">
+            $(document).ready(function() {
+                $('#TOTALBILL').html(0);
+                $("#addbillproduct").click(function () {
+                    var product_id = $("#product_id").val();
+                    var qty = $("#qty").val();
+                    if(product_id !='' && qty !=''){
+                        $.ajax({
+                            type: 'get',
+                            url: '/admin/product/getProduct',
+                            data:{product_id:product_id,qty:qty},
+                            success:function (data) {
+                                console.log(data);
+                                $('#productbilltable').append(data);
+                            }
+                        });
+                    }
+                 });
+
+                $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
+                    e.preventDefault();
+                    $(this).parent().parent().remove();
+                });
+            });
+
+    </script>
+
 @endsection
