@@ -198,7 +198,7 @@ Add Print
                                                 <h4 class="pull-right"><b>Balance</b> :  </h4>
                                             </th>
                                             <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i><b id="BalanceAmount"></b></b></h4>
+                                                <h4><b><i class="fa fa-inr"></i><b id="BalanceAmount" name="BalanceAmount" ></b></b></h4>
                                             </th>
                                             </thead>
                                         </table>
@@ -267,7 +267,7 @@ Add Print
                 });
                 $('#total_paid_amount').on('keyup',function (e) {
                     e.preventDefault();
-                    calculateTotal()
+                    calculateTotal();
                 });
 
             });
