@@ -19,11 +19,11 @@
 <script src="{{ url('billing/js/plugins/pace.min.js') }}"></script>
 <!-- Page specific javascripts-->
 
-<script type="text/javascript" src="{{ url('billing/js/plugins/jquery.dataTables.min.js') }}"></script>
-<script type="text/javascript" src="{{ url('billing/js/plugins/dataTables.bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('/billing/js/plugins/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('/billing/js/plugins/dataTables.bootstrap.min.js') }}"></script>
 
 <!-- DataTable -->
-<script type="text/javascript" src="{{ url('billing/js/plugins/bootstrap-notify.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('/billing/js/plugins/bootstrap-notify.min.js') }}"></script>
 
 <!-- sweetalert -->
-<script type="text/javascript" src="{{ url('billing/js/plugins/sweetalert.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('/billing/js/plugins/sweetalert.min.js') }}"></script>
