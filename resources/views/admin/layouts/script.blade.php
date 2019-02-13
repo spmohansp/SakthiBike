@@ -3,7 +3,7 @@
 <script src="{{ url('/billing/js/bootstrap.min.js') }}"></script>
 <script src="{{ url('/billing/js/main.js') }}"></script>
 <script src="{{url('/billing/js/ajax.js') }}"></script>
-<script src="{{url('/billing/js/bill.js') }}"></script>
+
 {{--<script src="{{ url('billing/js/menu.js') }} "></script>--}}
 
 <script src="{{ url('billing/js/plugins/pace.min.js') }}"></script>
