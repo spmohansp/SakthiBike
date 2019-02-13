@@ -71,7 +71,17 @@ class ProductController extends Controller
     }
 
     public function getProduct(){
-        return $Product = Products::findorfail(request('product_id'));
+        $Product = Products::findorfail(request('product_id'));
+         return $data=     '<tr>
+                                <th>'.$Product->Product_Name_English.'<input type="hidden" value="'.$Product->id.'" name="id[]"></th>
+                                <th>'.request('qty').'<input type="hidden" value="'.request('qty').'" name="qty[]"></th>
+                                <th>'.$Product->Selling_Price.'</th>
+                                <th>'.((($Product->Selling_Price*$Product->CGST)/100)*request('qty')).'</th>
+                                <th>'.((($Product->Selling_Price*$Product->SGST)/100)*request('qty')).'</th>
+                                <th>'.((($Product->Selling_Price*@$Product->CESS)/100)*request('qty')).'</th>
+                                <th>'.($Product->Selling_Price*request('qty') + ((($Product->Selling_Price*$Product->CGST)/100)*request('qty')) +((($Product->Selling_Price*$Product->SGST)/100)*request('qty')) + ((($Product->Selling_Price*@$Product->CESS)/100)*request('qty'))).'<input type="hidden" value="'.($Product->Selling_Price*request('qty') + ((($Product->Selling_Price*$Product->CGST)/100)*request('qty')) +((($Product->Selling_Price*$Product->SGST)/100)*request('qty')) + ((($Product->Selling_Price*@$Product->CESS)/100)*request('qty'))).'" name="qty[]"></th>
+                                <th><button type="button" class="btn btn-primary btn-sm RemoveProductButon"><i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></th>
+                            </tr>';
     }
 
 }

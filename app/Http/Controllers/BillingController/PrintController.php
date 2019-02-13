@@ -21,6 +21,7 @@ class PrintController extends Controller
 	}
 
     public function saveBill(){
+	    return request()->all();
         $Bill = new Bill;
         $LastBill = Bill::orderBy('id', 'DESC')->first();
 
