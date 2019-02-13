@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BillingController;
 use App\Bill;
+use App\BillProduct;
 use App\Products;
 use App\Client;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class PrintController extends Controller
 	}
 
     public function saveBill(){
-	    return request()->all();
+//	    return request()->all();
         $Bill = new Bill;
         $LastBill = Bill::orderBy('id', 'DESC')->first();
 
@@ -38,6 +39,14 @@ class PrintController extends Controller
         $Bill->products = request('products');
         $Bill->balance_amount = request('balance_amount');
         $Bill->save();
+
+        foreach(request('product_id') as $key=> $product){
+            $BillProduct = new BillProduct;
+            $BillProduct->product_id = $product;
+            $BillProduct->quantity = request('qty')[$key];
+            $BillProduct->bill_id = $Bill->id;
+            $BillProduct->save();
+        }
         return back()->with('success','Bill Added Successfully!');
     }
 }
