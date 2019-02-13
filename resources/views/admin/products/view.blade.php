@@ -44,7 +44,7 @@ View Products
                         <td> {{ ++$key }}</td>
                         <td> {{ $detail->Product_ID }}</td>
                         <td> {{ $detail->Product_Name_English }}</td>
-                        <td>-</td>
+                        <td>{{ auth()->user()->RemainingProducts($detail->id) }}</td>
                         <td> {{ $detail->Cost_Price }}</td>
                         <td>
                           <a href="{{ route('admin.editProduct',$detail->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
