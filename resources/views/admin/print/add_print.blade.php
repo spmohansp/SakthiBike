@@ -148,7 +148,7 @@ Add Print
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <button type="button" onclick="addbillproducts()"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
+                                                <button type="button" id="addbillproduct"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
                                             </div>
                                         </div>
                                     </div>
@@ -244,6 +244,24 @@ Add Print
         });
 
         $('#demoSelect').select2();
+    </script>
+
+    <script type="text/javascript">
+            $(document).ready(function() {
+                $("#addbillproduct").click(function () {
+                    var product_id = $("#product_id").val();
+                    var qty = $("#qty").val();
+                    $.ajax({
+                        type: 'get',
+                        url: '/admin/product/getProduct',
+                        data:{product_id:product_id},
+                        success:function (data) {
+                            console.log(data);
+                        }
+                    });
+                 });
+            });
+
     </script>
 
 @endsection

@@ -19,7 +19,7 @@ Route::post('/product/add', 'BillingController\ProductController@storeproduct')-
 Route::get('/product/{id}/edit', 'BillingController\ProductController@editProduct')->name('editProduct');
 Route::post('/product/{id}/update', 'BillingController\ProductController@updateProduct')->name('updateProduct');
 Route::get('/product/{id}/delete', 'BillingController\ProductController@deleteProduct')->name('deleteProduct');
-
+Route::get('/product/getProduct/','BillingController\ProductController@getProduct');
 
 
 

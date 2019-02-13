@@ -70,4 +70,8 @@ class ProductController extends Controller
         return back()->with('success', 'Product Deleted Successfully');
     }
 
+    public function getProduct(){
+        return $Product = Products::findorfail(request('product_id'));
+    }
+
 }
