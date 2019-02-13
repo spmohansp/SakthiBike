@@ -174,7 +174,7 @@ Add Print
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
-                                            <tbody id="productbilltable">
+                                            <tbody id="productBillTable">
                                             </tbody>
                                             <thead>
                                             <th colspan="7">
