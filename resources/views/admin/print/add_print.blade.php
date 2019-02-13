@@ -18,7 +18,6 @@ Add Print
             <div class="pad">
                 <div class="row">
                     <div class="col-md-2">
-
                     </div>
                     <div class="col-md-12" style="padding:5px;">
 
@@ -31,13 +30,11 @@ Add Print
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Enter Customer name</label>
-                                        <select class="form-control Selectpicker" onchange="showclientname()"  id="client_id" style="width:100% !important">
+                                        <select class="form-control Selectpicker" name="client_id" onchange="showclientname()"  id="client_id" style="width:100% !important">
                                             <optgroup label="Select Client" >
                                                 @foreach($Clients as $Client)
                                                     <option value="{{ $Client->id }}">{{ $Client->name }}</option>
                                                 @endforeach
-
-
                                             </optgroup>
                                         </select>
                                     </div>
@@ -57,9 +54,7 @@ Add Print
                                 </div>
 
                                 <div class="col-md-4">
-                                    <button type="submit"  class="btn btn-success "  style="padding:10px 20px;" >
-                                        Save Bill
-                                    </button>
+                                    <button type="submit" class="btn btn-success " style="padding:10px 20px;" >Save Bill</button>
                                     <!--
                                     <div class="form-group">
                                       <label>Bill No</label>
@@ -72,14 +67,20 @@ Add Print
                                     <div class="form-group">
                                         <label>Payment type</label>
                                         <div class="form-group" >
-                                            <select class="form-control Selectpicker"  onchange="showbilltable()" id="discount_type" style="width:100% !important">
-                                                <optgroup label="Select Discount type" >
-                                                    <option value="" price="" >Cash</option>
-                                                    <option value="1"  ></option>
-                                                    <option value="2"  >Cheque</option>
+                                            <select class="form-control Selectpicker"  onchange="showbilltable()" name="payment_type" id="discount_type" style="width:100% !important" required>
+                                                <optgroup label="Select Payment type" >
+                                                    <option value="cash">Cash</option>
+                                                    <option value="cheque">Cheque</option>
+                                                    <option value="card">Card</option>
                                                 </optgroup>
                                             </select>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Date</label>
+                                        <input class="form-control" type="date" name="date" required>
                                     </div>
                                 </div>
 
@@ -90,9 +91,9 @@ Add Print
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Payment status</label>
-                                        <select class="form-control Selectpicker" onchange="showpaymentstatus()"  id="payment_status" style="width:100% !important">
+                                        <select class="form-control Selectpicker" onchange="showpaymentstatus()" name="payment_status" id="payment_status" style="width:100% !important" required>
                                             <optgroup label="Select Payment" >
-                                                <option value="1" selected>Paid</option>
+                                                <option value="1">Paid</option>
                                                 <option value="2">Partially Paid</option>
                                                 <option value="3">Due</option>
                                             </optgroup>
@@ -102,7 +103,7 @@ Add Print
                                 <div class="col-md-4 payment2" style="display:none">
                                     <div class="form-group">
                                         <label>Paid Amount</label>
-                                        <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" id="paid_amount" onchange="showdueamount()">
+                                        <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
                                     </div>
                                 </div>
                                 <div class="col-md-4 payment2" style="display:none">
@@ -148,7 +149,7 @@ Add Print
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <button type="button" onclick="addbillproducts()"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
+                                                <button type="button" id="addbillproduct"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
                                             </div>
                                         </div>
                                     </div>
@@ -220,10 +221,6 @@ Add Print
 
     <script src="{{ url('billing/js/jquery-3.2.1.min.js') }}"></script>
 
-
-    <!-- The javascript plugin to display page loading on top-->
-
-    <!-- Page specific javascripts-->
     <script type="text/javascript" src="{{ url('billing/js/plugins/bootstrap-datepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('billing/js/plugins/select2.min.js') }}"></script>
     <script type="text/javascript">
@@ -244,6 +241,24 @@ Add Print
         });
 
         $('#demoSelect').select2();
+    </script>
+
+    <script type="text/javascript">
+            $(document).ready(function() {
+                $("#addbillproduct").click(function () {
+                    var product_id = $("#product_id").val();
+                    var qty = $("#qty").val();
+                    $.ajax({
+                        type: 'get',
+                        url: '/admin/product/getProduct',
+                        data:{product_id:product_id},
+                        success:function (data) {
+                            console.log(data);
+                        }
+                    });
+                 });
+            });
+
     </script>
 
 @endsection

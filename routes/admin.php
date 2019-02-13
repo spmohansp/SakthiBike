@@ -19,7 +19,7 @@ Route::post('/product/add', 'BillingController\ProductController@storeproduct')-
 Route::get('/product/{id}/edit', 'BillingController\ProductController@editProduct')->name('editProduct');
 Route::post('/product/{id}/update', 'BillingController\ProductController@updateProduct')->name('updateProduct');
 Route::get('/product/{id}/delete', 'BillingController\ProductController@deleteProduct')->name('deleteProduct');
-
+Route::get('/product/getProduct/','BillingController\ProductController@getProduct');
 
 
 
@@ -45,9 +45,7 @@ Route::get('/stock/{id}/delete','BillingController\StockController@deleteStock')
 //Print
 Route::get('/print/add','BillingController\PrintController@addPrint');
 Route::get('/prints','BillingController\PrintController@viewPrint');
-Route::post('/bill/add',function (){
-    return request()->all();
-})->name('saveBill');
+Route::post('/bill/add','BillingController\PrintController@saveBill')->name('saveBill');
 
 
 //Clients
