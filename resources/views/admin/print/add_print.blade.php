@@ -173,7 +173,7 @@ Add Print
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
-                                            <tbody id="productBillTable">
+                                            <tbody id="productbilltable">
                                             </tbody>
                                             <thead>
                                             <th colspan="7">
@@ -253,7 +253,7 @@ Add Print
                             url: '/admin/product/getProduct',
                             data:{product_id:product_id,qty:qty},
                             success:function (data) {
-                                console.log(data);
+
                                 $('#productbilltable').append(data);
                             }
                         });
