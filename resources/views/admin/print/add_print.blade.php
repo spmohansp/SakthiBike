@@ -67,7 +67,7 @@ Add Print
                                     <div class="form-group">
                                         <label>Payment type</label>
                                         <div class="form-group" >
-                                            <select class="form-control Selectpicker"  onchange="showbilltable()" name="payment_type" id="discount_type" style="width:100% !important" required>
+                                            <select class="form-control Selectpicker"  onchange="paymentType()" name="payment_type" id="payment_type" style="width:100% !important" required>
                                                 <optgroup label="Select Payment type" >
                                                     <option value="cash">Cash</option>
                                                     <option value="cheque">Cheque</option>
@@ -103,13 +103,13 @@ Add Print
                                 <div class="col-md-4 payment2" style="display:none">
                                     <div class="form-group">
                                         <label>Paid Amount</label>
-                                        <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
+                                        <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="total_paid_amount" id="total_paid_amount" onchange="showdueamount()">
                                     </div>
                                 </div>
                                 <div class="col-md-4 payment2" style="display:none">
                                     <div class="form-group">
                                         <label>Due Amount</label><br>
-                                        <span id="due_amount"></span>
+                                        <span id="DueAmount"></span>
                                     </div>
                                 </div>
                             </div>
@@ -183,8 +183,8 @@ Add Print
                                                 <h4><b><i class="fa fa-inr"></i> <b id="TOTALBILL"></b></b></h4>
                                             </th>
 
-                                            </thead>
-                                            <thead>
+                                            </thead >
+                                            <thead id="total_amount">
                                             <th colspan="7">
                                                 <h4 class="pull-right"><b>Cash Given</b> :</h4>
                                             </th>
@@ -193,7 +193,7 @@ Add Print
                                             </th>
 
                                             </thead>
-                                            <thead>
+                                            <thead id="balance_amount">
                                             <th colspan="7">
                                                 <h4 class="pull-right"><b>Balance</b> :  </h4>
                                             </th>
@@ -280,10 +280,26 @@ Add Print
                 });
                 $('#TOTALBILL').html(total);
                 $('#BalanceAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()));
+                $('#DueAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()));
             }
     </script>
-
     <script>
+        function paymentType()
+        {
+            var payment_type=$("#payment_type").val();
+
+            if(payment_type=='cheque'||'card')
+            {
+                $("#total_amount").hide();
+                $("#balance_amount").hide();
+            }
+            if(payment_type=='cash')
+            {
+                $("#total_amount").show();
+                $("#balance_amount").show();
+            }
+        }
+
         function showpaymentstatus()
         {
             var payment_status=$("#payment_status").val();
@@ -296,6 +312,7 @@ Add Print
                 $(".payment2").hide();
             }
         }
-    </script>
+      </script>
+
 
 @endsection
