@@ -41,9 +41,9 @@ class PrintController extends Controller
         $Bill->date = request('date');
         $Bill->payment_status = request('payment_status');
         $Bill->paid_amount = request('paid_amount');
-        $Bill->products = request('products');
+        $Bill->Due_Amount = $BillTotal - request('paid_amount');
         $Bill->bill_amount = $BillTotal;
-        $Bill->balance_amount = $BillTotal - request('paid_amount');
+        //$Bill->balance_amount =$BillTotal - request('total_paid_amount');
         $Bill->save();
 
         foreach(request('product_id') as $key=> $product){

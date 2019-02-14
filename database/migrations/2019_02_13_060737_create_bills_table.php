@@ -22,7 +22,7 @@ class CreateBillsTable extends Migration
             $table->string('payment_type');
             $table->string('payment_status')->nullable();
             $table->string('paid_amount')->nullable();
-            $table->longText('products')->nullable();
+            $table->longText('Due_Amount')->nullable();
             $table->string('bill_amount')->nullable();
             $table->string('balance_amount')->nullable();
             $table->timestamps();

@@ -103,13 +103,13 @@ Add Print
                                 <div class="col-md-4 payment2" style="display:none">
                                     <div class="form-group">
                                         <label>Paid Amount</label>
-                                        <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="total_paid_amount" id="total_paid_amount" onchange="showdueamount()">
+                                        <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
                                     </div>
                                 </div>
                                 <div class="col-md-4 payment2" style="display:none">
                                     <div class="form-group">
                                         <label>Due Amount</label><br>
-                                        <span id="DueAmount"></span>
+                                        <span id="DueAmount" name="" ></span>
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +189,7 @@ Add Print
                                                 <h4 class="pull-right"><b>Cash Given</b> :</h4>
                                             </th>
                                             <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="Cash_amount_given"></b></h4>
+                                                <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" name="total_paid_amount" ></b></h4>
                                             </th>
 
                                             </thead>
@@ -198,7 +198,7 @@ Add Print
                                                 <h4 class="pull-right"><b>Balance</b> :  </h4>
                                             </th>
                                             <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i><b id="BalanceAmount" name="BalanceAmount" ></b></b></h4>
+                                                <h4><b><i class="fa fa-inr"></i><b id="BalanceAmount"></b></b></h4>
                                             </th>
                                             </thead>
                                         </table>
@@ -254,8 +254,7 @@ Add Print
                             data:{product_id:product_id,qty:qty},
                             success:function (data) {
                                 $('#productbilltable').append(data);
-                                calculateCashGiven();
-                                calculateBalanceAmount()
+                                calculateTotal();
                             }
                         });
                     }
@@ -264,72 +263,62 @@ Add Print
                 $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
                     e.preventDefault();
                     $(this).parent().parent().remove();
-                    calculateCashGiven();
-                    calculateBalanceAmount()
+                    calculateTotal();
                 });
-                $('#Cash_amount_given').on('keyup',function (e) {
+                $('#total_paid_amount').on('keyup',function (e) {
                     e.preventDefault();
-                    calculateCashGiven();
+                    calculateTotal()
                 });
+
                 $('#paid_amount').on('keyup',function (e) {
                     e.preventDefault();
-                    calculateBalanceAmount()
+                    calculateTotal()
                 });
+
 
             });
 
 
-            function calculateCashGiven() {
+            function calculateTotal() {
                 var total=0;
                 $(".total_amount").each(function() {
                     total = parseInt($(this).val()) + parseInt(total);
                 });
                 $('#TOTALBILL').html(total);
-                $('#BalanceAmount').html(parseInt($('#Cash_amount_given').val()) - parseInt(total));
+                $('#BalanceAmount').html(parseInt($('#total_paid_amount').val()) - parseInt(total) );
+                $('#DueAmount').html(parseInt(total) - parseInt($('#paid_amount').val()));
             }
-
-            function calculateBalanceAmount() {
-                var total=0;
-                $(".total_amount").each(function() {
-                    total = parseInt($(this).val()) + parseInt(total);
-                });
-                $('#TOTALBILL').html(total);
-                $('#BalanceAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()));
-                $('#DueAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()));
-                $('#due_amount').html(parseInt(parseInt(total) - $('#paid_amount').val()));
-
-            }
-
-            function paymentType()
-            {
-                var payment_type=$("#payment_type").val();
-
-                if(payment_type=='cheque'||'card')
-                {
-                    $("#total_amount").hide();
-                    $("#balance_amount").hide();
-                }
-                if(payment_type=='cash')
-                {
-                    $("#total_amount").show();
-                    $("#balance_amount").show();
-                }
-            }
-
-            function showpaymentstatus()
-            {
-                var payment_status=$("#payment_status").val();
-                if(payment_status==2)
-                {
-                    $(".payment2").show();
-                }
-                else
-                {
-                    $(".payment2").hide();
-                }
-            }
-
     </script>
+    <script>
+        function paymentType()
+        {
+            var payment_type=$("#payment_type").val();
+
+            if(payment_type=='cheque'||'card')
+            {
+                $("#total_amount").hide();
+                $("#balance_amount").hide();
+            }
+            if(payment_type=='cash')
+            {
+                $("#total_amount").show();
+                $("#balance_amount").show();
+            }
+        }
+
+        function showpaymentstatus()
+        {
+            var payment_status=$("#payment_status").val();
+            if(payment_status==2)
+            {
+                $(".payment2").show();
+            }
+            else
+            {
+                $(".payment2").hide();
+            }
+        }
+      </script>
 
 
 @endsection
