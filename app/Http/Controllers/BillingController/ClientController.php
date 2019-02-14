@@ -14,10 +14,10 @@ class ClientController extends Controller
     public function saveClient(Request $request){
     	$request->validate([
     		'name'=>'required',
-    		'business_name'=>'required',
-    		'email'=>'required|email|unique:clients',
+    		// 'business_name'=>'required',
+    		// 'email'=>'required|email|unique:clients',
     		'phone_no'=>'required|min:10|max:10|unique:clients',
-    		'address'=>'required',
+    		// 'address'=>'required',
     	]);
     	try{
 	    	$Client = new Client;
@@ -49,11 +49,11 @@ class ClientController extends Controller
 
     public function updateClient($id,Request $request){
         $request->validate([
-            'name'=>'required',
-            'business_name'=>'required',
-            'email'=>'required|email',
-            'phone_no'=>'required|min:10|max:10',
-            'address'=>'required',
+			'name' => 'required',
+    		// 'business_name'=>'required',
+    		// 'email'=>'required|email|unique:clients',
+			'phone_no' => 'required|min:10|max:10|unique:clients',
+    		// 'address'=>'required',
         ]);
 	    try{
 	    	$Client = Client::FindorFail($id);

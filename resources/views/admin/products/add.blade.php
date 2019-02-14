@@ -78,14 +78,14 @@ Add Products
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <input class="form-control form-control-lg" id="" type="text"
+                                            <input class="form-control form-control-lg calculatevalue" id="Selling_Price" type="text"
                                                 aria-describedby="emailHelp" placeholder="Selling Price" name="Selling_Price">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <input class="form-control form-control-lg" id="" type="text"
-                                                aria-describedby="emailHelp" placeholder="Selling Price With Tax" name="Selling_Price_With_Tax">
+                                            <input class="form-control form-control-lg " id="Selling_Price_With_Tax" type="text"
+                                                aria-describedby="emailHelp" placeholder="Selling Price With Tax" name="Selling_Price_With_Tax" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -93,19 +93,19 @@ Add Products
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <input class="form-control form-control-lg" id="" type="text"
+                                            <input class="form-control form-control-lg calculatevalue" id="CGST" type="text"
                                                 aria-describedby="emailHelp" placeholder="CGST" name="CGST">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <input class="form-control form-control-lg" id="" type="text"
+                                            <input class="form-control form-control-lg calculatevalue" id="SGST" type="text"
                                                 aria-describedby="emailHelp" placeholder="SGST" name="SGST">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <input class="form-control form-control-lg" id="" type="text"
+                                            <input class="form-control form-control-lg calculatevalue" id="CESS" type="text"
                                                 aria-describedby="emailHelp" placeholder="CESS" name="CESS">
                                         </div>
                                     </div>
@@ -126,4 +126,5 @@ Add Products
         </div>
     </div>
 </div>
+
 @endsection

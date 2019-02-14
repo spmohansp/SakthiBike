@@ -83,14 +83,14 @@ Add Clients
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <input class="form-control form-control-lg" id="" type="text"
+                                            <input class="form-control form-control-lg calculatevalue" id="Selling_Price" type="text"
                                                 aria-describedby="emailHelp" placeholder="Selling Price" value="{{ $Product->Selling_Price }}"
                                                 name="Selling_Price">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <input class="form-control form-control-lg" id="" type="text"
+                                            <input class="form-control form-control-lg" id="Selling_Price_With_Tax" type="text"
                                                 aria-describedby="emailHelp" placeholder="Selling Price With Tax" value="{{ $Product->Selling_Price_With_Tax }}"
                                                 name="Selling_Price_With_Tax">
                                         </div>
@@ -100,19 +100,19 @@ Add Clients
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <input class="form-control form-control-lg" id="" type="text"
+                                            <input class="form-control form-control-lg calculatevalue" id="CGST" type="text"
                                                 aria-describedby="emailHelp" placeholder="CGST" name="CGST" value="{{ $Product->CGST }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <input class="form-control form-control-lg" id="" type="text"
+                                            <input class="form-control form-control-lg calculatevalue" id="SGST" type="text"
                                                 aria-describedby="emailHelp" placeholder="SGST" name="SGST" value="{{ $Product->SGST }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <input class="form-control form-control-lg" id="" type="text"
+                                            <input class="form-control form-control-lg calculatevalue" id="CESS" type="text"
                                                 aria-describedby="emailHelp" placeholder="CESS" name="CESS" value="{{ $Product->CESS }}">
                                         </div>
                                     </div>
