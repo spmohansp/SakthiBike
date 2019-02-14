@@ -30,10 +30,10 @@ Edit Print
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Enter Customer name</label>
-                                        <select class="form-control Selectpicker" name="client_id" onchange="showclientname()"  id="client_id" style="width:100% !important">
-                                            <optgroup label="Select Customer" >
+                                        <select class="form-control" name="client_id"  id="demoSelect" >
+                                            <optgroup label="Select Customer">
                                                 @foreach($Clients as $Client)
-                                                    <option value="{{ $Client->id }}" {{ ($Client->id == $Bill->client_id)?'selected':'' }}>{{ $Client->name }}</option>
+                                                    <option value="{{ $Client->id }}" {{ $Client->id==$Bill->id?'selected':'' }}>{{ $Client->name }} {{ $Client->phone_no }}</option>
                                                 @endforeach
                                             </optgroup>
                                         </select>
@@ -133,13 +133,15 @@ Edit Print
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group" >
-                                                <select class="form-control Selectpicker" id="product_id" style="width:100% !important">
-                                                    <optgroup label="Select Product" >
+                                                <select class="form-control demoSelect1" id="product_id">
+                                                    <optgroup label="Select Products">
                                                         @foreach($Products as $Product)
                                                             <option value="{{ $Product->id }}">{{ $Product->Product_Name_English }}</option>
                                                         @endforeach
                                                     </optgroup>
                                                 </select>
+
+
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -251,6 +253,8 @@ Edit Print
         });
 
         $('#demoSelect').select2();
+        $('.demoSelect1').select2();
+
     </script>
 
     <script type="text/javascript">
