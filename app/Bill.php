@@ -9,4 +9,9 @@ class Bill extends Model
     public function Client(){
         return $this->hasOne(Client::class,'id','client_id');
     }
+
+    public function BillProducts(){
+        return $this->hasMany(BillProduct::class,'bill_id','id');
+    }
+
 }

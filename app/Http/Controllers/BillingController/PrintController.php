@@ -22,7 +22,12 @@ class PrintController extends Controller
 	}
 
     public function saveBill(){
-//	    return request()->all();
+        // return request()->all();
+        $BillTotal=0;
+        foreach (request('product_id') as $key => $product) {
+            $BillTotal += request('total_amount')[$key];
+        }
+
         $Bill = new Bill;
         $LastBill = Bill::orderBy('id', 'DESC')->first();
 
@@ -37,14 +42,62 @@ class PrintController extends Controller
         $Bill->payment_status = request('payment_status');
         $Bill->paid_amount = request('paid_amount');
         $Bill->products = request('products');
-        $Bill->balance_amount = request('balance_amount');
+        $Bill->bill_amount = $BillTotal;
+        $Bill->balance_amount = $BillTotal - request('paid_amount');
         $Bill->save();
 
         foreach(request('product_id') as $key=> $product){
             $BillProduct = new BillProduct;
+            $BillProduct->bill_id = $Bill->id;
             $BillProduct->product_id = $product;
             $BillProduct->quantity = request('qty')[$key];
+            $BillProduct->CGST = request('CGST')[$key];
+            $BillProduct->SGST = request('SGST')[$key];
+            $BillProduct->CESS = request('CESS')[$key];
+            $BillProduct->Total_Cost = request('total_amount')[$key];
+            $BillProduct->save();
+        }
+        return back()->with('success','Bill Added Successfully!');
+    }
+
+    public function editPrint($id ,Request $request){
+        $Products = Products::all();
+        $Clients = Client::all();
+        $Bill = Bill::findorfail($id);
+        return view('admin.print.edit',compact('Products','Clients','Bill'));
+    }
+
+
+    public function UpdateBill($id){
+        $BillTotal=0;
+        foreach (request('product_id') as $key => $product) {
+            $BillTotal += request('total_amount')[$key];
+        }
+
+        $Bill = Bill::findorfail($id);
+        $Bill->client_id = request('client_id');
+        $Bill->payment_type = request('payment_type');
+        $Bill->date = request('date');
+        $Bill->payment_status = request('payment_status');
+        $Bill->paid_amount = request('paid_amount');
+        $Bill->products = request('products');
+        $Bill->bill_amount = $BillTotal;
+        $Bill->balance_amount = $BillTotal - request('paid_amount');
+        $Bill->save();
+
+        foreach($Bill->BillProducts as $key=> $product){
+            BillProduct::findorfail($product->id)->delete();
+        }
+
+        foreach(request('product_id') as $key=> $product){
+            $BillProduct = new BillProduct;
             $BillProduct->bill_id = $Bill->id;
+            $BillProduct->product_id = $product;
+            $BillProduct->quantity = request('qty')[$key];
+            $BillProduct->CGST = request('CGST')[$key];
+            $BillProduct->SGST = request('SGST')[$key];
+            $BillProduct->CESS = request('CESS')[$key];
+            $BillProduct->Total_Cost = request('total_amount')[$key];
             $BillProduct->save();
         }
         return back()->with('success','Bill Added Successfully!');

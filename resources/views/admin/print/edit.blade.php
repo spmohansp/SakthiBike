@@ -1,15 +1,15 @@
 @extends('admin.layouts.master')
 
 @section('Current-Page')
-Add Print 
+Edit Print
 @endsection
 
 @section('Parent-Menu')
-Transactions
+Bill
 @endsection
 
 @section('Menu')
-Add Print
+Edit Print
 @endsection
 
 @section('content')
@@ -21,7 +21,7 @@ Add Print
                     </div>
                     <div class="col-md-12" style="padding:5px;">
 
-                        <form action="{{ route('admin.saveBill') }}" method="post">
+                        <form action="{{ route('admin.UpdateBill',$Bill->id) }}" method="post">
                             {{ csrf_field() }}
                         <div class="tile">
                             <h3 style="margin-top:0px;">Customer Details</h3>
@@ -33,7 +33,7 @@ Add Print
                                         <select class="form-control Selectpicker" name="client_id" onchange="showclientname()"  id="client_id" style="width:100% !important">
                                             <optgroup label="Select Client" >
                                                 @foreach($Clients as $Client)
-                                                    <option value="{{ $Client->id }}">{{ $Client->name }}</option>
+                                                    <option value="{{ $Client->id }}" {{ ($Client->id == $Bill->client_id)?'selected':'' }}>{{ $Client->name }}</option>
                                                 @endforeach
                                             </optgroup>
                                         </select>
@@ -67,7 +67,7 @@ Add Print
                                     <div class="form-group">
                                         <label>Payment type</label>
                                         <div class="form-group" >
-                                            <select class="form-control Selectpicker"  onchange="paymentType()" name="payment_type" id="payment_type" style="width:100% !important" required>
+                                            <select class="form-control Selectpicker"  onchange="showbilltable()" name="payment_type" id="discount_type" style="width:100% !important" required>
                                                 <optgroup label="Select Payment type" >
                                                     <option value="cash">Cash</option>
                                                     <option value="cheque">Cheque</option>
@@ -80,7 +80,7 @@ Add Print
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Date</label>
-                                        <input class="form-control" type="date" name="date" required>
+                                        <input class="form-control" type="date" name="date" value="{{ $Bill->date }}" required>
                                     </div>
                                 </div>
 
@@ -103,13 +103,13 @@ Add Print
                                 <div class="col-md-4 payment2" style="display:none">
                                     <div class="form-group">
                                         <label>Paid Amount</label>
-                                        <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="total_paid_amount" id="total_paid_amount" onchange="showdueamount()">
+                                        <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
                                     </div>
                                 </div>
                                 <div class="col-md-4 payment2" style="display:none">
                                     <div class="form-group">
                                         <label>Due Amount</label><br>
-                                        <span id="DueAmount"></span>
+                                        <span id="due_amount"></span>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@ Add Print
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group" >
-                                                <select class="form-control Selectpicker"  id="product_id" style="width:100% !important">
+                                                <select class="form-control Selectpicker" id="product_id" style="width:100% !important">
                                                     <optgroup label="Select Product" >
                                                         @foreach($Products as $Product)
                                                             <option value="{{ $Product->id }}">{{ $Product->Product_Name_English }}</option>
@@ -174,32 +174,44 @@ Add Print
                                             </tr>
                                             </thead>
                                             <tbody id="productbilltable">
+                                                @foreach($Bill->BillProducts as $Product)
+                                                    <tr><input type="hidden" value="{{ $Product->id }}" name="bill_Product[]">
+                                                        <th>{{ @$Product->Product->Product_Name_English }}<input type="hidden" value="{{ $Product->Product->id }}" name="product_id[]"></th>
+                                                        <th>{{ $Product->quantity }}<input type="hidden" value="{{ $Product->quantity }}" name="qty[]"></th>
+                                                        <th>{{  @$Product->Product->Selling_Price }}</th>
+                                                        <th>{{ $Product->CGST }}<input type="hidden" value="{{ $Product->CGST }}" name="CGST[]"></th>
+                                                        <th>{{ $Product->SGST }}<input type="hidden" value="{{ $Product->SGST }}" name="SGST[]"></th>
+                                                        <th>{{ $Product->CESS }}<input type="hidden" value="{{ $Product->CESS }}" name="CESS[]"></th>
+                                                        <th>{{ $Product->Total_Cost }}<input type="hidden" class="total_amount" value="{{ $Product->Total_Cost }}" name="total_amount[]"></th>
+                                                        <th><button type="button" class="btn btn-primary btn-sm RemoveProductButon"><i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></th>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                             <thead>
-                                            <th colspan="7">
-                                                <h4 class="pull-right"><b>Total</b> :</h4>
-                                            </th>
-                                            <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i> <b id="TOTALBILL"></b></b></h4>
-                                            </th>
-
-                                            </thead >
-                                            <thead id="total_amount">
-                                            <th colspan="7">
-                                                <h4 class="pull-right"><b>Cash Given</b> :</h4>
-                                            </th>
-                                            <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="Cash_amount_given"></b></h4>
-                                            </th>
+                                                <th colspan="7">
+                                                    <h4 class="pull-right"><b>Total</b> :</h4>
+                                                </th>
+                                                <th colspan="2">
+                                                    <h4><b><i class="fa fa-inr"></i> <b id="TOTALBILL"></b></b></h4>
+                                                </th>
 
                                             </thead>
-                                            <thead id="balance_amount">
-                                            <th colspan="7">
-                                                <h4 class="pull-right"><b>Balance</b> :  </h4>
-                                            </th>
-                                            <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i><b id="BalanceAmount" name="BalanceAmount" ></b></b></h4>
-                                            </th>
+                                            <thead>
+                                                <th colspan="7">
+                                                    <h4 class="pull-right"><b>Cash Given</b> :</h4>
+                                                </th>
+                                                <th colspan="2">
+                                                    <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" value="{{ $Bill->paid_amount }}" name="paid_amount" required></b></h4>
+                                                </th>
+
+                                            </thead>
+                                            <thead>
+                                                <th colspan="7">
+                                                    <h4 class="pull-right"><b>Balance</b> :  </h4>
+                                                </th>
+                                                <th colspan="2">
+                                                    <h4><b><i class="fa fa-inr"></i><b id="BalanceAmount" name="BalanceAmount" ></b></b></h4>
+                                                </th>
                                             </thead>
                                         </table>
                                     </div>
@@ -244,6 +256,7 @@ Add Print
     <script type="text/javascript">
             $(document).ready(function() {
                 $('#TOTALBILL').html(0);
+                calculateTotal();
                 $("#addbillproduct").click(function () {
                     var product_id = $("#product_id").val();
                     var qty = $("#qty").val();
@@ -254,8 +267,7 @@ Add Print
                             data:{product_id:product_id,qty:qty},
                             success:function (data) {
                                 $('#productbilltable').append(data);
-                                calculateCashGiven();
-                                calculateBalanceAmount()
+                                calculateTotal();
                             }
                         });
                     }
@@ -264,72 +276,24 @@ Add Print
                 $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
                     e.preventDefault();
                     $(this).parent().parent().remove();
-                    calculateCashGiven();
-                    calculateBalanceAmount()
+                    calculateTotal();
                 });
-                $('#Cash_amount_given').on('keyup',function (e) {
+                $('#total_paid_amount').on('keyup',function (e) {
                     e.preventDefault();
-                    calculateCashGiven();
-                });
-                $('#paid_amount').on('keyup',function (e) {
-                    e.preventDefault();
-                    calculateBalanceAmount()
+                    calculateTotal();
                 });
 
             });
 
 
-            function calculateCashGiven() {
-                var total=0;
-                $(".total_amount").each(function() {
-                    total = parseInt($(this).val()) + parseInt(total);
-                });
-                $('#TOTALBILL').html(total);
-                $('#BalanceAmount').html(parseInt($('#Cash_amount_given').val()) - parseInt(total));
-            }
-
-            function calculateBalanceAmount() {
+            function calculateTotal() {
                 var total=0;
                 $(".total_amount").each(function() {
                     total = parseInt($(this).val()) + parseInt(total);
                 });
                 $('#TOTALBILL').html(total);
                 $('#BalanceAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()));
-                $('#DueAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()));
-                $('#due_amount').html(parseInt(parseInt(total) - $('#paid_amount').val()));
-
             }
-
-            function paymentType()
-            {
-                var payment_type=$("#payment_type").val();
-
-                if(payment_type=='cheque'||'card')
-                {
-                    $("#total_amount").hide();
-                    $("#balance_amount").hide();
-                }
-                if(payment_type=='cash')
-                {
-                    $("#total_amount").show();
-                    $("#balance_amount").show();
-                }
-            }
-
-            function showpaymentstatus()
-            {
-                var payment_status=$("#payment_status").val();
-                if(payment_status==2)
-                {
-                    $(".payment2").show();
-                }
-                else
-                {
-                    $(".payment2").hide();
-                }
-            }
-
     </script>
-
 
 @endsection

@@ -76,9 +76,9 @@ class ProductController extends Controller
                                 <th>'.$Product->Product_Name_English.'<input type="hidden" value="'.$Product->id.'" name="product_id[]"></th>
                                 <th>'.request('qty').'<input type="hidden" value="'.request('qty').'" name="qty[]"></th>
                                 <th>'.$Product->Selling_Price.'</th>
-                                <th>'.((($Product->Selling_Price*$Product->CGST)/100)*request('qty')).'</th>
-                                <th>'.((($Product->Selling_Price*$Product->SGST)/100)*request('qty')).'</th>
-                                <th>'.((($Product->Selling_Price*@$Product->CESS)/100)*request('qty')).'</th>
+                                <th>'.((($Product->Selling_Price*$Product->CGST)/100)*request('qty')). '<input type="hidden" value="' . ((($Product->Selling_Price*$Product->CGST)/100)*request('qty')) . '" name="CGST[]"></th>
+                                <th>'.((($Product->Selling_Price*$Product->SGST)/100)*request('qty')). '<input type="hidden" value="' . ((($Product->Selling_Price*$Product->SGST)/100)*request('qty')) . '" name="SGST[]"></th>
+                                <th>'.((($Product->Selling_Price*@$Product->CESS)/100)*request('qty')). '<input type="hidden" value="' . ((($Product->Selling_Price*@$Product->CESS)/100)*request('qty')) . '" name="CESS[]"></th>
                                 <th>'.($Product->Selling_Price*request('qty') + ((($Product->Selling_Price*$Product->CGST)/100)*request('qty')) +((($Product->Selling_Price*$Product->SGST)/100)*request('qty')) + ((($Product->Selling_Price*@$Product->CESS)/100)*request('qty'))).'<input type="hidden" class="total_amount" value="'.($Product->Selling_Price*request('qty') + ((($Product->Selling_Price*$Product->CGST)/100)*request('qty')) +((($Product->Selling_Price*$Product->SGST)/100)*request('qty')) + ((($Product->Selling_Price*@$Product->CESS)/100)*request('qty'))).'" name="total_amount[]"></th>
                                 <th><button type="button" class="btn btn-primary btn-sm RemoveProductButon"><i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></th>
                             </tr>';
