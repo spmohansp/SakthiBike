@@ -30,10 +30,17 @@ Add Print
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Enter Customer name</label>
-                                        <select class="form-control Selectpicker" name="client_id" onchange="showclientname()"  id="client_id" style="width:100% !important">
-                                            <optgroup label="Select Client" >
+                                        {{--<select class="form-control Selectpicker" name="client_id" onchange="showclientname()"  id="client_id" style="width:100% !important">--}}
+                                            {{--<optgroup label="Select Client" >--}}
+                                                {{--@foreach($Clients as $Client)--}}
+                                                    {{--<option value="{{ $Client->id }}">{{ $Client->name }}</option>--}}
+                                                {{--@endforeach--}}
+                                            {{--</optgroup>--}}
+                                        {{--</select>--}}
+                                        <select class="form-control" name="client_id"  id="demoSelect">
+                                            <optgroup label="Select Cities">
                                                 @foreach($Clients as $Client)
-                                                    <option value="{{ $Client->id }}">{{ $Client->name }}</option>
+                                                    <option value="{{ $Client->id }}">{{ $Client->name }} {{ $Client->phone_no }}</option>
                                                 @endforeach
                                             </optgroup>
                                         </select>
@@ -133,13 +140,20 @@ Add Print
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group" >
-                                                <select class="form-control Selectpicker"  id="product_id" style="width:100% !important">
-                                                    <optgroup label="Select Product" >
+
+                                                <select class="form-control demoSelect1" id="product_id">
+                                                    <optgroup label="Select Cities">
                                                         @foreach($Products as $Product)
                                                             <option value="{{ $Product->id }}">{{ $Product->Product_Name_English }}</option>
                                                         @endforeach
                                                     </optgroup>
                                                 </select>
+
+                                                {{--<select class="form-control Selectpicker"  id="" style="width:100% !important">--}}
+                                                    {{--<optgroup label="Select Product" >--}}
+
+                                                    {{--</optgroup>--}}
+                                                {{--</select>--}}
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -239,6 +253,8 @@ Add Print
         });
 
         $('#demoSelect').select2();
+        $('.demoSelect1').select2();
+
     </script>
 
     <script type="text/javascript">
@@ -319,6 +335,8 @@ Add Print
             }
         }
       </script>
+
+
 
 
 @endsection

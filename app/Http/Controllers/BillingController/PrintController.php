@@ -102,4 +102,7 @@ class PrintController extends Controller
         }
         return back()->with('success','Bill Added Successfully!');
     }
+
+
+
 }

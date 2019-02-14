@@ -67,11 +67,11 @@ Edit Print
                                     <div class="form-group">
                                         <label>Payment type</label>
                                         <div class="form-group" >
-                                            <select class="form-control Selectpicker"  onchange="showbilltable()" name="payment_type" id="discount_type" style="width:100% !important" required>
+                                            <select class="form-control Selectpicker"  onchange="paymentType()" name="payment_type" id="discount_type" style="width:100% !important" required>
                                                 <optgroup label="Select Payment type" >
-                                                    <option value="cash">Cash</option>
-                                                    <option value="cheque">Cheque</option>
-                                                    <option value="card">Card</option>
+                                                    <option value="cash" {{ $Bill->payment_type=='cash'?'selected':'' }}>Cash</option>
+                                                    <option value="cheque" {{ $Bill->payment_type=='cheque'?'selected':'' }}>Cheque</option>
+                                                    <option value="card" {{ $Bill->payment_type=='card'?'selected':'' }}>Card</option>
                                                 </optgroup>
                                             </select>
                                         </div>
@@ -93,9 +93,9 @@ Edit Print
                                         <label>Payment status</label>
                                         <select class="form-control Selectpicker" onchange="showpaymentstatus()" name="payment_status" id="payment_status" style="width:100% !important" required>
                                             <optgroup label="Select Payment" >
-                                                <option value="1">Paid</option>
-                                                <option value="2">Partially Paid</option>
-                                                <option value="3">Due</option>
+                                                <option value="1" {{ $Bill->payment_status=='1'?'selected':'' }} >Paid</option>
+                                                <option value="2" {{ $Bill->payment_status=='2'?'selected':'' }}>Partially Paid</option>
+                                                <option value="3" {{ $Bill->payment_status=='3'?'selected':'' }}>Due</option>
                                             </optgroup>
                                         </select>
                                     </div>
@@ -103,13 +103,13 @@ Edit Print
                                 <div class="col-md-4 payment2" style="display:none">
                                     <div class="form-group">
                                         <label>Paid Amount</label>
-                                        <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
+                                        <input class="form-control nextrow" value="{{ $Bill->paid_amount }}" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
                                     </div>
                                 </div>
                                 <div class="col-md-4 payment2" style="display:none">
                                     <div class="form-group">
                                         <label>Due Amount</label><br>
-                                        <span id="due_amount"></span>
+                                        <span id="DueAmount">{{ $Bill->Due_Amount }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@ Edit Print
                                                 </th>
 
                                             </thead>
-                                            <thead>
+                                            <thead id="total_amount">
                                                 <th colspan="7">
                                                     <h4 class="pull-right"><b>Cash Given</b> :</h4>
                                                 </th>
@@ -205,7 +205,7 @@ Edit Print
                                                 </th>
 
                                             </thead>
-                                            <thead>
+                                            <thead id="balance_amount">
                                                 <th colspan="7">
                                                     <h4 class="pull-right"><b>Balance</b> :  </h4>
                                                 </th>
@@ -257,6 +257,8 @@ Edit Print
             $(document).ready(function() {
                 $('#TOTALBILL').html(0);
                 calculateTotal();
+                paymentType();
+                showpaymentstatus();
                 $("#addbillproduct").click(function () {
                     var product_id = $("#product_id").val();
                     var qty = $("#qty").val();
@@ -278,11 +280,10 @@ Edit Print
                     $(this).parent().parent().remove();
                     calculateTotal();
                 });
-                $('#total_paid_amount').on('keyup',function (e) {
+                $('#paid_amount').on('keyup',function (e) {
                     e.preventDefault();
-                    calculateTotal();
+                    calculateTotal()
                 });
-
             });
 
 
@@ -292,8 +293,30 @@ Edit Print
                     total = parseInt($(this).val()) + parseInt(total);
                 });
                 $('#TOTALBILL').html(total);
-                $('#BalanceAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()));
+                $('#BalanceAmount').html(parseInt($('#total_paid_amount').val()) - parseInt(total) );
+                $('#DueAmount').html(parseInt(total) - parseInt($('#paid_amount').val()));
             }
-    </script>
 
+        function paymentType() {
+            var payment_type=$("#payment_type").val();
+
+            if(payment_type=='cheque'||'card') {
+                $("#total_amount").hide();
+                $("#balance_amount").hide();
+            } else if(payment_type=='cash') {
+                $("#total_amount").show();
+                $("#balance_amount").show();
+            }
+        }
+
+        function showpaymentstatus() {
+            var payment_status=$("#payment_status").val();
+            console.log(payment_status);
+            if(payment_status==2) {
+                $(".payment2").show();
+            }  else {
+                $(".payment2").hide();
+            }
+        }
+    </script>
 @endsection
