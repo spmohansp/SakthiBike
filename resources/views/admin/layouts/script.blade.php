@@ -1,4 +1,5 @@
 <script src="{{ url('/billing/js/jquery-3.2.1.min.js') }}"></script>
+
 <script src="{{ url('/billing/js/popper.min.js') }}"></script>
 <script src="{{ url('/billing/js/bootstrap.min.js') }}"></script>
 <script src="{{ url('/billing/js/main.js') }}"></script>
@@ -27,3 +28,15 @@
 
 <!-- sweetalert -->
 <script type="text/javascript" src="{{ url('/billing/js/plugins/sweetalert.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $(".calculatevalue").on('keyup change', function (){
+            var Selling_Price = $("#Selling_Price").val();
+            var CGST = $("#CGST").val();
+            var SGST = $("#SGST").val();
+            var CESS = $("#CESS").val();
+            console.log(CGST);
+            $('#Selling_Price_With_Tax').val((parseInt($('#Selling_Price').val()) / 100) * parseFloat($('#CGST').val()) + (parseInt($('#Selling_Price').val()) / 100) * parseFloat($('#SGST').val()) + (parseInt($('#Selling_Price').val()) / 100) * parseFloat($('#CESS').val()) + parseInt($("#Selling_Price").val()));
+        });
+    });
+</script>

@@ -30,10 +30,10 @@
     </ul>
   </li>
   <li class="treeview">
-    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-print"></i><span class="app-menu__label">Print</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-print"></i><span class="app-menu__label">Bill</span><i class="treeview-indicator fa fa-angle-right"></i></a>
     <ul class="treeview-menu">
-      <li><a class="treeview-item" href="{{ url('admin/print/add') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Print</a></li>
-      <li><a class="treeview-item" href="{{ url('admin/prints') }}"><i class="icon fa fa-chevron-circle-right"></i>View Print</a></li>
+      <li><a class="treeview-item" href="{{ url('admin/bill/add') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Bill</a></li>
+      <li><a class="treeview-item" href="{{ url('admin/bills') }}"><i class="icon fa fa-chevron-circle-right"></i>View Bill</a></li>
     </ul>
   </li>
   <li class="treeview">
