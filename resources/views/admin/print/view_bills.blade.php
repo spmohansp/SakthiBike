@@ -50,7 +50,7 @@ Add Print
                               <th class="csvth">Total Cost</th>
                               <th class="csvth">Balance</th>
                               <th class="csvth">Status</th>
-                              <th class="hidden-print">Action</th>
+                              <th class="hidden-print" ><center>Action</center></th>
                             </tr>
                           </thead>
                           <tbody  id="tablebody">
@@ -63,7 +63,8 @@ Add Print
                                 <td>{{ @$Bill->bill_amount }}</td>
                                 <td>{{ @$Bill->balance_amount }}</td>
                                 <td>{{ $Bill->payment_status }}</td>
-                                <td><a href="{{ route('admin.editPrint',$Bill->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a></td>
+                                <td><a href="{{ route('admin.editPrint',$Bill->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
+                                <a href="{{ route('admin.printBill',$Bill->id) }}"><button class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true" style="color:#fff"></i></button></a></td>
                               </tr>
                             @endforeach
                           </tbody>

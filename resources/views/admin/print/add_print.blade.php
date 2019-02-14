@@ -62,6 +62,7 @@ Add Print
 
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-success " style="padding:10px 20px;" >Save Bill</button>
+                                    <button type="submit" name="print" value="1" class="btn btn-primary " style="padding:10px 20px;" >Print Bill</button>
                                     <!--
                                     <div class="form-group">
                                       <label>Bill No</label>

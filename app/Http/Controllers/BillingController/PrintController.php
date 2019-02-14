@@ -22,7 +22,7 @@ class PrintController extends Controller
 	}
 
     public function saveBill(){
-        // return request()->all();
+//         return request()->all();
         $BillTotal=0;
         foreach (request('product_id') as $key => $product) {
             $BillTotal += request('total_amount')[$key];
@@ -57,7 +57,11 @@ class PrintController extends Controller
             $BillProduct->Total_Cost = request('total_amount')[$key];
             $BillProduct->save();
         }
-        return back()->with('success','Bill Added Successfully!');
+        if(request('print')){
+            return redirect(route('admin.printBill',$Bill->id));
+        }else{
+            return back()->with('success','Bill Added Successfully!');
+        }
     }
 
     public function editPrint($id ,Request $request){
@@ -103,6 +107,10 @@ class PrintController extends Controller
         return back()->with('success','Bill Added Successfully!');
     }
 
+    public function  printBill($id){
+        $Bill = Bill::findorfail($id);
+	    return view('admin.print.print_bill',compact('Bill'));
+    }
 
 
 }
