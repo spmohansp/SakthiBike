@@ -283,4 +283,19 @@ Add Print
             }
     </script>
 
+    <script>
+        function showpaymentstatus()
+        {
+            var payment_status=$("#payment_status").val();
+            if(payment_status==2)
+            {
+                $(".payment2").show();
+            }
+            else
+            {
+                $(".payment2").hide();
+            }
+        }
+    </script>
+
 @endsection
