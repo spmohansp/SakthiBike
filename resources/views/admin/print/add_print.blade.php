@@ -37,8 +37,8 @@ Add Print
                                                 {{--@endforeach--}}
                                             {{--</optgroup>--}}
                                         {{--</select>--}}
-                                        <select class="form-control" name="client_id"  id="demoSelect">
-                                            <optgroup label="Select Cities">
+                                        <select class="form-control" name="client_id"  id="demoSelect" >
+                                            <optgroup label="Select Customer">
                                                 @foreach($Clients as $Client)
                                                     <option value="{{ $Client->id }}">{{ $Client->name }} {{ $Client->phone_no }}</option>
                                                 @endforeach
@@ -142,7 +142,7 @@ Add Print
                                             <div class="form-group" >
 
                                                 <select class="form-control demoSelect1" id="product_id">
-                                                    <optgroup label="Select Cities">
+                                                    <optgroup label="Select Products">
                                                         @foreach($Products as $Product)
                                                             <option value="{{ $Product->id }}">{{ $Product->Product_Name_English }}</option>
                                                         @endforeach

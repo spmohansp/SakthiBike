@@ -31,7 +31,7 @@ Edit Print
                                     <div class="form-group">
                                         <label>Enter Customer name</label>
                                         <select class="form-control Selectpicker" name="client_id" onchange="showclientname()"  id="client_id" style="width:100% !important">
-                                            <optgroup label="Select Client" >
+                                            <optgroup label="Select Customer" >
                                                 @foreach($Clients as $Client)
                                                     <option value="{{ $Client->id }}" {{ ($Client->id == $Bill->client_id)?'selected':'' }}>{{ $Client->name }}</option>
                                                 @endforeach
