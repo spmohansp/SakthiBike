@@ -189,7 +189,7 @@ Add Print
                                                 <h4 class="pull-right"><b>Cash Given</b> :</h4>
                                             </th>
                                             <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" name="paid_amount" required></b></h4>
+                                                <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="Cash_amount_given"></b></h4>
                                             </th>
 
                                             </thead>
@@ -254,7 +254,8 @@ Add Print
                             data:{product_id:product_id,qty:qty},
                             success:function (data) {
                                 $('#productbilltable').append(data);
-                                calculateTotal();
+                                calculateCashGiven();
+                                calculateBalanceAmount()
                             }
                         });
                     }
@@ -263,23 +264,37 @@ Add Print
                 $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
                     e.preventDefault();
                     $(this).parent().parent().remove();
-                    calculateTotal();
+                    calculateCashGiven();
+                    calculateBalanceAmount()
                 });
-                $('#total_paid_amount').on('keyup',function (e) {
+                $('#Cash_amount_given').on('keyup',function (e) {
                     e.preventDefault();
-                    calculateTotal();
+                    calculateCashGiven();
+                });
+                $('#paid_amount').on('keyup',function (e) {
+                    e.preventDefault();
+                    calculateBalanceAmount()
                 });
 
             });
 
 
-            function calculateTotal() {
+            function calculateCashGiven() {
                 var total=0;
                 $(".total_amount").each(function() {
                     total = parseInt($(this).val()) + parseInt(total);
                 });
                 $('#TOTALBILL').html(total);
-                $('#BalanceAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()));
+                $('#BalanceAmount').html(parseInt($('#Cash_amount_given').val()) - parseInt(total));
+            }
+
+            function calculateBalanceAmount() {
+                var total=0;
+                $(".total_amount").each(function() {
+                    total = parseInt($(this).val()) + parseInt(total);
+                });
+                $('#TOTALBILL').html(total);
+                $('#due_amount').html(parseInt(parseInt(total) - $('#paid_amount').val()));
             }
     </script>
 
