@@ -113,4 +113,11 @@ class PrintController extends Controller
     }
 
 
+
+    public function search_customer_name()
+    {
+        return Client::all();
+    }
+
+
 }

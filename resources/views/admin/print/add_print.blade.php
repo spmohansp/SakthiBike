@@ -14,6 +14,60 @@ Add Print
 
 @section('content')
 
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Customer</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form action="{{ route('admin.saveClient') }}" method="post" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Client Name" name="name">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Business Name" name="business_name">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input class="form-control form-control-lg" id="" type="email" aria-describedby="emailHelp" placeholder="Enter Email Id" name="email">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Phone number" name="phone_no" minlength="10" maxlength="10">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control form-control-lg" id="exampleTextarea" placeholder="Enter Address" rows="3" name="address"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Enter GST Number" name="gst" >
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Notes" name="notes">
+                            </div>
+                            <div class="">
+                                <button class="btn btn-primary" type="submit">Add Client</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
         <div class="">
             <div class="pad">
                 <div class="row">
@@ -29,7 +83,11 @@ Add Print
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Enter Customer name</label>
+                                                
+                                             <label>Enter Customer name</label>
+                                        <div style="float:right;">
+                                            <button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#myModal">Add Customer</button>
+                                        </div>
                                         {{--<select class="form-control Selectpicker" name="client_id" onchange="showclientname()"  id="client_id" style="width:100% !important">--}}
                                             {{--<optgroup label="Select Client" >--}}
                                                 {{--@foreach($Clients as $Client)--}}
@@ -60,15 +118,7 @@ Add Print
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <button type="submit" class="btn btn-success " style="padding:10px 20px;" >Save Bill</button>
-                                    <button type="submit" name="print" value="1" class="btn btn-primary " style="padding:10px 20px;" >Print Bill</button>
-                                    <!--
-                                    <div class="form-group">
-                                      <label>Bill No</label>
-                                        <input class="form-control mobilenumber" type="text" placeholder="Enter Bill No" disabled>
-                                    </div>-->
-                                </div>
+                                
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
@@ -121,6 +171,16 @@ Add Print
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-4" style="text-align:center">
+                                    <button type="submit" class="btn btn-success " style="padding:10px 20px;" >Save Bill</button>
+                                    <button type="submit" name="print" value="1" class="btn btn-primary " style="padding:10px 20px;" >Print Bill</button>
+                                    <!--
+                                    <div class="form-group">
+                                      <label>Bill No</label>
+                                        <input class="form-control mobilenumber" type="text" placeholder="Enter Bill No" disabled>
+                                    </div>-->
+                                </div>
                         </div>
                         <div class="tile">
                             <div class="row">
