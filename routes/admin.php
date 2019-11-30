@@ -50,6 +50,7 @@ Route::get('/print/{id}/edit', 'BillingController\PrintController@editPrint')->n
 Route::post('/print/{id}/update', 'BillingController\PrintController@UpdateBill')->name('UpdateBill');
 Route::get('/bill/{id}/print','BillingController\PrintController@printBill')->name('printBill');
 
+Route::get('/bill/autocomplete','BillingController\PrintController@search_customer_name');
 
 
 //Clients
@@ -68,4 +69,6 @@ Route::post('/expense/add','BillingController\ExpenseController@saveExpense')->n
 Route::get('/expense/{id}/edit','BillingController\ExpenseController@editExpense')->name('editExpense');
 Route::post('/expense/{id}/update','BillingController\ExpenseController@updateExpense')->name('updateExpense');
 Route::get('/expense/{id}/delete','BillingController\ExpenseController@deleteExpense')->name('deleteExpense');
+
+
 
