@@ -21,7 +21,7 @@ Route::post('/product/{id}/update', 'BillingController\ProductController@updateP
 Route::get('/product/{id}/delete', 'BillingController\ProductController@deleteProduct')->name('deleteProduct');
 Route::get('/product/getProduct/','BillingController\ProductController@getProduct');
 
-
+Route::resource('/shop','BillingController\ShopController');
 
 Route::get('/deposit/add','BillingController\DepositController@addDeposit');
 Route::get('/deposits','BillingController\DepositController@viewDeposit');
