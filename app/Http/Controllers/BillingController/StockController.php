@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BillingController;
 use App\Products;
 use App\Stock;
+use App\Shop;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -10,7 +11,8 @@ class StockController extends Controller
 {
    public function addStock(){
    	$Stock = Products::all();
-   return view('admin.stock.add',compact('Stock'));
+      $Shops = Shop::all();
+   return view('admin.stock.add',compact('Stock','Shops'));
    }
 
    public function saveStock(){
@@ -26,6 +28,7 @@ class StockController extends Controller
 
    public function viewStock(){
    	$Stock = Stock::all();
+      $Shops = Shop::all();
    return view('admin.stock.view',compact('Stock'));
    }
 
