@@ -14,279 +14,231 @@ Add Print
 
 @section('content')
 
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Add Customer</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form action="{{ route('admin.saveClient') }}" method="post" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Client Name" name="name">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Business Name" name="business_name">
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input class="form-control form-control-lg" id="" type="email" aria-describedby="emailHelp" placeholder="Enter Email Id" name="email">
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Customer</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form action="{{ route('admin.saveClient') }}" method="post" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                      <div class="form-group">
+                                        <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Customer Name" name="name">
+                                      </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Phone number" name="phone_no" minlength="10" maxlength="10">
+                                    <div class="col-lg-6">
+                                      <div class="form-group">
+                                          <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Phone Number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" value="{{ old('phone_number') }}" name="phone_number" minlength="0" maxlength="10">
+                                      </div>
                                     </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-lg-6">
+                                      <div class="form-group">
+                                        <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Bike Number" name="bike_no">
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                      <div class="form-group">
+                                        <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Service Km" name="service_km">
+                                      </div>
+                                    </div>
+                                  </div>
+                                <div class="">
+                                    <button class="btn btn-primary" type="submit">Add Client</button>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control form-control-lg" id="exampleTextarea" placeholder="Enter Address" rows="3" name="address"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Enter GST Number" name="gst" >
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Notes" name="notes">
-                            </div>
-                            <div class="">
-                                <button class="btn btn-primary" type="submit">Add Client</button>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <form action="{{ route('admin.saveBill') }}" method="post">
+                {{ csrf_field() }}
+                <div class="tile">
+                    <h3 style="margin-top:0px;">Customer Details</h3>
 
-        <div class="">
-            <div class="pad">
-                <div class="row">
-                    <div class="col-md-2">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                 <label>Enter Customer name</label>
+                                <div style="float:right;">
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add Customer</button>
+                                </div>
+                                <select class="form-control" name="client_id"  id="demoSelect" >
+                                    <optgroup label="Select Customer">
+                                        @foreach($Clients as $Client)
+                                            <option value="{{ $Client->id }}" {{ old('client_id') == $Client->id ? 'selected' : '' }}>{{ $Client->name }} || {{ $Client->phone_no }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>    
                     </div>
-                    <div class="col-md-12" style="padding:5px;">
 
-                        <form action="{{ route('admin.saveBill') }}" method="post">
-                            {{ csrf_field() }}
-                        <div class="tile">
-                            <h3 style="margin-top:0px;">Customer Details</h3>
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                                
-                                             <label>Enter Customer name</label>
-                                        <div style="float:right;">
-                                            <button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#myModal">Add Customer</button>
-                                        </div>
-                                        {{--<select class="form-control Selectpicker" name="client_id" onchange="showclientname()"  id="client_id" style="width:100% !important">--}}
-                                            {{--<optgroup label="Select Client" >--}}
-                                                {{--@foreach($Clients as $Client)--}}
-                                                    {{--<option value="{{ $Client->id }}">{{ $Client->name }}</option>--}}
-                                                {{--@endforeach--}}
-                                            {{--</optgroup>--}}
-                                        {{--</select>--}}
-                                        <select class="form-control" name="client_id"  id="demoSelect" >
-                                            <optgroup label="Select Customer">
-                                                @foreach($Clients as $Client)
-                                                    <option value="{{ $Client->id }}">{{ $Client->name }} {{ $Client->phone_no }}</option>
-                                                @endforeach
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Customer Name</label>
-                                        <br>
-                                        <span id="client_name"></span>
-                                        <!--<select class="form-control Selectpicker" style="width:100% !important">
-                                            <option>Enter Customer Phone Number</option>
-                                            <option>Product1</option>
-                                            <option>Product2</option>
-                                        </select>-->
-                                    </div>
-                                </div>
-
-                                
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Payment type</label>
-                                        <div class="form-group" >
-                                            <select class="form-control Selectpicker"  onchange="paymentType()" name="payment_type" id="payment_type" style="width:100% !important" required>
-                                                <optgroup label="Select Payment type" >
-                                                    <option value="cash">Cash</option>
-                                                    <option value="cheque">Cheque</option>
-                                                    <option value="card">Card</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Date</label>
-                                        <input class="form-control" type="date" name="date" required>
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Payment status</label>
-                                        <select class="form-control Selectpicker" onchange="showpaymentstatus()" name="payment_status" id="payment_status" style="width:100% !important" required>
-                                            <optgroup label="Select Payment" >
-                                                <option value="1">Paid</option>
-                                                <option value="2">Partially Paid</option>
-                                                <option value="3">Due</option>
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 payment2" style="display:none">
-                                    <div class="form-group">
-                                        <label>Paid Amount</label>
-                                        <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
-                                    </div>
-                                </div>
-                                <div class="col-md-4 payment2" style="display:none">
-                                    <div class="form-group">
-                                        <label>Due Amount</label><br>
-                                        <span id="DueAmount" name="" ></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4" style="text-align:center">
-                                    <button type="submit" class="btn btn-success " style="padding:10px 20px;" >Save Bill</button>
-                                    <button type="submit" name="print" value="1" class="btn btn-primary " style="padding:10px 20px;" >Print Bill</button>
-                                    <!--
-                                    <div class="form-group">
-                                      <label>Bill No</label>
-                                        <input class="form-control mobilenumber" type="text" placeholder="Enter Bill No" disabled>
-                                    </div>-->
-                                </div>
-                        </div>
-                        <div class="tile">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label>Add Products</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Quantity </label>
-                                </div>
-                                <div class="col-md-2">
-                                    <label></label>
-                                </div>
-                                <div class="col-md-2">
-                                    <label></label>
-                                </div>
-                            </div>
-                                <div id="productsbilllist">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group" >
-
-                                                <select class="form-control demoSelect1" id="product_id">
-                                                    <optgroup label="Select Products">
-                                                        @foreach($Products as $Product)
-                                                            <option value="{{ $Product->id }}">{{ $Product->Product_Name_English }}</option>
-                                                        @endforeach
-                                                    </optgroup>
-                                                </select>
-
-                                                {{--<select class="form-control Selectpicker"  id="" style="width:100% !important">--}}
-                                                    {{--<optgroup label="Select Product" >--}}
-
-                                                    {{--</optgroup>--}}
-                                                {{--</select>--}}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <input class="form-control nextrow " type="text" placeholder="Enter Quantity" min="1" id="qty">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <button type="button" id="addbillproduct"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="tile">
-                                    <div class="-body table-responsive">
-                                        <table class="table table-hover table-bordered">
-                                            <thead>
-                                            <tr>
-                                                <th>Items</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>CGST</th>
-                                                <th>SGST</th>
-                                                <th>CESS</th>
-                                                <th>Total Cost</th>
-                                                <th>Action</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="productbilltable">
-                                            </tbody>
-                                            <thead>
-                                            <th colspan="7">
-                                                <h4 class="pull-right"><b>Total</b> :</h4>
-                                            </th>
-                                            <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i> <b id="TOTALBILL"></b></b></h4>
-                                            </th>
-
-                                            </thead >
-                                            <thead id="total_amount">
-                                            <th colspan="7">
-                                                <h4 class="pull-right"><b>Cash Given</b> :</h4>
-                                            </th>
-                                            <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" name="total_paid_amount" ></b></h4>
-                                            </th>
-
-                                            </thead>
-                                            <thead id="balance_amount">
-                                            <th colspan="7">
-                                                <h4 class="pull-right"><b>Balance</b> :  </h4>
-                                            </th>
-                                            <th colspan="2">
-                                                <h4><b><i class="fa fa-inr"></i><b id="BalanceAmount"></b></b></h4>
-                                            </th>
-                                            </thead>
-                                        </table>
-                                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Payment type</label>
+                                <div class="form-group">
+                                    <select class="form-control Selectpicker"  onchange="paymentType()" name="payment_type" id="payment_type" style="width:100% !important" required>
+                                        <optgroup label="Select Payment type" >
+                                            <option value="cash" {{ old('payment_type') == "cash" ? 'selected' : '' }}>Cash</option>
+                                            <option value="cheque" {{ old('payment_type') == "cheque" ? 'selected' : '' }}>Cheque</option>
+                                            <option value="card" {{ old('payment_type') == "card" ? 'selected' : '' }}>Card</option>
+                                        </optgroup>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input class="form-control" type="date" name="date" value="{{ old('date') }}" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Payment status</label>
+                                <select class="form-control Selectpicker" onchange="showpaymentstatus()" name="payment_status" id="payment_status" style="width:100% !important" required>
+                                    <optgroup label="Select Payment" >
+                                        <option value="1">Paid</option>
+                                        <option value="2">Partially Paid</option>
+                                        <option value="3">Due</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 payment2" style="display:none">
+                            <div class="form-group">
+                                <label>Paid Amount</label>
+                                <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
+                            </div>
+                        </div>
+                        <div class="col-md-4 payment2" style="display:none">
+                            <div class="form-group">
+                                <label>Due Amount</label><br>
+                                <span id="DueAmount" name="" ></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="tile">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Add Products</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Quantity </label>
+                        </div>
+                        <div class="col-md-2">
+                            <label></label>
+                        </div>
+                        <div class="col-md-2">
+                            <label></label>
+                        </div>
+                    </div>
+                    <div id="productsbilllist">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group" >
+
+                                    <select class="form-control demoSelect1" id="product_id">
+                                        <optgroup label="Select Products">
+                                            @foreach($Products as $Product)
+                                                <option value="{{ $Product->id }}">{{ $Product->Product_Name_English }}</option>
+                                            @endforeach
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input class="form-control nextrow " type="text" placeholder="Enter Quantity" min="1" id="qty">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <button type="button" id="addbillproduct"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tile">
+                            <div class="-body table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Items</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>CGST</th>
+                                        <th>SGST</th>
+                                        <th>CESS</th>
+                                        <th>Total Cost</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="productbilltable">
+                                    </tbody>
+                                    <thead>
+                                    <th colspan="7">
+                                        <h4 class="pull-right"><b>Total</b> :</h4>
+                                    </th>
+                                    <th colspan="2">
+                                        <h4><b><i class="fa fa-inr"></i> <b id="TOTALBILL"></b></b></h4>
+                                    </th>
+
+                                    </thead >
+                                    <thead id="total_amount">
+                                    <th colspan="7">
+                                        <h4 class="pull-right"><b>Cash Given</b> :</h4>
+                                    </th>
+                                    <th colspan="2">
+                                        <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" name="total_paid_amount" ></b></h4>
+                                    </th>
+
+                                    </thead>
+                                    <thead id="balance_amount">
+                                    <th colspan="7">
+                                        <h4 class="pull-right"><b>Balance</b> :  </h4>
+                                    </th>
+                                    <th colspan="2">
+                                        <h4><b><i class="fa fa-inr"></i><b id="BalanceAmount"></b></b></h4>
+                                    </th>
+                                    </thead>
+                                </table>
+                            </div>
+                            <br>
+                            <div class="col-md-8" style="text-align: right">
+                                <button type="submit" name="print" value="1" class="btn btn-primary" style="padding:10px 20px;" >Print Bill</button>
+                                <button type="submit" class="btn btn-success" style="padding:10px 20px;" >Save Bill</button>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        </form>
+    </div>
 
    @endsection
 

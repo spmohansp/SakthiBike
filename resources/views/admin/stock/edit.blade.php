@@ -37,7 +37,7 @@ Edit Stock
                         <select class="form-control form-control-lg" name="product_id" required="">
                           <option value="">Select Product</option>
                           @foreach($Products as $Product)
-                          <option value={{ $Product->id }} {{ $Product->id==$Stock->product_id?'selected':'' }}>{{ $Product->Product_Name_English}} </option>
+                            <option value={{ $Product->id }} {{ $Product->id==$Stock->product_id?'selected':'' }}>{{ $Product->Product_Name_English}} </option>
                           @endforeach
                         </select>
                       </div>

@@ -16,12 +16,9 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('business_name')->nullable();
-            $table->string('email')->unique();
-            $table->string('phone_no')->unique()->nullable();
-            $table->string('address');
-            $table->string('gst')->nullable();
-            $table->string('notes')->nullable();
+            $table->string('phone_number');
+            $table->string('bike_no')->unique();
+            $table->string('service_km')->nullable();
             $table->timestamps();
         });
     }

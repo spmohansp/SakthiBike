@@ -15,17 +15,10 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Product_ID')->unique();
-            $table->string('Product_Name_English')->nullable();
-            $table->string('Product_Name_Tamil')->nullable();
+            $table->string('Product_Name');
+            $table->string('Product_Type')->nullable();
             $table->string('Cost_Price');
-            $table->string('Expense')->nullable();
             $table->string('Selling_Price')->nullable();
-            $table->string('Selling_Price_With_Tax')->nullable();
-            $table->string('CGST')->nullable();
-            $table->string('SGST')->nullable();
-            $table->string('CESS')->nullable();
-            $table->string('minimun_quantity')->nullable();
             $table->timestamps();
         });
     }

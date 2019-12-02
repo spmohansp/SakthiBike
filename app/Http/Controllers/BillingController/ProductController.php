@@ -20,17 +20,10 @@ class ProductController extends Controller
     public function storeproduct(){
         try {
             $Product = new Products;
-            $Product->Product_ID = request('Product_ID');
-            $Product->Product_Name_English = request('Product_Name_English');
-            $Product->Product_Name_Tamil = request('Product_Name_Tamil');
+            $Product->Product_Name = request('Product_Name');
+            $Product->Product_Type = request('Product_Type');
             $Product->Cost_Price = request('Cost_Price');
-            $Product->Expense = request('Expense');
             $Product->Selling_Price = request('Selling_Price');
-            $Product->Selling_Price_With_Tax = request('Selling_Price_With_Tax');
-            $Product->CGST = request('CGST');
-            $Product->SGST = request('SGST');
-            $Product->CESS = request('CESS');
-            $Product->minimun_quantity = request('minimun_quantity');
             $Product->save();
             return back()->with('success', 'Product Added Successfully');
         } catch (Exception $e) {
@@ -46,19 +39,12 @@ class ProductController extends Controller
     public function updateProduct($id){
         try {
             $Product = Products::findorfail($id);
-            $Product->Product_ID = request('Product_ID');
-            $Product->Product_Name_English = request('Product_Name_English');
-            $Product->Product_Name_Tamil = request('Product_Name_Tamil');
+            $Product->Product_Name = request('Product_Name');
+            $Product->Product_Type = request('Product_Type');
             $Product->Cost_Price = request('Cost_Price');
-            $Product->Expense = request('Expense');
             $Product->Selling_Price = request('Selling_Price');
-            $Product->Selling_Price_With_Tax = request('Selling_Price_With_Tax');
-            $Product->CGST = request('CGST');
-            $Product->SGST = request('SGST');
-            $Product->CESS = request('CESS');
-            $Product->minimun_quantity = request('minimun_quantity');
             $Product->save();
-            return back()->with('success', 'Product Updated Successfully');
+            return redirect(route('admin.viewProducts'))->with('success', 'Product Updated Successfully');
         } catch (Exception $e) {
             return back()->with('danger', 'Something went wrong');
         }
