@@ -2,10 +2,10 @@
 <aside class="app-sidebar">
 <ul class="app-menu">
   <li class="treeview">
-    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Clients</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Customer</span><i class="treeview-indicator fa fa-angle-right"></i></a>
     <ul class="treeview-menu">
-      <li><a class="treeview-item" href="{{ url('admin/client/add') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Clients</a></li>
-      <li><a class="treeview-item" href="{{ url('admin/clients') }}"><i class="icon fa fa-chevron-circle-right"></i>View Clients</a></li>
+      <li><a class="treeview-item" href="{{ url('admin/client/add') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Customer</a></li>
+      <li><a class="treeview-item" href="{{ url('admin/clients') }}"><i class="icon fa fa-chevron-circle-right"></i>View Customer</a></li>
     </ul>
   </li>
   <li class="treeview">

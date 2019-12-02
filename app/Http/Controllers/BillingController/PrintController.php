@@ -24,8 +24,10 @@ class PrintController extends Controller
     public function saveBill(){
 //         return request()->all();
         $BillTotal=0;
-        foreach (request('product_id') as $key => $product) {
-            $BillTotal += request('total_amount')[$key];
+        if(!empty(request('product_id'))){
+            foreach (request('product_id') as $key => $product) {
+                $BillTotal += request('total_amount')[$key];
+            }
         }
 
         $Bill = new Bill;
@@ -45,22 +47,27 @@ class PrintController extends Controller
         $Bill->bill_amount = $BillTotal;
         //$Bill->balance_amount =$BillTotal - request('total_paid_amount');
         $Bill->save();
-
-        foreach(request('product_id') as $key=> $product){
-            $BillProduct = new BillProduct;
-            $BillProduct->bill_id = $Bill->id;
-            $BillProduct->product_id = $product;
-            $BillProduct->quantity = request('qty')[$key];
-            $BillProduct->CGST = request('CGST')[$key];
-            $BillProduct->SGST = request('SGST')[$key];
-            $BillProduct->CESS = request('CESS')[$key];
-            $BillProduct->Total_Cost = request('total_amount')[$key];
-            $BillProduct->save();
+        if(!empty(request('product_id'))){
+            foreach(request('product_id') as $key=> $product){
+                $BillProduct = new BillProduct;
+                $BillProduct->bill_id = $Bill->id;
+                $BillProduct->product_id = $product;
+                $BillProduct->quantity = request('qty')[$key];
+                $BillProduct->CGST = request('CGST')[$key];
+                $BillProduct->SGST = request('SGST')[$key];
+                $BillProduct->CESS = request('CESS')[$key];
+                $BillProduct->Total_Cost = request('total_amount')[$key];
+                $BillProduct->save();
+            }
         }
-        if(request('print')){
-            return redirect(route('admin.printBill',$Bill->id));
+        if(!empty(request('product_id'))){
+            if(request('print')){
+                return redirect(route('admin.printBill',$Bill->id));
+            }else{
+                return back()->with('success','Bill Added Successfully!');
+            }
         }else{
-            return back()->with('success','Bill Added Successfully!');
+            return back()->with('danger','Select Any Product First!');
         }
     }
 

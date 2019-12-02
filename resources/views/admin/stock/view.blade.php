@@ -5,7 +5,7 @@ View Stock
 @endsection
 
 @section('Parent-Menu')
-Transactions
+Stock
 @endsection
 
 @section('Menu')

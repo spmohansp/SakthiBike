@@ -32,12 +32,8 @@ View Clients
                   <tr>
                     <th>S.No</th>
                     <th>Name</th>
-                    <th>Business Name</th>
-                    <th>Email</th>
                     <th>Phone Number</th>
-                    <th>Address</th>
-                    <th>Notes</th>
-                    <th>Status</th>
+                    <th>Bike Number</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -46,12 +42,8 @@ View Clients
                       <tr>
                         <td>{{ ++$key }}</td>
                         <td>{{ $Client->name }}</td>
-                        <td>{{ $Client->business_name }}</td>
-                        <td>{{ $Client->email }}</td>
-                        <td>{{ $Client->phone_no }}</td>
-                        <td>{{ $Client->address }}</td>
-                        <td>{{ $Client->notes }}</td>
-                        <td></td>
+                        <td>{{ $Client->phone_number }}</td>
+                        <td>{{ $Client->bike_no }}</td>
                         <td>
                           <a href="{{ route('admin.editClient',$Client->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
                           <a href="{{ route('admin.deleteClient',$Client->id) }}"> <button class="btn btn-primary" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></a>
