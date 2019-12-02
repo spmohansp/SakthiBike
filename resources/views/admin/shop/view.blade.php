@@ -14,18 +14,14 @@ View Shops
 
 @section('content')
     <div class="tile">
-      <div class="pad">
         <div class="row">
-          <div class="col-lg-10">
-
+          <div class="col-lg-12">
+            <button class="btn btn-primary pull-right" type="button" onclick="window.location.href='{{ action('BillingController\ShopController@create') }}'">Add Shop</button>
           </div>
-          <div class="col-lg-2">
-            <button class="btn btn-primary" type="button" onclick="window.location.href='{{ action('BillingController\ShopController@create') }}'">Add Shop</button>
-          </div>
-        </div><br>
+        </div>
+        <br>
         <div class="row">
         <div class="col-md-12">
-          <div class="">
             <div class="tile-body">
               <table class="table ">
                 <thead>
@@ -57,9 +53,7 @@ View Shops
                 </tbody>
               </table>
             </div>
-          </div>
         </div>
-      </div>
       </div>
     </div>
   @endsection
