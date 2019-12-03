@@ -57,7 +57,7 @@
 
       <li><a class="treeview-item" href="{{ action('BillingController\SalaryController@create') }}"><i class="icon fa fa-chevron-circle-right"></i>Add Salary</a></li>
 
-      <li><a class="treeview-item" href="{{ url('admin/expenses') }}"><i class="icon fa fa-chevron-circle-right"></i>View Salary</a></li>
+      <li><a class="treeview-item" href="{{ action('BillingController\SalaryController@index') }}"><i class="icon fa fa-chevron-circle-right"></i>View Salary</a></li>
     </ul>
   </li>
 

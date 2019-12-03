@@ -1,15 +1,15 @@
 @extends('admin.layouts.master')
 
 @section('Current-Page')
-View Salary 
+View Attendence 
 @endsection
 
 @section('Parent-Menu')
-{{-- Stock --}}
+Stock
 @endsection
 
 @section('Menu')
-view Salary
+view Attendence
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@ view Salary
 
           </div>
           <div class="col-lg-2">
-            <button class="btn btn-primary" type="button" onclick="window.location.href='{{ action('BillingController\SalaryController@create') }}'">Add Shop</button>
+            <button class="btn btn-primary" type="button" onclick="window.location.href='{{ action('BillingController\SalaryController@create') }}'">Add Attendence</button>
           </div>
         </div><br>
         <div class="row">

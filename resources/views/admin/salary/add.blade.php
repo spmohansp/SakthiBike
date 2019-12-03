@@ -1,15 +1,15 @@
 @extends('admin.layouts.master')
 
 @section('Current-Page')
-Add Salary
+Attendence Register
 @endsection
 
 @section('Parent-Menu')
-{{-- Stock --}}
+Stock
 @endsection
 
 @section('Menu')
-Salary Detail
+Attendence Register
 @endsection
 
 @section('content')
@@ -18,7 +18,7 @@ Salary Detail
 <div class="title">
     <div class="row">
         <div class="col-lg-12">
-            <button class="btn btn-primary pull-right" type="button" onclick="window.location.href='{{ action('BillingController\SalaryController@index') }}'">View Salary Details
+            <button class="btn btn-primary pull-right" type="button" onclick="window.location.href='{{ action('BillingController\SalaryController@index') }}'">View Atttendence
             </button>
         </div>
     </div>
@@ -59,7 +59,7 @@ Salary Detail
 
                         <div class="row">
                             <div class="col-lg-7">
-                                <button class="btn btn-primary pull-right" type="submit">Add Shop</button>
+                                <button class="btn btn-primary pull-right" type="submit">Add Attendence</button>
                             </div>
                         </div>
                     </form>
