@@ -15,7 +15,7 @@
 @include('admin.layouts.sidemenu')
 @include('admin.layouts.menu')
 @include('admin.layouts.errors')
-@yield('content')
+@yield('content')   
 @include('admin.layouts.script')
 @include('admin.layouts.footer')
 @yield('loadMore')

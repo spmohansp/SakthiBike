@@ -135,7 +135,6 @@ Add Stock
       });
     </script>
 
-=======
             </div>
          </div>
       </div>
@@ -151,5 +150,4 @@ Add Stock
     <script type="text/javascript">
         $('#demoSelect').select2();
     </script>
->>>>>>> 05c0f53cc5b58a06c7f3a164cd1804df77cffa2e
 @endsection
