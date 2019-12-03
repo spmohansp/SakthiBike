@@ -10,9 +10,9 @@ use App\Http\Controllers\Controller;
 class StockController extends Controller
 {
    public function addStock(){
-   	$Stock = Products::all();
+   	$Products = Products::all();
       $Shops = Shop::all();
-   return view('admin.stock.add',compact('Stock','Shops'));
+   return view('admin.stock.add',compact('Products','Shops'));
    }
 
    public function saveStock(){
@@ -48,8 +48,14 @@ class StockController extends Controller
    	return back()->with('success','Stock Updated Sucessfully');
    }
 
-    public function deleteStock($id){
-   Stock::FindorFail($id)->delete();
-   return back()->with('success','Stock Deleted Sucessfully');
+   public function deleteStock($id){
+      Stock::FindorFail($id)->delete();
+      return back()->with('success','Stock Deleted Sucessfully');
+   }
+
+   public function GetProductDetails(Request $request)
+   {
+      $data = Products::findorfail(request('Product'));
+      return $data;
    }
 }

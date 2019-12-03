@@ -23,7 +23,10 @@ Route::get('/product/getProduct/','BillingController\ProductController@getProduc
 
 Route::resource('/shop','BillingController\ShopController');
 
+Route::get('/GetProductDetails','BillingController\StockController@GetProductDetails')->name('GetProductDetails');
+
 Route::get('/deposit/add','BillingController\DepositController@addDeposit');
+
 Route::get('/deposits','BillingController\DepositController@viewDeposit');
 
 //Ledger

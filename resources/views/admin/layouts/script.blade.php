@@ -13,9 +13,6 @@
 <script type="text/javascript" src="{{ url('/billing/js/plugins/bootstrap-datepicker.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('/billing/js/plugins/select2.min.js') }}"></script>
 
-
-
-
 <!-- The javascript plugin to display page loading on top-->
 <script src="{{ url('billing/js/plugins/pace.min.js') }}"></script>
 <!-- Page specific javascripts-->

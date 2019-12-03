@@ -35,29 +35,14 @@ Add Stock
                        </select>
                     </div>
                  </div>
-                 <div class="col-lg-6">
-                    <div class="form-group">
-                       <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Quantity" name="quantity" required="">
-                    </div>
-                 </div>
                </div>
-               <div class="row">
-                 <div class="col-lg-6">
-                    <div class="form-group">
-                       <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Amount" name="amount" required="">
-                    </div>
-                 </div>
-                 <div class="col-lg-6">
-                    <div class="form-group">
-                       <input class="form-control form-control-lg" id="" type="date" aria-describedby="emailHelp" placeholder="" name="date" required="">
-                    </div>
-                 </div>
-               </div>
+               
                 <div class="row">
                     <div class="col-sm-12">
                        <div class="panel-group">
                           <div class="panel panel-default">
-                             <div class="panel-heading">Add Stock
+                             <div class="panel-heading">
+                                <h5>Add Stock</h5>
                                 <button type="button" class="btn btn-primary btn-sm pull-right AddStock"><i class="fa fa-plus"></i></button>
                              </div>
                              <div class="panel-body table-responsive">
@@ -68,26 +53,19 @@ Add Stock
                                          <th>Unit</th>
                                          <th>Cost </th>
                                          <th>Selling</th>
+                                         <th>Total</th>
                                          <th>Action</th>
                                       </tr>
                                    </thead>
                                    <tbody class="StockDetailTableData">
-                                      <tr>
-                                         <td>
-                                            <input type="text" class="form-control" name="Stock[Product][]" value="">
-                                         </td>
-                                         <td>
-                                            <input type="number" min="0" class="form-control" name="Stock[Unit][]" value="">
-                                         </td>
-                                         <td>
-                                            <input type="text" class="form-control" name="Stock[Cost][]" value="" disabled>
-                                         </td>
-                                         <td>
-                                            <input type="number" min="0" class="form-control" name="Stock[Selling][]" value="" disabled>
-                                         </td>
-                                         <td><i style="color: red;" class="fa fa-close RemoveStockInput"></i></td>
-                                      </tr>
                                    </tbody>
+                                      <tr>
+                                        <td colspan="" rowspan="" headers=""></td>
+                                        <td colspan="" rowspan="" headers=""></td>
+                                        <td colspan="" rowspan="" headers=""><input type="" class="form-control" name="" readonly></td>
+                                        <td colspan="" rowspan="" headers=""><input type="" class="form-control" name="" readonly></td>
+                                        <td colspan="" rowspan="" headers=""><p class="ProductWiseTotal" style="font-size: 18px;">0</p></td>
+                                      </tr>
                                 </table>
                              </div>
                           </div>
@@ -104,52 +82,76 @@ Add Stock
     </div>
   @endsection
 
-
-
 @section('loadMore')
-    <script>
+      <script type="text/javascript">
       $( document ).ready(function() {
+        var x = 1;
         $('.AddStock').on('click',function () {
           var stock_entry = '<tr>\n' +
-              '    <td>\n' +
-              '        <input type="text" class="form-control" name="Stock[Product][]" value="">\n' +
+              '    <td id="1td">\n' +
+              '        <select class="form-control Products" style="width:20em;" name="Stock[Product][]" >\n' +
+                        @foreach($Products as $key=>$Product)
+              '           <option value="{{ $Product->id }}">{{ $Product->Product_Name }}</option>\n' +
+                        @endforeach
+              '        </select>\n' +
               '    </td>\n' +
-               '    <td>\n' +
-              '        <input type="text" class="form-control" name="Stock[Unit][]" value="">\n' +
+              '    <td id="2td">\n' +
+              '        <input type="text" class="form-control Unit" name="Stock[Unit][]" value="">\n' +
               '    </td>\n' +
-               '      <td>\n' +
-              '        <input type="text" class="form-control" name="Stock[Cost][]" value="" disabled>\n' +
+              '    <td id="3td">\n' +
+              '        <input type="text" class="form-control Cost" name="Stock[Cost][]" value="">\n' +
               '    </td>\n' +
-              '    <td>\n' +
-              '        <input type="number" min="0" class="form-control" name="Stock[Selling][]" value="" disabled>\n' +
+              '    <td id="4td">\n' +
+              '        <input type="text" min="0" class="form-control Selling" name="Stock[Selling][]" value="">\n' +
               '    </td>\n' +
+              '    <td><p class="ProductWiseTotal" style="font-size: 18px;">0</p></td>\n' +
               '    <td class="RemoveStockInput" style="font-size: 18px;"><i style="color: red;" class="fa fa-close fa-10x"></i></td>\n' +
               '</tr>';
-          $('.StockDetailTableData').append(stock_entry);
-        });
+              x++;
+            $('.StockDetailTableData').append(stock_entry);
+            $('.Products').select2();
+           });
+
+
+          $('.AddStock').trigger('click');
+          setTimeout(function() {
+            $('.Products').trigger('change');
+          }, 2000);
+          
+
+          $('.Products').select2({
+          });
+
+          $('body').on('change keypress','.Products',function() {
+            var Product = $(this).val();
+            setTimeout(function() {
+            $('.Products').trigger('change');
+          }, 2000);
+            $.ajax({
+                type: "get",
+                url: "{{ route('admin.GetProductDetails') }}",
+                data: {Product: Product},
+                success: (data)=> {
+                  // return data;
+                  $(this).parent().parent().find(".Cost").val(data.Cost_Price);
+                  $(this).parent().parent().find(".Selling").val(data.Selling_Price);
+                }
+              });
+           });
+
+      
 
         $('body').on('click','.RemoveStockInput',function (e) {
             e.preventDefault();
-            $(this).parent().remove();
+            if(x>1){
+              $(this).parent().remove();
+              x--;
+            }
         });
       });
+
+
+
     </script>
 
-=======
-            </div>
-         </div>
-      </div>
-  </div>
-  @endsection
-
-  @section('loadMore')
-
-    <script src="{{ url('billing/js/jquery-3.2.1.min.js') }}"></script>
-
-    <script type="text/javascript" src="{{ url('billing/js/plugins/bootstrap-datepicker.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('billing/js/plugins/select2.min.js') }}"></script>
-    <script type="text/javascript">
-        $('#demoSelect').select2();
-    </script>
->>>>>>> 05c0f53cc5b58a06c7f3a164cd1804df77cffa2e
 @endsection
