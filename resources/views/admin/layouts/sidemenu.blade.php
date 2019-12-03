@@ -8,6 +8,15 @@
       <li><a class="treeview-item" href="{{ url('admin/clients') }}"><i class="icon fa fa-chevron-circle-right"></i>View Customer</a></li>
     </ul>
   </li>
+
+  <li class="treeview">
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Employee</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+    <ul class="treeview-menu">
+      <li><a class="treeview-item" href="{{ action('BillingController\EmployeeController@create') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Employee</a></li>
+      <li><a class="treeview-item" href="{{ action('BillingController\EmployeeController@index') }}"><i class="icon fa fa-chevron-circle-right"></i>View Employee</a></li>
+    </ul>
+  </li>
+
   <li class="treeview">
     <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Shops</span><i class="treeview-indicator fa fa-angle-right"></i></a>
     <ul class="treeview-menu">

@@ -60,7 +60,7 @@ Salary Detail
 
                         <div class="row">
                             <div class="col-lg-7">
-                                <button class="btn btn-primary pull-right" type="submit">Add Shop</button>
+                                <button class="btn btn-primary pull-right" type="submit">Update Shop</button>
                             </div>
                         </div>
                     </form>

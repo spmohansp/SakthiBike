@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('Current-Page')
-Attendence Register
+Add Emoloyee
 @endsection
 
 @section('Parent-Menu')
@@ -9,16 +9,15 @@ Stock
 @endsection
 
 @section('Menu')
-Attendence Register
+Add Emoloyee
 @endsection
 
 @section('content')
 
-
 <div class="tile">
     <div class="row">
         <div class="col-lg-12">
-            <button class="btn btn-primary pull-right" type="button" onclick="window.location.href='{{ action('BillingController\SalaryController@index') }}'">View Atttendence
+            <button class="btn btn-primary pull-right" type="button" onclick="window.location.href='{{ action('BillingController\EmployeeController@index') }}'">View Employee
             </button>
         </div>
     </div>
@@ -27,7 +26,7 @@ Attendence Register
         <div class="col-md-12">
             <div class="row">
                 <div class="col-lg-12">
-                    <form action="{{ action('BillingController\SalaryController@store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ action('BillingController\EmployeeController@store') }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="row">
@@ -37,29 +36,33 @@ Attendence Register
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <div class="form-group"><h5><b>From Date</b></h5>
-                                    <input type="datetime-local"  class="form-control" value="{{ old('from_date') }}" name="from_date">
+                                <div class="form-group"><h5><b>Mobile Number</b></h5>
+                                    <input type="number"  class="form-control" placeholder="Enter Mobile Number" value="{{ old('mobile') }}" name="mobile">
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <div class="form-group"><h5><b>To Date</b></h5>
-                                    <input type="datetime-local"  class="form-control" value="{{ old('to_date') }}" name="to_date">
+                                <div class="form-group"><h5><b>Employee Id</b></h5>
+                                    <input type="text"  class="form-control" placeholder="Enter Employee Id" value="{{ old('employee_id') }}" name="employee_id">
                                 </div>
                             </div>
-                         	
                         </div>							   
                         
-					    <div class="row">
-					        <div class='col-sm-4'>
+
+                         <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group"><h5><b>Address</b></h5>
+                                    <textarea rows="4" cols="50" class="form-control"  value="{{ old('address') }}" name="address"></textarea>
+                                </div>
+                            </div>
+                             <div class='col-sm-4'>
 					        	 <div class="form-group"><h5><b>Salary Per/DAy</b></h5>
 					            <input type='number' class="form-control" placeholder="Enter Salary Per/Day" value="{{ old('amount_per_day') }}" name="amount_per_day"/>
 					        </div>
 					        </div>
-					    </div>
-
+                        </div>
                         <div class="row">
                             <div class="col-lg-7">
-                                <button class="btn btn-primary pull-right" type="submit">Add Attendence</button>
+                                <button class="btn btn-primary pull-right" type="submit">Add</button>
                             </div>
                         </div>
                     </form>
@@ -69,17 +72,5 @@ Attendence Register
     </div>
 </div>
 
-@endsection
 
-
-@section('loadMore')
-	
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
-
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker4').datetimepicker();
-        });
-    </script>
 @endsection
