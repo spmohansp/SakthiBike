@@ -32,7 +32,7 @@ Add Emoloyee
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>Employee Name</b></h5>
-                                    <input class="form-control form-control-lg" id="" type="text"  placeholder="Enter Name" value="{{ old('name') }}" name="name">
+                                    <input class="form-control form-control-lg"  type="text"  placeholder="Enter Name" value="{{ old('name') }}" name="name">
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -51,7 +51,7 @@ Add Emoloyee
                          <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>Address</b></h5>
-                                    <textarea rows="4" cols="50" class="form-control"  value="{{ old('address') }}" name="address"></textarea>
+                                    <textarea rows="4" cols="50" class="form-control" name="address">{{ old('address') }}</textarea>
                                 </div>
                             </div>
                              <div class='col-sm-4'>

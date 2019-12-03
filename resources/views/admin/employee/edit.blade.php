@@ -52,7 +52,7 @@ Edit Emoloyee
                          <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>Address</b></h5>
-                                    <textarea rows="4" cols="50" class="form-control"  value="{{ $Employee->address }}" name="address"></textarea>
+                                    <textarea rows="4" cols="50" class="form-control" name="address">{{ $Employee->address }}</textarea>
                                 </div>
                             </div>
                              <div class='col-sm-4'>
