@@ -150,8 +150,5 @@ Add Stock
         });
       });
 
-
-
     </script>
-
 @endsection
