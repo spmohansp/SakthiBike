@@ -62,9 +62,9 @@ Add Stock
                                       <tr>
                                         <td colspan="" rowspan="" headers=""></td>
                                         <td colspan="" rowspan="" headers=""></td>
-                                        <td colspan="" rowspan="" headers=""><input type="" class="form-control" name="" readonly></td>
-                                        <td colspan="" rowspan="" headers=""><input type="" class="form-control" name="" readonly></td>
-                                        <td colspan="" rowspan="" headers=""><p class="ProductWiseTotal" style="font-size: 18px;">0</p></td>
+                                        <td colspan="" rowspan="" headers=""></td>
+                                        <td colspan="" rowspan="" headers=""></td>
+                                        <td colspan="" rowspan="" headers=""><p class="ProductWiseFullTotal" style="font-size: 18px;">0</p></td>
                                       </tr>
                                 </table>
                              </div>
@@ -90,6 +90,7 @@ Add Stock
           var stock_entry = '<tr>\n' +
               '    <td id="1td">\n' +
               '        <select class="form-control Products" style="width:20em;" name="Stock[Product][]" >\n' +
+              '           <option selected disabled>Select Product</option>\n' +
                         @foreach($Products as $key=>$Product)
               '           <option value="{{ $Product->id }}">{{ $Product->Product_Name }}</option>\n' +
                         @endforeach
@@ -99,10 +100,10 @@ Add Stock
               '        <input type="text" class="form-control Unit" name="Stock[Unit][]" value="">\n' +
               '    </td>\n' +
               '    <td id="3td">\n' +
-              '        <input type="text" class="form-control Cost" name="Stock[Cost][]" value="">\n' +
+              '        <p class="Cost">0</p>\n' +
               '    </td>\n' +
               '    <td id="4td">\n' +
-              '        <input type="text" min="0" class="form-control Selling" name="Stock[Selling][]" value="">\n' +
+              '        <p class="Selling" >0</p>\n' +
               '    </td>\n' +
               '    <td><p class="ProductWiseTotal" style="font-size: 18px;">0</p></td>\n' +
               '    <td class="RemoveStockInput" style="font-size: 18px;"><i style="color: red;" class="fa fa-close fa-10x"></i></td>\n' +
@@ -114,29 +115,33 @@ Add Stock
 
 
           $('.AddStock').trigger('click');
-          setTimeout(function() {
-            $('.Products').trigger('change');
-          }, 2000);
-          
 
           $('.Products').select2({
           });
 
-          $('body').on('change keypress','.Products',function() {
-            var Product = $(this).val();
-            setTimeout(function() {
-            $('.Products').trigger('change');
-          }, 2000);
-            $.ajax({
+          $('body').on('change keyup','.Products,.Unit',function(e) {
+            e.preventDefault();
+            var Unit = $(this).parent().parent().find(".Unit").val();
+            var Product = $(this).parent().parent().find(".Products").val();
+            if(Product!= ''){              
+              $.ajax({
                 type: "get",
                 url: "{{ route('admin.GetProductDetails') }}",
                 data: {Product: Product},
                 success: (data)=> {
-                  // return data;
-                  $(this).parent().parent().find(".Cost").val(data.Cost_Price);
-                  $(this).parent().parent().find(".Selling").val(data.Selling_Price);
+                  $(this).parent().parent().find(".Cost").html(data.Cost_Price);
+                  $(this).parent().parent().find(".Selling").html(data.Selling_Price);
+                  $(this).parent().parent().find(".ProductWiseTotal").html(data.Cost_Price * Unit);
+                  
+                  var ProductWiseFullTotal = 0;
+                  $('.ProductWiseTotal').each(function() {
+                        if($(this).text() !=='' && !isNaN($(this).text()))
+                        ProductWiseFullTotal += parseFloat($(this).text());
+                    $('.ProductWiseFullTotal').html(ProductWiseFullTotal);
+                  });
                 }
               });
+            }
            });
 
       
