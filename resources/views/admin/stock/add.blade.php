@@ -27,12 +27,17 @@ Add Stock
               <div class="row">
                  <div class="col-lg-6">
                     <div class="form-group">
-                       <select class="form-control form-control-lg" name="product_id" required="">
+                       <select class="form-control form-control-lg" name="shop_id" required="">
                           <option value="">Select Shop</option>
                           @foreach($Shops as $Shop)
                             <option value={{ $Shop->id }}>{{ $Shop->name}} </option>
                           @endforeach 
                        </select>
+                    </div>
+                 </div>
+                 <div class="col-lg-6">
+                    <div class="form-group">
+                       <input type="date" name="date" class="form-control form-control-lg">
                     </div>
                  </div>
                </div>
@@ -58,13 +63,37 @@ Add Stock
                                       </tr>
                                    </thead>
                                    <tbody class="StockDetailTableData">
+                                    {{-- @if(old('Stock'))
+                                      @foreach(old('Stock')['Unit'] as $Key=>$Stock)
+                                       <tr>
+                                         <td>
+                                           <select class="form-control Products" style="width:30em;" name="Stock[Product][]">
+                                              <option value="">Select Product</option>
+                                                @foreach($Products as $key=>$Product)
+                                                    <option value="{{ $Product->id }}">{{ $Product->Product_Name }}</option>
+                                                @endforeach
+                                           </select>
+                                         </td>
+                                         <td>
+                                             <input type="text" class="form-control Unit" name="Stock[Unit][]" value="{{ $Stock }}" required>
+                                         </td>
+                                         <td>
+                                             <p class="Cost" style="font-size: 18px;">0</p>
+                                         </td>
+                                         <td>
+                                             <p class="Selling" style="font-size: 18px;">0</p>
+                                         </td>
+                                         <td><p class="ProductWiseTotal" style="font-size: 18px;">0</p></td>
+                                         <td class="RemoveStockInput" style="font-size: 18px;"><i style="color: red;" class="fa fa-close fa-10x"></i></td>
+                                        </tr>
+                                      @endforeach
+                                    @endif --}}
                                    </tbody>
                                       <tr>
-                                        <td colspan="" rowspan="" headers=""></td>
-                                        <td colspan="" rowspan="" headers=""></td>
-                                        <td colspan="" rowspan="" headers=""></td>
-                                        <td colspan="" rowspan="" headers=""></td>
-                                        <td colspan="" rowspan="" headers=""><p class="ProductWiseFullTotal" style="font-size: 18px;">0</p></td>
+                                        <td colspan="" rowspan="" headers="" style="width:15em;"></td>
+                                        <td colspan="" rowspan="" headers="" style="width:20em;font-size: 18px;"></td>
+                                        <td colspan="2" rowspan="" headers="" style="width:10em;font-size: 18px;">Total Amount</td>
+                                        <td colspan="" rowspan="" headers=""><p class="ProductWiseFullTotal" style="font-size: 18px;">0</p><input type="hidden" name="ProductTotal" class="ProductWiseFullTotal"></td>
                                       </tr>
                                 </table>
                              </div>
@@ -88,22 +117,22 @@ Add Stock
         var x = 1;
         $('.AddStock').on('click',function () {
           var stock_entry = '<tr>\n' +
-              '    <td id="1td">\n' +
-              '        <select class="form-control Products" style="width:20em;" name="Stock[Product][]" >\n' +
+              '    <td>\n' +
+              '        <select class="form-control Products" style="width:30em;" name="Stock[Product][]">\n' +
               '           <option selected disabled>Select Product</option>\n' +
                         @foreach($Products as $key=>$Product)
               '           <option value="{{ $Product->id }}">{{ $Product->Product_Name }}</option>\n' +
                         @endforeach
               '        </select>\n' +
               '    </td>\n' +
-              '    <td id="2td">\n' +
-              '        <input type="text" class="form-control Unit" name="Stock[Unit][]" value="">\n' +
+              '    <td>\n' +
+              '        <input type="text" class="form-control Unit" name="Stock[Unit][]" value="" required>\n' +
               '    </td>\n' +
-              '    <td id="3td">\n' +
-              '        <p class="Cost">0</p>\n' +
+              '    <td>\n' +
+              '        <p class="Cost" style="font-size: 18px;">0</p>\n' +
               '    </td>\n' +
-              '    <td id="4td">\n' +
-              '        <p class="Selling" >0</p>\n' +
+              '    <td>\n' +
+              '        <p class="Selling" style="font-size: 18px;">0</p>\n' +
               '    </td>\n' +
               '    <td><p class="ProductWiseTotal" style="font-size: 18px;">0</p></td>\n' +
               '    <td class="RemoveStockInput" style="font-size: 18px;"><i style="color: red;" class="fa fa-close fa-10x"></i></td>\n' +
@@ -135,9 +164,10 @@ Add Stock
                   
                   var ProductWiseFullTotal = 0;
                   $('.ProductWiseTotal').each(function() {
-                        if($(this).text() !=='' && !isNaN($(this).text()))
-                        ProductWiseFullTotal += parseFloat($(this).text());
+                    if($(this).text() !=='' && !isNaN($(this).text()))
+                    ProductWiseFullTotal += parseFloat($(this).text());
                     $('.ProductWiseFullTotal').html(ProductWiseFullTotal);
+                    $('.ProductWiseFullTotal').val(ProductWiseFullTotal);
                   });
                 }
               });
