@@ -113,14 +113,14 @@ Add Stock
            });
 
 
-          $('.AddStock').trigger('click');
-          setTimeout(function() {
-            $('.Products').trigger('change');
-          }, 2000);
+          // $('.AddStock').trigger('click');
+          // setTimeout(function() {
+          //   $('.Products').trigger('change');
+          // }, 2000);
           
 
-          $('.Products').select2({
-          });
+          // $('.Products').select2({
+          // });
 
           $('body').on('change keypress','.Products',function() {
             var Product = $(this).val();
