@@ -28,7 +28,7 @@ Salary Detail
             <div class="row">
                 <div class="col-lg-12">
                     <form action="{{ action('BillingController\SalaryController@update',$Salary->id) }}" method="post" enctype="multipart/form-data">
-                	{{ csrf_field() }}
+                	{{ csrf_field() }}                                                                  
                 	{{method_field('PATCH')}}
 
                         <div class="row">
@@ -37,7 +37,7 @@ Salary Detail
                                    <select class="form-control form-control-lg" name="name" required="">
                                       <option value="">Select Employee Name</option>
                                       @foreach($Employees as $Employee)
-                                       <option value="{{ $Employee->id }}>"{{ ($Employee->id == $Salary->id) ?'selected':'' }}>{{ $Employee->name }}</option>
+                                       <option value="{{ $Employee->id }}>"{{ ($Employee->id == $Salary->name) ?'selected':'' }}>{{ $Employee->name }}</option>
                                       @endforeach 
                                    </select>
                                 </div>
