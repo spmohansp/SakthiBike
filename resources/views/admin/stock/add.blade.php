@@ -143,10 +143,15 @@ Add Stock
            });
 
 
+          // $('.AddStock').trigger('click');
+          // setTimeout(function() {
+          //   $('.Products').trigger('change');
+          // }, 2000);
+          
           $('.AddStock').trigger('click');
 
-          $('.Products').select2({
-          });
+          // $('.Products').select2({
+          // });
 
           $('body').on('change keyup','.Products,.Unit',function(e) {
             e.preventDefault();
