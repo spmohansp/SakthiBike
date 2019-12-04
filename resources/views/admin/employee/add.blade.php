@@ -32,7 +32,7 @@ Add Emoloyee
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>Employee Name</b></h5>
-                                    <input class="form-control form-control-lg"  type="text"  placeholder="Enter Name" value="{{ old('name') }}" name="name">
+                                    <input class="form-control"  type="text"  placeholder="Enter Name" value="{{ old('name') }}" name="name">
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -40,25 +40,20 @@ Add Emoloyee
                                     <input type="number"  class="form-control" placeholder="Enter Mobile Number" value="{{ old('mobile') }}" name="mobile">
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="form-group"><h5><b>Employee Id</b></h5>
-                                    <input type="text"  class="form-control" placeholder="Enter Employee Id" value="{{ old('employee_id') }}" name="employee_id">
+                            <div class='col-sm-4'>
+                                 <div class="form-group"><h5><b>Salary Per/DAy</b></h5>
+                                    <input type='number' class="form-control" placeholder="Enter Salary Per/Day" value="{{ old('amount_per_day') }}" name="amount_per_day"/>
                                 </div>
                             </div>
                         </div>							   
-                        
 
                          <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>Address</b></h5>
-                                    <textarea rows="4" cols="50" class="form-control" name="address">{{ old('address') }}</textarea>
+                                    <textarea rows="4" cols="50" class="form-control" placeholder="Enter Employee Address" name="address">{{ old('address') }}</textarea>
                                 </div>
                             </div>
-                             <div class='col-sm-4'>
-					        	 <div class="form-group"><h5><b>Salary Per/DAy</b></h5>
-					            <input type='number' class="form-control" placeholder="Enter Salary Per/Day" value="{{ old('amount_per_day') }}" name="amount_per_day"/>
-					        </div>
-					        </div>
+                             
                         </div>
                         <div class="row">
                             <div class="col-lg-7">

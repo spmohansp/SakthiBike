@@ -78,40 +78,25 @@ Add Print
                                 <div style="float:right;">
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add Customer</button>
                                 </div>
-                                <select class="form-control" name="client_id"  id="demoSelect" >
+                                <select class="form-control" name="client_id"  id="Customer" >
                                     <optgroup label="Select Customer">
                                         @foreach($Clients as $Client)
-                                            <option value="{{ $Client->id }}" {{ old('client_id') == $Client->id ? 'selected' : '' }}>{{ $Client->name }} || {{ $Client->phone_no }}</option>
+                                            <option value="{{ $Client->id }}" {{ old('client_id') == $Client->id ? 'selected' : '' }}>{{ $Client->name }} || {{ $Client->phone_number }} || {{ $Client->bike_no }}</option>
                                         @endforeach
                                     </optgroup>
                                 </select>
                             </div>
-                        </div>    
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Payment type</label>
-                                <div class="form-group">
-                                    <select class="form-control Selectpicker"  onchange="paymentType()" name="payment_type" id="payment_type" style="width:100% !important" required>
-                                        <optgroup label="Select Payment type" >
-                                            <option value="cash" {{ old('payment_type') == "cash" ? 'selected' : '' }}>Cash</option>
-                                            <option value="cheque" {{ old('payment_type') == "cheque" ? 'selected' : '' }}>Cheque</option>
-                                            <option value="card" {{ old('payment_type') == "card" ? 'selected' : '' }}>Card</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        </div> 
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Date</label>
                                 <input class="form-control" type="date" name="date" value="{{ old('date') }}" required>
                             </div>
-                        </div>
+                        </div>   
                     </div>
+
                     <div class="row">
+                        
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Payment status</label>
@@ -119,7 +104,7 @@ Add Print
                                     <optgroup label="Select Payment" >
                                         <option value="1">Paid</option>
                                         <option value="2">Partially Paid</option>
-                                        <option value="3">Due</option>
+                                        <option value="3">Not Paid</option>
                                     </optgroup>
                                 </select>
                             </div>
@@ -130,10 +115,14 @@ Add Print
                                 <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
                             </div>
                         </div>
-                        <div class="col-md-4 payment2" style="display:none">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label>Due Amount</label><br>
-                                <span id="DueAmount" name="" ></span>
+                                <label>Employee Attended</label>
+                                <select class="form-control" name="employees[]" required multiple>
+                                    @foreach($Employees as $Employee)
+                                        <option value="{{ $Employee->id }}">{{ $Employee->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -142,40 +131,27 @@ Add Print
                     <div class="row">
                         <div class="col-md-4">
                             <label>Add Products</label>
+                            <div class="form-group" >
+                                <select class="form-control Product" id="product_id">
+                                    <optgroup label="Select Products">
+                                        @foreach($Products as $Product)
+                                            <option value="{{ $Product->id }}">{{ $Product->Product_Name }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <label>Quantity </label>
+                            <div class="form-group">
+                                <input class="form-control nextrow Quantity" type="text" placeholder="Enter Quantity" min="1" id="qty">
+                                <span class="QuantityLimit" style="color:red;font-size: 18px;"></span>
+                            </div>
                         </div>
                         <div class="col-md-2">
                             <label></label>
-                        </div>
-                        <div class="col-md-2">
-                            <label></label>
-                        </div>
-                    </div>
-                    <div id="productsbilllist">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group" >
-
-                                    <select class="form-control demoSelect1" id="product_id">
-                                        <optgroup label="Select Products">
-                                            @foreach($Products as $Product)
-                                                <option value="{{ $Product->id }}">{{ $Product->Product_Name_English }}</option>
-                                            @endforeach
-                                        </optgroup>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input class="form-control nextrow " type="text" placeholder="Enter Quantity" min="1" id="qty">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <button type="button" id="addbillproduct"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
-                                </div>
+                            <div class="form-group">
+                                <button type="button" id="addbillproduct"  class="btn btn-primary addbillproduct"  style="padding:10px 20px;" > Add Product</button>
                             </div>
                         </div>
                     </div>
@@ -191,9 +167,6 @@ Add Print
                                         <th>Items</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
-                                        <th>CGST</th>
-                                        <th>SGST</th>
-                                        <th>CESS</th>
                                         <th>Total Cost</th>
                                         <th>Action</th>
                                     </tr>
@@ -201,16 +174,16 @@ Add Print
                                     <tbody id="productbilltable">
                                     </tbody>
                                     <thead>
-                                    <th colspan="7">
+                                    <th colspan="4">
                                         <h4 class="pull-right"><b>Total</b> :</h4>
                                     </th>
-                                    <th colspan="2">
+                                    <th colspan="1">
                                         <h4><b><i class="fa fa-inr"></i> <b id="TOTALBILL"></b></b></h4>
                                     </th>
 
                                     </thead >
                                     <thead id="total_amount">
-                                    <th colspan="7">
+                                    <th colspan="4">
                                         <h4 class="pull-right"><b>Cash Given</b> :</h4>
                                     </th>
                                     <th colspan="2">
@@ -219,7 +192,7 @@ Add Print
 
                                     </thead>
                                     <thead id="balance_amount">
-                                    <th colspan="7">
+                                    <th colspan="4">
                                         <h4 class="pull-right"><b>Balance</b> :  </h4>
                                     </th>
                                     <th colspan="2">
@@ -265,8 +238,8 @@ Add Print
             todayHighlight: true
         });
 
-        $('#demoSelect').select2();
-        $('.demoSelect1').select2();
+        $('#Customer').select2();
+        $('.Product').select2();
 
     </script>
 
@@ -284,6 +257,47 @@ Add Print
                             success:function (data) {
                                 $('#productbilltable').append(data);
                                 calculateTotal();
+                                GetQuantityCount(product_id,qty);
+                            }
+                        });
+                    }
+                 });
+
+                function GetQuantityCount(product_id,qty) {
+                    $.ajax({
+                        type: 'get',
+                        url: "{{ route('admin.GetProductCount') }}",
+                        data:{product_id:product_id,qty:qty},
+                        success:function (data) {
+                            var count = data.Unit - qty;
+                            if(count >0){
+                                $(".addbillproduct").show();
+                            }else{
+                                $(".addbillproduct").hide();
+                                $(".QuantityLimit").text('Your Quanity Limit is '+data.Unit);
+                            }
+                        }
+                    });
+                }
+
+                $('body').on('change keyup','.Product,.Quantity',function (e) {
+                    e.preventDefault();
+                    var product_id = $("#product_id").val();
+                    var qty = $("#qty").val();
+                    if(product_id !=''){
+                        $.ajax({
+                            type: 'get',
+                            url: "{{ route('admin.GetProductStock') }}",
+                            data:{product_id:product_id},
+                            success:function (data) {
+                                var Count = data.Unit;
+                                console.log(Count);
+                                if(qty<=Count){
+                                    $(".addbillproduct").show();
+                                }else{
+                                    $(".addbillproduct").hide();
+                                    $(".QuantityLimit").text('Your Quanity Limit is '+Count);
+                                }
                             }
                         });
                     }

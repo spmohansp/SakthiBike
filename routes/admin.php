@@ -21,9 +21,13 @@ Route::post('/product/{id}/update', 'BillingController\ProductController@updateP
 Route::get('/product/{id}/delete', 'BillingController\ProductController@deleteProduct')->name('deleteProduct');
 Route::get('/product/getProduct/','BillingController\ProductController@getProduct');
 
+Route::get('/GetProductStock','BillingController\ProductController@GetProductStock')->name('GetProductStock');
+Route::get('/GetProductCount','BillingController\ProductController@GetProductCount')->name('GetProductCount');
+
 Route::resource('/shop','BillingController\ShopController');
 
 Route::get('/GetProductDetails','BillingController\StockController@GetProductDetails')->name('GetProductDetails');
+
 
 Route::get('/deposit/add','BillingController\DepositController@addDeposit');
 

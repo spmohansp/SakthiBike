@@ -61,22 +61,22 @@
         <div class="row">
 
           <div class="col-lg-12 col-sm-12" style="text-align: center !important;">
-            <h1 class="th" >விஜய் பல்பொருள் அங்காடி</h1>
-            <h4 class="th">2 வது,டீட்ஸ் தோட்டம்</h4>
+            <h1 class="th" >Greefi Technologies</h1>
+            <h4 class="th">Pullipalayam</h4>
           </div>
 
         </div>
         <div class="row">
           <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
-            <h4 class="th">தொலைபேசி எண் : 044 - 694784</h4>
+            <h4 class="th">தொலைபேசி எண் : 044 - 254789</h4>
           </div>
           <div class="col-lg-6 col-sm-6" style="text-align: right !important;">
-            <h4 class="th">மொபைல் எண் : 9876543210</h4>
+            <h4 class="th">மொபைல் எண் : 0123654789</h4>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-12 col-sm-12"style="text-align: center !important;">
-            <h4 class="th">G.S.T : 123456789 RT 0001</h4>
+            <h4 class="th">G.S.T : 123456789 GR 1010</h4>
           </div>
         </div>
         <div class="row">
@@ -87,6 +87,9 @@
         <div class="row">
           <div class="col-lg-6">
             <h4 class="th"> To :</h4>
+            <h5 class="th" style="margin-left: 45px;">{{ $Bill->Client->name }}</h5>
+            <h5 class="th" style="margin-left: 45px;">{{ $Bill->Client->bike_no }}</h5>
+            <h5 class="th" style="margin-left: 45px;">{{ $Bill->Client->phone_number }}</h5>
           </div>
         </div>
         <hr>
@@ -95,7 +98,8 @@
             <h5 class="th">விலைப்பட்டியல் எண் : {{ $Bill->bill_number }}</h5>
           </div>
           <div class="col-lg-6 col-sm-6"style="text-align: right !important;">
-            <h5 class="th">தேதி :  {{ $Bill->date }}<br> <br>  நேரம் : <span id="time"></span> </h5>
+            <h5 class="th">தேதி :  {{ $Bill->date }}<br> 
+            <br>நேரம் : <span id="time"></span> </h5>
           </div>
         </div>
         <div class="row">
@@ -104,7 +108,6 @@
               <thead>
                 <tr>
                   <th>S.No</th>
-                  <th>HSN/SAC</th>
                   <th>விவரங்கள்</th>
                   <th>அளவு</th>
                   <th>மதிப்பீடு</th>
@@ -115,31 +118,18 @@
                 @foreach($Bill->BillProducts as $key=>$Product)
                 <tr>
                   <th>{{ ++$key }}</th>
-                   <th>{{ @$Product->Product->Product_ID }}</th>
-                   <th>{{ @$Product->Product->Product_Name_English }}</th>
-                    <th>{{ @$Product->quantity }}</th>
+                  <th>{{ @$Product->Product->Product_Name }}</th>
+                  <th>{{ @$Product->quantity }}</th>
                   <th>{{ @$Product->Product->Selling_Price }}</th>
-                    <th>{{ @$Product->Total_Cost }}</th>
+                  <th>{{ @$Product->Total_Cost }}</th>
                 </tr>
                 @endforeach
-
-
-                  <th colspan="5" class="tr" style="text-align: right !important;">கூட்டுத்தொகை : </th>
-                  <th>{{ @$Product->sum('Total_Cost') -@$Product->sum('CGST') - @$Product->sum('SGST') }}</th>
+                  <th colspan="4" class="tr" style="text-align: right !important;">கூட்டுத்தொகை : </th>
+                  <th>{{ @$Product->sum('Total_Cost') }}</th>
                 </tr>
                 <tr>
 
-                  <th colspan="5" class="tr" style="text-align: right !important;">CGST : </th>
-                  <th>{{ @$Product->sum('CGST') }}</th>
-                </tr>
-                <tr>
-
-                  <th colspan="5" class="tr" style="text-align: right !important;">SGST : </th>
-                  <th>{{ @$Product->sum('SGST') }}</th>
-                </tr>
-                <tr>
-
-                  <th colspan="5" class="tr" style="text-align: right !important;">பெரும் மொத்தம் : </th>
+                  <th colspan="4" class="tr" style="text-align: right !important;">பெரும் மொத்தம் : </th>
                   <th>{{ @$Product->sum('Total_Cost') }}</th>
                 </tr>
                 <tr>

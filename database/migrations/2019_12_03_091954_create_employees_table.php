@@ -17,9 +17,8 @@ class CreateEmployeesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('mobile');
-            $table->string('employee_id');
-            $table->string('address');
-            $table->string('amount_per_day');
+            $table->string('address')->nullable();
+            $table->string('amount_per_day')->nullable();
             $table->timestamps();
         });
     }

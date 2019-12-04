@@ -5,6 +5,7 @@ use App\Bill;
 use App\BillProduct;
 use App\Products;
 use App\Client;
+use App\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,7 +14,8 @@ class PrintController extends Controller
 	public function addPrint(){
 	    $Products = Products::all();
 	    $Clients = Client::all();
-		return view('admin.print.add_print',compact('Products','Clients'));
+        $Employees = Employee::all();
+		return view('admin.print.add_print',compact('Products','Clients','Employees'));
 	}
 
 	public function viewPrint(){
@@ -22,7 +24,7 @@ class PrintController extends Controller
 	}
 
     public function saveBill(){
-//         return request()->all();
+        // return request()->all();
         $BillTotal=0;
         if(!empty(request('product_id'))){
             foreach (request('product_id') as $key => $product) {
@@ -39,7 +41,6 @@ class PrintController extends Controller
             $Bill->bill_number = $LastBill->bill_number+1;
         }
         $Bill->client_id = request('client_id');
-        $Bill->payment_type = request('payment_type');
         $Bill->date = request('date');
         $Bill->payment_status = request('payment_status');
         $Bill->paid_amount = request('paid_amount');
@@ -53,9 +54,6 @@ class PrintController extends Controller
                 $BillProduct->bill_id = $Bill->id;
                 $BillProduct->product_id = $product;
                 $BillProduct->quantity = request('qty')[$key];
-                $BillProduct->CGST = request('CGST')[$key];
-                $BillProduct->SGST = request('SGST')[$key];
-                $BillProduct->CESS = request('CESS')[$key];
                 $BillProduct->Total_Cost = request('total_amount')[$key];
                 $BillProduct->save();
             }

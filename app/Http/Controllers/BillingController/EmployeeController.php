@@ -46,13 +46,12 @@ class EmployeeController extends Controller
             $Employee = new Employee;
             $Employee->name = request('name');  
             $Employee->mobile = request('mobile');
-            $Employee->employee_id = request('employee_id');
             $Employee->address = request('address');
             $Employee->amount_per_day = request('amount_per_day');
             $Employee->save();
             return redirect(action('BillingController\EmployeeController@create'))->with('success','Employee Created Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Manager Cannot Be Created!');
+            return back()->with('danger','Employee Cannot Be Created!');
         }
     }
 
