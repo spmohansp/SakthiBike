@@ -17,11 +17,6 @@ class StockController extends Controller
    }
 
    public function saveStock(){
-      $this->validate(request(),[
-         'Product'=>'required',
-         'Unit'=>'required',
-     ]);
-
    	$Stock = new stock;
    	$Stock->shop_id = request('shop_id');
    	$Stock->date = request('date');
