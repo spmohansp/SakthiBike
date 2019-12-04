@@ -33,9 +33,14 @@ Attendence Register
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>Employee Name</b></h5>
-                                    <input class="form-control form-control-lg" id="" type="text"  placeholder="Enter Name" value="{{ old('name') }}" name="name">
+                                   <select class="form-control form-control-lg" name="name" required="">
+                                      <option value="">Select Employee Name</option>
+                                      @foreach($Employees as $Employee)
+                                        <option value={{ $Employee->id }}>{{ $Employee->name}} </option>
+                                      @endforeach 
+                                   </select>
                                 </div>
-                            </div>
+                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>From Date</b></h5>
                                     <input type="datetime-local"  class="form-control" value="{{ old('from_date') }}" name="from_date">

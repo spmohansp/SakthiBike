@@ -15,7 +15,7 @@ Salary Detail
 @section('content')
 
 
-<div class="title">
+<div class="tile">
     <div class="row">
         <div class="col-lg-12">
             <button class="btn btn-primary pull-right" type="button" onclick="window.location.href='{{ action('BillingController\SalaryController@index') }}'">View Salary Details
@@ -34,9 +34,14 @@ Salary Detail
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>Employee Name</b></h5>
-                                    <input class="form-control form-control-lg" id="" type="text"  placeholder="Enter Name" value="{{ $Salary->name }}" name="name">
+                                   <select class="form-control form-control-lg" name="name" required="">
+                                      <option value="">Select Employee Name</option>
+                                      @foreach($Employees as $Employee)
+                                       <option value="{{ $Employee->id }}>"{{ ($Employee->id == $Salary->id) ?'selected':'' }}>{{ $Employee->name }}</option>
+                                      @endforeach 
+                                   </select>
                                 </div>
-                            </div>
+                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>From Date</b></h5>
                                     <input type="datetime-local"  class="form-control" value="{{ $Salary->from_date }}" name="from_date">

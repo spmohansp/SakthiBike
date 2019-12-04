@@ -42,7 +42,7 @@ view Attendence
                 <tbody>
                   @foreach($Salaries as $Salary)
                   <tr>
-                    <td>{{ $Salary->name }}</td>
+                    <td>{{ @$Salary->Salary->name }}</td>
                     <td>{{ $Salary->from_date }}</td>
                     <td>{{ $Salary->to_date }}</td>
                     <td>{{ $Salary->amount_per_day }}</td>

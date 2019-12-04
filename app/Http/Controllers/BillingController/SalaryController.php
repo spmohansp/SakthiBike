@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BillingController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Salary;
+use App\Employee;
 
 class SalaryController extends Controller
 {
@@ -26,7 +27,8 @@ class SalaryController extends Controller
      */
     public function create()
     {
-        return view('admin.salary.add');
+        $Data['Employees'] = Employee::get();
+        return view('admin.salary.add',$Data);
     }
 
     /**
@@ -74,6 +76,7 @@ class SalaryController extends Controller
      */
     public function edit($id)
     {
+        $Data['Employees'] = Employee::get();
         $Data['Salary'] = Salary::findorfail($id);
         return view('admin.salary.edit',$Data);
     }
