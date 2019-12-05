@@ -59,48 +59,45 @@
     <div class="tile" >
       <div class="">
         <div class="row">
-
           <div class="col-lg-12 col-sm-12" style="text-align: center !important;">
-            <h1 class="th" >Greefi Technologies</h1>
-            <h4 class="th">Pullipalayam</h4>
+            <h1 class="th">SRI SAKTHI BIKE ZONE</h1>
+            <P><b>All Two Wheelers Servixe Center</b></P>
+            <P style="margin-top: -15px;"><b>Opp SPM Hospital, Rajiv Nagar, Alamarathu Compound</b></P>
+            <p style="margin-top: -15px;"><b>Tiruchengode - 637211,Namakkal(Dt)</b></p>
+            <p style="margin-top: -15px;"><b>Cell : 9003885959 , 9025837777</b></p>
           </div>
-
+        </div>
+        
+        <hr>
+        <div class="row">
+          <div class="col-lg-12 col-sm-12" style="text-align: center !important;">
+            <h4 class="th"> Service Bill </h4>
+          </div>
         </div>
         <div class="row">
           <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
-            <h4 class="th">தொலைபேசி எண் : 044 - 254789</h4>
-          </div>
-          <div class="col-lg-6 col-sm-6" style="text-align: right !important;">
-            <h4 class="th">மொபைல் எண் : 0123654789</h4>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12 col-sm-12"style="text-align: center !important;">
-            <h4 class="th">G.S.T : 123456789 GR 1010</h4>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12 col-sm-12" style="text-align: center !important;">
-            <h4 class="th"> <u>வரி &nbspவிலைப்பட்டியல்</u> </h4>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <h4 class="th"> To :</h4>
-            <h5 class="th" style="margin-left: 45px;">{{ $Bill->Client->name }}</h5>
-            <h5 class="th" style="margin-left: 45px;">{{ $Bill->Client->bike_no }}</h5>
-            <h5 class="th" style="margin-left: 45px;">{{ $Bill->Client->phone_number }}</h5>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-lg-6 col-sm-6"style="text-align: left !important;">
-            <h5 class="th">விலைப்பட்டியல் எண் : {{ $Bill->bill_number }}</h5>
+            <h5 class="th">Bill No : {{ $Bill->bill_number }}</h5>
           </div>
           <div class="col-lg-6 col-sm-6"style="text-align: right !important;">
-            <h5 class="th">தேதி :  {{ $Bill->date }}<br> 
-            <br>நேரம் : <span id="time"></span> </h5>
+            <h5 class="th">Date :  {{ $Bill->date }}<br> 
           </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
+            <h5 class="th"> Name : <span style="font-size: 16px; font-style: italic;">{{ $Bill->Client->name }}</span></h5>
+          </div>
+          <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
+            <h5 class="th"> Phone Number : <span style="font-size: 16px;font-style: italic;">{{ $Bill->Client->phone_number }}</span></h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
+            <h5 class="th"> Bike No : <span style="font-size: 16px;font-style: italic;">{{ $Bill->Client->bike_no }}</span></h5>
+          </div>
+          <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
+            <h5 class="th"> Next Service Km : <span style="font-size: 16px;font-style: italic;">{{ $Bill->Client->bike_no }}</span></h5>
+          </div>
+        </div>
         </div>
         <div class="row">
           <div class="table-responsive">
@@ -108,10 +105,10 @@
               <thead>
                 <tr>
                   <th>S.No</th>
-                  <th>விவரங்கள்</th>
-                  <th>அளவு</th>
-                  <th>மதிப்பீடு</th>
-                  <th>தொகை</th>
+                  <th>Particulars</th>
+                  <th>Qty</th>
+                  <th>Rate</th>
+                  <th>Rs</th>
                 </tr>
               </thead>
               <tbody>
@@ -124,13 +121,13 @@
                   <th>{{ @$Product->Total_Cost }}</th>
                 </tr>
                 @endforeach
-                  <th colspan="4" class="tr" style="text-align: right !important;">கூட்டுத்தொகை : </th>
-                  <th>{{ @$Product->sum('Total_Cost') }}</th>
+                  <th colspan="4" style="text-align: right !important;"><h5>Net Total : </h5></th>
+                  <th><h5>{{ @$Product->sum('Total_Cost') }}</h5></th>
                 </tr>
                 <tr>
 
-                  <th colspan="4" class="tr" style="text-align: right !important;">பெரும் மொத்தம் : </th>
-                  <th>{{ @$Product->sum('Total_Cost') }}</th>
+                  <th colspan="4" style="text-align: right !important;"><h5>Gross Total : </h5></th>
+                  <th><h5>{{ @$Product->sum('Total_Cost') - $Bill->discount_amount }}</h5></th>
                 </tr>
                 <tr>
                   <th colspan="6"></th>
@@ -142,6 +139,17 @@
           </div>
           <hr>
         </div>
+        <div class="row">
+          <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
+            <br><br><br>
+            <h5 class="th">Customer Signature </h5>
+          </div>
+          <div class="col-lg-6 col-sm-6"style="text-align: right !important;">
+            <h5 class="th"><span style="font-size: 14px;">For </span>Sri Sakthi Bike Zone<br> <br> <br> 
+            <p><b><span style="font-size: 14px;">Authorized Signature</span></b></p>
+          </div>
+        </div>
+        <hr>
         <div class="row">
           <div class="col-lg-12 col-sm-12"style="text-align: center !important;">
             <h5 class="th">நன்றி மீண்டும் வருக !!!</h5>

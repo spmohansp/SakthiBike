@@ -191,6 +191,16 @@ Add Print
                                     </th>
 
                                     </thead>
+
+                                    <thead id="discount">
+                                    <th colspan="4">
+                                        <h4 class="pull-right"><b>Discount</b> :</h4>
+                                    </th>
+                                    <th colspan="2">
+                                        <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="discount_amount" name="discount_amount" value="0"></b></h4>
+                                    </th>
+
+                                    </thead>
                                     <thead id="balance_amount">
                                     <th colspan="4">
                                         <h4 class="pull-right"><b>Balance</b> :  </h4>
@@ -318,6 +328,11 @@ Add Print
                     calculateTotal()
                 });
 
+                $('#discount_amount').on('keyup',function (e) {
+                    e.preventDefault();
+                    calculateTotal()
+                });
+
 
             });
 
@@ -328,7 +343,7 @@ Add Print
                     total = parseInt($(this).val()) + parseInt(total);
                 });
                 $('#TOTALBILL').html(total);
-                $('#BalanceAmount').html(parseInt($('#total_paid_amount').val()) - parseInt(total) );
+                $('#BalanceAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()) - parseInt($('#discount_amount').val()) );
                 $('#DueAmount').html(parseInt(total) - parseInt($('#paid_amount').val()));
             }
     </script>

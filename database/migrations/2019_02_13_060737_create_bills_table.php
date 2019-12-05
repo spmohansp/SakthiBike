@@ -19,12 +19,13 @@ class CreateBillsTable extends Migration
             $table->string('bill_number')->unique();
             $table->integer('client_id')->unsigned();
             $table->foreign('client_id')->references('id')->on('clients');
-            $table->string('payment_type');
+            $table->string('payment_type')->nullable();
             $table->string('payment_status')->nullable();
             $table->string('paid_amount')->nullable();
             $table->longText('Due_Amount')->nullable();
             $table->string('bill_amount')->nullable();
             $table->string('balance_amount')->nullable();
+            $table->string('discount_amount')->nullable();
             $table->timestamps();
         });
     }

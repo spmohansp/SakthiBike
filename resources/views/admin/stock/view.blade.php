@@ -28,7 +28,6 @@ View Stock
                 <th>S.No</th>
                 <th>Product Name</th>
                 <th>Quantity</th>
-                <th>Amount</th>
                 <th>Date</th>
                 <th>Action</th>
               </tr>
@@ -37,10 +36,9 @@ View Stock
               @foreach($Stock as $Stocks)
                 <tr>
                   <td>{{ $Stocks->id }}</td>
-                  <td>{{ $Stocks->Products->Product_Name_English }}</td>
-                  <td>{{ $Stocks->quantity }}</td>
-                  <td>{{ $Stocks->amount }}</td>
-                  <td>{{ $Stocks->date }}</td>
+                  <td>{{ implode(",",$Stocks->StockDetail->pluck('Product')->pluck('Product_Name')->toArray()) }}</td>
+                  <td>{{ implode(",",$Stocks->StockDetail->pluck('Unit')->toArray()) }}</td>
+                  <td>{{ date('d-m-Y', strtotime($Stocks->date)) }}</td>
                   <td>
                     <a href="{{ route('admin.editStock',$Stocks->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
                     <a href="{{ route('admin.deleteStock',$Stocks->id) }}"> <button class="btn btn-primary" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></a>
