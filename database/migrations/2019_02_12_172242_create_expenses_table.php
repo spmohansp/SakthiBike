@@ -17,8 +17,7 @@ class CreateExpensesTable extends Migration
             $table->increments('id');
             $table->string('date');
             $table->string('amount');
-            $table->integer('expense_id')->unsigned()->nullable();
-            $table->foreign('expense_id')->references('id')->on('ledgers');
+            $table->string('expense_id')->unsigned()->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
         });
