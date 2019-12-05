@@ -38,12 +38,18 @@ Add Products
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input class="form-control form-control-lg" id="" type="text"
-                                            aria-describedby="emailHelp" placeholder="Product Type" name="Product_Type">
-                                    </div>
-                                </div>
+                                <label class="radio-inline"><b>Select Product Type:</b>&nbsp;
+                                  <input type="radio" name="Product_Type" value="ml">Ml
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="Product_Type" value="Litter">Litter
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="Product_Type" value="Kg">Kg
+                                </label>
                             </div>
-
+                        </div>
+                        </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">

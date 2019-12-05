@@ -14,6 +14,59 @@ Add Stock
 
 @section('content')
 
+
+ <div class="modal fade" id="Stock" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Shop</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                           <form action="{{ action('BillingController\ShopController@store') }}" method="post" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Shop Name" value="{{ old('name') }}" name="name">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Phone Number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" value="{{ old('phone_number') }}" name="phone_number" minlength="0" maxlength="10">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <textarea class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Shop Address" name="address">{{ old('address') }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <button class="btn btn-primary pull-right" type="submit">Add Shop</button>
+                            </div>
+                        </div>
+                    </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  
   <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -35,10 +88,17 @@ Add Stock
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input class="form-control form-control-lg" id="" type="text"
-                                            aria-describedby="emailHelp" placeholder="Product Type" name="Product_Type">
-                                    </div>
-                                </div>
+                                <label class="radio-inline"><b>Select Product Type:</b>&nbsp;
+                                  <input type="radio" name="Product_Type" value="ml">Ml
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="Product_Type" value="Litter">Litter
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="Product_Type" value="Kg">Kg
+                                </label>
+                            </div>
+                        </div>
                             </div>
 
                             <div class="row">
@@ -82,7 +142,12 @@ Add Stock
            <form action="{{ route('admin.saveStock') }}" method="post">
               {{ csrf_field() }}
               <div class="row">
+
                  <div class="col-lg-6">
+                  <h5 class="pull-left">Select Shop</h5>
+                  <div style="float:right;">
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#Stock">Add Shop</button>
+                  </div>
                     <div class="form-group">
                        <select class="form-control form-control-lg" name="shop_id" required="">
                           <option value="">Select Shop</option>
@@ -90,10 +155,12 @@ Add Stock
                             <option value={{ $Shop->id }}>{{ $Shop->name}} </option>
                           @endforeach 
                        </select>
+
                     </div>
                  </div>
                  <div class="col-lg-6">
                     <div class="form-group">
+                      <h5>Date</h5>
                        <input type="date" name="date" class="form-control form-control-lg">
                     </div>
                  </div>
