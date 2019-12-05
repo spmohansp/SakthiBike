@@ -88,17 +88,21 @@ Add Stock
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                <label class="radio-inline"><b>Select Product Type:</b>&nbsp;
-                                  <input type="radio" name="Product_Type" value="ml">Ml
-                                </label>
-                                <label class="radio-inline">
-                                  <input type="radio" name="Product_Type" value="Litter">Litter
-                                </label>
-                                <label class="radio-inline">
-                                  <input type="radio" name="Product_Type" value="Kg">Kg
-                                </label>
-                            </div>
-                        </div>
+                                    <label><b>Select Product Type:</b></label><br>
+                                    <label class="radio-inline">&nbsp;
+                                      <input type="radio" name="Product_Type" value="ml">Ml
+                                    </label>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="Product_Type" value="Litter">Litter
+                                    </label>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="Product_Type" value="Kg">Kg
+                                    </label>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="Product_Type" value="piece">Piece
+                                    </label>
+                                </div>
+                              </div>
                             </div>
 
                             <div class="row">

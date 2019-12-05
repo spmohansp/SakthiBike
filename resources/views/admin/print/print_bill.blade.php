@@ -67,7 +67,6 @@
             <p style="margin-top: -15px;"><b>Cell : 9003885959 , 9025837777</b></p>
           </div>
         </div>
-        
         <hr>
         <div class="row">
           <div class="col-lg-12 col-sm-12" style="text-align: center !important;">

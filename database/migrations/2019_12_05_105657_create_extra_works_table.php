@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepositsTable extends Migration
+class CreateExtraWorksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateDepositsTable extends Migration
      */
     public function up()
     {
-        Schema::create('deposits', function (Blueprint $table) {
+        Schema::create('extra_works', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('date');
+            $table->string('name');
+            $table->string('amount');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateDepositsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deposits');
+        Schema::dropIfExists('extra_works');
     }
 }

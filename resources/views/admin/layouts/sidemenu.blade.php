@@ -39,10 +39,10 @@
     </ul>
   </li>
   <li class="treeview">
-    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-exchange"></i><span class="app-menu__label">Transactions</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-exchange"></i><span class="app-menu__label">Extra Works</span><i class="treeview-indicator fa fa-angle-right"></i></a>
     <ul class="treeview-menu">
-      <li><a class="treeview-item" href="{{ url('admin/deposit/add') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Deposit</a></li>
-      <li><a class="treeview-item" href="{{ url('admin/deposit') }}"><i class="icon fa fa-chevron-circle-right"></i> View Deposit</a></li>
+      <li><a class="treeview-item" href="{{ action('BillingController\ExtraWorkController@create') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Extra Works</a></li>
+      <li><a class="treeview-item" href="{{ action('BillingController\ExtraWorkController@index') }}"><i class="icon fa fa-chevron-circle-right"></i> View Extra Works</a></li>
     </ul>
   </li>
   <li class="treeview">
@@ -55,7 +55,6 @@
   <li class="treeview">
     <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-print"></i><span class="app-menu__label">Expense</span><i class="treeview-indicator fa fa-angle-right"></i></a>
     <ul class="treeview-menu">
-      <li><a class="treeview-item" href="{{ url('admin/ledgers') }}"><i class="icon fa fa-chevron-circle-right"></i>Ledger</a></li>
       <li><a class="treeview-item" href="{{ url('admin/expense/add') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Expense</a></li>
       <li><a class="treeview-item" href="{{ url('admin/expenses') }}"><i class="icon fa fa-chevron-circle-right"></i>View Expense</a></li>
     </ul>

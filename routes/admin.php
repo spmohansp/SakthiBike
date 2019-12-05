@@ -26,12 +26,7 @@ Route::get('/GetProductCount','BillingController\ProductController@GetProductCou
 
 Route::resource('/shop','BillingController\ShopController');
 
-Route::get('/GetProductDetails','BillingController\StockController@GetProductDetails')->name('GetProductDetails');
-
-
-Route::get('/deposit/add','BillingController\DepositController@addDeposit');
-
-Route::get('/deposits','BillingController\DepositController@viewDeposit');
+Route::resource('/extraworks','BillingController\ExtraWorkController');
 
 //Ledger
 Route::get('/ledgers', 'BillingController\LedgerController@viewLedger');
@@ -48,6 +43,8 @@ Route::get('/stock/view', 'BillingController\StockController@viewStock')->name('
 Route::get('/stock/{id}/edit','BillingController\StockController@editStock')->name('editStock');
 Route::post('/stock/{id}/update','BillingController\StockController@updateStock')->name('updateStock');
 Route::get('/stock/{id}/delete','BillingController\StockController@deleteStock')->name('deleteStock');
+
+Route::get('/GetProductDetails','BillingController\StockController@GetProductDetails')->name('GetProductDetails');
 
 //Print
 Route::get('/bill/add','BillingController\PrintController@addPrint');
