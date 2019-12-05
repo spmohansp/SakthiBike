@@ -16,6 +16,7 @@ class SalaryController extends Controller
      */
     public function index()
     {
+        $Data['Employees'] = Employee::get();
         $Data['Salaries'] = Salary::get();
         return view('admin.salary.view',$Data);
     }
@@ -65,7 +66,9 @@ class SalaryController extends Controller
      */
     public function show($id)
     {
-        //
+         $Data['Salary'] = Salary::get();
+         $Data['Employees'] = Employee::get();
+         return view('admin.salary.employeewise_salary_view',$Data);
     }
 
     /**

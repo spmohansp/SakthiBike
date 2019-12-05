@@ -35,9 +35,16 @@ Add Clients
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <input class="form-control form-control-lg" id="" type="text"
-                                    aria-describedby="emailHelp" placeholder="Product Type" value="{{ $Product->Product_Type }}" name="Product_Type">
+                                    <div class="form-group">
+                                <label class="radio-inline"><b>Select Product Type:</b>&nbsp;
+                                  <input type="radio" name="Product_Type" value="ml" {{ $Product->Product_Type == 'ml' ? 'checked' : ''}} >Ml
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="Product_Type" value="Litter" {{ $Product->Product_Type == 'Litter' ? 'checked' : ''}}>Litter
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="Product_Type" value="Kg" {{ $Product->Product_Type == 'Kg' ? 'checked' : ''}}>Kg
+                                </label>
                             </div>
                         </div>
                     </div>

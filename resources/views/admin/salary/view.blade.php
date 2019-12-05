@@ -40,19 +40,28 @@ view Attendence
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($Salaries as $Salary)
+                 
+                  @foreach($Employees as $Employee)
                   <tr>
-                    <td>{{ @$Salary->Salary->name }}</td>
-                    <td>{{ $Salary->from_date }}</td>
-                    <td>{{ $Salary->to_date }}</td>
-                    <td>{{ $Salary->amount_per_day }}</td>
-                   
+                    <td>{{ @$Employee->name }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                 
+
+                    {{-- @foreach($Salaries as $Salary) 
+                     <tr>
+                    <td>{{ date("d-m-Y", strtotime($Salary->from_date)) }}</td>
+                    <td>{{ date("d-m-Y", strtotime($Salary->to_date)) }}</td>
+                    <td>{{ $Salary->amount_per_day }}</td> --}}
                     <td>
-                      <form action="{{ action('BillingController\SalaryController@destroy',$Salary->id) }}" method="POST">
+                      <form action="{{ action('BillingController\SalaryController@destroy',$Employee->id) }}" method="POST">
                           {{ csrf_field() }}
                           <input type="hidden" name="_method" value="DELETE">
-                          <a href="{{ action('BillingController\SalaryController@edit',$Salary->id) }}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></a>
+                          <a href="{{ action('BillingController\SalaryController@edit',$Employee->id) }}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></a>
                           <button href="" onclick="return confirm('Are you sure?')" class="btn btn-primary"><i class="fa fa-trash-o"  aria-hidden="true" style="color:#fff" ></i></button>
+
+                           <a href="{{ action('BillingController\SalaryController@show',$Employee->id) }}" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true" style="color:#fff"></i></a>
                       </form>
                     </td>
                   </tr>
