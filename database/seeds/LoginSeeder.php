@@ -17,5 +17,11 @@ class LoginSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456'),
         ]);
+
+        DB::table('expense_categories')->insert([
+            'name' => 'Salary',
+            'created_at'=>now(),
+            'updated_at'=>now(),
+        ]);
     }
 }

@@ -26,6 +26,8 @@ Route::get('/GetProductCount','BillingController\ProductController@GetProductCou
 
 Route::resource('/shop','BillingController\ShopController');
 
+Route::resource('/Expense-category','BillingController\ExpenseCategoryController');
+
 Route::resource('/extraworks','BillingController\ExtraWorkController');
 
 //Ledger

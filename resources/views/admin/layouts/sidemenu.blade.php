@@ -55,6 +55,7 @@
   <li class="treeview">
     <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-print"></i><span class="app-menu__label">Expense</span><i class="treeview-indicator fa fa-angle-right"></i></a>
     <ul class="treeview-menu">
+      <li><a class="treeview-item" href="{{ action('BillingController\ExpenseCategoryController@create') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Expense Category</a></li>
       <li><a class="treeview-item" href="{{ url('admin/expense/add') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Expense</a></li>
       <li><a class="treeview-item" href="{{ url('admin/expenses') }}"><i class="icon fa fa-chevron-circle-right"></i>View Expense</a></li>
     </ul>
