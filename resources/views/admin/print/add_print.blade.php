@@ -156,7 +156,29 @@ Add Print
                         </div>
                     </div>
                 </div>
-                
+
+                <div class="tile">
+                <div class="row">
+                <div class="col-md-12">
+                                <label><h5><b>Extra Work</b></h5></label>
+                                <div class="row">
+
+                                     @foreach($ExtraWorks as $ExtraWork)
+                                        <div class="col-sm-1">
+                                            <div class="input-group ">
+                                                <span class="input-group-addon">
+                                                  <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-extra-name="{{ $ExtraWork->name  }}" data-id="{{ $ExtraWork->amount }}"> {{ $ExtraWork->name }}
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tile">
@@ -171,44 +193,55 @@ Add Print
                                         <th>Action</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="productbilltable">
-                                    </tbody>
-                                    <thead>
-                                    <th colspan="4">
-                                        <h4 class="pull-right"><b>Total</b> :</h4>
-                                    </th>
-                                    <th colspan="1">
-                                        <h4><b><i class="fa fa-inr"></i> <b id="TOTALBILL"></b></b></h4>
-                                    </th>
 
+                                    <tbody id="productbilltable">
+
+                                    </tbody>
+                                    
+                                    <tbody id="appendExtraAmount">
+                                        
+                                    </tbody>
+
+                                    <thead>
+                                        <th colspan="4">
+                                            <h4 class="pull-right"><b>Total</b> :</h4>
+                                            <input type="hidden" class="HiddenTotalBill" value="0">
+                                            <input type="hidden" class="HiddenAppendExtraAmount" value="0">
+                                        </th>
+                                        <th colspan="1">
+                                            <h4><b><i class="fa fa-inr"></i> <b id="TOTALBILL"></b></b></h4>
+                                        </th>
                                     </thead >
+
                                     <thead id="total_amount">
-                                    <th colspan="4">
-                                        <h4 class="pull-right"><b>Cash Given</b> :</h4>
-                                    </th>
-                                    <th colspan="2">
-                                        <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" name="total_paid_amount" ></b></h4>
-                                    </th>
+                                        <th colspan="4">
+                                            <h4 class="pull-right"><b>Cash Given</b> :</h4>
+                                        </th>
+                                        <th colspan="2">
+                                            <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" name="total_paid_amount" ></b></h4>
+                                        </th>
 
                                     </thead>
 
                                     <thead id="discount">
-                                    <th colspan="4">
-                                        <h4 class="pull-right"><b>Discount</b> :</h4>
-                                    </th>
-                                    <th colspan="2">
-                                        <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="discount_amount" name="discount_amount" value="0"></b></h4>
-                                    </th>
+                                        <th colspan="4">
+                                            <h4 class="pull-right"><b>Discount</b> :</h4>
+                                        </th>
+                                        <th colspan="2">
+                                            <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="discount_amount" name="discount_amount" value="0"></b></h4>
+                                        </th>
 
                                     </thead>
+
                                     <thead id="balance_amount">
-                                    <th colspan="4">
-                                        <h4 class="pull-right"><b>Balance</b> :  </h4>
-                                    </th>
-                                    <th colspan="2">
-                                        <h4><b><i class="fa fa-inr"></i><b id="BalanceAmount"></b></b></h4>
-                                    </th>
+                                        <th colspan="4">
+                                            <h4 class="pull-right"><b>Balance</b> :  </h4>
+                                        </th>
+                                        <th colspan="2">
+                                            <h4><b><i class="fa fa-inr"></i><b id="BalanceAmount"></b></b></h4>
+                                        </th>
                                     </thead>
+
                                 </table>
                             </div>
                             <br>
@@ -342,8 +375,10 @@ Add Print
                 $(".total_amount").each(function() {
                     total = parseInt($(this).val()) + parseInt(total);
                 });
-                $('#TOTALBILL').html(total);
-                $('#BalanceAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()) - parseInt($('#discount_amount').val()) );
+                totalAmount = parseInt(total)+ parseInt($('.HiddenAppendExtraAmount').val() );
+                $('#TOTALBILL').html(totalAmount);
+                $('.HiddenTotalBill').val(total);
+                $('#BalanceAmount').html(parseInt(totalAmount) - parseInt($('#total_paid_amount').val()) - parseInt($('#discount_amount').val()) );
                 $('#DueAmount').html(parseInt(total) - parseInt($('#paid_amount').val()));
             }
     </script>
@@ -376,6 +411,54 @@ Add Print
                 $(".payment2").hide();
             }
         }
+
+        $('.ExtraWorkCheckBox').click('click',function(e){
+
+            var val = 0;
+            var extra_amount_name = [];
+            var extra_amount = [];
+            var extra_total  = 0;
+            var initial_total_amount=  +($('.HiddenTotalBill').val());
+            var total_paid_amount = $('#total_paid_amount').val();
+            var total_amount= 0;
+
+            $('.ExtraWorkCheckBox:checkbox:checked').each(function(i){
+                extra_amount_name[i] = {
+                    name :   $(this).attr('data-extra-name')  ,
+                    amount:  $(this).attr('data-id')
+                };
+                val = parseInt(val) + parseInt($(this).attr('data-id'));
+                $('.HiddenAppendExtraAmount').val(val);
+                $('#TOTALBILL').html(parseInt(val + initial_total_amount));
+                total_amount = parseInt(val + initial_total_amount);
+            });
+
+            $('#appendExtraAmount').empty();
+
+            $.each(extra_amount_name,function(index , value){
+                    $('#appendExtraAmount').append(
+                                           '<tr>'+
+                                            '<td colspan="4"><h4 class="pull-right"><b>' + value.name + '</b> :</h4> </td>'+
+                                            '<td colspan="1"> <h4><b><i class="fa fa-inr"></i> <b>'+ value.amount +'</b></b></h4> </td>'+
+                                            '</tr>');
+
+
+            });
+            
+            $('#BalanceAmount').html(parseInt(total_amount - total_paid_amount));
+
+            if(val == 0){
+                $('#TOTALBILL').html($('.HiddenTotalBill').val());
+                $('#appendExtraAmount').empty();
+
+            }
+
+            if(total_amount == 0){
+                 $('#BalanceAmount').html(parseInt(initial_total_amount - total_paid_amount));
+            }
+
+        });
+
       </script>
 
 

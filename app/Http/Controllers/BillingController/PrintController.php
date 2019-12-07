@@ -6,6 +6,7 @@ use App\BillProduct;
 use App\Products;
 use App\Client;
 use App\Employee;
+use App\ExtraWork;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,8 @@ class PrintController extends Controller
 	    $Products = Products::all();
 	    $Clients = Client::all();
         $Employees = Employee::all();
-		return view('admin.print.add_print',compact('Products','Clients','Employees'));
+        $ExtraWorks = ExtraWork::all();
+		return view('admin.print.add_print',compact('Products','Clients','Employees','ExtraWorks'));
 	}
 
 	public function viewPrint(){
