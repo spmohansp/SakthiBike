@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Expense extends Model
 {
-    public function Ledger(){
-        return $this->hasOne(Ledger::class, 'id', 'expense_id');
+    public function ExpenseCategory(){
+        return $this->hasOne(ExpenseCategory::class,'id','expense_id');
     }
 }

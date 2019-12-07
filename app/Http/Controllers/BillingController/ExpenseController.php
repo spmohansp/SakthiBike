@@ -5,11 +5,14 @@ namespace App\Http\Controllers\BillingController;
 use App\Expense;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\ExpenseCategory;
+
 
 class ExpenseController extends Controller
 {
     public function addExpense(){
-    	return view('admin.expenses.add_expenses');
+        $Data['Expense_Categories'] = ExpenseCategory::get();
+    	return view('admin.expenses.add_expenses',$Data);
     }
 
     public function viewExpense(){
@@ -28,8 +31,9 @@ class ExpenseController extends Controller
     }
 
     public function editExpense($id){
-        $Expense = Expense::findorfail($id);
-        return view('admin.expenses.edit',compact('Expense','Legers'));
+        $Data['Expense_Categories'] = ExpenseCategory::get();
+        $Data['Expense'] = Expense::findorfail($id);
+        return view('admin.expenses.edit',$Data);
     }
 
     public function updateExpense($id){

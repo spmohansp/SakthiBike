@@ -30,12 +30,12 @@ Edit Expenses
                         <input class="form-control" name="amount" id="inputLarge" value="{{ $Expense->amount }}"  type="number" required>
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label col-form-label-lg " for="inputLarge">Ledger Type</label>
+                        <label class="col-form-label col-form-label-lg " for="inputLarge">Select Expense Type</label>
                         <select name="expense_id" id="" class="form-control" required>
                             <option value="">Select Expense</option>
-                            @foreach($Legers as $Leger)
-                            <option value="{{ $Leger->id }}" {{ ($Leger->id == $Expense->expense_id)?'selected':'' }}>{{ $Leger->name }}</option>
-                            @endforeach
+                          @foreach($Expense_Categories as $Expense_Category)
+                            <option value={{ $Expense_Category->id }}>{{ $Expense_Category->expense_type}} </option>
+                          @endforeach 
                         </select>
                     </div>
                 </div>

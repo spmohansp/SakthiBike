@@ -43,7 +43,7 @@ View Expenses
                     <tr>
                       <td>{{ ++$key }}</td>
                       <td>{{ @$Expense->date }}</td>
-                      <td>{{ @$Expense->Ledger->name }}</td>
+                      <td>{{ @$Expense->ExpenseCategory->expense_type }}</td>
                       <td>{{ @$Expense->amount }}</td>
                       <td>{{ @$Expense->description }}</td>
                       <td>
