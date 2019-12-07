@@ -3,15 +3,13 @@
 namespace App\Http\Controllers\BillingController;
 
 use App\Expense;
-use App\Ledger;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ExpenseController extends Controller
 {
     public function addExpense(){
-        $Legers = Ledger::get();
-    	return view('admin.expenses.add_expenses',compact('Legers'));
+    	return view('admin.expenses.add_expenses');
     }
 
     public function viewExpense(){
@@ -30,7 +28,6 @@ class ExpenseController extends Controller
     }
 
     public function editExpense($id){
-        $Legers = Ledger::get();
         $Expense = Expense::findorfail($id);
         return view('admin.expenses.edit',compact('Expense','Legers'));
     }

@@ -40,9 +40,6 @@ Add Expenses
                         <label class="col-form-label col-form-label-lg " for="inputLarge">Ledger Type</label>
                         <select name="expense_id" id="" class="form-control" required>
                             <option value="">Select Expense</option>
-                            @foreach($Legers as $Leger)
-                                <option value="{{ $Leger->id }}">{{ $Leger->name }}</option>
-                            @endforeach
                         </select>
                     </div>
                 </div>
