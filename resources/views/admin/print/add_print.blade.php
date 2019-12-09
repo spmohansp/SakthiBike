@@ -158,26 +158,25 @@ Add Print
                 </div>
 
                 <div class="tile">
-                <div class="row">
-                <div class="col-md-12">
-                                <label><h5><b>Extra Work</b></h5></label>
-                                <div class="row">
-
-                                     @foreach($ExtraWorks as $ExtraWork)
-                                        <div class="col-sm-1">
-                                            <div class="input-group ">
-                                                <span class="input-group-addon">
-                                                  <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-extra-name="{{ $ExtraWork->name  }}" data-id="{{ $ExtraWork->amount }}"> {{ $ExtraWork->name }}
-
-                                                </span>
-                                            </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label><h5><b>Extra Work</b></h5></label>
+                            <div class="row">
+                                 @foreach($ExtraWorks as $ExtraWork)
+                                    <div class="col-sm-1">
+                                        <div class="input-group ">
+                                            <span class="input-group-addon">
+                                              <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" value="{{ $ExtraWork->id }}" data-extra-name="{{ $ExtraWork->name  }}" data-id="{{ $ExtraWork->amount }}"> {{ $ExtraWork->name }}
+                                            </span>
                                         </div>
-                                    @endforeach
-
-                                </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
+                </div>
+
+
 
                 <div class="row">
                     <div class="col-md-12">
@@ -195,11 +194,9 @@ Add Print
                                     </thead>
 
                                     <tbody id="productbilltable">
-
                                     </tbody>
                                     
                                     <tbody id="appendExtraAmount">
-                                        
                                     </tbody>
 
                                     <thead>
@@ -334,7 +331,7 @@ Add Print
                             data:{product_id:product_id},
                             success:function (data) {
                                 var Count = data.Unit;
-                                console.log(Count);
+                                //console.log(Count);
                                 if(qty<=Count){
                                     $(".addbillproduct").show();
                                 }else{
@@ -423,15 +420,18 @@ Add Print
             var total_amount= 0;
 
             $('.ExtraWorkCheckBox:checkbox:checked').each(function(i){
+                
                 extra_amount_name[i] = {
                     name :   $(this).attr('data-extra-name')  ,
                     amount:  $(this).attr('data-id')
                 };
+
                 val = parseInt(val) + parseInt($(this).attr('data-id'));
                 $('.HiddenAppendExtraAmount').val(val);
                 $('#TOTALBILL').html(parseInt(val + initial_total_amount));
                 total_amount = parseInt(val + initial_total_amount);
             });
+
 
             $('#appendExtraAmount').empty();
 

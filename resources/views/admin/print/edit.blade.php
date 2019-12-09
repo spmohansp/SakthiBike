@@ -15,19 +15,14 @@ Edit Print
 @section('content')
 
         <div class="">
-            <div class="pad">
-                <div class="row">
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-12" style="padding:5px;">
-
-                        <form action="{{ route('admin.UpdateBill',$Bill->id) }}" method="post">
-                            {{ csrf_field() }}
+            <div class="row">
+                <div class="col-md-12" style="padding:5px;">
+                    <form action="{{ route('admin.UpdateBill',$Bill->id) }}" method="post">
+                        {{ csrf_field() }}
                         <div class="tile">
                             <h3 style="margin-top:0px;">Customer Details</h3>
-
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Enter Customer name</label>
                                         <select class="form-control" name="client_id"  id="demoSelect" >
@@ -39,54 +34,14 @@ Edit Print
                                         </select>
                                     </div>
                                 </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Customer Name</label>
-                                        <br>
-                                        <span id="client_name"></span>
-                                        <!--<select class="form-control Selectpicker" style="width:100% !important">
-                                            <option>Enter Customer Phone Number</option>
-                                            <option>Product1</option>
-                                            <option>Product2</option>
-                                        </select>-->
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <button type="submit" class="btn btn-success " style="padding:10px 20px;" >Save Bill</button>
-                                    <!--
-                                    <div class="form-group">
-                                      <label>Bill No</label>
-                                        <input class="form-control mobilenumber" type="text" placeholder="Enter Bill No" disabled>
-                                    </div>-->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Payment type</label>
-                                        <div class="form-group" >
-                                            <select class="form-control Selectpicker"  onchange="paymentType()" name="payment_type" id="discount_type" style="width:100% !important" required>
-                                                <optgroup label="Select Payment type" >
-                                                    <option value="cash" {{ $Bill->payment_type=='cash'?'selected':'' }}>Cash</option>
-                                                    <option value="cheque" {{ $Bill->payment_type=='cheque'?'selected':'' }}>Cheque</option>
-                                                    <option value="card" {{ $Bill->payment_type=='card'?'selected':'' }}>Card</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Date</label>
                                         <input class="form-control" type="date" name="date" value="{{ $Bill->date }}" required>
                                     </div>
                                 </div>
-
-
-
                             </div>
+                        
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -106,10 +61,14 @@ Edit Print
                                         <input class="form-control nextrow" value="{{ $Bill->paid_amount }}" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
                                     </div>
                                 </div>
-                                <div class="col-md-4 payment2" style="display:none">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Due Amount</label><br>
-                                        <span id="DueAmount">{{ $Bill->Due_Amount }}</span>
+                                        <label>Employee Attended</label>
+                                        <select class="form-control" name="employees[]" required multiple>
+                                            @foreach($Employees as $Employee)
+                                                <option value="{{ $Employee->id }}" {{ in_array($Employee->id, json_decode($Bill->employee_id)) ? 'selected' : '' }}>{{ $Employee->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -129,33 +88,52 @@ Edit Print
                                     <label></label>
                                 </div>
                             </div>
-                                <div id="productsbilllist">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group" >
-                                                <select class="form-control demoSelect1" id="product_id">
-                                                    <optgroup label="Select Products">
-                                                        @foreach($Products as $Product)
-                                                            <option value="{{ $Product->id }}">{{ $Product->Product_Name_English }}</option>
-                                                        @endforeach
-                                                    </optgroup>
-                                                </select>
+                            <div id="productsbilllist">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group" >
+                                            <select class="form-control demoSelect1" id="product_id">
+                                                <optgroup label="Select Products">
+                                                    @foreach($Products as $Product)
+                                                        <option value="{{ $Product->id }}">{{ $Product->Product_Name }}</option>
+                                                    @endforeach
+                                                </optgroup>
+                                            </select>
 
 
-                                            </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <input class="form-control nextrow " type="text" placeholder="Enter Quantity" min="1" id="qty">
-                                            </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input class="form-control nextrow " type="text" placeholder="Enter Quantity" min="1" id="qty">
                                         </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <button type="button" id="addbillproduct"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
-                                            </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <button type="button" id="addbillproduct"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="tile">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label><h5><b>Extra Work</b></h5></label>
+                                    <div class="row">
+                                         @foreach($ExtraWorks as $ExtraWork)
+                                            <div class="col-sm-1">
+                                                <div class="input-group ">
+                                                    <span class="input-group-addon">
+                                                      <input type="checkbox" name="extraAmount[]" {{ in_array($ExtraWork->id, json_decode($Bill->extra_work_id))?'checked':'' }} class="ExtraWorkCheckBox" value="{{ $ExtraWork->id }}" data-extra-name="{{ $ExtraWork->name  }}" data-id="{{ $ExtraWork->amount }}"> {{ $ExtraWork->name }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -168,9 +146,6 @@ Edit Print
                                                 <th>Items</th>
                                                 <th>Quantity</th>
                                                 <th>Price</th>
-                                                <th>CGST</th>
-                                                <th>SGST</th>
-                                                <th>CESS</th>
                                                 <th>Total Cost</th>
                                                 <th>Action</th>
                                             </tr>
@@ -181,37 +156,38 @@ Edit Print
                                                         <th>{{ @$Product->Product->Product_Name_English }}<input type="hidden" value="{{ $Product->Product->id }}" name="product_id[]"></th>
                                                         <th>{{ $Product->quantity }}<input type="hidden" value="{{ $Product->quantity }}" name="qty[]"></th>
                                                         <th>{{  @$Product->Product->Selling_Price }}</th>
-                                                        <th>{{ $Product->CGST }}<input type="hidden" value="{{ $Product->CGST }}" name="CGST[]"></th>
-                                                        <th>{{ $Product->SGST }}<input type="hidden" value="{{ $Product->SGST }}" name="SGST[]"></th>
-                                                        <th>{{ $Product->CESS }}<input type="hidden" value="{{ $Product->CESS }}" name="CESS[]"></th>
                                                         <th>{{ $Product->Total_Cost }}<input type="hidden" class="total_amount" value="{{ $Product->Total_Cost }}" name="total_amount[]"></th>
                                                         <th><button type="button" class="btn btn-primary btn-sm RemoveProductButon"><i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></th>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
+                                            <tbody id="appendExtraAmount">
+                                            </tbody>
                                             <thead>
-                                                <th colspan="7">
+                                                <th colspan="4">
                                                     <h4 class="pull-right"><b>Total</b> :</h4>
+                                                    <input type="hidden" class="HiddenTotalBill" value="0">
+                                                    <input type="hidden" class="HiddenAppendExtraAmount" value="0">
                                                 </th>
-                                                <th colspan="2">
+                                                <th colspan="1">
                                                     <h4><b><i class="fa fa-inr"></i> <b id="TOTALBILL"></b></b></h4>
                                                 </th>
 
                                             </thead>
                                             <thead id="total_amount">
-                                                <th colspan="7">
+                                                <th colspan="4">
                                                     <h4 class="pull-right"><b>Cash Given</b> :</h4>
                                                 </th>
-                                                <th colspan="2">
+                                                <th colspan="1">
                                                     <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" value="{{ $Bill->paid_amount }}" name="paid_amount" required></b></h4>
                                                 </th>
 
                                             </thead>
                                             <thead id="balance_amount">
-                                                <th colspan="7">
+                                                <th colspan="4">
                                                     <h4 class="pull-right"><b>Balance</b> :  </h4>
                                                 </th>
-                                                <th colspan="2">
+                                                <th colspan="1">
                                                     <h4><b><i class="fa fa-inr"></i><b id="BalanceAmount" name="BalanceAmount" ></b></b></h4>
                                                 </th>
                                             </thead>
@@ -220,12 +196,10 @@ Edit Print
                                 </div>
                             </div>
                         </div>
-
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-        </form>
 
    @endsection
 
@@ -252,17 +226,14 @@ Edit Print
             todayHighlight: true
         });
 
-        $('#demoSelect').select2();
-        $('.demoSelect1').select2();
+        $('#Customer').select2();
+        $('.Product').select2();
 
     </script>
 
     <script type="text/javascript">
             $(document).ready(function() {
                 $('#TOTALBILL').html(0);
-                calculateTotal();
-                paymentType();
-                showpaymentstatus();
                 $("#addbillproduct").click(function () {
                     var product_id = $("#product_id").val();
                     var qty = $("#qty").val();
@@ -274,6 +245,46 @@ Edit Print
                             success:function (data) {
                                 $('#productbilltable').append(data);
                                 calculateTotal();
+                                GetQuantityCount(product_id,qty);
+                            }
+                        });
+                    }
+                 });
+
+                function GetQuantityCount(product_id,qty) {
+                    $.ajax({
+                        type: 'get',
+                        url: "{{ route('admin.GetProductCount') }}",
+                        data:{product_id:product_id,qty:qty},
+                        success:function (data) {
+                            var count = data.Unit - qty;
+                            if(count >0){
+                                $(".addbillproduct").show();
+                            }else{
+                                $(".addbillproduct").hide();
+                                $(".QuantityLimit").text('Your Quanity Limit is '+data.Unit);
+                            }
+                        }
+                    });
+                }
+
+                $('body').on('change keyup','.Product,.Quantity',function (e) {
+                    e.preventDefault();
+                    var product_id = $("#product_id").val();
+                    var qty = $("#qty").val();
+                    if(product_id !=''){
+                        $.ajax({
+                            type: 'get',
+                            url: "{{ route('admin.GetProductStock') }}",
+                            data:{product_id:product_id},
+                            success:function (data) {
+                                var Count = data.Unit;
+                                if(qty<=Count){
+                                    $(".addbillproduct").show();
+                                }else{
+                                    $(".addbillproduct").hide();
+                                    $(".QuantityLimit").text('Your Quanity Limit is '+Count);
+                                }
                             }
                         });
                     }
@@ -284,10 +295,22 @@ Edit Print
                     $(this).parent().parent().remove();
                     calculateTotal();
                 });
+                $('#total_paid_amount').on('keyup',function (e) {
+                    e.preventDefault();
+                    calculateTotal()
+                });
+
                 $('#paid_amount').on('keyup',function (e) {
                     e.preventDefault();
                     calculateTotal()
                 });
+
+                $('#discount_amount').on('keyup',function (e) {
+                    e.preventDefault();
+                    calculateTotal()
+                });
+
+
             });
 
 
@@ -296,31 +319,95 @@ Edit Print
                 $(".total_amount").each(function() {
                     total = parseInt($(this).val()) + parseInt(total);
                 });
-                $('#TOTALBILL').html(total);
-                $('#BalanceAmount').html(parseInt($('#total_paid_amount').val()) - parseInt(total) );
+                totalAmount = parseInt(total)+ parseInt($('.HiddenAppendExtraAmount').val() );
+                $('#TOTALBILL').html(totalAmount);
+                $('.HiddenTotalBill').val(total);
+                $('#BalanceAmount').html(parseInt(totalAmount) - parseInt($('#total_paid_amount').val()) - parseInt($('#discount_amount').val()) );
                 $('#DueAmount').html(parseInt(total) - parseInt($('#paid_amount').val()));
             }
+ 
+            function paymentType()
+            {
+                var payment_type=$("#payment_type").val();
 
-        function paymentType() {
-            var payment_type=$("#payment_type").val();
-
-            if(payment_type=='cheque'||'card') {
-                $("#total_amount").hide();
-                $("#balance_amount").hide();
-            } else if(payment_type=='cash') {
-                $("#total_amount").show();
-                $("#balance_amount").show();
+                if(payment_type=='cheque'||'card')
+                {
+                    $("#total_amount").hide();
+                    $("#balance_amount").hide();
+                }
+                if(payment_type=='cash')
+                {
+                    $("#total_amount").show();
+                    $("#balance_amount").show();
+                }
             }
-        }
 
-        function showpaymentstatus() {
-            var payment_status=$("#payment_status").val();
-            console.log(payment_status);
-            if(payment_status==2) {
-                $(".payment2").show();
-            }  else {
-                $(".payment2").hide();
+            function showpaymentstatus()
+            {
+                var payment_status=$("#payment_status").val();
+                if(payment_status==2)
+                {
+                    $(".payment2").show();
+                }
+                else
+                {
+                    $(".payment2").hide();
+                }
             }
-        }
-    </script>
+
+            $(document).ready(function() {
+                $('.ExtraWorkCheckBox').trigger('click');
+            });
+
+            $('.ExtraWorkCheckBox').click('click',function(){
+                var val = 0;
+                var extra_amount_name = [];
+                var extra_amount = [];
+                var extra_total  = 0;
+                var initial_total_amount=  +($('.HiddenTotalBill').val());
+                var total_paid_amount = $('#total_paid_amount').val();
+                var total_amount= 0;
+
+                $('.ExtraWorkCheckBox:checkbox:checked').each(function(i){
+                    
+                    extra_amount_name[i] = {
+                        name :   $(this).attr('data-extra-name')  ,
+                        amount:  $(this).attr('data-id')
+                    };
+
+                    val = parseInt(val) + parseInt($(this).attr('data-id'));
+                    $('.HiddenAppendExtraAmount').val(val);
+                    $('#TOTALBILL').html(parseInt(val + initial_total_amount));
+                    total_amount = parseInt(val + initial_total_amount);
+                });
+
+
+                $('#appendExtraAmount').empty();
+
+                $.each(extra_amount_name,function(index , value){
+                        $('#appendExtraAmount').append(
+                                               '<tr>'+
+                                                '<td colspan="4"><h4 class="pull-right"><b>' + value.name + '</b> :</h4> </td>'+
+                                                '<td colspan="1"> <h4><b><i class="fa fa-inr"></i> <b>'+ value.amount +'</b></b></h4> </td>'+
+                                                '</tr>');
+
+
+                });
+                
+                $('#BalanceAmount').html(parseInt(total_amount - total_paid_amount));
+
+                if(val == 0){
+                    $('#TOTALBILL').html($('.HiddenTotalBill').val());
+                    $('#appendExtraAmount').empty();
+
+                }
+
+                if(total_amount == 0){
+                     $('#BalanceAmount').html(parseInt(initial_total_amount - total_paid_amount));
+                }
+
+            });
+
+      </script>
+
 @endsection
