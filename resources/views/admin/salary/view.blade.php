@@ -33,9 +33,6 @@ view Attendence
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>From Date & Time</th>
-                    <th>TO Date & Time</th>
-                    <th>Salary Per/Day</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -44,16 +41,6 @@ view Attendence
                   @foreach($Employees as $Employee)
                   <tr>
                     <td>{{ @$Employee->name }}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                 
-
-                    {{-- @foreach($Salaries as $Salary) 
-                     <tr>
-                    <td>{{ date("d-m-Y", strtotime($Salary->from_date)) }}</td>
-                    <td>{{ date("d-m-Y", strtotime($Salary->to_date)) }}</td>
-                    <td>{{ $Salary->amount_per_day }}</td> --}}
                     <td>
                       <form action="{{ action('BillingController\SalaryController@destroy',$Employee->id) }}" method="POST">
                           {{ csrf_field() }}

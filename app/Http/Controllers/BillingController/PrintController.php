@@ -75,8 +75,9 @@ class PrintController extends Controller
     public function editPrint($id ,Request $request){
         $Products = Products::all();
         $Clients = Client::all();
+        $ExtraWorks = ExtraWork::all();
         $Bill = Bill::findorfail($id);
-        return view('admin.print.edit',compact('Products','Clients','Bill'));
+        return view('admin.print.edit',compact('Products','Clients','Bill','ExtraWorks'));
     }
 
 

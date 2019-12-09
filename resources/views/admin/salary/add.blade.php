@@ -43,12 +43,12 @@ Attendence Register
                              </div>
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>From Date</b></h5>
-                                    <input type="datetime-local"  class="form-control" value="{{ old('from_date') }}" name="from_date">
+                                    <input type="date"  class="form-control" value="{{ old('from_date') }}" name="from_date">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>To Date</b></h5>
-                                    <input type="datetime-local"  class="form-control" value="{{ old('to_date') }}" name="to_date">
+                                    <input type="date"  class="form-control" value="{{ old('to_date') }}" name="to_date">
                                 </div>
                             </div>
                          	

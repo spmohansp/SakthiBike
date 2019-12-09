@@ -399,8 +399,7 @@ Add Print
             }
         }
 
-        function showpaymentstatus()
-        {
+        function showpaymentstatus(){
             var payment_status=$("#payment_status").val();
             if(payment_status==2)
             {
