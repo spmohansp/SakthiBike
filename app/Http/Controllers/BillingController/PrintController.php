@@ -26,7 +26,6 @@ class PrintController extends Controller
 	}
 
     public function saveBill(){
-        // return request()->all();
         $BillTotal=0;
         if(!empty(request('product_id'))){
             foreach (request('product_id') as $key => $product) {
@@ -46,11 +45,14 @@ class PrintController extends Controller
         $Bill->date = request('date');
         $Bill->payment_status = request('payment_status');
         $Bill->paid_amount = request('paid_amount');
-        $Bill->Due_Amount = $BillTotal - request('paid_amount');
+        $Bill->Due_Amount = $BillTotal - request('paid_amount') - request('discount_amount');
         $Bill->bill_amount = $BillTotal;
         $Bill->balance_amount =$BillTotal - request('total_paid_amount') - request('discount_amount');
         $Bill->discount_amount = request('discount_amount');
+        $Bill->employee_id = json_encode(request('employees'));
+        $Bill->extra_work_id = json_encode(request('extraAmount'));
         $Bill->save();
+
         if(!empty(request('product_id'))){
             foreach(request('product_id') as $key=> $product){
                 $BillProduct = new BillProduct;
@@ -78,6 +80,12 @@ class PrintController extends Controller
         $ExtraWorks = ExtraWork::all();
         $Bill = Bill::findorfail($id);
         return view('admin.print.edit',compact('Products','Clients','Bill','ExtraWorks'));
+        $Data['Products']   = Products::all();
+        $Data['Clients']    = Client::all();
+        $Data['ExtraWorks'] = ExtraWork::all();
+        $Data['Employees'] = Employee::all();
+        $Data['Bill']       = Bill::findorfail($id);
+        return view('admin.print.edit',$Data);
     }
 
 
@@ -89,13 +97,13 @@ class PrintController extends Controller
 
         $Bill = Bill::findorfail($id);
         $Bill->client_id = request('client_id');
-        $Bill->payment_type = request('payment_type');
         $Bill->date = request('date');
         $Bill->payment_status = request('payment_status');
         $Bill->paid_amount = request('paid_amount');
-        $Bill->products = request('products');
+        $Bill->Due_Amount = $BillTotal - request('paid_amount') - request('discount_amount');
         $Bill->bill_amount = $BillTotal;
-        $Bill->balance_amount = $BillTotal - request('paid_amount');
+        $Bill->balance_amount =$BillTotal - request('total_paid_amount') - request('discount_amount');
+        $Bill->discount_amount = request('discount_amount');
         $Bill->save();
 
         foreach($Bill->BillProducts as $key=> $product){

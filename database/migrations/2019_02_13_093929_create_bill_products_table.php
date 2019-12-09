@@ -20,9 +20,6 @@ class CreateBillProductsTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
             $table->string('quantity')->nullable();
-            $table->string('CGST')->nullable();
-            $table->string('SGST')->nullable();
-            $table->string('CESS')->nullable();
             $table->string('Total_Cost')->nullable();
             $table->timestamps();
         });
