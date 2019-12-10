@@ -35,11 +35,14 @@ View Stock
             </thead>
             <tbody>
               @foreach($Stock as $Stocks)
-              <?php $ProductId = implode(",",$Stocks->StockDetail->pluck('id')->toArray()); ?>
+              @php $ProductId = implode(",",$Stocks->StockDetail->pluck('id')->toArray());
+                $BillProduct = App\BillProduct::where('product_id',$ProductId)->sum('quantity');
+              @endphp
+
                 <tr>
                   <td>{{ $Stocks->id }}</td>
                   <td>{{ implode(",",$Stocks->StockDetail->pluck('Product')->pluck('Product_Name')->toArray()) }}</td>
-                  <td>{{ implode(",",$Stocks->StockDetail->pluck('Unit')->toArray()) - GetStockDetails($ProductId) }} </td>
+                  <td>{{ implode(",",$Stocks->StockDetail->pluck('Unit')->toArray()) -$BillProduct }} </td>
                   <td>{{ date('d-m-Y', strtotime($Stocks->date)) }}</td>
                   <td>
                     <a href="{{ route('admin.editStock',$Stocks->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
@@ -47,9 +50,7 @@ View Stock
                   </td>
                 </tr>
               @endforeach
-              @foreach($Bill_product as $Bill_products)
-              <td>{{ $Bill_products->quantity }}</td>
-               @endforeach
+              
             </tbody>
             </table>
           </div>
