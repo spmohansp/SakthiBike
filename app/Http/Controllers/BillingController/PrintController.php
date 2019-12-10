@@ -27,11 +27,21 @@ class PrintController extends Controller
 
     public function saveBill(){
         $BillTotal=0;
+        $TotalBill=0;
         if(!empty(request('product_id'))){
             foreach (request('product_id') as $key => $product) {
                 $BillTotal += request('total_amount')[$key];
             }
         }
+
+        if(!empty(request('extraAmount'))){
+            foreach (request('extraAmount') as $key1 => $extraAmount) {
+                $ExtraWorks = ExtraWork::findorfail(request('extraAmount')[$key1]);
+                $TotalBill += $ExtraWorks->amount;
+            }
+        }
+
+        $bill_amount = $BillTotal + $TotalBill;
 
         $Bill = new Bill;
         $LastBill = Bill::orderBy('id', 'DESC')->first();
@@ -45,9 +55,9 @@ class PrintController extends Controller
         $Bill->date = request('date');
         $Bill->payment_status = request('payment_status');
         $Bill->paid_amount = request('paid_amount');
-        $Bill->Due_Amount = $BillTotal - request('paid_amount') - request('discount_amount');
-        $Bill->bill_amount = $BillTotal;
-        $Bill->balance_amount =$BillTotal - request('total_paid_amount') - request('discount_amount');
+        $Bill->bill_amount_given = $bill_amount - request('paid_amount') - request('discount_amount');
+        $Bill->bill_amount = $bill_amount;
+        $Bill->balance_amount =$bill_amount - request('total_paid_amount') - request('discount_amount');
         $Bill->discount_amount = request('discount_amount');
         $Bill->employee_id = json_encode(request('employees'));
         $Bill->extra_work_id = json_encode(request('extraAmount'));
@@ -75,11 +85,6 @@ class PrintController extends Controller
     }
 
     public function editPrint($id ,Request $request){
-        $Products = Products::all();
-        $Clients = Client::all();
-        $ExtraWorks = ExtraWork::all();
-        $Bill = Bill::findorfail($id);
-        return view('admin.print.edit',compact('Products','Clients','Bill','ExtraWorks'));
         $Data['Products']   = Products::all();
         $Data['Clients']    = Client::all();
         $Data['ExtraWorks'] = ExtraWork::all();
@@ -91,19 +96,33 @@ class PrintController extends Controller
 
     public function UpdateBill($id){
         $BillTotal=0;
-        foreach (request('product_id') as $key => $product) {
-            $BillTotal += request('total_amount')[$key];
+        $TotalBill=0;
+        if(!empty(request('product_id'))){
+            foreach (request('product_id') as $key => $product) {
+                $BillTotal += request('total_amount')[$key];
+            }
         }
+
+        if(!empty(request('extraAmount'))){
+            foreach (request('extraAmount') as $key1 => $extraAmount) {
+                $ExtraWorks = ExtraWork::findorfail(request('extraAmount')[$key1]);
+                $TotalBill += $ExtraWorks->amount;
+            }
+        }
+
+        $bill_amount = $BillTotal + $TotalBill;
 
         $Bill = Bill::findorfail($id);
         $Bill->client_id = request('client_id');
         $Bill->date = request('date');
         $Bill->payment_status = request('payment_status');
-        $Bill->paid_amount = request('paid_amount');
-        $Bill->Due_Amount = $BillTotal - request('paid_amount') - request('discount_amount');
-        $Bill->bill_amount = $BillTotal;
-        $Bill->balance_amount =$BillTotal - request('total_paid_amount') - request('discount_amount');
+        $Bill->paid_amount = request('total_paid_amount');
+        $Bill->bill_amount_given = $bill_amount - request('total_paid_amount') - request('discount_amount');
+        $Bill->bill_amount = $bill_amount;
+        $Bill->balance_amount =$bill_amount - request('total_paid_amount') - request('discount_amount');
         $Bill->discount_amount = request('discount_amount');
+        $Bill->employee_id = json_encode(request('employees'));
+        $Bill->extra_work_id = json_encode(request('extraAmount'));
         $Bill->save();
 
         foreach($Bill->BillProducts as $key=> $product){
@@ -115,13 +134,18 @@ class PrintController extends Controller
             $BillProduct->bill_id = $Bill->id;
             $BillProduct->product_id = $product;
             $BillProduct->quantity = request('qty')[$key];
-            $BillProduct->CGST = request('CGST')[$key];
-            $BillProduct->SGST = request('SGST')[$key];
-            $BillProduct->CESS = request('CESS')[$key];
             $BillProduct->Total_Cost = request('total_amount')[$key];
             $BillProduct->save();
         }
-        return back()->with('success','Bill Added Successfully!');
+        if(!empty(request('product_id'))){
+            if(request('print')){
+                return redirect(route('admin.printBill',$Bill->id));
+            }else{
+                return back()->with('success','Bill Updated Successfully!');
+            }
+        }else{
+            return back()->with('danger','Select Any Product First!');
+        }
     }
 
     public function  printBill($id){

@@ -85,7 +85,7 @@
           <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
             <h5 class="th"> Name : <span style="font-size: 16px; font-style: italic;">{{ $Bill->Client->name }}</span></h5>
           </div>
-          <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
+          <div class="col-lg-6 col-sm-6" style="text-align: right !important;">
             <h5 class="th"> Phone Number : <span style="font-size: 16px;font-style: italic;">{{ $Bill->Client->phone_number }}</span></h5>
           </div>
         </div>
@@ -93,8 +93,8 @@
           <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
             <h5 class="th"> Bike No : <span style="font-size: 16px;font-style: italic;">{{ $Bill->Client->bike_no }}</span></h5>
           </div>
-          <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
-            <h5 class="th"> Next Service Km : <span style="font-size: 16px;font-style: italic;">{{ $Bill->Client->bike_no }}</span></h5>
+          <div class="col-lg-6 col-sm-6" style="text-align: right !important;">
+            <h5 class="th"> Next Service Km : <span style="font-size: 16px;font-style: italic;">{{ $Bill->Client->service_km }}</span></h5>
           </div>
         </div>
         </div>
@@ -120,13 +120,23 @@
                   <th>{{ @$Product->Total_Cost }}</th>
                 </tr>
                 @endforeach
+
+                @foreach(json_decode($Bill->extra_work_id) as $key=>$Extrawork)
+                <tr>
+                  <th colspan="4" style="text-align: right !important;"><h5>{{ GetExtraWorkDetails($Extrawork)->name }} : </h5></th>
+                  <th><h5>{{ GetExtraWorkDetails($Extrawork)->amount }}</h5></th>
+                </tr>
+                @endforeach
+
+
+                <tr>
                   <th colspan="4" style="text-align: right !important;"><h5>Net Total : </h5></th>
-                  <th><h5>{{ @$Product->sum('Total_Cost') }}</h5></th>
+                  <th><h5>{{ @$Bill->bill_amount }}</h5></th>
                 </tr>
                 <tr>
 
                   <th colspan="4" style="text-align: right !important;"><h5>Gross Total : </h5></th>
-                  <th><h5>{{ @$Product->sum('Total_Cost') - $Bill->discount_amount }}</h5></th>
+                  <th><h5>{{ @$Bill->bill_amount - @$Bill->discount_amount }}</h5></th>
                 </tr>
                 <tr>
                   <th colspan="6"></th>

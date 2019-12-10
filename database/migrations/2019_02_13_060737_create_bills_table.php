@@ -21,7 +21,7 @@ class CreateBillsTable extends Migration
             $table->foreign('client_id')->references('id')->on('clients');
             $table->string('payment_status')->nullable();
             $table->string('paid_amount')->nullable();
-            $table->longText('Due_Amount')->nullable();
+            $table->longText('bill_amount_given')->nullable();
             $table->string('bill_amount')->nullable();
             $table->string('balance_amount')->nullable();
             $table->string('extra_work_id')->nullable();

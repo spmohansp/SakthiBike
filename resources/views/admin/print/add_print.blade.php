@@ -96,7 +96,6 @@ Add Print
                     </div>
 
                     <div class="row">
-                        
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Payment status</label>
@@ -175,8 +174,6 @@ Add Print
                         </div>
                     </div>
                 </div>
-
-
 
                 <div class="row">
                     <div class="col-md-12">
@@ -281,105 +278,101 @@ Add Print
         $('#Customer').select2();
         $('.Product').select2();
 
-    </script>
-
-    <script type="text/javascript">
-            $(document).ready(function() {
-                $('#TOTALBILL').html(0);
-                $("#addbillproduct").click(function () {
-                    var product_id = $("#product_id").val();
-                    var qty = $("#qty").val();
-                    if(product_id !='' && qty !=''){
-                        $.ajax({
-                            type: 'get',
-                            url: '/admin/product/getProduct',
-                            data:{product_id:product_id,qty:qty},
-                            success:function (data) {
-                                $('#productbilltable').append(data);
-                                calculateTotal();
-                                GetQuantityCount(product_id,qty);
-                            }
-                        });
-                    }
-                 });
-
-                function GetQuantityCount(product_id,qty) {
+        $(document).ready(function() {
+            $('#TOTALBILL').html(0);
+            $("#addbillproduct").click(function () {
+                var product_id = $("#product_id").val();
+                var qty = $("#qty").val();
+                if(product_id !='' && qty !=''){
                     $.ajax({
                         type: 'get',
-                        url: "{{ route('admin.GetProductCount') }}",
+                        url: '/admin/product/getProduct',
                         data:{product_id:product_id,qty:qty},
                         success:function (data) {
-                            var count = data.Unit - qty;
-                            if(count >0){
+                            $('#productbilltable').append(data);
+                            calculateTotal();
+                            GetQuantityCount(product_id,qty);
+                        }
+                    });
+                }
+             });
+
+            function GetQuantityCount(product_id,qty) {
+                $.ajax({
+                    type: 'get',
+                    url: "{{ route('admin.GetProductCount') }}",
+                    data:{product_id:product_id,qty:qty},
+                    success:function (data) {
+                        var count = data.Unit - qty;
+                        if(count >0){
+                            $(".addbillproduct").show();
+                        }else{
+                            $(".addbillproduct").hide();
+                            $(".QuantityLimit").text('Your Quanity Limit is '+data.Unit);
+                        }
+                    }
+                });
+            }
+
+            $('body').on('change keyup','.Product,.Quantity',function (e) {
+                e.preventDefault();
+                var product_id = $("#product_id").val();
+                var qty = $("#qty").val();
+                if(product_id !=''){
+                    $.ajax({
+                        type: 'get',
+                        url: "{{ route('admin.GetProductStock') }}",
+                        data:{product_id:product_id},
+                        success:function (data) {
+                            var Count = data.Unit;
+                            //console.log(Count);
+                            if(qty<=Count){
                                 $(".addbillproduct").show();
                             }else{
                                 $(".addbillproduct").hide();
-                                $(".QuantityLimit").text('Your Quanity Limit is '+data.Unit);
+                                $(".QuantityLimit").text('Your Quanity Limit is '+Count);
                             }
                         }
                     });
                 }
+             });
 
-                $('body').on('change keyup','.Product,.Quantity',function (e) {
-                    e.preventDefault();
-                    var product_id = $("#product_id").val();
-                    var qty = $("#qty").val();
-                    if(product_id !=''){
-                        $.ajax({
-                            type: 'get',
-                            url: "{{ route('admin.GetProductStock') }}",
-                            data:{product_id:product_id},
-                            success:function (data) {
-                                var Count = data.Unit;
-                                //console.log(Count);
-                                if(qty<=Count){
-                                    $(".addbillproduct").show();
-                                }else{
-                                    $(".addbillproduct").hide();
-                                    $(".QuantityLimit").text('Your Quanity Limit is '+Count);
-                                }
-                            }
-                        });
-                    }
-                 });
+            $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
+                e.preventDefault();
+                $(this).parent().parent().remove();
+                calculateTotal();
+            });
+            $('#total_paid_amount').on('keyup',function (e) {
+                e.preventDefault();
+                calculateTotal()
+            });
 
-                $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
-                    e.preventDefault();
-                    $(this).parent().parent().remove();
-                    calculateTotal();
-                });
-                $('#total_paid_amount').on('keyup',function (e) {
-                    e.preventDefault();
-                    calculateTotal()
-                });
+            $('#paid_amount').on('keyup',function (e) {
+                e.preventDefault();
+                calculateTotal()
+            });
 
-                $('#paid_amount').on('keyup',function (e) {
-                    e.preventDefault();
-                    calculateTotal()
-                });
-
-                $('#discount_amount').on('keyup',function (e) {
-                    e.preventDefault();
-                    calculateTotal()
-                });
-
-
+            $('#discount_amount').on('keyup',function (e) {
+                e.preventDefault();
+                calculateTotal()
             });
 
 
-            function calculateTotal() {
-                var total=0;
-                $(".total_amount").each(function() {
-                    total = parseInt($(this).val()) + parseInt(total);
-                });
-                totalAmount = parseInt(total)+ parseInt($('.HiddenAppendExtraAmount').val() );
-                $('#TOTALBILL').html(totalAmount);
-                $('.HiddenTotalBill').val(total);
-                $('#BalanceAmount').html(parseInt(totalAmount) - parseInt($('#total_paid_amount').val()) - parseInt($('#discount_amount').val()) );
-                $('#DueAmount').html(parseInt(total) - parseInt($('#paid_amount').val()));
-            }
-    </script>
-    <script>
+        });
+
+
+        function calculateTotal() {
+            var total=0;
+            $(".total_amount").each(function() {
+                total = parseInt($(this).val()) + parseInt(total);
+            });
+            totalAmount = parseInt(total)+ parseInt($('.HiddenAppendExtraAmount').val() );
+            $('#TOTALBILL').html(totalAmount);
+            $('.HiddenTotalBill').val(total);
+            $('#BalanceAmount').html(parseInt(totalAmount) - parseInt($('#total_paid_amount').val()) - parseInt($('#discount_amount').val()) );
+            $('#DueAmount').html(parseInt(total) - parseInt($('#paid_amount').val()));
+        }
+
         function paymentType()
         {
             var payment_type=$("#payment_type").val();
@@ -458,9 +451,6 @@ Add Print
 
         });
 
-      </script>
-
-
-
+    </script>
 
 @endsection
