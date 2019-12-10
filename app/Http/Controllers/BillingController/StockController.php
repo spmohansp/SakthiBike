@@ -5,6 +5,7 @@ use App\Products;
 use App\Stock;
 use App\StockDetail;
 use App\Shop;
+use App\BillProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -36,6 +37,7 @@ class StockController extends Controller
       $Data['Products'] = Products::all();
    	$Data['Stock'] = Stock::all();
       $Data['Shops'] = Shop::all();
+      $Data['Bill_product'] = BillProduct::all();
       return view('admin.stock.view',$Data);
    }
 
