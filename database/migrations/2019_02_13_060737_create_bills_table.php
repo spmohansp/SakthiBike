@@ -26,6 +26,7 @@ class CreateBillsTable extends Migration
             $table->string('balance_amount')->nullable();
             $table->string('extra_work_id')->nullable();
             $table->string('employee_id')->nullable();
+            $table->string('amount')->nullable();
             $table->string('discount_amount')->nullable();
             $table->timestamps();
         });

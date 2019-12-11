@@ -30,12 +30,6 @@ Edit Extra Income
                                     <input class="form-control form-control-lg" id="" type="text"  placeholder="Enter Name" value="{{ $ExtraWork->name }}" name="name">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                	<label><h5><b>Enter Amount</b></h5></label>
-                                     <input class="form-control form-control-lg" id="" type="number"  placeholder="Enter Amount" value="{{ $ExtraWork->amount }}" name="amount">
-                                </div>
-                            </div>
                         </div>
 
                         <div class="row">

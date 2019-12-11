@@ -42,7 +42,6 @@ class SalaryController extends Controller
     {
         $this->validate(request(),[
             'from_date'=>'required',
-            'to_date' => 'required',
         ]);
         try {
             // return request()->all();

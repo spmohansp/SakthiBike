@@ -45,9 +45,8 @@ class ExtraWorkController extends Controller
             // return request()->all();
             $ExtraWork = new ExtraWork;
             $ExtraWork->name = request('name');  
-            $ExtraWork->amount = request('amount');
             $ExtraWork->save();
-            return redirect(action('BillingController\ExtraWorkController@create'))->with('success','ExtraWork Created Successfully');
+            return redirect(action('BillingController\PrintController@addPrint'))->with('success','ExtraWork Created Successfully');
         }catch (Exception $e){
             return back()->with('sorry','Sorry,Something went wrong!.Manager Cannot Be Created!');
         }
@@ -89,7 +88,6 @@ class ExtraWorkController extends Controller
             // return request()->all();
             $ExtraWork = ExtraWork::findorfail($id);
             $ExtraWork->name = request('name');  
-            $ExtraWork->amount = request('amount');
             $ExtraWork->save();
             return redirect(action('BillingController\ExtraWorkController@create'))->with('success','ExtraWork Updated Successfully');
         }catch (Exception $e){

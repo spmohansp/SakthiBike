@@ -16,7 +16,6 @@ class CreateExtraWorksTable extends Migration
         Schema::create('extra_works', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('amount');
             $table->timestamps();
         });
     }

@@ -62,6 +62,7 @@ class PrintController extends Controller
         $Bill->discount_amount = request('discount_amount');
         $Bill->employee_id = json_encode(request('employees'));
         $Bill->extra_work_id = json_encode(request('extraAmount'));
+        $Bill->amount = request('amount');
         $Bill->save();
         if(!empty(request('product_id'))){
             foreach(request('product_id') as $key=> $product){

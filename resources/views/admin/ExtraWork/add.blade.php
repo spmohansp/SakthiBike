@@ -30,12 +30,6 @@ Add Extra Income
                                     <input class="form-control form-control-lg" id="" type="text"  placeholder="Enter Name" value="{{ old('name') }}" name="name">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                	<label><h5><b>Enter Amount</b></h5></label>
-                                     <input class="form-control form-control-lg" id="" type="number"  placeholder="Enter Amount" value="{{ old('amount') }}" name="amount">
-                                </div>
-                            </div>
                         </div>
 
                         <div class="row">
@@ -58,7 +52,6 @@ Add Extra Income
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Amount</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -66,7 +59,6 @@ Add Extra Income
                         @foreach($ExtraWorks as $ExtraWork)
                             <tr>
                                 <td>{{ $ExtraWork->name }}</td>
-                                <td>{{ $ExtraWork->amount }}</td>
                               <td>
 		                      <form action="{{ action('BillingController\ExtraWorkController@destroy',$ExtraWork->id) }}" method="POST">
 		                          {{ csrf_field() }}

@@ -46,20 +46,23 @@ Attendence Register
                                     <input type="date"  class="form-control" value="{{ old('from_date') }}" name="from_date">
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="form-group"><h5><b>To Date</b></h5>
-                                    <input type="date"  class="form-control" value="{{ old('to_date') }}" name="to_date">
-                                </div>
+                            <div class='col-sm-4'>
+                                 <div class="form-group"><h5><b>Salary Per/DAy</b></h5>
+                                <input type='number' class="form-control" placeholder="Enter Salary Per/Day" value="{{ old('amount_per_day') }}" name="amount_per_day"/>
+                            </div>
                             </div>
                          	
                         </div>							   
                         
 					    <div class="row">
-					        <div class='col-sm-4'>
-					        	 <div class="form-group"><h5><b>Salary Per/DAy</b></h5>
-					            <input type='number' class="form-control" placeholder="Enter Salary Per/Day" value="{{ old('amount_per_day') }}" name="amount_per_day"/>
-					        </div>
-					        </div>
+
+                             <div class="col-lg-4">
+                                <div class="form-group"><h5><b>To Date</b></h5>
+                                    <input type="date"  class="form-control" value="{{ old('to_date') }}" name="to_date">
+                                </div>
+                            </div>
+
+					       
 					    </div>
 
                         <div class="row">
