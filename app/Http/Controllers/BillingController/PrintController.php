@@ -26,6 +26,7 @@ class PrintController extends Controller
 	}
 
     public function saveBill(){
+        // return request()->all();
         $BillTotal=0;
         $TotalBill=0;
         if(!empty(request('product_id'))){
@@ -55,14 +56,13 @@ class PrintController extends Controller
         $Bill->date = request('date');
         $Bill->payment_status = request('payment_status');
         $Bill->paid_amount = request('paid_amount');
-        $Bill->bill_amount_given = $bill_amount - request('paid_amount') - request('discount_amount');
+        $Bill->bill_amount_given = $bill_amount - request('total_paid_amount') - request('discount_amount');
         $Bill->bill_amount = $bill_amount;
         $Bill->balance_amount =$bill_amount - request('total_paid_amount') - request('discount_amount');
         $Bill->discount_amount = request('discount_amount');
         $Bill->employee_id = json_encode(request('employees'));
         $Bill->extra_work_id = json_encode(request('extraAmount'));
         $Bill->save();
-
         if(!empty(request('product_id'))){
             foreach(request('product_id') as $key=> $product){
                 $BillProduct = new BillProduct;

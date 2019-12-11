@@ -16,45 +16,21 @@ view Salary
 
 <div class="tile">
 	<label><b>Daily Attendence</b></label>
-<table border="1" cellspacing="10" cellpadding="10">
+<table border="1" cellspacing="5" cellpadding="5">
   <tbody>
   	@foreach($Salary as $salaries)
-    <tr>
     	
 <td><input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">{{ $salaries->from_date }}</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">{{ $salaries->from_date }}</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-<td> <input type="checkbox" name="extraAmount[]" class="ExtraWorkCheckBox" data-date="2016-4-4">04</td>
-    </tr>
+
+<?php
+echo date('M').date('Y'). ' is :' .date('t')."\n";
+?>
    @endforeach
   </tbody>
 </table>
 </div>
+
+
 @endsection
 
 {{-- @section('loadMore')
