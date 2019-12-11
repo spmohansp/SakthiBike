@@ -34,7 +34,7 @@ View Products
                     <th>Product Name</th>
                     <th>Cost Price</th>
                     <th>Selling Price</th>
-                    <th>Selling Price</th>
+                    <th>Unit</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -45,7 +45,7 @@ View Products
                         <td> {{ $detail->Product_Name }}</td>
                         <td> {{ $detail->Cost_Price }}</td>
                         <td> {{ $detail->Selling_Price }}</td>
-                        <td>{{ $detail->StockDetail->sum('Unit') !='' ? $detail->StockDetail->sum('Unit') : '' }}</td>
+                        <td> {{ $detail->StockDetail->sum('Unit') - $detail->BillProduct->sum('quantity') }}</td>
                         <td>
                           <a href="{{ route('admin.editProduct',$detail->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
                           <a href="{{ route('admin.deleteProduct',$detail->id) }}"> <button class="btn btn-primary" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></a>
