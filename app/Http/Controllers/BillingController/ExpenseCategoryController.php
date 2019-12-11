@@ -26,7 +26,7 @@ class ExpenseCategoryController extends Controller
     public function create()
     {
         $Data['ExpenseCategories'] = ExpenseCategory::get();
-        return view('admin.expenses.expense_category',$Data);
+        return view('admin.expenses.add_expense_category',$Data);
     }
 
     /**
@@ -44,10 +44,8 @@ class ExpenseCategoryController extends Controller
         try {
             // return request()->all();
             $Expense_category = new ExpenseCategory;
-            $Expense_category->date = request('date');  
-            $Expense_category->amount = request('amount');
             $Expense_category->expense_type = request('expense_type');
-            $Expense_category->description = request('description');
+            // $Expense_category->description = request('description');
             $Expense_category->save();
             return redirect(action('BillingController\ExpenseCategoryController@create'))->with('success','Expense Category Created Successfully');
         }catch (Exception $e){

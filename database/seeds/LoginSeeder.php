@@ -19,7 +19,7 @@ class LoginSeeder extends Seeder
         ]);
 
         DB::table('expense_categories')->insert([
-            'name' => 'Salary',
+            'expense_type' => 'Salary',
             'created_at'=>now(),
             'updated_at'=>now(),
         ]);
