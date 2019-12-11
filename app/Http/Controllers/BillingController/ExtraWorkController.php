@@ -16,7 +16,7 @@ class ExtraWorkController extends Controller
      */
     public function index()
     {
-        return 1;
+       
     }
 
     /**
@@ -27,7 +27,7 @@ class ExtraWorkController extends Controller
     public function create()
     {
         $Data['ExtraWorks'] = ExtraWork::get();
-        return view('admin.ExtraIncome.add',$Data);
+        return view('admin.ExtraWork.add',$Data);
     }
 
     /**
@@ -73,7 +73,7 @@ class ExtraWorkController extends Controller
     public function edit($id)
     {
         $Data['ExtraWork'] = ExtraWork::findorfail($id);
-        return view('admin.ExtraIncome.edit',$Data);
+        return view('admin.ExtraWork.edit',$Data);
     }
 
     /**
