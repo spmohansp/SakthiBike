@@ -46,19 +46,12 @@ Edit Print
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Payment status</label>
-                                        <select class="form-control Selectpicker" onchange="showpaymentstatus()" name="payment_status" id="payment_status" style="width:100% !important" required>
+                                        <select class="form-control Selectpicker" name="payment_status" id="payment_status" style="width:100% !important" required>
                                             <optgroup label="Select Payment" >
                                                 <option value="1" {{ $Bill->payment_status=='1'?'selected':'' }} >Paid</option>
-                                                <option value="2" {{ $Bill->payment_status=='2'?'selected':'' }}>Partially Paid</option>
-                                                <option value="3" {{ $Bill->payment_status=='3'?'selected':'' }}>Due</option>
+                                                <option value="2" {{ $Bill->payment_status=='3'?'selected':'' }}>Due</option>
                                             </optgroup>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 payment2" style="display:none">
-                                    <div class="form-group">
-                                        <label>Paid Amount</label>
-                                        <input class="form-control nextrow" value="{{ $Bill->paid_amount }}" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -177,7 +170,7 @@ Edit Print
                                                     <h4 class="pull-right"><b>Cash Given</b> :</h4>
                                                 </th>
                                                 <th colspan="1">
-                                                    <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" value="{{ $Bill->bill_amount_given }}" name="paid_amount" required></b></h4>
+                                                    <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" value="{{ $Bill->bill_amount_given }}" name="bill_amount_given" required></b></h4>
                                                 </th>
 
                                             </thead>
@@ -353,20 +346,7 @@ Edit Print
                 $("#balance_amount").show();
             }
         }
-
-        function showpaymentstatus()
-        {
-            var payment_status=$("#payment_status").val();
-            if(payment_status==2)
-            {
-                $(".payment2").show();
-            }
-            else
-            {
-                $(".payment2").hide();
-            }
-        }
-
+        
         $(document).ready(function() {
             $('.ExtraWorkCheckBox').trigger('click');
         });

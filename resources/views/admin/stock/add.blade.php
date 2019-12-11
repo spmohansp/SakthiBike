@@ -31,12 +31,12 @@ Add Stock
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Shop Name" value="{{ old('name') }}" name="name">
+                                    <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Shop Name" value="{{ old('name') }}" name="name" required>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Phone Number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" value="{{ old('phone_number') }}" name="phone_number" minlength="0" maxlength="10">
+                                    <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Phone Number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" value="{{ old('phone_number') }}" name="phone_number" minlength="0" maxlength="10" required>
                                 </div>
                             </div>
                         </div>
@@ -165,7 +165,7 @@ Add Stock
                  <div class="col-lg-6">
                     <div class="form-group">
                       <h5>Date</h5>
-                       <input type="date" name="date" class="form-control form-control-lg">
+                       <input type="date" name="date" class="form-control form-control-lg" required>
                     </div>
                  </div>
                </div>

@@ -99,21 +99,21 @@ Add Print
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Payment status</label>
-                                <select class="form-control Selectpicker" onchange="showpaymentstatus()" name="payment_status" id="payment_status" style="width:100% !important" required>
+                                <select class="form-control Selectpicker" name="payment_status" id="payment_status" style="width:100% !important" required>
                                     <optgroup label="Select Payment" >
                                         <option value="1">Paid</option>
-                                        <option value="2">Partially Paid</option>
-                                        <option value="3">Not Paid</option>
+                                        {{-- <option value="2">Partially Paid</option> --}}
+                                        <option value="2">Not Paid</option>
                                     </optgroup>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4 payment2" style="display:none">
+                        {{-- <div class="col-md-4 payment2" style="display:none">
                             <div class="form-group">
                                 <label>Paid Amount</label>
                                 <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Employee Attended</label>
@@ -212,7 +212,7 @@ Add Print
                                             <h4 class="pull-right"><b>Cash Given</b> :</h4>
                                         </th>
                                         <th colspan="2">
-                                            <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" name="total_paid_amount" ></b></h4>
+                                            <h4><b><i class="fa fa-inr"></i><b></b><input type="number" id="total_paid_amount" name="bill_amount_given" ></b></h4>
                                         </th>
 
                                     </thead>
@@ -388,19 +388,7 @@ Add Print
                 $("#balance_amount").show();
             }
         }
-
-        function showpaymentstatus(){
-            var payment_status=$("#payment_status").val();
-            if(payment_status==2)
-            {
-                $(".payment2").show();
-            }
-            else
-            {
-                $(".payment2").hide();
-            }
-        }
-
+        
         $('.ExtraWorkCheckBox').click('click',function(e){
 
             var val = 0;
