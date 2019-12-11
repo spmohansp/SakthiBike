@@ -19,7 +19,7 @@ Add Expenses Category
             <form action="{{ action('BillingController\ExpenseCategoryController@store') }}" method="post">
                 {{ csrf_field() }}
                 <div class="row ">
-                  <div class="col-lg-6">
+                  <div class="col-lg-5">
                     <div class="form-group">
                         <label class="col-form-label col-form-label-lg " for="inputLarge">Expense Type</label>
                         <input class="form-control" placeholder="Enter Expense Type" name="expense_type" id="inputLarge" type="text" required>
@@ -48,20 +48,14 @@ Add Expenses Category
             <table class="table table-bordered" id="VehicleTable">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Amount</th>
                         <th>Expense Type</th>
-                        <th>Description</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($ExpenseCategories as $ExpenseCategory)
                         <tr>
-                            <td>{{ $ExpenseCategory->date }}</td>
-                            <td>{{ $ExpenseCategory->amount }}</td>
                             <td>{{ $ExpenseCategory->expense_type }}</td>
-                            <td>{{ $ExpenseCategory->description }}</td>
                           <td>
                       <form action="{{ action('BillingController\ExpenseCategoryController@destroy',$ExpenseCategory->id) }}" method="POST">
                           {{ csrf_field() }}

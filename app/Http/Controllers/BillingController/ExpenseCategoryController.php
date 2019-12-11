@@ -38,7 +38,6 @@ class ExpenseCategoryController extends Controller
     public function store(Request $request)
     {
          $this->validate(request(),[
-            'date'=>'required',
             'expense_type' => 'required',
         ]);
         try {
@@ -87,10 +86,7 @@ class ExpenseCategoryController extends Controller
     {
         try {
             $Expense_category = ExpenseCategory::findorfail($id);
-            $Expense_category->date = request('date');  
-            $Expense_category->amount = request('amount');
             $Expense_category->expense_type = request('expense_type');
-            $Expense_category->description = request('description');
             $Expense_category->save();
             return redirect(action('BillingController\ExpenseCategoryController@create'))->with('success','Expense Category Updated Successfully');
         }catch (Exception $e){
