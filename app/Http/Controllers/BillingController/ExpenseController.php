@@ -24,7 +24,7 @@ class ExpenseController extends Controller
         $Expense = new Expense;
         $Expense->date = request('date');
         $Expense->amount = request('amount');
-        $Expense->expense_id = request('expense_id');
+        $Expense->expense_type_id = request('expense_id');
         $Expense->description = request('description');
         $Expense->save();
         return back()->with('success','Expense Added Successfully!');
@@ -40,10 +40,10 @@ class ExpenseController extends Controller
         $Expense = Expense::findorfail($id);
         $Expense->date = request('date');
         $Expense->amount = request('amount');
-        $Expense->expense_id = request('expense_id');
+        $Expense->expense_type_id = request('expense_id');
         $Expense->description = request('description');
         $Expense->save();
-        return back()->with('success','Expense Updated Successfully!');
+        return redirect(route('admin.viewExpense'))->with('success','Expense Updated Successfully!');
     }
 
     public function deleteExpense($id){
