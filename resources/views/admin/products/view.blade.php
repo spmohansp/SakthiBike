@@ -22,7 +22,7 @@ View Products
       <br>
       <div class="row">
         <div class="col-md-12">
-          <div class="tile-body">
+          <div class="tile-body table-responsive">
             <table class="table ">
               <thead>
                 <tr>
