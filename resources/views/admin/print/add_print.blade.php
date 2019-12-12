@@ -356,8 +356,7 @@ Add Print
                         url: "{{ route('admin.GetProductStock') }}",
                         data:{product_id:product_id},
                         success:function (data) {
-                            var Count = 0;
-                            if(Count>0){
+                            if(qty>0){
                                 if(data.BillProduct!= null){
                                     var calc = data.StockDetail.Unit - data.BillProduct;
                                     count(qty,calc);
