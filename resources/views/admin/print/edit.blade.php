@@ -25,7 +25,7 @@ Edit Print
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Enter Customer name</label>
-                                        <select class="form-control" name="client_id"  id="Customer" >
+                                        <select class="form-control" name="client_id"  id="Customer" style="width: 31em;">
                                             <optgroup label="Select Customer">
                                                 @foreach($Clients as $Client)
                                                     <option value="{{ $Client->id }}" {{ $Client->id==$Bill->id?'selected':'' }}>{{ $Client->name }} {{ $Client->phone_no }}</option>
@@ -85,7 +85,7 @@ Edit Print
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group" >
-                                            <select class="form-control Product" id="product_id">
+                                            <select class="form-control Product" id="product_id" style="width: 31em;">
                                                 <optgroup label="Select Products">
                                                     @foreach($Products as $Product)
                                                         <option value="{{ $Product->id }}">{{ $Product->Product_Name }}</option>
