@@ -7,6 +7,7 @@ use App\Products;
 use App\Client;
 use App\Employee;
 use App\ExtraWork;
+use App\BillExtraWork;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,13 +36,11 @@ class PrintController extends Controller
             }
         }
 
-        if(!empty(request('extraAmount'))){
-            foreach (request('extraAmount') as $key1 => $extraAmount) {
-                $ExtraWorks = ExtraWork::findorfail(request('extraAmount')[$key1]);
-                $TotalBill += $ExtraWorks->amount;
+        if(!empty(request('extrawork'))){
+            foreach (request('extrawork') as $key1 => $extrawork) {
+                $TotalBill += request('amount')[$key1];
             }
         }
-
         $bill_amount = $BillTotal + $TotalBill;
 
         $Bill = new Bill;
@@ -55,14 +54,11 @@ class PrintController extends Controller
         $Bill->client_id = request('client_id');
         $Bill->date = request('date');
         $Bill->payment_status = request('payment_status');
-        $Bill->paid_amount = request('bill_amount_given');
         $Bill->bill_amount_given = request('bill_amount_given');
         $Bill->bill_amount = $bill_amount;
         $Bill->balance_amount =$bill_amount - request('bill_amount_given') - request('discount_amount');
         $Bill->discount_amount = request('discount_amount');
         $Bill->employee_id = json_encode(request('employees'));
-        $Bill->extra_work_id = json_encode(request('extraAmount'));
-        $Bill->amount = request('amount');
         $Bill->save();
         if(!empty(request('product_id'))){
             foreach(request('product_id') as $key=> $product){
@@ -72,6 +68,15 @@ class PrintController extends Controller
                 $BillProduct->quantity = request('qty')[$key];
                 $BillProduct->Total_Cost = request('total_amount')[$key];
                 $BillProduct->save();
+            }
+        }
+        if(!empty(request('extrawork'))){
+            foreach(request('extrawork') as $key1=> $extrawork){
+                $BillExtraWork = new BillExtraWork;
+                $BillExtraWork->bill_id = $Bill->id;
+                $BillExtraWork->extra_work_id = request('extrawork')[$key1];
+                $BillExtraWork->amount = request('amount')[$key1];
+                $BillExtraWork->save();
             }
         }
         if(!empty(request('product_id'))){
@@ -91,6 +96,7 @@ class PrintController extends Controller
         $Data['ExtraWorks'] = ExtraWork::all();
         $Data['Employees'] = Employee::all();
         $Data['Bill']       = Bill::findorfail($id);
+        $Data['BillExtraWorks']       = BillExtraWork::where('bill_id',$id)->get();
         return view('admin.print.edit',$Data);
     }
 
@@ -104,26 +110,23 @@ class PrintController extends Controller
             }
         }
 
-        if(!empty(request('extraAmount'))){
-            foreach (request('extraAmount') as $key1 => $extraAmount) {
-                $ExtraWorks = ExtraWork::findorfail(request('extraAmount')[$key1]);
+        if(!empty(request('extrawork'))){
+            foreach (request('extrawork') as $key1 => $extrawork) {
+                $ExtraWorks = ExtraWork::findorfail(request('extrawork')[$key1]);
                 $TotalBill += $ExtraWorks->amount;
             }
         }
 
         $bill_amount = $BillTotal + $TotalBill;
-        // return request('bill_amount_given');
         $Bill = Bill::findorfail($id);
         $Bill->client_id = request('client_id');
         $Bill->date = request('date');
         $Bill->payment_status = request('payment_status');
-        $Bill->paid_amount = request('bill_amount_given');
         $Bill->bill_amount_given = request('bill_amount_given') ;
         $Bill->bill_amount = $bill_amount;
         $Bill->balance_amount =$bill_amount - request('bill_amount_given') - request('discount_amount');
         $Bill->discount_amount = request('discount_amount');
         $Bill->employee_id = json_encode(request('employees'));
-        $Bill->extra_work_id = json_encode(request('extraAmount'));
         $Bill->save();
 
         foreach($Bill->BillProducts as $key=> $product){
@@ -137,6 +140,18 @@ class PrintController extends Controller
             $BillProduct->quantity = request('qty')[$key];
             $BillProduct->Total_Cost = request('total_amount')[$key];
             $BillProduct->save();
+        }
+        
+        BillExtraWork::where('bill_id',$id)->delete();
+        
+        if(!empty(request('extrawork'))){
+            foreach(request('extrawork') as $key1=> $extrawork){
+                $BillExtraWork = new BillExtraWork;
+                $BillExtraWork->bill_id = $Bill->id;
+                $BillExtraWork->extra_work_id = request('extrawork')[$key1];
+                $BillExtraWork->amount = request('amount')[$key1];
+                $BillExtraWork->save();
+            }
         }
         if(!empty(request('product_id'))){
             if(request('print')){

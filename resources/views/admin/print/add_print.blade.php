@@ -63,9 +63,8 @@ Add Print
             </div>
         </div>
     </div>
-    {{-- //Add Extra work --}}
 
-    <div class="modal fade" id="extraWork" role="dialog">
+    {{-- <div class="modal fade" id="extraWork" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
@@ -98,7 +97,7 @@ Add Print
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="row">
         <div class="col-md-12">
@@ -192,38 +191,36 @@ Add Print
                     </div>
                 </div>
 
-
-
-
-                      <div class="tile">
-                            <div class="row">
-                            <div class="col-md-6">
+                <div class="tile">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label class="col-form-label col-form-label-lg" for="inputLarge">Extra Work</label>
                                 <div style="float:right;">
-                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#extraWork">Add Extra Work</button>
+                                    <button type="button" class="btn btn-primary btn-lg AddExtraWork" >Add Extra Work</button>
                                 </div>
-                            <label><h5><b>Extra Work</b></h5> </label>
-                            <div class="form-group">
-                               <select class="form-control form-control-lg" name="extraAmount[]" class="ExtraWorkCheckBox">
-                                  <option value="">Select Extra work</option>
-                                  @foreach($ExtraWorks as $ExtraWork)
-                                  <option value={{ $ExtraWork->id }}>{{ $ExtraWork->name }} </option>
-                                  @endforeach 
-                               </select>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label><h5><b>Enter Amount</b></h5></label>
-                                     <input class="form-control form-control-lg" id="" type="number"  placeholder="Enter Amount" value="{{ old('amount') }}" name="amount">
-                                </div>
-                            </div>
-                          </div>
-                     </div>
+                    </div>
+                    <div class="body table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Extra Work</th>
+                                    <th>Enter Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="AppendAddExtraWork">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tile">
-                            <div class="-body table-responsive">
+                            <div class="body table-responsive">
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                     <tr>
@@ -322,6 +319,7 @@ Add Print
 
         $('#Customer').select2();
         $('.Product').select2();
+        $('.ExtraWorks').select2();
 
         $(document).ready(function() {
             $('#TOTALBILL').html(0);
@@ -341,6 +339,12 @@ Add Print
                     });
                 }
              });
+
+            $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
+                e.preventDefault();
+                $(this).parent().parent().remove();
+                calculateTotal();
+            });
 
             function GetQuantityCount(product_id,qty) {
                 $.ajax({
@@ -370,7 +374,6 @@ Add Print
                         data:{product_id:product_id},
                         success:function (data) {
                             var Count = data.Unit;
-                            //console.log(Count);
                             if(qty<=Count){
                                 $(".addbillproduct").show();
                             }else{
@@ -382,11 +385,35 @@ Add Print
                 }
              });
 
-            $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
+            $('body').on("click", ".AddExtraWork", function (e) { 
+                e.preventDefault();
+                var ExtraWork = 
+                '     <tr>\n' +
+                '        <td colspan="" rowspan="" headers="">\n' +
+                '           <select class="form-control ExtraWorks" name="extrawork[]">\n' +
+                '               <optgroup label="Select Extra Work">\n' +
+                                    @foreach($ExtraWorks as $ExtraWork)
+                '                       <option value={{ $ExtraWork->id }}>{{ $ExtraWork->name }} </option>\n' +
+                                    @endforeach
+                '               </optgroup>\n' +
+                '           </select>\n' +
+                '       </td>\n' +
+                '       <td colspan="" rowspan="" headers="">\n'+
+                '           <input class="form-control total_amount" id="" type="number" onKeyUp="calculateTotal()" placeholder="Enter Amount" name="amount[]">\n' +
+                '       </td>\n' +
+                '       <td colspan="" rowspan="" headers="">\n' +
+                '           <i class="fa fa-close fa-1x RemoveExtraWorkButon btn" style="color:red;"></i>\n' +
+                '       </td>\n' +
+                '    </tr>';
+                $('.AppendAddExtraWork').append(ExtraWork);
+            });
+
+            $('body').on("click", ".RemoveExtraWorkButon", function (e) {
                 e.preventDefault();
                 $(this).parent().parent().remove();
                 calculateTotal();
             });
+
             $('#total_paid_amount').on('keyup',function (e) {
                 e.preventDefault();
                 calculateTotal()
@@ -433,56 +460,6 @@ Add Print
                 $("#balance_amount").show();
             }
         }
-        
-        $('.ExtraWorkCheckBox').click('click',function(e){
-
-            var val = 0;
-            var extra_amount_name = [];
-            var extra_amount = [];
-            var extra_total  = 0;
-            var initial_total_amount=  +($('.HiddenTotalBill').val());
-            var total_paid_amount = $('#total_paid_amount').val();
-            var total_amount= 0;
-
-            $('.ExtraWorkCheckBox:checkbox:checked').each(function(i){
-                
-                extra_amount_name[i] = {
-                    name :   $(this).attr('data-extra-name')  ,
-                    amount:  $(this).attr('data-id')
-                };
-
-                val = parseInt(val) + parseInt($(this).attr('data-id'));
-                $('.HiddenAppendExtraAmount').val(val);
-                $('#TOTALBILL').html(parseInt(val + initial_total_amount));
-                total_amount = parseInt(val + initial_total_amount);
-            });
-
-
-            $('#appendExtraAmount').empty();
-
-            $.each(extra_amount_name,function(index , value){
-                    $('#appendExtraAmount').append(
-                                           '<tr>'+
-                                            '<td colspan="4"><h4 class="pull-right"><b>' + value.name + '</b> :</h4> </td>'+
-                                            '<td colspan="1"> <h4><b><i class="fa fa-inr"></i> <b>'+ value.amount +'</b></b></h4> </td>'+
-                                            '</tr>');
-
-
-            });
-            
-            $('#BalanceAmount').html(parseInt(total_amount - total_paid_amount));
-
-            if(val == 0){
-                $('#TOTALBILL').html($('.HiddenTotalBill').val());
-                $('#appendExtraAmount').empty();
-
-            }
-
-            if(total_amount == 0){
-                 $('#BalanceAmount').html(parseInt(initial_total_amount - total_paid_amount));
-            }
-
-        });
 
     </script>
 

@@ -48,6 +48,9 @@ Add Products
                                     <label class="radio-inline">
                                       <input type="radio" name="Product_Type" value="Kg">Kg
                                     </label>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="Product_Type" value="piece">Piece
+                                    </label>
                                 </div>
                             </div>
                         </div>

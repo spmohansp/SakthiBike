@@ -109,21 +109,45 @@ Edit Print
                         </div>
 
                         <div class="tile">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label><h5><b>Extra Work</b></h5></label>
-                                    <div class="row">
-                                         @foreach($ExtraWorks as $ExtraWork)
-                                            <div class="col-sm-1">
-                                                <div class="input-group ">
-                                                    <span class="input-group-addon">
-                                                      <input type="checkbox" name="extraAmount[]" {{ in_array($ExtraWork->id, json_decode($Bill->extra_work_id)) ? '':'checked' }} class="ExtraWorkCheckBox" value="{{ $ExtraWork->id }}" data-extra-name="{{ $ExtraWork->name  }}" data-id="{{ $ExtraWork->amount }}"> {{ $ExtraWork->name }}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        @endforeach
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label class="col-form-label col-form-label-lg" for="inputLarge">Extra Work</label>
+                                        <div style="float:right;">
+                                            <button type="button" class="btn btn-primary btn-lg AddExtraWork" >Add Extra Work</button>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="body table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Extra Work</th>
+                                            <th>Enter Amount</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="AppendAddExtraWork">
+                                        @foreach($BillExtraWorks as $BillExtraWork)
+                                            <tr>
+                                                <td>
+                                                    <select class="form-control ExtraWorks" name="extrawork[]" style="width: 40em;">
+                                                        <optgroup label="Select Extra Work">
+                                                            @foreach($ExtraWorks as $ExtraWork)
+                                                                <option value="{{ $ExtraWork->id }}" {{ in_array($ExtraWork->id, array($BillExtraWork->extra_work_id)) ? 'selected' : '' }}>{{ $ExtraWork->name }} </option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input class="form-control total_amount" type="number" onKeyUp="calculateTotal()" placeholder="Enter Amount" value="{{ $BillExtraWork->amount }}" name="amount[]" style="width: 40em;">
+                                                </td>
+                                                <td><i class="fa fa-close fa-1x RemoveExtraWorkButon btn" style="color:red;"></i></td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
 
@@ -217,6 +241,8 @@ Edit Print
     <script type="text/javascript" src="{{ url('billing/js/plugins/bootstrap-datepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('billing/js/plugins/select2.min.js') }}"></script>
     <script type="text/javascript">
+        calculateTotal();
+
         $('#sl').click(function(){
             $('#tl').loadingBtn();
             $('#tb').loadingBtn({ text : "Signing In"});
@@ -235,8 +261,7 @@ Edit Print
 
         $('#Customer').select2();
         $('.Product').select2();
-
-        calculateTotal();
+        $('.ExtraWorks').select2();
 
         $(document).ready(function() {
             $('#TOTALBILL').html(0);
@@ -256,6 +281,12 @@ Edit Print
                     });
                 }
              });
+
+            $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
+                e.preventDefault();
+                $(this).parent().parent().remove();
+                calculateTotal();
+            });
 
             function GetQuantityCount(product_id,qty) {
                 $.ajax({
@@ -295,12 +326,41 @@ Edit Print
                     });
                 }
              });
+            $(document).ready(function() {
+                $(".total_amount").trigger('keyup');
+            });
 
-            $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
+            $('body').on("click", ".AddExtraWork", function (e) {
+            console.log(1) 
+                calculateTotal();
+                e.preventDefault();
+                var ExtraWork = 
+                '     <tr>\n' +
+                '        <td colspan="" rowspan="" headers="">\n' +
+                '           <select class="form-control ExtraWorks" name="extrawork[]" style="width: 40em;">\n' +
+                '               <optgroup label="Select Extra Work">\n' +
+                                    @foreach($ExtraWorks as $ExtraWork)
+                '                       <option value={{ $ExtraWork->id }}>{{ $ExtraWork->name }} </option>\n' +
+                                    @endforeach
+                '               </optgroup>\n' +
+                '           </select>\n' +
+                '       </td>\n' +
+                '       <td colspan="" rowspan="" headers="">\n'+
+                '           <input class="form-control total_amount" id="" type="number" onKeyUp="calculateTotal();" placeholder="Enter Amount" name="amount[]" style="width: 40em;">\n' +
+                '       </td>\n' +
+                '       <td colspan="" rowspan="" headers="">\n' +
+                '           <i class="fa fa-close fa-1x RemoveExtraWorkButon btn" style="color:red;"></i>\n' +
+                '       </td>\n' +
+                '    </tr>';
+                $('.AppendAddExtraWork').append(ExtraWork);
+            });
+
+            $('body').on("click", ".RemoveExtraWorkButon", function (e) {
                 e.preventDefault();
                 $(this).parent().parent().remove();
                 calculateTotal();
             });
+
             $('#total_paid_amount').on('keyup',function (e) {
                 e.preventDefault();
                 calculateTotal()
@@ -318,6 +378,7 @@ Edit Print
 
 
         });
+
 
         function calculateTotal() {
             var total=0;
@@ -346,61 +407,7 @@ Edit Print
                 $("#balance_amount").show();
             }
         }
-        
-        $(document).ready(function() {
-            $('.ExtraWorkCheckBox').trigger('click');
-        });
 
-        $('.ExtraWorkCheckBox').click('click',function(){
-            var val = 0;
-            var extra_amount_name = [];
-            var extra_amount = [];
-            var extra_total  = 0;
-            var initial_total_amount=  +($('.HiddenTotalBill').val());
-            var total_paid_amount = $('#total_paid_amount').val();
-            var discount_amount = $('#discount_amount').val();
-            var total_amount= 0;
-
-            $('.ExtraWorkCheckBox:checkbox:checked').each(function(i){
-                extra_amount_name[i] = {
-                    name :   $(this).attr('data-extra-name')  ,
-                    amount:  $(this).attr('data-id')
-                };
-
-                val = parseInt(val) + parseInt($(this).attr('data-id'));
-                $('.HiddenAppendExtraAmount').val(val);
-                $('#TOTALBILL').html(parseInt(val + initial_total_amount));
-                total_amount = parseInt(val + initial_total_amount);
-
-            });
-
-
-            $('#appendExtraAmount').empty();
-
-            $.each(extra_amount_name,function(index , value){
-                    $('#appendExtraAmount').append(
-                                           '<tr>'+
-                                            '<td colspan="4"><h4 class="pull-right"><b>' + value.name + '</b> :</h4> </td>'+
-                                            '<td colspan="1"> <h4><b><i class="fa fa-inr"></i> <b>'+ value.amount +'</b></b></h4> </td>'+
-                                            '</tr>');
-
-
-            });
-            
-            $('#BalanceAmount').html(parseInt(total_amount - total_paid_amount - discount_amount));
-
-            if(val == 0){
-                $('#TOTALBILL').html($('.HiddenTotalBill').val());
-                $('#appendExtraAmount').empty();
-
-            }
-
-            if(total_amount == 0){
-                 $('#BalanceAmount').html(parseInt(initial_total_amount - total_paid_amount - discount_amount));
-            }
-
-        });
-
-  </script>
+    </script>
 
 @endsection
