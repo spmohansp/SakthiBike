@@ -121,10 +121,10 @@
                 </tr>
                 @endforeach
 
-                @foreach(json_decode($Bill->extra_work_id) as $key=>$Extrawork)
+                @foreach($ExtraWorks as $key=>$Extrawork)
                 <tr>
-                  <th colspan="4" style="text-align: right !important;"><h5>{{ GetExtraWorkDetails($Extrawork)->name }} : </h5></th>
-                  <th><h5>{{ GetExtraWorkDetails($Extrawork)->amount }}</h5></th>
+                  <th colspan="4" style="text-align: right !important;"><h5>{{ $Extrawork->BillExtraWork->name }} : </h5></th>
+                  <th><h5>{{ $Extrawork->amount }}</h5></th>
                 </tr>
                 @endforeach
 

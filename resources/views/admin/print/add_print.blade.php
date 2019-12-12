@@ -197,7 +197,7 @@ Add Print
                             <div class="col-lg-12">
                                 <label class="col-form-label col-form-label-lg" for="inputLarge">Extra Work</label>
                                 <div style="float:right;">
-                                    <button type="button" class="btn btn-primary btn-lg AddExtraWork" >Add Extra Work</button>
+                                    <button type="button" class="btn btn-primary btn-sm AddExtraWork" >Add Extra Work</button>
                                 </div>
                             </div>
                         </div>

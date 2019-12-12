@@ -166,7 +166,8 @@ class PrintController extends Controller
 
     public function  printBill($id){
         $Bill = Bill::findorfail($id);
-	    return view('admin.print.print_bill',compact('Bill'));
+        $ExtraWorks = BillExtraWork::where('bill_id',$id)->get();
+	    return view('admin.print.print_bill',compact('Bill','ExtraWorks','BillWork'));
     }
 
 

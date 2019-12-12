@@ -14,4 +14,7 @@ class Bill extends Model
         return $this->hasMany(BillProduct::class,'bill_id','id');
     }
 
+	public function BillExtraWork(){
+	        return $this->hasOne(ExtraWork::class,'id','extra_work_id');
+	    }
 }
