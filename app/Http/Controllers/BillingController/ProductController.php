@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Products;
 use App\StockDetail;
+use App\BillProduct;
 
 class ProductController extends Controller
 {
@@ -69,11 +70,9 @@ class ProductController extends Controller
     }
 
     public function GetProductStock(){
-        return $StockDetail = StockDetail::where('product_id',request('product_id'))->get()->first();
-    }
-
-    public function GetProductCount(){
-        return $StockDetail = StockDetail::where('product_id',request('product_id'))->get()->first();
+        $Data['StockDetail'] = StockDetail::where('product_id',request('product_id'))->get()->first();
+        $Data['BillProduct'] = BillProduct::where('product_id',request('product_id'))->sum('quantity');
+        return $Data;
     }
 
 }

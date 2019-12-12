@@ -323,7 +323,8 @@ Add Print
 
         $(document).ready(function() {
             $('#TOTALBILL').html(0);
-            $("#addbillproduct").click(function () {
+            $("#addbillproduct").click(function (e) {
+            e.preventDefault();
                 var product_id = $("#product_id").val();
                 var qty = $("#qty").val();
                 if(product_id !='' && qty !=''){
@@ -334,34 +335,16 @@ Add Print
                         success:function (data) {
                             $('#productbilltable').append(data);
                             calculateTotal();
-                            GetQuantityCount(product_id,qty);
                         }
                     });
                 }
-             });
+            });
 
             $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
                 e.preventDefault();
                 $(this).parent().parent().remove();
                 calculateTotal();
             });
-
-            function GetQuantityCount(product_id,qty) {
-                $.ajax({
-                    type: 'get',
-                    url: "{{ route('admin.GetProductCount') }}",
-                    data:{product_id:product_id,qty:qty},
-                    success:function (data) {
-                        var count = data.Unit - qty;
-                        if(count >0){
-                            $(".addbillproduct").show();
-                        }else{
-                            $(".addbillproduct").hide();
-                            $(".QuantityLimit").text('Your Quanity Limit is '+data.Unit);
-                        }
-                    }
-                });
-            }
 
             $('body').on('change keyup','.Product,.Quantity',function (e) {
                 e.preventDefault();
@@ -373,17 +356,32 @@ Add Print
                         url: "{{ route('admin.GetProductStock') }}",
                         data:{product_id:product_id},
                         success:function (data) {
-                            var Count = data.Unit;
-                            if(qty<=Count){
-                                $(".addbillproduct").show();
+                            var Count = 0;
+                            if(Count>0){
+                                if(data.BillProduct!= null){
+                                    var calc = data.StockDetail.Unit - data.BillProduct;
+                                    count(qty,calc);
+                                }else{
+                                    var calc = data.StockDetail.Unit;
+                                    count(qty,calc);
+                                }
                             }else{
+                                count(qty,0);
                                 $(".addbillproduct").hide();
-                                $(".QuantityLimit").text('Your Quanity Limit is '+Count);
                             }
                         }
                     });
                 }
              });
+
+            function count(qty,calc) {
+                if(qty<=calc){
+                    $(".addbillproduct").show();
+                }else{
+                    $(".addbillproduct").hide();
+                    $(".QuantityLimit").text('Your Quanity Limit is '+calc);
+                }
+            }
 
             $('body').on("click", ".AddExtraWork", function (e) { 
                 e.preventDefault();

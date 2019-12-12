@@ -112,8 +112,7 @@ class PrintController extends Controller
 
         if(!empty(request('extrawork'))){
             foreach (request('extrawork') as $key1 => $extrawork) {
-                $ExtraWorks = ExtraWork::findorfail(request('extrawork')[$key1]);
-                $TotalBill += $ExtraWorks->amount;
+                $TotalBill += request('amount')[$key1];
             }
         }
 

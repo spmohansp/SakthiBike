@@ -19,7 +19,7 @@ class CreateStockDetailsTable extends Migration
             $table->foreign('stock_id')->references('id')->on('stocks');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
-            $table->string('Unit');
+            $table->bigInteger('Unit');
             $table->timestamps();
         });
     }
