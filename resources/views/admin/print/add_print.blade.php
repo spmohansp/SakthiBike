@@ -179,7 +179,7 @@ Add Print
                         <div class="col-md-4">
                             <label>Quantity </label>
                             <div class="form-group">
-                                <input class="form-control nextrow Quantity" type="text" placeholder="Enter Quantity" min="1" id="qty">
+                                <input class="form-control nextrow Quantity" type="number" placeholder="Enter Quantity" min="1" id="qty">
                                 <span class="QuantityLimit" style="color:red;font-size: 18px;"></span>
                             </div>
                         </div>

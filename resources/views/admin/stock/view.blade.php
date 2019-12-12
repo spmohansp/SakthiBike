@@ -23,6 +23,7 @@ View Stock
         <br>
         <div class="row ">
           <div class="col-lg-12">
+             <div class="tile-body table-responsive">
             <table class="table">
               <thead>
               <tr>
@@ -56,6 +57,7 @@ View Stock
               
             </tbody>
             </table>
+          </div>
           </div>
         </div>
     </div>
