@@ -69,7 +69,7 @@ view Attendence
                     <td class="name">{{ $Employee->name }}</td>
                     <td>{{ isset($GetSalaryDetails["AttendenceCount"]) ? $GetSalaryDetails["AttendenceCount"] : 0 }}</td>
                     <td>{{ isset($GetSalaryDetails["Employee"]) ? $GetSalaryDetails["Employee"]->amount_per_day : 0 }}</td>
-                    <td>{{ @$GetSalaryDetails["AttendenceCount"] * $GetSalaryDetails["Employee"]->amount_per_day }}</td>
+                    <td>{{ @$GetSalaryDetails["AttendenceCount"] * $GetSalaryDetails["Employee"]->amount_per_day - $GetSalaryDetails["Expense"] }}</td>
                     <td>
                       <form action="{{ action('BillingController\SalaryController@destroy',$Employee->id) }}" method="POST">
                           {{ csrf_field() }}
@@ -119,12 +119,12 @@ view Attendence
                                 $('.EmployeeDetails').hide();
                                 $('.Action').hide();
                                 var Counts = ++Count;
-                                console.log(Counts * data.Employee.amount_per_day);
+                                TotalSalary = Counts * data.Employee.amount_per_day - data.Expense;
                                 var EmployeeDetail = 'tr' +
                                 '<td>'+data.Employee.name+'</td>' +
                                 '<td>'+Counts+'</td>' +
                                 '<td>'+data.Employee.amount_per_day+'</td>' +
-                                '<td>'+Counts * data.Employee.amount_per_day+'</td>' +
+                                '<td>'+TotalSalary+'</td>' +
                                 '</tr>';
                                 $('.AjaxEmployeeDetails').html(EmployeeDetail);
                               }

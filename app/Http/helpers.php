@@ -2,6 +2,7 @@
 
 use App\Salary;
 use App\Employee;
+use App\Expense;
 use App\ExtraWork;
 use App\Attendence;
 
@@ -18,6 +19,7 @@ if (! function_exists('GetSalaryDetails')) {
     	$Data[] = '';
     	$Data['Employee'] = Employee::findorfail($EmployeeId);
     	$Data['Attendence'] = Attendence::whereMonth('date',$Month)->whereYear('date',$Year)->first();
+        $Data['Expense'] = Expense::where('employee_id',$EmployeeId)->whereMonth('date',$Month)->whereYear('date',$Year)->sum('amount');
         $Salaries = Salary::where([['employees_id',$EmployeeId],['date_id',$Data['Attendence']->id]])->get();
         $Count = 0;
         foreach ($Salaries as $key=>$salary) {

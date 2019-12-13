@@ -25,27 +25,25 @@ view Salary
         </div><br>
         <div class="row">
         <div class="col-md-12">
-          <div class="">
-            <div class="tile-body">
-              <table class="table ">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach($Salaries as $Salary)
-                    @if($Salary->attendence!=0)
-                      <tr>
-                        <td>{{ $Salary->AttendenceDate->date }}</td>
-                        <td><a href="{{ action('BillingController\SalaryController@edit',$Salary->AttendenceDate->id) }}" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true" style="color:#fff"></i></a></td>
-                      </tr>
-                    @endif
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
+          <div class="tile-body">
+            <table class="table ">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($Salaries as $Salary)
+                  @if($Salary->attendence!=0)
+                    <tr>
+                      <td>{{ date('d-m-Y',strtotime($Salary->AttendenceDate->date)) }}</td>
+                      <td><a href="{{ action('BillingController\SalaryController@edit',$Salary->AttendenceDate->id) }}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></a></td>
+                    </tr>
+                  @endif
+                @endforeach
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

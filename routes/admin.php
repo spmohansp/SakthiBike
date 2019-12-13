@@ -78,11 +78,11 @@ Route::get('/expense/{id}/delete','BillingController\ExpenseController@deleteExp
 Route::get('/GetExpenseDetails','BillingController\ExpenseController@GetExpenseDetails');
 
 //Salary
-Route::resource('admin/salary','BillingController\SalaryController');
+Route::resource('salary','BillingController\SalaryController');
 Route::get('GetSalaryDetails','BillingController\SalaryController@GetSalaryDetails')->name('GetSalaryDetails');
 
 //Employee
-Route::resource('admin/employee','BillingController\EmployeeController');
+Route::resource('employee','BillingController\EmployeeController');
 
 
 

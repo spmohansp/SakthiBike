@@ -44,11 +44,11 @@ View Expenses
                   @foreach($Expenses as $key=>$Expense)
                     <tr>
                       <td>{{ ++$key }}</td>
-                      <td>{{ @$Expense->EmployeeName->name }}</td>
-                      <td>{{ @$Expense->date }}</td>
-                      <td>{{ @$Expense->ExpenseCategory->expense_type }}</td>
-                      <td>{{ @$Expense->amount }}</td>
-                      <td>{{ @$Expense->description }}</td>
+                      <td>{{ $Expense->EmployeeName->name }}</td>
+                      <td>{{ date('d-m-Y',strtotime($Expense->date)) }}</td>
+                      <td>{{ $Expense->ExpenseCategory->expense_type }}</td>
+                      <td>{{ $Expense->amount }}</td>
+                      <td>{{ $Expense->description }}</td>
                       <td>
                         <a href="{{ route('admin.editExpense',$Expense->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
                         <a href="{{ route('admin.deleteExpense',$Expense->id) }}"> <button class="btn btn-primary" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash" aria-hidden="true" style="color:#fff" ></i></button></a>

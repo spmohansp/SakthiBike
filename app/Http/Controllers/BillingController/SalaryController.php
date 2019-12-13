@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Salary;
 use App\Employee;
+use App\Expense;
 use App\Attendence;
 
 class SalaryController extends Controller
@@ -133,6 +134,7 @@ class SalaryController extends Controller
     public function GetSalaryDetails()
     {
         $Data['Employee'] = Employee::findorfail(request('employee_id'));
+        $Data['Expense'] = Expense::where('employee_id',request('employee_id'))->whereBetween('date', array(request('From_Date'), request('To_Date')))->sum('amount');
         $Data['Attendence'] = Attendence::whereBetween('date', array(request('From_Date'), request('To_Date')))->first();
         $Data['salary'] = Salary::where([['employees_id',request('employee_id')],['date_id',$Data['Attendence']->id]])->get();
         return $Data;
