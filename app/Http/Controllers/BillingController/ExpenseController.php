@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BillingController;
 
 use App\Expense;
+use App\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ExpenseCategory;
@@ -12,6 +13,7 @@ class ExpenseController extends Controller
 {
     public function addExpense(){
         $Data['Expense_Categories'] = ExpenseCategory::get();
+        $Data['Employees'] = Employee::get();
     	return view('admin.expenses.add_expenses',$Data);
     }
 
@@ -25,13 +27,16 @@ class ExpenseController extends Controller
         $Expense->date = request('date');
         $Expense->amount = request('amount');
         $Expense->expense_type_id = request('expense_id');
+        $Expense->employee_id = request('employee_id');
         $Expense->description = request('description');
         $Expense->save();
         return back()->with('success','Expense Added Successfully!');
     }
 
     public function editExpense($id){
+
         $Data['Expense_Categories'] = ExpenseCategory::get();
+        $Data['Employees'] = Employee::get();
         $Data['Expense'] = Expense::findorfail($id);
         return view('admin.expenses.edit',$Data);
     }
@@ -49,5 +54,13 @@ class ExpenseController extends Controller
     public function deleteExpense($id){
         Expense::findorfail($id)->delete();
         return back()->with('success','Expense Deleted Successfully!');
+    }
+    
+    public function GetExpenseDetails(){
+        if(!empty(request('ExpenseId'))){
+           return ExpenseCategory::findorfail(request('ExpenseId'));
+        }else{
+            return '';
+        }
     }
 }

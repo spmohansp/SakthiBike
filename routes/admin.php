@@ -75,6 +75,7 @@ Route::post('/expense/add','BillingController\ExpenseController@saveExpense')->n
 Route::get('/expense/{id}/edit','BillingController\ExpenseController@editExpense')->name('editExpense');
 Route::post('/expense/{id}/update','BillingController\ExpenseController@updateExpense')->name('updateExpense');
 Route::get('/expense/{id}/delete','BillingController\ExpenseController@deleteExpense')->name('deleteExpense');
+Route::get('/GetExpenseDetails','BillingController\ExpenseController@GetExpenseDetails');
 
 //Salary
 Route::resource('admin/salary','BillingController\SalaryController');

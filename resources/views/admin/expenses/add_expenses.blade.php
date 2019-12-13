@@ -19,16 +19,17 @@ Add Expenses
       <form action="{{ route('admin.saveExpense') }}" method="post">
         {{ csrf_field() }}
         <div class="row ">
-          <div class="col-lg-6 col-xs-4 w3-center">
+          <div class="col-lg-4 col-xs-4 w3-center">
             <div class="form-group">
               <label class="col-form-label col-form-label-lg" for="inputLarge">Select Date</label>
               <input class="form-control" name="date" id="inputLarge" type="date" required>
             </div>
           </div>
-          <div class="col-lg-6 col-xs-4 w3-center">
+
+          <div class="col-lg-4 col-xs-4 w3-center">
             <div class="form-group">
               <label class="col-form-label col-form-label-lg " for="inputLarge">Select Expense Type</label>
-              <select name="expense_id" id="" class="form-control" required>
+              <select name="expense_id" class="form-control SelectExpense" required>
                 <option value="">Select Expense</option>
                 @foreach($Expense_Categories as $Expense_Category)
                 <option value={{ $Expense_Category->id }}>{{ $Expense_Category->expense_type}} </option>
@@ -36,7 +37,17 @@ Add Expenses
               </select>
             </div>
           </div>
-          
+          <div class="col-lg-4 col-xs-4 w3-center EmployeeId_Div">
+            <div class="form-group">
+              <label class="col-form-label col-form-label-lg " for="inputLarge">Select Employee </label>
+              <select name="employee_id" id="" class="form-control Employee" required>
+                <option value="">Select Employee</option>
+                @foreach($Employees as $Employee)
+                <option value={{ $Employee->id }}>{{ $Employee->name}} </option>
+                @endforeach
+              </select>
+            </div>
+          </div>
         </div>
         <div class="row ">
           <div class="col-lg-6 col-xs-4 w3-center">
@@ -61,4 +72,36 @@ Add Expenses
       </div>
     </form>
     </div>
+@endsection
+@section('loadMore')
+    <script>
+        $('.EmployeeId_Div').hide();  
+        $(document).ready(function(){
+            $('.SelectExpense').on('change',function(){
+              ExpenseData();
+            });
+        });
+
+        function ExpenseData(){
+          var ExpenseId = $( ".SelectExpense" ).val();
+          $.ajax({
+          type: 'get',
+          url: '{{ action('BillingController\ExpenseController@GetExpenseDetails') }}',
+          data: { ExpenseId: ExpenseId},
+          success: function (data) {
+            if(data!=''){
+              if(ExpenseId == '1'){
+                $('.EmployeeId_Div').show();
+                $('.Employee').prop("disabled", false);
+              }else{
+                $('.EmployeeId_Div').hide();
+                $('.Employee').prop("disabled", true);
+              }
+            }else{
+              $('.EmployeeId_Div').hide();
+            }
+          }
+      });
+    }
+    </script>
 @endsection

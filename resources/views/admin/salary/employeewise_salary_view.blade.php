@@ -53,3 +53,4 @@ view Salary
     </div>
 
 @endsection
+
