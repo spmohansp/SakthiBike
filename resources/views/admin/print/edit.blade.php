@@ -114,7 +114,7 @@ Edit Print
                                     <div class="col-lg-12">
                                         <label class="col-form-label col-form-label-lg" for="inputLarge">Extra Work</label>
                                         <div style="float:right;">
-                                            <button type="button" class="btn btn-primary btn-lg AddExtraWork" >Add Extra Work</button>
+                                            <button type="button" class="btn btn-primary btn-sm AddExtraWork" >Add Extra Work</button>
                                         </div>
                                     </div>
                                 </div>
@@ -182,7 +182,6 @@ Edit Print
                                                 <th colspan="4">
                                                     <h4 class="pull-right"><b>Total</b> :</h4>
                                                     <input type="hidden" class="HiddenTotalBill" value="0">
-                                                    <input type="hidden" class="HiddenAppendExtraAmount" value="0">
                                                 </th>
                                                 <th colspan="1">
                                                     <h4><b><i class="fa fa-inr"></i> <b id="TOTALBILL"></b></b></h4>
@@ -241,7 +240,11 @@ Edit Print
     <script type="text/javascript" src="{{ url('billing/js/plugins/bootstrap-datepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('billing/js/plugins/select2.min.js') }}"></script>
     <script type="text/javascript">
-        calculateTotal();
+
+        $(document).ready(function() {
+            $(".total_amount").trigger('click');
+            calculateTotal();
+        });
 
         $('#sl').click(function(){
             $('#tl').loadingBtn();
@@ -264,8 +267,8 @@ Edit Print
         $('.ExtraWorks').select2();
 
         $(document).ready(function() {
-            $('#TOTALBILL').html(0);
-            $("#addbillproduct").click(function () {
+            $("#addbillproduct").click(function (e) {
+            e.preventDefault();
                 var product_id = $("#product_id").val();
                 var qty = $("#qty").val();
                 if(product_id !='' && qty !=''){
@@ -276,34 +279,16 @@ Edit Print
                         success:function (data) {
                             $('#productbilltable').append(data);
                             calculateTotal();
-                            GetQuantityCount(product_id,qty);
                         }
                     });
                 }
-             });
+            });
 
             $('body').on("click", ".RemoveProductButon", function (e) { // REMOVE HALT
                 e.preventDefault();
                 $(this).parent().parent().remove();
                 calculateTotal();
             });
-
-            function GetQuantityCount(product_id,qty) {
-                $.ajax({
-                    type: 'get',
-                    url: "{{ route('admin.GetProductCount') }}",
-                    data:{product_id:product_id,qty:qty},
-                    success:function (data) {
-                        var count = data.Unit - qty;
-                        if(count >0){
-                            $(".addbillproduct").show();
-                        }else{
-                            $(".addbillproduct").hide();
-                            $(".QuantityLimit").text('Your Quanity Limit is '+data.Unit);
-                        }
-                    }
-                });
-            }
 
             $('body').on('change keyup','.Product,.Quantity',function (e) {
                 e.preventDefault();
@@ -315,29 +300,38 @@ Edit Print
                         url: "{{ route('admin.GetProductStock') }}",
                         data:{product_id:product_id},
                         success:function (data) {
-                            var Count = data.Unit;
-                            if(qty<=Count){
-                                $(".addbillproduct").show();
+                            if(qty>0){
+                                if(data.BillProduct!= null){
+                                    var calc = data.StockDetail.Unit - data.BillProduct;
+                                    count(qty,calc);
+                                }else{
+                                    var calc = data.StockDetail.Unit;
+                                    count(qty,calc);
+                                }
                             }else{
+                                count(qty,0);
                                 $(".addbillproduct").hide();
-                                $(".QuantityLimit").text('Your Quanity Limit is '+Count);
                             }
                         }
                     });
                 }
              });
-            $(document).ready(function() {
-                $(".total_amount").trigger('keyup');
-            });
 
-            $('body').on("click", ".AddExtraWork", function (e) {
-            console.log(1) 
-                calculateTotal();
+            function count(qty,calc) {
+                if(qty<=calc){
+                    $(".addbillproduct").show();
+                }else{
+                    $(".addbillproduct").hide();
+                    $(".QuantityLimit").text('Your Quanity Limit is '+calc);
+                }
+            }
+
+            $('body').on("click", ".AddExtraWork", function (e) { 
                 e.preventDefault();
                 var ExtraWork = 
                 '     <tr>\n' +
                 '        <td colspan="" rowspan="" headers="">\n' +
-                '           <select class="form-control ExtraWorks" name="extrawork[]" style="width: 40em;">\n' +
+                '           <select class="form-control ExtraWorks" name="extrawork[]">\n' +
                 '               <optgroup label="Select Extra Work">\n' +
                                     @foreach($ExtraWorks as $ExtraWork)
                 '                       <option value={{ $ExtraWork->id }}>{{ $ExtraWork->name }} </option>\n' +
@@ -346,7 +340,7 @@ Edit Print
                 '           </select>\n' +
                 '       </td>\n' +
                 '       <td colspan="" rowspan="" headers="">\n'+
-                '           <input class="form-control total_amount" id="" type="number" onKeyUp="calculateTotal();" placeholder="Enter Amount" name="amount[]" style="width: 40em;">\n' +
+                '           <input class="form-control total_amount" id="" type="number" onKeyUp="calculateTotal()" placeholder="Enter Amount" name="amount[]">\n' +
                 '       </td>\n' +
                 '       <td colspan="" rowspan="" headers="">\n' +
                 '           <i class="fa fa-close fa-1x RemoveExtraWorkButon btn" style="color:red;"></i>\n' +
@@ -385,10 +379,9 @@ Edit Print
             $(".total_amount").each(function() {
                 total = parseInt($(this).val()) + parseInt(total);
             });
-            totalAmount = parseInt(total)+ parseInt($('.HiddenAppendExtraAmount').val() );
-            $('#TOTALBILL').html(totalAmount);
+            $('#TOTALBILL').html(total);
             $('.HiddenTotalBill').val(total);
-            $('#BalanceAmount').html(parseInt(totalAmount) - parseInt($('#total_paid_amount').val()) - parseInt($('#discount_amount').val()) );
+            $('#BalanceAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()) - parseInt($('#discount_amount').val()) );
             $('#DueAmount').html(parseInt(total) - parseInt($('#paid_amount').val()));
         }
 

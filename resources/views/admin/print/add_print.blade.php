@@ -435,10 +435,9 @@ Add Print
             $(".total_amount").each(function() {
                 total = parseInt($(this).val()) + parseInt(total);
             });
-            totalAmount = parseInt(total)+ parseInt($('.HiddenAppendExtraAmount').val() );
-            $('#TOTALBILL').html(totalAmount);
+            $('#TOTALBILL').html(total);
             $('.HiddenTotalBill').val(total);
-            $('#BalanceAmount').html(parseInt(totalAmount) - parseInt($('#total_paid_amount').val()) - parseInt($('#discount_amount').val()) );
+            $('#BalanceAmount').html(parseInt(total) - parseInt($('#total_paid_amount').val()) - parseInt($('#discount_amount').val()) );
             $('#DueAmount').html(parseInt(total) - parseInt($('#paid_amount').val()));
         }
 

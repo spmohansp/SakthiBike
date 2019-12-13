@@ -131,12 +131,12 @@
 
                 <tr>
                   <th colspan="4" style="text-align: right !important;"><h5>Net Total : </h5></th>
-                  <th><h5>{{ @$Bill->bill_amount }}</h5></th>
+                  <th><h5>{{ $Bill->bill_amount }}</h5></th>
                 </tr>
                 <tr>
 
                   <th colspan="4" style="text-align: right !important;"><h5>Gross Total : </h5></th>
-                  <th><h5>{{ @$Bill->bill_amount - @$Bill->discount_amount }}</h5></th>
+                  <th><h5>{{ $Bill->bill_amount - $Bill->discount_amount }}</h5></th>
                 </tr>
                 <tr>
                   <th colspan="6"></th>
@@ -167,14 +167,5 @@
       </div>
     </div>
   </body>
-    @endsection
+@endsection
 
-@section('loadMore')
-
-    <script>
-        var d = new Date();
-        document.getElementById("date").innerHTML = d.toLocaleDateString();
-        var t = new Date();
-        document.getElementById("time").innerHTML = t.toLocaleTimeString();
-    </script>
-    @endsection

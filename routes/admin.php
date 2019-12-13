@@ -78,6 +78,7 @@ Route::get('/expense/{id}/delete','BillingController\ExpenseController@deleteExp
 
 //Salary
 Route::resource('admin/salary','BillingController\SalaryController');
+Route::get('GetSalaryDetails','BillingController\SalaryController@GetSalaryDetails')->name('GetSalaryDetails');
 
 //Employee
 Route::resource('admin/employee','BillingController\EmployeeController');

@@ -14,11 +14,10 @@ Salary Detail
 
 @section('content')
 
-
 <div class="tile">
     <div class="row">
         <div class="col-lg-12">
-            <button class="btn btn-primary pull-right" type="button" onclick="window.location.href='{{ action('BillingController\SalaryController@index') }}'">View Salary Details
+            <button class="btn btn-primary pull-right" type="button" onclick="window.location.href='{{ action('BillingController\SalaryController@index') }}'">View Atttendence
             </button>
         </div>
     </div>
@@ -27,47 +26,57 @@ Salary Detail
         <div class="col-md-12">
             <div class="row">
                 <div class="col-lg-12">
-                    <form action="{{ action('BillingController\SalaryController@update',$Salary->id) }}" method="post" enctype="multipart/form-data">
-                	{{ csrf_field() }}                                                                  
-                	{{method_field('PATCH')}}
-
+                    <form action="{{ action('BillingController\SalaryController@update',$Attendence->id) }}" method="post" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
                         <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group"><h5><b>Employee Name</b></h5>
-                                   <select class="form-control form-control-lg" name="name" required="">
-                                      <option value="">Select Employee Name</option>
-                                      @foreach($Employees as $Employee)
-                                       <option value="{{ $Employee->id }}>"{{ ($Employee->id == $Salary->name) ?'selected':'' }}>{{ $Employee->name }}</option>
-                                      @endforeach 
-                                   </select>
-                                </div>
-                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>From Date</b></h5>
-                                    <input type="datetime-local"  class="form-control" value="{{ $Salary->from_date }}" name="from_date">
+                                    <input type="date" class="form-control" value="{{ $Attendence->date }}" name="date">
                                 </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group"><h5><b>To Date</b></h5>
-                                    <input type="datetime-local"  class="form-control" value="{{ $Salary->to_date }}" name="to_date">
-                                </div>
-                            </div>
-                         	
-                        </div>							   
-                        
-					    <div class="row">
-					        <div class='col-sm-4'>
-					        	 <div class="form-group"><h5><b>Salary Per/DAy</b></h5>
-					            <input type='number' class="form-control" placeholder="Enter Salary Per/Day" value="{{ $Salary->amount_per_day }}" name="amount_per_day"/>
-					        </div>
-					        </div>
-					    </div>
-
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <button class="btn btn-primary pull-right" type="submit">Update Shop</button>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="tile-footer">
+                                    <table class="table table-bordered" id="VehicleTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Employee Name</th>
+                                                <th>Employee Attendence</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($Employees as $key=>$Employee)
+                                                <tr>
+                                                    <td>
+                                                        <input type="hidden" name="employee[name][{{$key}}]" value="{{ $Employee->id }}">{{ $Employee->name }}
+                                                    </td>
+                                                    <td>
+                                                        <label class="radio-inline">&nbsp;
+                                                            <input type="radio" name="employee[attendence][{{$key}}]" value="1" {{ in_array(1,array(@$Salaries[$key]))?'checked' : '' }}>Present
+                                                        </label>
+                                                        <label class="radio-inline">&nbsp;
+                                                            <input type="radio" name="employee[attendence][{{$key}}]" value="0" {{ in_array(0,array(@$Salaries[$key]))?'checked' : '' }}>Absent
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="tile-footer">
+                                    <button class="btn btn-primary center-block" type="submit">Add Attendence</button>
+                                </div>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>

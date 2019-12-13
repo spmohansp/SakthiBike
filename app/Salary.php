@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Salary extends Model
 {
-    public function Salary(){
-        return $this->hasOne(Employee::class,'id','name');
+    public function AttendenceDate(){
+        return $this->hasOne(Attendence::class,'id','date_id');
     }
 }

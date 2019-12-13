@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSalariesTable extends Migration
+class CreateAttendencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateSalariesTable extends Migration
      */
     public function up()
     {
-        Schema::create('salaries', function (Blueprint $table) {
+        Schema::create('attendences', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('from_date')->unique();
-            $table->string('to_date')->unique();
-            $table->string('amount_per_day')->nullable();
+            $table->string('date')->unique();
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateSalariesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('salaries');
+        Schema::dropIfExists('attendences');
     }
 }
