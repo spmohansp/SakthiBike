@@ -34,7 +34,9 @@ class ExpenseController extends Controller
     }
 
     public function editExpense($id){
+
         $Data['Expense_Categories'] = ExpenseCategory::get();
+        $Data['Employees'] = Employee::get();
         $Data['Expense'] = Expense::findorfail($id);
         return view('admin.expenses.edit',$Data);
     }

@@ -18,13 +18,13 @@ Edit Expenses
         <form action="{{ route('admin.updateExpense',$Expense->id) }}" method="post">
             {{ csrf_field() }}
             <div class="row ">
-                <div class="col-lg-6 col-xs-4 w3-center">
+                <div class="col-lg-4 col-xs-4 w3-center">
                     <div class="form-group">
                         <label class="col-form-label col-form-label-lg" for="inputLarge">Select Date</label>
                         <input class="form-control" name="date" id="inputLarge" type="date" value="{{ $Expense->date }}" required>
                     </div>
                 </div>
-                <div class="col-lg-6 col-xs-4 w3-center">
+                <div class="col-lg-4 col-xs-4 w3-center">
                     <div class="form-group">
                         <label class="col-form-label col-form-label-lg " for="inputLarge">Select Expense Type</label>
                         <select name="expense_id" id="" class="form-control" required>
@@ -35,7 +35,17 @@ Edit Expenses
                         </select>
                     </div>
                 </div>
-                
+                <div class="col-lg-4 col-xs-4 w3-center EmployeeId_Div">
+            <div class="form-group">
+              <label class="col-form-label col-form-label-lg " for="inputLarge">Select Employee </label>
+              <select name="employee_id" id="" class="form-control Employee" required>
+                <option value="">Select Employee</option>
+                @foreach($Employees as $Employee)
+                <option value={{ $Employee->id }}>{{ $Employee->name}} </option>
+                @endforeach
+              </select>
+            </div>
+          </div>
             </div>
             <div class="row ">
                 <div class="col-lg-6 col-xs-4 w3-center">

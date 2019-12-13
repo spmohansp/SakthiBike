@@ -32,6 +32,7 @@ View Expenses
                   <thead>
                     <tr>
                       <th>S.No</th>
+                      <th>Name</th>
                       <th>Date</th>
                       <th>Expense</th>
                       <th>Amount</th>
@@ -43,6 +44,7 @@ View Expenses
                   @foreach($Expenses as $key=>$Expense)
                     <tr>
                       <td>{{ ++$key }}</td>
+                      <td>{{ @$Expense->EmployeeName->name }}</td>
                       <td>{{ @$Expense->date }}</td>
                       <td>{{ @$Expense->ExpenseCategory->expense_type }}</td>
                       <td>{{ @$Expense->amount }}</td>
