@@ -84,6 +84,10 @@ Route::get('GetSalaryDetails','BillingController\SalaryController@GetSalaryDetai
 //Employee
 Route::resource('employee','BillingController\EmployeeController');
 
+//Dashboard
+Route::get('/dashboard/get-total-income-expense', 'BillingController\DashboardController@GetTotalDashboardIncomeExpense');
+
+
 
 
 

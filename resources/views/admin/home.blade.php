@@ -78,7 +78,7 @@
 				<h5 class="card-title mb-0">Expense</h5>
 			</div>
 			<div class="card-body my-2">
-				<div class="row d-flex align-items-center mb-4">
+				<div class="row d-flex align-items-center mb-4" id="DashboardExpense">
 					<div class="col-8">
 						<h2 class="d-flex align-items-center mb-0 font-weight-light" id="Expense">
 							{{ $DashboardMonthlyWiseTotalExpense }}
@@ -120,4 +120,33 @@
 		</div>
 	</div>
 </div>
+@endsection
+
+@section('loadMore')
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+        $(".dashboardDate").on('change',function() {
+          GetDashboardIncomeExpense();
+        });
+
+	        function GetDashboardIncomeExpense() {
+	          var year =$('#year').val();
+	          console.log(year);
+	            $.ajax({
+	                type : "get",
+	                url : '{{ action("BillingController\DashboardController@GetTotalDashboardIncomeExpense") }}',
+	                data:{year:year},
+	                beforeSend: function() {
+	                    $('#DashboardExpense').find('h3').html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+	                },
+	                success:function(data){
+	                    setTimeout(function() {
+	                        $('#DashboardExpense').html(data.expense);
+	                    }, 2000);
+	                }
+	          });
+	        }
+        });
+    </script>
 @endsection
