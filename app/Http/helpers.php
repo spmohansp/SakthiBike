@@ -30,3 +30,10 @@ if (! function_exists('GetSalaryDetails')) {
         return $Data;
     }
 }
+
+
+if (! function_exists('DashboardMonthlyWiseTotalExpense')) { 
+    function DashboardMonthlyWiseTotalExpense($Month,$Year) {
+        return Expense::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('amount');
+    } 
+}
