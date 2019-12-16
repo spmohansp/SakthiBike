@@ -100,23 +100,24 @@ class DashboardController extends Controller
                 <span class="badge badge-primary float-right">Monthly</span>
                 <h5 class="card-title mb-0">Income</h5>
             </div>
-            <div class="card-body my-2">
-                <div class="row d-flex align-items-center mb-4">
-                    <div class="col-8">
-                        <h5>'.$Months.'-'.$year.'</h5>
-                        <h2 class="d-flex align-items-center mb-0 font-weight-light" id="Expense">
-                             ₹'.$DashboardMonthlyWiseTotalIncomeExpense['Income'].'
-                        </h2>
+            <a href="'.route('admin.ViewBill').'" style="color:black;text-decoration: none">
+                <div class="card-body my-2">
+                    <div class="row d-flex align-items-center mb-4">
+                        <div class="col-8">
+                            <h5>'.$Months.'-'.$year.'</h5>
+                            <h2 class="d-flex align-items-center mb-0 font-weight-light" id="Expense">
+                                 ₹'.$DashboardMonthlyWiseTotalIncomeExpense['Income'].'
+                            </h2>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span class="text-muted">'.$MonthlyIncomeBar.'%</span>
+                        </div>
                     </div>
-                    <div class="col-4 text-right">
-                        <span class="text-muted">'.$MonthlyIncomeBar.'%</span>
+                    <div class="progress progress-sm shadow-sm mb-1">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: '.$MonthlyIncomeBar.'%"></div>
                     </div>
                 </div>
-                <div class="progress progress-sm shadow-sm mb-1">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: '.$MonthlyIncomeBar.'%"></div>
-                </div>
-                <a href="'.route('admin.ViewBill').'" class="small-box-footer pull-right">More info<i class="fa fa-arrow-circle-right"></i></a>
-            </div>
+            </a>
         </div>';
 
         $final['expense'] = '
@@ -125,23 +126,24 @@ class DashboardController extends Controller
                 <span class="badge badge-info float-right">Monthly</span>
                 <h5 class="card-title mb-0">Expense</h5>
             </div>
-            <a href="#" style="color:black;"><div class="card-body my-2">
-                <div class="row d-flex align-items-center mb-4">
-                    <div class="col-8">
-                        <h5>'.$Months.'-'.$year.'</h5>
-                        <h2 class="d-flex align-items-center mb-0 font-weight-light" id="Expense">
-                             ₹'.$DashboardMonthlyWiseTotalIncomeExpense['Expense'].'
-                        </h2>
+            <a href="'.route('admin.viewExpense').'" style="color:black;text-decoration: none">
+                <div class="card-body my-2">
+                    <div class="row d-flex align-items-center mb-4">
+                        <div class="col-8">
+                            <h5>'.$Months.'-'.$year.'</h5>
+                            <h2 class="d-flex align-items-center mb-0 font-weight-light" id="Expense">
+                                 ₹'.$DashboardMonthlyWiseTotalIncomeExpense['Expense'].'
+                            </h2>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span class="text-muted">'.$MonthlyExpenseBar.'%</span>
+                        </div>
                     </div>
-                    <div class="col-4 text-right">
-                        <span class="text-muted">'.$MonthlyExpenseBar.'%</span>
+                    <div class="progress progress-sm shadow-sm mb-1">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: '.$MonthlyExpenseBar.'%"></div>
                     </div>
                 </div>
-                <div class="progress progress-sm shadow-sm mb-1">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: '.$MonthlyExpenseBar.'%"></div>
-                </div>
-                <a href="'.route('admin.viewExpense').'" class="small-box-footer pull-right">More info<i class="fa fa-arrow-circle-right"></i></a>
-            </div></a>
+            </a>
         </div>';
         return $final;
     }

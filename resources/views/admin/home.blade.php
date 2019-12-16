@@ -33,24 +33,24 @@ Home
 						<span class="badge badge-primary float-right">Monthly</span>
 						<h5 class="card-title mb-0">Income</h5>
 					</div>
-					<div class="card-body my-2">
-						<div class="row d-flex align-items-center mb-4">
-							<div class="col-8">
-								<h5>{{ date('F', mktime(0, 0, 0, date('m'), 10)) }} - {{ date('Y') }}</h5>
-								<h2 class="d-flex align-items-center mb-0 font-weight-light" id="Income">
-									₹{{ $DashboardMonthlyWiseTotalIncomeExpense['Income'] }}
-								</h2>
+					<a href="{{ route('admin.ViewBill') }}" style="color:black;text-decoration: none;">
+						<div class="card-body my-2">
+							<div class="row d-flex align-items-center mb-4">
+								<div class="col-8">
+									<h5>{{ date('F', mktime(0, 0, 0, date('m'), 10)) }} - {{ date('Y') }}</h5>
+									<h2 class="d-flex align-items-center mb-0 font-weight-light" id="Income">
+										₹{{ $DashboardMonthlyWiseTotalIncomeExpense['Income'] }}
+									</h2>
+								</div>
+								<div class="col-4 text-right">
+									<span class="text-muted">{{ $IncomeBar }}%</span>
+								</div>
 							</div>
-							<div class="col-4 text-right">
-								<span class="text-muted">{{ $IncomeBar }}%</span>
+							<div class="progress progress-sm shadow-sm mb-1">
+								<div class="progress-bar bg-primary" role="progressbar" style="width: {{ $IncomeBar }}%"></div>
 							</div>
 						</div>
-
-						<div class="progress progress-sm shadow-sm mb-1">
-							<div class="progress-bar bg-primary" role="progressbar" style="width: {{ $IncomeBar }}%"></div>
-						</div>
-						<a href="{{ route('admin.ViewBill') }}" class="small-box-footer pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
-					</div>
+					</a>
 				</div>
 			</div>
 			<div class="col-lg-6 col-xl-3 d-flex">
@@ -71,11 +71,9 @@ Home
 								<span class="text-muted">82%</span>
 							</div>
 						</div>
-
 						<div class="progress progress-sm shadow-sm mb-1">
 							<div class="progress-bar bg-warning" role="progressbar" style="width: 82%"></div>
 						</div>
-						<a href="{{ route('admin.viewExpense') }}" class="small-box-footer pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 			</div>
@@ -85,23 +83,24 @@ Home
 						<span class="badge badge-info float-right">Monthly</span>
 						<h5 class="card-title mb-0">Expense</h5>
 					</div>
-					<div class="card-body my-2">
-						<div class="row d-flex align-items-center mb-4">
-							<div class="col-8">
-								<h5>{{ date('F', mktime(0, 0, 0, date('m'), 10)) }} - {{ date('Y') }}</h5>
-								<h2 class="d-flex align-items-center mb-0 font-weight-light" id="Expense">
-									₹{{ $DashboardMonthlyWiseTotalIncomeExpense['Expense'] }}
-								</h2>
+					<a href="{{ route('admin.viewExpense') }}" style="color:black;text-decoration: none;">
+						<div class="card-body my-2">
+							<div class="row d-flex align-items-center mb-4">
+								<div class="col-8">
+									<h5>{{ date('F', mktime(0, 0, 0, date('m'), 10)) }} - {{ date('Y') }}</h5>
+									<h2 class="d-flex align-items-center mb-0 font-weight-light" id="Expense">
+										₹{{ $DashboardMonthlyWiseTotalIncomeExpense['Expense'] }}
+									</h2>
+								</div>
+								<div class="col-4 text-right">
+									<span class="text-muted">{{ $ExpenseBar }}%</span>
+								</div>
 							</div>
-							<div class="col-4 text-right">
-								<span class="text-muted">{{ $ExpenseBar }}%</span>
+							<div class="progress progress-sm shadow-sm mb-1">
+								<div class="progress-bar bg-info" role="progressbar" style="width: {{ $ExpenseBar }}%"></div>
 							</div>
 						</div>
-						<div class="progress progress-sm shadow-sm mb-1">
-							<div class="progress-bar bg-info" role="progressbar" style="width: {{ $ExpenseBar }}%"></div>
-						</div>
-						<a href="{{ route('admin.viewExpense') }}" class="small-box-footer pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
-					</div>
+					</a>
 				</div>
 			</div>
 			<div class="col-lg-6 col-xl-3 d-flex">
@@ -122,11 +121,9 @@ Home
 								<span class="text-muted">32%</span>
 							</div>
 						</div>
-
 						<div class="progress progress-sm shadow-sm mb-1">
 							<div class="progress-bar bg-success" role="progressbar" style="width: 32%"></div>
 						</div>
-						<a href="{{ route('admin.viewExpense') }}" class="small-box-footer pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 			</div>
