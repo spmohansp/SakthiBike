@@ -45,6 +45,13 @@ Add Customer
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
+                    <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Bike Name" name="bike_name">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
                     <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Service Km" name="service_km">
                   </div>
                 </div>

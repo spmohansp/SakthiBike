@@ -22,6 +22,7 @@ class ClientController extends Controller
 	    	$Client->phone_number = request('phone_number');
 	    	$Client->bike_no = request('bike_no');
 	    	$Client->service_km = request('service_km');
+            $Client->bike_name = request('bike_name');
 	    	$Client->save();
 	    	return back()->with('success','Client Added Successfully');
     	}catch(Exception $e){
@@ -52,6 +53,7 @@ class ClientController extends Controller
             $Client->phone_number = request('phone_number');
             $Client->bike_no = request('bike_no');
             $Client->service_km = request('service_km');
+            $Client->bike_name = request('bike_name');
 	    	$Client->save();
 	    	return redirect(url('/admin/clients'))->with('success','Client Updated Successfully');
     	}catch(Exception $e){

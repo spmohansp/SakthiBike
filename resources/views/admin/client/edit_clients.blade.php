@@ -43,6 +43,13 @@ Add Clients
                         <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Bike Number" value="{{ $Client->bike_no }}" name="bike_no">
                       </div>
                     </div>
+                     <div class="col-lg-6">
+                  <div class="form-group">
+                    <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Bike Name" value="{{ $Client->bike_name }}" name="bike_name">
+                  </div>
+                </div>
+                  </div>
+                  <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
                         <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Service Km" value="{{ $Client->service_km }}" name="service_km">
