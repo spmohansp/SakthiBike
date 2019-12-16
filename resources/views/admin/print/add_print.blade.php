@@ -150,12 +150,6 @@ Add Print
                                 </select>
                             </div>
                         </div>
-                        {{-- <div class="col-md-4 payment2" style="display:none">
-                            <div class="form-group">
-                                <label>Paid Amount</label>
-                                <input class="form-control nextrow" type="text" placeholder="Enter Amount" min="1" name="paid_amount" id="paid_amount" onchange="showdueamount()">
-                            </div>
-                        </div> --}}
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Employee Attended</label>

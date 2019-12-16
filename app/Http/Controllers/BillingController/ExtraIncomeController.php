@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BillingController;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\ExtraIncome;
 
 class ExtraIncomeController extends Controller
 {
@@ -14,7 +15,8 @@ class ExtraIncomeController extends Controller
      */
     public function index()
     {
-        //
+        $Data['ExtraIncomes'] = ExtraIncome::get();
+        return view('admin.extra_income.view',$Data);
     }
 
     /**
@@ -35,7 +37,16 @@ class ExtraIncomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $ExtraIncome = new ExtraIncome;
+            $ExtraIncome->date = request('date');
+            $ExtraIncome->amount = request('amount');
+            $ExtraIncome->description = request('description');
+            $ExtraIncome->save();
+            return back()->with('success','Extra Income Added Successfully!');
+        }catch (\Exception $e){
+            return back()->with('danger','Sorry,Something went wrong!.Extra Income Cannot be Stored!');
+        }
     }
 
     /**
@@ -57,7 +68,8 @@ class ExtraIncomeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Data['ExtraIncome'] = ExtraIncome::findorfail($id);
+        return view('admin.extra_income.edit',$Data);
     }
 
     /**
@@ -69,7 +81,16 @@ class ExtraIncomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $ExtraIncome = ExtraIncome::findorfail($id);
+            $ExtraIncome->date = request('date');
+            $ExtraIncome->amount = request('amount');
+            $ExtraIncome->description = request('description');
+            $ExtraIncome->save();
+            return back()->with('success','Extra Income Updated Successfully!');
+        }catch (\Exception $e){
+            return back()->with('danger','Sorry,Something went wrong!.Extra Income Cannot be Updated!');
+        }
     }
 
     /**
@@ -80,6 +101,11 @@ class ExtraIncomeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $ExtraIncome = ExtraIncome::findorfail($id)->delete();
+            return back()->with('success','Extra Income Deleted Successfully!');
+        }catch (\Exception $e){
+            return back()->with('danger','Sorry,Something went wrong!.Extra Income Cannot be Deleted!');
+        }
     }
 }

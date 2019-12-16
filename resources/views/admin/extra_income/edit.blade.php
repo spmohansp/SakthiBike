@@ -24,31 +24,32 @@ Add Extra Income
 		<br>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="{{ action('BillingController\ExtraIncomeController@store') }}" method="post" enctype="multipart/form-data">
+				<form action="{{ action('BillingController\ExtraIncomeController@update',$ExtraIncome->id) }}" method="post" enctype="multipart/form-data">
 					{{ csrf_field() }}
+					{{method_field('PUT')}}
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label class="col-form-label col-form-label-lg " for="inputLarge">date</label>
-								<input class="form-control"  type="date"  placeholder="Enter Name" value="{{ old('date') }}" name="date" required>
+								<input class="form-control"  type="date"  placeholder="Enter Name" value="{{ $ExtraIncome->date }}" name="date" required>
 							</div>
 						</div>
 						<div class='col-sm-4'>
 							<div class="form-group">
 								<label class="col-form-label col-form-label-lg " for="inputLarge">Amount</label>
-								<input type='number' class="form-control" placeholder="Enter Amount" value="{{ old('amount') }}" name="amount"/ required>
+								<input type='number' class="form-control" placeholder="Enter Amount" value="{{ $ExtraIncome->amount }}" name="amount"/ required>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label class="col-form-label col-form-label-lg " for="inputLarge">Description</label>
-								<textarea rows="4" cols="50" class="form-control" placeholder="Enter Income Description" name="description">{{ old('description') }}</textarea>
+								<textarea rows="4" cols="50" class="form-control" placeholder="Enter Income Description" name="description">{{ $ExtraIncome->description }}</textarea>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-7">
-							<button class="btn btn-primary pull-right" type="submit">Add</button>
+							<button class="btn btn-primary pull-right" type="submit">Update</button>
 						</div>
 					</div>
 				</form>

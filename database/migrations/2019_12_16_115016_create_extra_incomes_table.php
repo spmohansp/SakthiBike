@@ -15,6 +15,9 @@ class CreateExtraIncomesTable extends Migration
     {
         Schema::create('extra_incomes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('date');
+            $table->string('amount');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
