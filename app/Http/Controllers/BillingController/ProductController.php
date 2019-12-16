@@ -54,8 +54,12 @@ class ProductController extends Controller
 
     public function deleteProduct($id)
     {
-        Products::findorfail($id)->delete();
-        return back()->with('success', 'Product Deleted Successfully');
+        try{
+            Products::findorfail($id)->delete();
+            return back()->with('success', 'Product Deleted Successfully');
+        } catch (\Exception $e) {
+            return back()->with('danger', 'Something went wrong');
+        }
     }
 
     public function getProduct(){

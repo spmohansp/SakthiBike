@@ -48,7 +48,7 @@ class ExpenseCategoryController extends Controller
             $Expense_category->save();
             return redirect(action('BillingController\ExpenseCategoryController@create'))->with('success','Expense Category Created Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Expense Category cannot be stored!');
+            return back()->with('danger','Sorry,Something went wrong!.Expense Category cannot be stored!');
         }
     }
 
@@ -90,7 +90,7 @@ class ExpenseCategoryController extends Controller
             $Expense_category->save();
             return redirect(action('BillingController\ExpenseCategoryController@create'))->with('success','Expense Category Updated Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!Expense Category cannot be Updated!');
+            return back()->with('danger','Sorry,Something went wrong!Expense Category cannot be Updated!');
         }
     }
 
@@ -106,7 +106,7 @@ class ExpenseCategoryController extends Controller
             ExpenseCategory::findOrFail($id)->delete();
             return back()->with('success','Expense Category Details Deleted Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!');
+            return back()->with('danger','Sorry,Something went wrong!');
         }
     }
 }

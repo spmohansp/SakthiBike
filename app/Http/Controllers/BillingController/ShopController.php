@@ -46,7 +46,7 @@ class ShopController extends Controller
             $Shop = Shop::create($request->all());
             return back()->with('success','Shop Added Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Shop Cannot Be Created!');
+            return back()->with('danger','Sorry,Something went wrong!.Shop Cannot Be Created!');
         }
     }
 
@@ -86,7 +86,7 @@ class ShopController extends Controller
             Shop::findOrFail($id)->update($request->all());
             return redirect(action('BillingController\ShopController@index'))->with('success','Shop Updated Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Shop Cannot Be Updated!');
+            return back()->with('danger','Sorry,Something went wrong!.Shop Cannot Be Updated!');
         }
     }
 
@@ -102,7 +102,7 @@ class ShopController extends Controller
             Shop::findOrFail($id)->delete();
             return back()->with('success','Shop Deleted Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Shop Cannot Be Deleted!');
+            return back()->with('danger','Sorry,Something went wrong!.Shop Cannot Be Deleted!');
         }
     }
 }

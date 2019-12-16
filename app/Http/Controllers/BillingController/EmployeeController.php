@@ -98,7 +98,7 @@ class EmployeeController extends Controller
             $Employee->save();
             return redirect(action('BillingController\EmployeeController@create'))->with('success','Employee Updated Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Employee Cannot be Updated!');
+            return back()->with('danger','Sorry,Something went wrong!.Employee Cannot be Updated!');
         }
     }
 
@@ -114,7 +114,7 @@ class EmployeeController extends Controller
             Employee::findOrFail($id)->delete();
             return back()->with('success','Employee Details Deleted Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Employee Cannot be deleted!');
+            return back()->with('danger','Sorry,Something went wrong!.Employee Cannot be deleted!');
         }
     }
 }

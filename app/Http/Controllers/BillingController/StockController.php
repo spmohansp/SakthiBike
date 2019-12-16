@@ -37,7 +37,7 @@ class StockController extends Controller
          }
       	return back()->with('success','Stock Added Sucessfully');
       }catch (\Exception $e){
-         return back()->with('sorry','Sorry,Something went wrong!.Stock Cannot Be Created!');
+         return back()->with('danger','Sorry,Something went wrong!.Stock Cannot Be Created!');
       }
    }
 
@@ -74,7 +74,7 @@ class StockController extends Controller
          }
       	return redirect(route('admin.ViewStock'))->with('success','Stock Updated Sucessfully');
       }catch (\Exception $e){
-         return back()->with('sorry','Sorry,Something went wrong!.Stock Cannot Be Updated!');
+         return back()->with('danger','Sorry,Something went wrong!.Stock Cannot Be Updated!');
       }
    }
 
@@ -83,7 +83,7 @@ class StockController extends Controller
          Stock::FindorFail($id)->delete();
          return back()->with('success','Stock Deleted Sucessfully');
       }catch (\Exception $e){
-         return back()->with('sorry','Sorry,Something went wrong!.Stock Cannot Be Deleted!');
+         return back()->with('danger','Sorry,Something went wrong!.Stock Cannot Be Deleted!');
       }
    }
 

@@ -33,7 +33,7 @@ class ExpenseController extends Controller
             $Expense->save();
             return back()->with('success','Expense Added Successfully!');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Expense Cannot be Stored!');
+            return back()->with('danger','Sorry,Something went wrong!.Expense Cannot be Stored!');
         }
     }
 
@@ -44,7 +44,7 @@ class ExpenseController extends Controller
             $Data['Expense'] = Expense::findorfail($id);
             return view('admin.expenses.edit',$Data);
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Expense Cannot be Edited!');
+            return back()->with('danger','Sorry,Something went wrong!.Expense Cannot be Edited!');
         }
     }
 
@@ -58,7 +58,7 @@ class ExpenseController extends Controller
             $Expense->save();
             return redirect(route('admin.viewExpense'))->with('success','Expense Updated Successfully!');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Expense Cannot be Updated!');
+            return back()->with('danger','Sorry,Something went wrong!.Expense Cannot be Updated!');
         }
     }
 
@@ -67,7 +67,7 @@ class ExpenseController extends Controller
             Expense::findorfail($id)->delete();
             return back()->with('success','Expense Deleted Successfully!');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Expense Cannot be Deleted!');
+            return back()->with('danger','Sorry,Something went wrong!.Expense Cannot be Deleted!');
         }
     }
     

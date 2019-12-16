@@ -47,7 +47,7 @@ class ExtraWorkController extends Controller
             $ExtraWork->save();
             return back()->with('success','ExtraWork Created Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.ExtraWork Cannot be Stored!');
+            return back()->with('danger','Sorry,Something went wrong!.ExtraWork Cannot be Stored!');
         }
     }
 
@@ -90,7 +90,7 @@ class ExtraWorkController extends Controller
             $ExtraWork->save();
             return redirect(action('BillingController\ExtraWorkController@create'))->with('success','ExtraWork Updated Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.ExtraWork Cannot Be Updated!');
+            return back()->with('danger','Sorry,Something went wrong!.ExtraWork Cannot Be Updated!');
         }
     }
 
@@ -106,7 +106,7 @@ class ExtraWorkController extends Controller
             ExtraWork::findOrFail($id)->delete();
             return back()->with('success','ExtraWork Deleted Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.ExtraWork Cannot Be Deleted!');
+            return back()->with('danger','Sorry,Something went wrong!.ExtraWork Cannot Be Deleted!');
         }
     }
 }

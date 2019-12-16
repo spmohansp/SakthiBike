@@ -58,7 +58,7 @@ class SalaryController extends Controller
             }
             return redirect(action('BillingController\SalaryController@create'))->with('success','Salary Created Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Salary Cannot Be Created!');
+            return back()->with('danger','Sorry,Something went wrong!.Salary Cannot Be Created!');
         }
     }
 
@@ -115,7 +115,7 @@ class SalaryController extends Controller
             }
             return redirect(action('BillingController\SalaryController@index'))->with('success','Salary Updated Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Salary Cannot Be Updated !');
+            return back()->with('danger','Sorry,Something went wrong!.Salary Cannot Be Updated !');
         }
     }
 
@@ -131,7 +131,7 @@ class SalaryController extends Controller
             Salary::findOrFail($id)->delete();
             return back()->with('success','Salary Details Deleted Successfully');
         }catch (\Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Salary Cannot Be Deleted !');
+            return back()->with('danger','Sorry,Something went wrong!.Salary Cannot Be Deleted !');
         }
     }
 
