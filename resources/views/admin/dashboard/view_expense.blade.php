@@ -36,6 +36,11 @@ Income MonthlyWise
 
 	<div class="tile">
 		<div class="row">
+			<div class="col-lg-12">
+				<h4>&nbsp;&nbsp;Income</h4>
+			</div>
+		</div>
+		<div class="row">
 			<div class="card-body table-responsive" id="printdiv">
 				<table class="table table-hover table-bordered" id="reporttable">
 					<thead>
@@ -57,6 +62,40 @@ Income MonthlyWise
 								<td>{{ $Income->Client->name }}</td>
                                 <td>{{ $Income->bill_amount }}</td>
                                 <td>{{ $Income->balance_amount }}</td>
+							</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="tile">
+		<div class="row">
+			<div class="col-lg-12">
+				<h4>&nbsp;&nbsp;Expense</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="card-body table-responsive" id="printdiv">
+				<table class="table table-hover table-bordered" id="reporttable">
+					<thead>
+						<tr>
+							<th class="csvth">S.no</th>
+							<th class="csvth">Date</th>
+							<th class="csvth">Expense</th>
+							<th class="csvth">Amount</th>
+							<th class="csvth">Description</th>
+						</tr>
+					</thead>
+					<tbody  id="tablebody">
+						@foreach($DashboardIncomeDetails['Expense'] as $key=>$Expense)
+							<tr>
+								<td>{{ ++$key }}</td>
+								<td>{{ date('d-m-Y',strtotime($Expense->date)) }}</td>
+								<td>{{ @$Expense->EmployeeName ? $Expense->ExpenseCategory->expense_type.'-'.@$Expense->EmployeeName->name :$Expense->ExpenseCategory->expense_type }}</td>
+								<td>{{ $Expense->amount }}</td>
+								<td>{{ $Expense->description }}</td>
 							</tr>
 						@endforeach
 					</tbody>

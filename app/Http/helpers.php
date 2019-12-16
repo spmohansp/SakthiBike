@@ -46,6 +46,7 @@ if (! function_exists('DashboardMonthlyWiseTotalIncomeExpense')) {
 if (! function_exists('DashboardIncomeDetails')) { 
     function DashboardIncomeDetails($Month,$Year) { 
         $Data['Income'] = Bill::whereMonth('date',$Month)->whereYear('date',$Year)->get();
+        $Data['Expense'] = Expense::whereMonth('date',$Month)->whereYear('date',$Year)->get();
         return $Data;
     } 
 }
