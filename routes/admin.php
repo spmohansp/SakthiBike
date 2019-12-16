@@ -16,6 +16,9 @@ Route::get('/dashboard/get-total-income-expense','BillingController\DashboardCon
 // })->name('home');
 
 //Product
+Route::get('/GetMonthlyIncome/{month}/{year}', 'BillingController\DashboardController@GetMonthlyIncome')->name('GetMonthlyIncome');
+
+
 Route::get('/product/add', 'BillingController\ProductController@addproduct')->name('addProduct');
 Route::get('/products', 'BillingController\ProductController@viewproduct')->name('viewProducts');
 Route::post('/product/add', 'BillingController\ProductController@storeproduct')->name('storeproduct');

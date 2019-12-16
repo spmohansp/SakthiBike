@@ -41,8 +41,9 @@ if (! function_exists('DashboardMonthlyWiseTotalIncomeExpense')) {
     } 
 }
 
-// if (! function_exists('DashboardMonthlyWiseTotalIncome')) { 
-//     function DashboardMonthlyWiseTotalIncome($Month,$Year) {
-//         return Bill::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('bill_amount_given');
-//     } 
-// }
+if (! function_exists('DashboardIncomeDetails')) { 
+    function DashboardIncomeDetails($Month,$Year) { 
+        $Data['Income'] = Bill::whereMonth('date',$Month)->whereYear('date',$Year)->get();
+        return $Data;
+    } 
+}

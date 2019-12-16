@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BillingController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Expense;
+use App\Bill;
 use Auth;
 class DashboardController extends Controller
 {
@@ -86,6 +87,16 @@ class DashboardController extends Controller
     {
         //
     }
+
+    public function GetMonthlyIncome($Month,$Year)
+    {
+        $Data['Year'] = $Year;
+        $Data['Month'] = $Month;
+        $Data['Bills'] = Bill::orderBy('id', 'DESC')->get();
+        return view('admin.dashboard.view_expense',$Data);
+    }
+
+
     public function GetTotalDashboardIncomeExpense(){
         $DateMonthYear = explode('-',request('year'));
         $year = $DateMonthYear[0];
@@ -100,7 +111,7 @@ class DashboardController extends Controller
                 <span class="badge badge-primary float-right">Monthly</span>
                 <h5 class="card-title mb-0">Income</h5>
             </div>
-            <a href="'.route('admin.ViewBill').'" style="color:black;text-decoration: none">
+            <a href="'.route('admin.GetMonthlyIncome',[$month,$year]).'" style="color:black;text-decoration: none">
                 <div class="card-body my-2">
                     <div class="row d-flex align-items-center mb-4">
                         <div class="col-8">
