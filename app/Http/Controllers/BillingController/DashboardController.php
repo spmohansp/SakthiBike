@@ -96,7 +96,7 @@ class DashboardController extends Controller
         $MonthlyIncomeBar = $DashboardMonthlyWiseTotalIncomeExpense['Income']/100;
         $MonthlyExpenseBar = $DashboardMonthlyWiseTotalIncomeExpense['Expense']/100;
         $MonthlyProfitBar = $MonthlyProfit/100;
-        if($MonthlyProfit>0) {  $Profitstyle='black'; } else{ $Profitstyle='red'; }
+        if($MonthlyProfit>=0) {  $Profitstyle='black'; } else{ $Profitstyle='red'; }
         $final['income'] = '
         <div class="card flex-fill" id="DashboardIncome">
             <div class="card-header">
