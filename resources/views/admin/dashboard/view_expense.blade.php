@@ -23,83 +23,86 @@ Income MonthlyWise
 @endphp
 
 	<div class="tile">
-		<ul class="pager">
-			<br>
-			<li class="previouspull-left"><a href="{{ route('admin.GetMonthlyIncome',[$PrevM,$PrevY]) }}">&laquo; Previous</a></li>
-			<li class="next pull-right"><a href="{{ route('admin.GetMonthlyIncome',[$NextM,$NextY]) }}">Next &raquo;</a></li>
-		</ul>
-	</div>
-
-	@php
-        $DashboardIncomeDetails = DashboardIncomeDetails($Month,$Year);
-    @endphp
-
-	<div class="tile">
-		<div class="row">
-			<div class="col-lg-12">
-				<h4>&nbsp;&nbsp;Income</h4>
+		<div class="tile">
+			<div class="row">
+				<div class="col-lg-12">
+					<a href="{{ route('admin.GetMonthlyIncome',[$PrevM,$PrevY]) }}"><button type="button" class="btn btn-primary">&laquo; Previous</button></a>
+					<a href="{{ route('admin.GetMonthlyIncome',[$NextM,$NextY]) }}"><button class="btn btn-primary pull-right">Next &raquo;</button></a>
+				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="card-body table-responsive" id="printdiv">
-				<table class="table table-hover table-bordered" id="reporttable">
-					<thead>
-						<tr>
-							<th class="csvth">S.no</th>
-							<th class="csvth">Date</th>
-							<th class="csvth">Bill No</th>
-							<th class="csvth">Customer Name</th>
-							<th class="csvth">Total Cost</th>
-							<th class="csvth">Balance</th>
-						</tr>
-					</thead>
-					<tbody  id="tablebody">
-						@foreach($DashboardIncomeDetails['Income'] as $key=>$Income)
+
+		@php
+	        $DashboardIncomeDetails = DashboardIncomeDetails($Month,$Year);
+	    @endphp
+
+		<div class="tile">
+			<div class="row">
+				<div class="col-lg-12">
+					<h4>&nbsp;&nbsp;Income</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="card-body table-responsive" id="printdiv">
+					<table class="table table-hover table-bordered" id="reporttable">
+						<thead>
 							<tr>
-								<td>{{ ++$key }}</td>
-								<td>{{ date('d-m-Y',strtotime($Income->date)) }}</td>
-								<td>{{ $Income->bill_number }}</td>
-								<td>{{ $Income->Client->name }}</td>
-                                <td>{{ $Income->bill_amount }}</td>
-                                <td>{{ $Income->balance_amount }}</td>
+								<th class="csvth">S.no</th>
+								<th class="csvth">Date</th>
+								<th class="csvth">Bill No</th>
+								<th class="csvth">Customer Name</th>
+								<th class="csvth">Total Cost</th>
+								<th class="csvth">Balance</th>
 							</tr>
-						@endforeach
-					</tbody>
-				</table>
+						</thead>
+						<tbody  id="tablebody">
+							@foreach($DashboardIncomeDetails['Income'] as $key=>$Income)
+								<tr>
+									<td>{{ ++$key }}</td>
+									<td>{{ date('d-m-Y',strtotime($Income->date)) }}</td>
+									<td>{{ $Income->bill_number }}</td>
+									<td>{{ $Income->Client->name }}</td>
+	                                <td>{{ $Income->bill_amount }}</td>
+	                                <td>{{ $Income->balance_amount }}</td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="tile">
-		<div class="row">
-			<div class="col-lg-12">
-				<h4>&nbsp;&nbsp;Expense</h4>
+		<div class="tile">
+			<div class="row">
+				<div class="col-lg-12">
+					<h4>&nbsp;&nbsp;Expense</h4>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="card-body table-responsive" id="printdiv">
-				<table class="table table-hover table-bordered" id="reporttable">
-					<thead>
-						<tr>
-							<th class="csvth">S.no</th>
-							<th class="csvth">Date</th>
-							<th class="csvth">Expense</th>
-							<th class="csvth">Amount</th>
-							<th class="csvth">Description</th>
-						</tr>
-					</thead>
-					<tbody  id="tablebody">
-						@foreach($DashboardIncomeDetails['Expense'] as $key=>$Expense)
+			<div class="row">
+				<div class="card-body table-responsive" id="printdiv">
+					<table class="table table-hover table-bordered" id="reporttable">
+						<thead>
 							<tr>
-								<td>{{ ++$key }}</td>
-								<td>{{ date('d-m-Y',strtotime($Expense->date)) }}</td>
-								<td>{{ @$Expense->EmployeeName ? $Expense->ExpenseCategory->expense_type.'-'.@$Expense->EmployeeName->name :$Expense->ExpenseCategory->expense_type }}</td>
-								<td>{{ $Expense->amount }}</td>
-								<td>{{ $Expense->description }}</td>
+								<th class="csvth">S.no</th>
+								<th class="csvth">Date</th>
+								<th class="csvth">Expense</th>
+								<th class="csvth">Amount</th>
+								<th class="csvth">Description</th>
 							</tr>
-						@endforeach
-					</tbody>
-				</table>
+						</thead>
+						<tbody  id="tablebody">
+							@foreach($DashboardIncomeDetails['Expense'] as $key=>$Expense)
+								<tr>
+									<td>{{ ++$key }}</td>
+									<td>{{ date('d-m-Y',strtotime($Expense->date)) }}</td>
+									<td>{{ @$Expense->EmployeeName ? $Expense->ExpenseCategory->expense_type.'-'.@$Expense->EmployeeName->name :$Expense->ExpenseCategory->expense_type }}</td>
+									<td>{{ $Expense->amount }}</td>
+									<td>{{ $Expense->description }}</td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
