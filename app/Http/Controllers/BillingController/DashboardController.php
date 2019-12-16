@@ -103,8 +103,16 @@ class DashboardController extends Controller
         $month = $DateMonthYear[1];
         $Months= date('F', mktime(0, 0, 0, $month, 10));
         $DashboardMonthlyWiseTotalIncomeExpense = DashboardMonthlyWiseTotalIncomeExpense($month,$year);
+
+        $MonthlyProfit = $DashboardMonthlyWiseTotalIncomeExpense['Income'] - $DashboardMonthlyWiseTotalIncomeExpense['Expense'];
+
         $MonthlyIncomeBar = $DashboardMonthlyWiseTotalIncomeExpense['Income']/100;
         $MonthlyExpenseBar = $DashboardMonthlyWiseTotalIncomeExpense['Expense']/100;
+        $MonthlyOutStandingBar = $DashboardMonthlyWiseTotalIncomeExpense['OutStanding']/100;
+        $MonthlyProfitBar = $MonthlyProfit/100;
+
+        if($MonthlyProfit>=0) {  $Profitstyle='black'; } else{ $Profitstyle='red'; }
+
         $final['income'] = '
         <div class="card flex-fill" id="DashboardIncome">
             <div class="card-header">
@@ -156,6 +164,57 @@ class DashboardController extends Controller
                 </div>
             </a>
         </div>';
+
+        $final['Profit'] = '
+        <div class="card flex-fill" id="DashboardMonthlyProfit">
+            <div class="card-header">
+                <span class="badge badge-success float-right">Monthly</span>
+                <h5 class="card-title mb-0">Profit</h5>
+            </div>
+            <div class="card-body my-2">
+                <div class="row d-flex align-items-center mb-4">
+                    <div class="col-8" style="color:'.$Profitstyle.'">
+                        <h5>'.$Months.'-'.$year.'</h5>
+                        <h2 class="d-flex align-items-center mb-0 font-weight-light">
+                             ₹'.$MonthlyProfit.'
+                        </h2>
+                    </div>
+                    <div class="col-4 text-right">
+                        <span class="text-muted">'.$MonthlyProfitBar.'%</span>
+                    </div>
+                </div>
+                <div class="progress progress-sm shadow-sm mb-1">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: '.$MonthlyProfitBar.'%"></div>
+                </div>
+            </div>
+        </div>';
+
+        $final['OutStanding'] = '
+        <div class="card flex-fill" id="DashboardMonthlyOutStanding">
+            <div class="card-header">
+                <span class="badge badge-warning float-right">Monthly</span>
+                <h5 class="card-title mb-0">OutStanding</h5>
+            </div>
+            <a href="'.route('admin.ViewBill').'" style="color:black;text-decoration: none;">
+                <div class="card-body my-2">
+                    <div class="row d-flex align-items-center mb-4">
+                        <div class="col-8">
+                            <h5>'.$Months.'-'.$year.'</h5>
+                            <h2 class="d-flex align-items-center mb-0 font-weight-light">
+                                 ₹'.$DashboardMonthlyWiseTotalIncomeExpense['OutStanding'].'
+                            </h2>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span class="text-muted">'.$MonthlyOutStandingBar.'%</span>
+                        </div>
+                    </div>
+                    <div class="progress progress-sm shadow-sm mb-1">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: '.$MonthlyOutStandingBar.'%"></div>
+                    </div>
+                </div>
+            </a>
+        </div>';
+
         return $final;
     }
 }
