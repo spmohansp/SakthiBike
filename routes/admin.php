@@ -1,16 +1,19 @@
 <?php
 
 
+//Dashboard
+Route::get('/home','BillingController\DashboardController@index')->name('home');
+Route::get('/dashboard/get-total-income-expense','BillingController\DashboardController@GetTotalDashboardIncomeExpense');
 
-Route::get('/home', function () {
-    $users[] = Auth::user();
-    $users[] = Auth::guard()->user();
-    $users[] = Auth::guard('admin')->user();
+// Route::get('/home', function () {
+//     $users[] = Auth::user();
+//     $users[] = Auth::guard()->user();
+//     $users[] = Auth::guard('admin')->user();
 
-    //dd($users);
+//     //dd($users);
 
-    return view('admin.home');
-})->name('home');
+//     return view('admin.home');
+// })->name('home');
 
 //Product
 Route::get('/product/add', 'BillingController\ProductController@addproduct')->name('addProduct');
@@ -30,14 +33,6 @@ Route::resource('/Expense-category','BillingController\ExpenseCategoryController
 
 Route::resource('/extraworks','BillingController\ExtraWorkController');
 
-//Ledger
-Route::get('/ledgers', 'BillingController\LedgerController@viewLedger');
-Route::post('/ledger/add','BillingController\LedgerController@addLedger')->name('addLedger');
-Route::get('/ledger/{id}/edit', 'BillingController\LedgerController@editLedger')->name('editLedger');
-Route::post('/ledger/{id}/update', 'BillingController\LedgerController@updateLedger')->name('updateLedger');
-Route::get('/ledger/{id}/delete', 'BillingController\LedgerController@deleteLedger')->name('deleteLedger');
-
-
 //Stock
 Route::get('/stock/add','BillingController\StockController@addStock');
 Route::post('/stock/add','BillingController\StockController@saveStock')->name('saveStock');
@@ -50,7 +45,7 @@ Route::get('/GetProductDetails','BillingController\StockController@GetProductDet
 
 //Print
 Route::get('/bill/add','BillingController\PrintController@addPrint');
-Route::get('/bills','BillingController\PrintController@viewPrint');
+Route::get('/bills','BillingController\PrintController@viewPrint')->name('ViewBill');
 Route::post('/bill/add','BillingController\PrintController@saveBill')->name('saveBill');
 Route::get('/print/{id}/edit', 'BillingController\PrintController@editPrint')->name('editPrint');
 Route::post('/print/{id}/update', 'BillingController\PrintController@UpdateBill')->name('UpdateBill');
@@ -83,9 +78,6 @@ Route::get('GetSalaryDetails','BillingController\SalaryController@GetSalaryDetai
 
 //Employee
 Route::resource('employee','BillingController\EmployeeController');
-
-//Dashboard
-Route::get('/dashboard/get-total-income-expense', 'BillingController\DashboardController@GetTotalDashboardIncomeExpense');
 
 
 

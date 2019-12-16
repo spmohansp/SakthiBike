@@ -1,8 +1,12 @@
 @extends('admin.layouts.master')
 
-@section('Current-Page')
-    Dashboard
-@endsection
+@section('Current-Page') 
+Dashboard
+@endsection 
+
+@section('Parent-Menu') 
+Home 
+@endsection 
 
 @section('Menu')
     Dashboard
@@ -10,116 +14,124 @@
 
 @section('content')
 
- <?php
-        $DashboardMonthlyWiseTotalExpense = DashboardMonthlyWiseTotalExpense(date('m'),date('Y'));
- ?>
-<div class="box box-info">
-      <div class="box-body">
-            <div class="col-sm-4">
-                <input type="month" class="form-control dashboardDate" id="year" value="{{ date("Y-m") }}" max="{{ date("Y-m") }}">
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
+	 <?php
+	    $DashboardMonthlyWiseTotalIncomeExpense = DashboardMonthlyWiseTotalIncomeExpense(date('m'),date('Y'));
+	    $IncomeBar = $DashboardMonthlyWiseTotalIncomeExpense['Income']/100;
+	    $ExpenseBar = $DashboardMonthlyWiseTotalIncomeExpense['Expense']/100;
+	 ?>
+	 <div class="tile" style="background-color: #F0F0F0;">
 		<div class="row">
-	<div class="col-lg-6 col-xl-3 d-flex">
-		<div class="card flex-fill">
-			<div class="card-header">
-				<span class="badge badge-primary float-right">Today</span>
-				<h5 class="card-title mb-0">Income</h5>
-			</div>
-			<div class="card-body my-2">
-				<div class="row d-flex align-items-center mb-4">
-					<div class="col-8">
-						<h2 class="d-flex align-items-center mb-0 font-weight-light">
-							$37.500
-						</h2>
+	        <div class="col-sm-4">
+	            <input type="month" class="form-control dashboardDate" id="year" value="{{ date("Y-m") }}" max="{{ date("Y-m") }}">
+	        </div>
+	    </div>
+	    <br>
+		<div class="row">
+			<div class="col-lg-6 col-xl-3 d-flex" id="DashboardIncome">
+				<div class="card flex-fill">
+					<div class="card-header">
+						<span class="badge badge-primary float-right">Monthly</span>
+						<h5 class="card-title mb-0">Income</h5>
 					</div>
-					<div class="col-4 text-right">
-						<span class="text-muted">57%</span>
+					<div class="card-body my-2">
+						<div class="row d-flex align-items-center mb-4">
+							<div class="col-8">
+								<h5>{{ date('F', mktime(0, 0, 0, date('m'), 10)) }} - {{ date('Y') }}</h5>
+								<h2 class="d-flex align-items-center mb-0 font-weight-light" id="Income">
+									₹{{ $DashboardMonthlyWiseTotalIncomeExpense['Income'] }}
+								</h2>
+							</div>
+							<div class="col-4 text-right">
+								<span class="text-muted">{{ $IncomeBar }}%</span>
+							</div>
+						</div>
+
+						<div class="progress progress-sm shadow-sm mb-1">
+							<div class="progress-bar bg-primary" role="progressbar" style="width: {{ $IncomeBar }}%"></div>
+						</div>
+						<a href="{{ route('admin.ViewBill') }}" class="small-box-footer pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
+			</div>
+			<div class="col-lg-6 col-xl-3 d-flex">
+				<div class="card flex-fill">
+					<div class="card-header">
+						<span class="badge badge-warning float-right">Monthly</span>
+						<h5 class="card-title mb-0">Orders</h5>
+					</div>
+					<div class="card-body my-2">
+						<div class="row d-flex align-items-center mb-4">
+							<div class="col-8">
+								<h5>{{ date('F', mktime(0, 0, 0, date('m'), 10)) }} - {{ date('Y') }}</h5>
+								<h2 class="d-flex align-items-center mb-0 font-weight-light">
+									3.282
+								</h2>
+							</div>
+							<div class="col-4 text-right">
+								<span class="text-muted">82%</span>
+							</div>
+						</div>
 
-				<div class="progress progress-sm shadow-sm mb-1">
-					<div class="progress-bar bg-primary" role="progressbar" style="width: 57%"></div>
+						<div class="progress progress-sm shadow-sm mb-1">
+							<div class="progress-bar bg-warning" role="progressbar" style="width: 82%"></div>
+						</div>
+						<a href="{{ route('admin.viewExpense') }}" class="small-box-footer pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-xl-3 d-flex">
+				<div class="card flex-fill" id="DashboardExpense">
+					<div class="card-header">
+						<span class="badge badge-info float-right">Monthly</span>
+						<h5 class="card-title mb-0">Expense</h5>
+					</div>
+					<div class="card-body my-2">
+						<div class="row d-flex align-items-center mb-4">
+							<div class="col-8">
+								<h5>{{ date('F', mktime(0, 0, 0, date('m'), 10)) }} - {{ date('Y') }}</h5>
+								<h2 class="d-flex align-items-center mb-0 font-weight-light" id="Expense">
+									₹{{ $DashboardMonthlyWiseTotalIncomeExpense['Expense'] }}
+								</h2>
+							</div>
+							<div class="col-4 text-right">
+								<span class="text-muted">{{ $ExpenseBar }}%</span>
+							</div>
+						</div>
+						<div class="progress progress-sm shadow-sm mb-1">
+							<div class="progress-bar bg-info" role="progressbar" style="width: {{ $ExpenseBar }}%"></div>
+						</div>
+						<a href="{{ route('admin.viewExpense') }}" class="small-box-footer pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-xl-3 d-flex">
+				<div class="card flex-fill">
+					<div class="card-header">
+						<span class="badge badge-success float-right">Monthly</span>
+						<h5 class="card-title mb-0">Revenue</h5>
+					</div>
+					<div class="card-body my-2">
+						<div class="row d-flex align-items-center mb-4">
+							<div class="col-8">
+								<h5>{{ date('F', mktime(0, 0, 0, date('m'), 10)) }} - {{ date('Y') }}</h5>
+								<h2 class="d-flex align-items-center mb-0 font-weight-light">
+									$82.400
+								</h2>
+							</div>
+							<div class="col-4 text-right">
+								<span class="text-muted">32%</span>
+							</div>
+						</div>
+
+						<div class="progress progress-sm shadow-sm mb-1">
+							<div class="progress-bar bg-success" role="progressbar" style="width: 32%"></div>
+						</div>
+						<a href="{{ route('admin.viewExpense') }}" class="small-box-footer pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-6 col-xl-3 d-flex">
-		<div class="card flex-fill">
-			<div class="card-header">
-				<span class="badge badge-warning float-right">Annual</span>
-				<h5 class="card-title mb-0">Orders</h5>
-			</div>
-			<div class="card-body my-2">
-				<div class="row d-flex align-items-center mb-4">
-					<div class="col-8">
-						<h2 class="d-flex align-items-center mb-0 font-weight-light">
-							3.282
-						</h2>
-					</div>
-					<div class="col-4 text-right">
-						<span class="text-muted">82%</span>
-					</div>
-				</div>
-
-				<div class="progress progress-sm shadow-sm mb-1">
-					<div class="progress-bar bg-warning" role="progressbar" style="width: 82%"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-lg-6 col-xl-3 d-flex">
-		<div class="card flex-fill">
-			<div class="card-header">
-				<span class="badge badge-info float-right">Monthly</span>
-				<h5 class="card-title mb-0">Expense</h5>
-			</div>
-			<div class="card-body my-2">
-				<div class="row d-flex align-items-center mb-4" id="DashboardExpense">
-					<div class="col-8">
-						<h2 class="d-flex align-items-center mb-0 font-weight-light" id="Expense">
-							{{ $DashboardMonthlyWiseTotalExpense }}
-						</h2>
-					</div>
-					<div class="col-4 text-right">
-						<span class="text-muted">64%</span>
-					</div>
-				</div>
-
-				<div class="progress progress-sm shadow-sm mb-1">
-					<div class="progress-bar bg-info" role="progressbar" style="width: 64%"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-lg-6 col-xl-3 d-flex">
-		<div class="card flex-fill">
-			<div class="card-header">
-				<span class="badge badge-success float-right">Yearly</span>
-				<h5 class="card-title mb-0">Revenue</h5>
-			</div>
-			<div class="card-body my-2">
-				<div class="row d-flex align-items-center mb-4">
-					<div class="col-8">
-						<h2 class="d-flex align-items-center mb-0 font-weight-light">
-							$82.400
-						</h2>
-					</div>
-					<div class="col-4 text-right">
-						<span class="text-muted">32%</span>
-					</div>
-				</div>
-
-				<div class="progress progress-sm shadow-sm mb-1">
-					<div class="progress-bar bg-success" role="progressbar" style="width: 32%"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 @endsection
 
 @section('loadMore')
@@ -138,10 +150,12 @@
 	                url : '{{ action("BillingController\DashboardController@GetTotalDashboardIncomeExpense") }}',
 	                data:{year:year},
 	                beforeSend: function() {
-	                    $('#DashboardExpense').find('h3').html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+	                    $('#DashboardIncome').find('h2').html('<div class="overlay"><i class="fa fa-refresh fa-spin" style="size:26px;"></i></div>');
+	                    $('#DashboardExpense').find('h2').html('<div class="overlay"><i class="fa fa-refresh fa-spin" style="size:26px;"></i></div>');
 	                },
 	                success:function(data){
 	                    setTimeout(function() {
+	                        $('#DashboardIncome').html(data.income);
 	                        $('#DashboardExpense').html(data.expense);
 	                    }, 2000);
 	                }
