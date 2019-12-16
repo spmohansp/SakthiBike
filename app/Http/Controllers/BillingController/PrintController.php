@@ -27,7 +27,6 @@ class PrintController extends Controller
 	}
 
     public function saveBill(){
-        // return request()->all();
         $BillTotal=0;
         $TotalBill=0;
         if(!empty(request('product_id'))){

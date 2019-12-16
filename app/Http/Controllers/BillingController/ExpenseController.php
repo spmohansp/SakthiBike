@@ -23,37 +23,52 @@ class ExpenseController extends Controller
     }
 
     public function saveExpense(){
-        $Expense = new Expense;
-        $Expense->date = request('date');
-        $Expense->amount = request('amount');
-        $Expense->expense_type_id = request('expense_id');
-        $Expense->employee_id = request('employee_id');
-        $Expense->description = request('description');
-        $Expense->save();
-        return back()->with('success','Expense Added Successfully!');
+        try {
+            $Expense = new Expense;
+            $Expense->date = request('date');
+            $Expense->amount = request('amount');
+            $Expense->expense_type_id = request('expense_id');
+            $Expense->employee_id = request('employee_id');
+            $Expense->description = request('description');
+            $Expense->save();
+            return back()->with('success','Expense Added Successfully!');
+        }catch (\Exception $e){
+            return back()->with('danger','Sorry,Something went wrong!.Expense Cannot be Stored!');
+        }
     }
 
     public function editExpense($id){
-
-        $Data['Expense_Categories'] = ExpenseCategory::get();
-        $Data['Employees'] = Employee::get();
-        $Data['Expense'] = Expense::findorfail($id);
-        return view('admin.expenses.edit',$Data);
+        try {
+            $Data['Expense_Categories'] = ExpenseCategory::get();
+            $Data['Employees'] = Employee::get();
+            $Data['Expense'] = Expense::findorfail($id);
+            return view('admin.expenses.edit',$Data);
+        }catch (\Exception $e){
+            return back()->with('danger','Sorry,Something went wrong!.Expense Cannot be Edited!');
+        }
     }
 
     public function updateExpense($id){
-        $Expense = Expense::findorfail($id);
-        $Expense->date = request('date');
-        $Expense->amount = request('amount');
-        $Expense->expense_type_id = request('expense_id');
-        $Expense->description = request('description');
-        $Expense->save();
-        return redirect(route('admin.viewExpense'))->with('success','Expense Updated Successfully!');
+        try {
+            $Expense = Expense::findorfail($id);
+            $Expense->date = request('date');
+            $Expense->amount = request('amount');
+            $Expense->expense_type_id = request('expense_id');
+            $Expense->description = request('description');
+            $Expense->save();
+            return redirect(route('admin.viewExpense'))->with('success','Expense Updated Successfully!');
+        }catch (\Exception $e){
+            return back()->with('danger','Sorry,Something went wrong!.Expense Cannot be Updated!');
+        }
     }
 
     public function deleteExpense($id){
-        Expense::findorfail($id)->delete();
-        return back()->with('success','Expense Deleted Successfully!');
+        try{
+            Expense::findorfail($id)->delete();
+            return back()->with('success','Expense Deleted Successfully!');
+        }catch (\Exception $e){
+            return back()->with('danger','Sorry,Something went wrong!.Expense Cannot be Deleted!');
+        }
     }
     
     public function GetExpenseDetails(){

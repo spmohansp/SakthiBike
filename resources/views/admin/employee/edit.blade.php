@@ -41,25 +41,19 @@ Edit Emoloyee
                                     <input type="number"  class="form-control" placeholder="Enter Mobile Number" value="{{ $Employee->mobile}}" name="mobile">
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="form-group"><h5><b>Employee Id</b></h5>
-                                    <input type="text"  class="form-control" placeholder="Enter Employee Id" value="{{ $Employee->employee_id }}" name="employee_id">
+                            <div class='col-sm-4'>
+                                 <div class="form-group"><h5><b>Salary Per/DAy</b></h5>
+                                    <input type='number' class="form-control" placeholder="Enter Salary Per/Day" value="{{ $Employee->amount_per_day }}" name="amount_per_day"/>
                                 </div>
                             </div>
                         </div>							   
                         
-
                          <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group"><h5><b>Address</b></h5>
                                     <textarea rows="4" cols="50" class="form-control" name="address">{{ $Employee->address }}</textarea>
                                 </div>
                             </div>
-                             <div class='col-sm-4'>
-					        	 <div class="form-group"><h5><b>Salary Per/DAy</b></h5>
-					            <input type='number' class="form-control" placeholder="Enter Salary Per/Day" value="{{ $Employee->amount_per_day }}" name="amount_per_day"/>
-					        </div>
-					        </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-7">
