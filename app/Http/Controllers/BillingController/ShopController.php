@@ -42,8 +42,12 @@ class ShopController extends Controller
             'phone_number'=>'required|min:10|max:10',
             'address'=>'required',
         ]);
-        $Shop = Shop::create($request->all());
-        return back()->with('success','Shop Added Successfully');
+        try{
+            $Shop = Shop::create($request->all());
+            return back()->with('success','Shop Added Successfully');
+        }catch (\Exception $e){
+            return back()->with('sorry','Sorry,Something went wrong!.Shop Cannot Be Created!');
+        }
     }
 
     /**
@@ -78,8 +82,12 @@ class ShopController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Shop::findOrFail($id)->update($request->all());
-        return redirect(action('BillingController\ShopController@index'))->with('success','Shop Updated Successfully');
+        try{
+            Shop::findOrFail($id)->update($request->all());
+            return redirect(action('BillingController\ShopController@index'))->with('success','Shop Updated Successfully');
+        }catch (\Exception $e){
+            return back()->with('sorry','Sorry,Something went wrong!.Shop Cannot Be Updated!');
+        }
     }
 
     /**
@@ -90,7 +98,11 @@ class ShopController extends Controller
      */
     public function destroy($id)
     {
-        Shop::findOrFail($id)->delete();
-        return back()->with('success','Shop Deleted Successfully');
+        try{
+            Shop::findOrFail($id)->delete();
+            return back()->with('success','Shop Deleted Successfully');
+        }catch (\Exception $e){
+            return back()->with('sorry','Sorry,Something went wrong!.Shop Cannot Be Deleted!');
+        }
     }
 }

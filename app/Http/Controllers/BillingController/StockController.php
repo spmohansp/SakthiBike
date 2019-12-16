@@ -21,21 +21,24 @@ class StockController extends Controller
       $this->validate(request(),[
          'shop_id'=>'required',
          'date' => 'required',
-     ]);
-   
-   	$Stock = new stock;
-   	$Stock->shop_id = request('shop_id');
-   	$Stock->date = request('date');
-      $Stock->ProductTotal = request('ProductTotal');
-   	$Stock->save();
-      foreach (request('Stock')['Product'] as $key=>$value) {
-         $StockDetails = new StockDetail;
-         $StockDetails->stock_id = $Stock->id;
-         $StockDetails->product_id = request('Stock')['Product'][$key];
-         $StockDetails->Unit = request('Stock')['Unit'][$key];
-         $StockDetails->save();
+      ]);
+      try{
+      	$Stock = new stock;
+      	$Stock->shop_id = request('shop_id');
+      	$Stock->date = request('date');
+         $Stock->ProductTotal = request('ProductTotal');
+      	$Stock->save();
+         foreach (request('Stock')['Product'] as $key=>$value) {
+            $StockDetails = new StockDetail;
+            $StockDetails->stock_id = $Stock->id;
+            $StockDetails->product_id = request('Stock')['Product'][$key];
+            $StockDetails->Unit = request('Stock')['Unit'][$key];
+            $StockDetails->save();
+         }
+      	return back()->with('success','Stock Added Sucessfully');
+      }catch (\Exception $e){
+         return back()->with('sorry','Sorry,Something went wrong!.Stock Cannot Be Created!');
       }
-   	return back()->with('success','Stock Added Sucessfully');
    }
 
    public function viewStock(){
@@ -55,25 +58,33 @@ class StockController extends Controller
    }
 
    public function updateStock($id){
-   	$Stock = Stock::FindorFail($id);
-      $Stock->shop_id = request('shop_id');
-      $Stock->date = request('date');
-      $Stock->ProductTotal = request('ProductTotal');
-      $Stock->save();
-      $StockDetail = StockDetail::where('stock_id',$Stock->id)->delete();
-      foreach (request('Stock')['Product'] as $key=>$value) {
-         $StockDetails = new StockDetail;
-         $StockDetails->stock_id = $Stock->id;
-         $StockDetails->product_id = request('Stock')['Product'][$key];
-         $StockDetails->Unit = request('Stock')['Unit'][$key];
-         $StockDetails->save();
+      try{
+      	$Stock = Stock::FindorFail($id);
+         $Stock->shop_id = request('shop_id');
+         $Stock->date = request('date');
+         $Stock->ProductTotal = request('ProductTotal');
+         $Stock->save();
+         $StockDetail = StockDetail::where('stock_id',$Stock->id)->delete();
+         foreach (request('Stock')['Product'] as $key=>$value) {
+            $StockDetails = new StockDetail;
+            $StockDetails->stock_id = $Stock->id;
+            $StockDetails->product_id = request('Stock')['Product'][$key];
+            $StockDetails->Unit = request('Stock')['Unit'][$key];
+            $StockDetails->save();
+         }
+      	return redirect(route('admin.ViewStock'))->with('success','Stock Updated Sucessfully');
+      }catch (\Exception $e){
+         return back()->with('sorry','Sorry,Something went wrong!.Stock Cannot Be Updated!');
       }
-   	return redirect(route('admin.ViewStock'))->with('success','Stock Updated Sucessfully');
    }
 
    public function deleteStock($id){
-      Stock::FindorFail($id)->delete();
-      return back()->with('success','Stock Deleted Sucessfully');
+      try{
+         Stock::FindorFail($id)->delete();
+         return back()->with('success','Stock Deleted Sucessfully');
+      }catch (\Exception $e){
+         return back()->with('sorry','Sorry,Something went wrong!.Stock Cannot Be Deleted!');
+      }
    }
 
    public function GetProductDetails(Request $request)

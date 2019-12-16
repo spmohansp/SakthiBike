@@ -47,8 +47,8 @@ class ExpenseCategoryController extends Controller
             // $Expense_category->description = request('description');
             $Expense_category->save();
             return redirect(action('BillingController\ExpenseCategoryController@create'))->with('success','Expense Category Created Successfully');
-        }catch (Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Manager Cannot Be Created!');
+        }catch (\Exception $e){
+            return back()->with('sorry','Sorry,Something went wrong!.Expense Category cannot be stored!');
         }
     }
 
@@ -89,8 +89,8 @@ class ExpenseCategoryController extends Controller
             $Expense_category->expense_type = request('expense_type');
             $Expense_category->save();
             return redirect(action('BillingController\ExpenseCategoryController@create'))->with('success','Expense Category Updated Successfully');
-        }catch (Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Manager Cannot Be Created!');
+        }catch (\Exception $e){
+            return back()->with('sorry','Sorry,Something went wrong!Expense Category cannot be Updated!');
         }
     }
 
@@ -102,7 +102,11 @@ class ExpenseCategoryController extends Controller
      */
     public function destroy($id)
     {
-        ExpenseCategory::findOrFail($id)->delete();
-        return back()->with('success','Expense Category Details Deleted Successfully');
+        try {
+            ExpenseCategory::findOrFail($id)->delete();
+            return back()->with('success','Expense Category Details Deleted Successfully');
+        }catch (\Exception $e){
+            return back()->with('sorry','Sorry,Something went wrong!');
+        }
     }
 }

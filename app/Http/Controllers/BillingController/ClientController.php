@@ -25,7 +25,7 @@ class ClientController extends Controller
             $Client->bike_name = request('bike_name');
 	    	$Client->save();
 	    	return back()->with('success','Client Added Successfully');
-    	}catch(Exception $e){
+    	}catch(\Exception $e){
     		return back()->with('danger','Something went wrong');
     	}
     	
@@ -56,7 +56,7 @@ class ClientController extends Controller
             $Client->bike_name = request('bike_name');
 	    	$Client->save();
 	    	return redirect(url('/admin/clients'))->with('success','Client Updated Successfully');
-    	}catch(Exception $e){
+    	}catch(\Exception $e){
     		return back()->with('danger','Something went wrong');
     	}
     }
@@ -65,8 +65,8 @@ class ClientController extends Controller
     	try{
 	    	Client::FindorFail($id)->delete();
 	    	return back()->with('success','Client Deleted Successfully');
-    	}catch(Exception $e){
-    		return back()->with('danger','Something went wrong');
+    	}catch(\Exception $e){
+    		return back()->with('danger','Something went wrong.Customer Cannot Be Delete.Because This Customer Added to the Bill.');
     	}
     }
 }

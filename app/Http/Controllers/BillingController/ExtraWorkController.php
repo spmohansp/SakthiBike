@@ -46,8 +46,8 @@ class ExtraWorkController extends Controller
             $ExtraWork->name = request('name');  
             $ExtraWork->save();
             return back()->with('success','ExtraWork Created Successfully');
-        }catch (Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Manager Cannot Be Created!');
+        }catch (\Exception $e){
+            return back()->with('sorry','Sorry,Something went wrong!.ExtraWork Cannot be Stored!');
         }
     }
 
@@ -89,8 +89,8 @@ class ExtraWorkController extends Controller
             $ExtraWork->name = request('name');  
             $ExtraWork->save();
             return redirect(action('BillingController\ExtraWorkController@create'))->with('success','ExtraWork Updated Successfully');
-        }catch (Exception $e){
-            return back()->with('sorry','Sorry,Something went wrong!.Manager Cannot Be Created!');
+        }catch (\Exception $e){
+            return back()->with('sorry','Sorry,Something went wrong!.ExtraWork Cannot Be Updated!');
         }
     }
 
@@ -102,7 +102,11 @@ class ExtraWorkController extends Controller
      */
     public function destroy($id)
     {
-        ExtraWork::findOrFail($id)->delete();
-        return back()->with('success','Extra Income Deleted Successfully');
+        try{
+            ExtraWork::findOrFail($id)->delete();
+            return back()->with('success','ExtraWork Deleted Successfully');
+        }catch (\Exception $e){
+            return back()->with('sorry','Sorry,Something went wrong!.ExtraWork Cannot Be Deleted!');
+        }
     }
 }

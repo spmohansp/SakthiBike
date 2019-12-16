@@ -28,7 +28,7 @@ class ProductController extends Controller
             $Product->Selling_Price = request('Selling_Price');
             $Product->save();
             return back()->with('success', 'Product Added Successfully');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return back()->with('danger', 'Something went wrong');
         }
     }
@@ -47,7 +47,7 @@ class ProductController extends Controller
             $Product->Selling_Price = request('Selling_Price');
             $Product->save();
             return redirect(route('admin.viewProducts'))->with('success', 'Product Updated Successfully');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return back()->with('danger', 'Something went wrong');
         }
     }
