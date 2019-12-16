@@ -15,19 +15,28 @@ Income MonthlyWise
 @section('content')
 
 
-@php
-    $PrevM =  Carbon\Carbon::parse($Year.'-'.$Month)->subMonth()->format('m'); 
-    $PrevY =  Carbon\Carbon::parse($Year.'-'.$Month)->subMonth()->format('Y'); 
-    $NextM =  Carbon\Carbon::parse($Year.'-'.$Month)->addMonthsNoOverflow(1)->format('m'); 
-    $NextY =  Carbon\Carbon::parse($Year.'-'.$Month)->addMonthsNoOverflow(1)->format('Y'); 
-@endphp
+	@php
+	    $PrevM =  Carbon\Carbon::parse($Year.'-'.$Month)->subMonth()->format('m'); 
+	    $PrevY =  Carbon\Carbon::parse($Year.'-'.$Month)->subMonth()->format('Y'); 
+	    $NextM =  Carbon\Carbon::parse($Year.'-'.$Month)->addMonthsNoOverflow(1)->format('m'); 
+	    $NextY =  Carbon\Carbon::parse($Year.'-'.$Month)->addMonthsNoOverflow(1)->format('Y'); 
+	@endphp
 
 	<div class="tile">
 		<div class="tile">
 			<div class="row">
 				<div class="col-lg-12">
-					<a href="{{ route('admin.GetMonthlyIncome',[$PrevM,$PrevY]) }}"><button type="button" class="btn btn-primary">&laquo; Previous</button></a>
-					<a href="{{ route('admin.GetMonthlyIncome',[$NextM,$NextY]) }}"><button class="btn btn-primary pull-right">Next &raquo;</button></a>
+					<div class="row">
+						<div class="col-lg-4">
+							<a href="{{ route('admin.GetMonthlyIncome',[$PrevM,$PrevY]) }}"><button type="button" class="btn btn-primary">&laquo; Previous</button></a>
+						</div>
+						<div class="col-lg-4">
+							<h4 class="text-center">{{ date('F', mktime(0, 0, 0, $Month, 10)) }} - {{ $Year }}</h4>
+						</div>
+						<div class="col-lg-4">
+							<a href="{{ route('admin.GetMonthlyIncome',[$NextM,$NextY]) }}"><button class="btn btn-primary pull-right">Next &raquo;</button></a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
