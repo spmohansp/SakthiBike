@@ -32,9 +32,8 @@ View Expenses
                   <thead>
                     <tr>
                       <th>S.No</th>
-                      <th>Name</th>
-                      <th>Date</th>
                       <th>Expense</th>
+                      <th>Date</th>
                       <th>Amount</th>
                       <th>Description</th>
                       <th>Action</th>
@@ -44,9 +43,8 @@ View Expenses
                   @foreach($Expenses as $key=>$Expense)
                     <tr>
                       <td>{{ ++$key }}</td>
-                      <td>{{ $Expense->EmployeeName->name }}</td>
+                      <td>{{ @$Expense->EmployeeName ? $Expense->ExpenseCategory->expense_type.'-'.@$Expense->EmployeeName->name :$Expense->ExpenseCategory->expense_type }}</td>
                       <td>{{ date('d-m-Y',strtotime($Expense->date)) }}</td>
-                      <td>{{ $Expense->ExpenseCategory->expense_type }}</td>
                       <td>{{ $Expense->amount }}</td>
                       <td>{{ $Expense->description }}</td>
                       <td>
