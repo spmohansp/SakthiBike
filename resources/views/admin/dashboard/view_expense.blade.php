@@ -26,8 +26,8 @@ Income MonthlyWise
 		<div class="tile">
 			<div class="row">
 				<div class="col-lg-12">
-					<a href="{{ route('admin.GetMonthlyIncome',[$PrevM,$PrevY]) }}"><button type="button" class="btn btn-primary">&laquo; Previous</button></a>
-					<a href="{{ route('admin.GetMonthlyIncome',[$NextM,$NextY]) }}"><button class="btn btn-primary pull-right">Next &raquo;</button></a>
+					<a href="{{ route('admin.GetMonthlyIncome',[$PrevM,$PrevY]) }}"><button type="button"  class="btn btn-info">&laquo; Previous</button></a>
+					<a href="{{ route('admin.GetMonthlyIncome',[$NextM,$NextY]) }}"><button class="btn btn-info pull-right">Next &raquo;</button></a>
 				</div>
 			</div>
 		</div>
@@ -107,4 +107,27 @@ Income MonthlyWise
 		</div>
 	</div>
 								
+@endsection
+
+@section('loadMore')
+
+<style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #f44336;} /* Red */ 
+.button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
+.button5 {background-color: #555555;} /* Black */
+</style>
 @endsection
