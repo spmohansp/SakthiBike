@@ -3,6 +3,7 @@
 
 //Dashboard
 Route::get('/home','BillingController\DashboardController@index')->name('home');
+
 Route::get('/dashboard/get-total-income-expense','BillingController\DashboardController@GetTotalDashboardIncomeExpense');
 
 // Route::get('/home', function () {
@@ -81,6 +82,10 @@ Route::get('GetSalaryDetails','BillingController\SalaryController@GetSalaryDetai
 
 //Employee
 Route::resource('employee','BillingController\EmployeeController');
+
+//ExtraIncome
+Route::resource('Extra-Income','BillingController\ExtraIncomeController');
+
 
 
 
