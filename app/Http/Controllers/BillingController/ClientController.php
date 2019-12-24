@@ -56,6 +56,7 @@ class ClientController extends Controller
 	    	$Client->name = request('name');
             $Client->phone_number = request('phone_number');
             $Client->bike_no = request('bike_no');
+            $Client->Vehicle_id = request('Vehicle_id');
             $Client->service_km = request('service_km');
             $Client->bike_name = request('bike_name');
 	    	$Client->save();

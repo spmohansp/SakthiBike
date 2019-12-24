@@ -30,13 +30,28 @@ Add Clients
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
+                                <label><h5><b>Product Name</b></h5></label>
                                 <input class="form-control form-control-lg" id="" type="text"
                                     aria-describedby="emailHelp" placeholder="Product Name" value="{{ $Product->Product_Name }}" name="Product_Name">
                             </div>
                         </div>
+                         <div class="col-lg-6">
+                            <h5 class="pull-left">Select Vehicle Type</h5>
+                              <div class="form-group">
+                                 <select class="form-control form-control-lg" name="Vehicle_id" >
+                                    <option value="">Select Vehicle Type</option>
+                                    @foreach($Vehicles as $Vehicle)
+                                      <option value={{ $Vehicle->id }}>{{ $Vehicle->name}} </option>
+                                    @endforeach 
+                                 </select>
+
+                              </div>
+                           </div>
+                       </div>
+                       <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="radio-inline"><b>Select Product Type:</b>&nbsp;
+                               <label><h5><b>Select Product Type:</b></h5></label>
                                   <input type="radio" name="Product_Type" value="ml" {{ $Product->Product_Type == 'ml' ? 'checked' : ''}} >Ml
                                 </label>
                                 <label class="radio-inline">
@@ -55,6 +70,7 @@ Add Clients
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
+                                <label><h5><b>Cost Price</b></h5></label>
                                 <input class="form-control form-control-lg" id="" type="text"
                                     aria-describedby="emailHelp" placeholder="Cost Price" value="{{ $Product->Cost_Price }}"
                                     name="Cost_Price">
@@ -62,6 +78,7 @@ Add Clients
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
+                                <label><h5><b>Selling Price</b></h5></label>
                                 <input class="form-control form-control-lg calculatevalue" id="Selling_Price" type="text"
                                     aria-describedby="emailHelp" placeholder="Selling Price" value="{{ $Product->Selling_Price }}"
                                     name="Selling_Price">

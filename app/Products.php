@@ -13,4 +13,8 @@ class Products extends Model
     public function BillProduct(){
         return $this->hasMany(BillProduct::class,'product_id','id');
     }
+
+    public function VehicleName(){
+        return $this->hasOne(vehicle_type::class,'id','Vehicle_id');
+    }
 }

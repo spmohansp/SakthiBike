@@ -29,16 +29,31 @@ Add Products
                     <div class="col-lg-12">
                         <form action="{{ route('admin.storeproduct') }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label><h5><b>Product Name</b></h5></label>
+                                <input class="form-control form-control-lg" id="" type="text"
+                                    aria-describedby="emailHelp" placeholder="Product Name" name="Product_Name">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5 class="pull-left">Select Vehicle Type</h5>
+                              <div class="form-group">
+                                 <select class="form-control form-control-lg" name="Vehicle_id" required="">
+                                    <option value="">Select Vehicle Type</option>
+                                    @foreach($Vehicles as $Vehicle)
+                                      <option value={{ $Vehicle->id }}>{{ $Vehicle->name}} </option>
+                                    @endforeach 
+                                 </select>
+
+                              </div>
+                           </div>
+                            </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input class="form-control form-control-lg" id="" type="text"
-                                            aria-describedby="emailHelp" placeholder="Product Name" name="Product_Name">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label><b>Select Product Type:</b></label>
+                                        <label><h5><b>Select Product Type:</b></h5></label>
                                     <label class="radio-inline">
                                       <input type="radio" name="Product_Type" value="ml">Ml
                                     </label>
@@ -57,12 +72,14 @@ Add Products
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
+                                         <label><h5><b>Cost Price</b></h5></label>
                                         <input class="form-control form-control-lg" id="" type="text"
                                             aria-describedby="emailHelp" placeholder="Cost Price" name="Cost_Price">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
+                                         <label><h5><b>Selling Price</b></h5></label>
                                         <input class="form-control form-control-lg calculatevalue" id="Selling_Price" type="text"
                                             aria-describedby="emailHelp" placeholder="Selling Price" name="Selling_Price">
                                     </div>

@@ -7,11 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Products;
 use App\StockDetail;
 use App\BillProduct;
+use App\vehicle_type;
 
 class ProductController extends Controller
 {
     public function addproduct(){
-        return view('admin.products.add');
+        $Data['Vehicles'] = vehicle_type::get();
+        return view('admin.products.add',$Data);
     }
 
     public function viewproduct(){
@@ -26,6 +28,7 @@ class ProductController extends Controller
             $Product->Product_Type = request('Product_Type');
             $Product->Cost_Price = request('Cost_Price');
             $Product->Selling_Price = request('Selling_Price');
+            $Product->Vehicle_id = request('Vehicle_id');
             $Product->save();
             return back()->with('success', 'Product Added Successfully');
         } catch (\Exception $e) {
@@ -35,7 +38,8 @@ class ProductController extends Controller
 
     public function editProduct($id){
         $Product = Products::findorfail($id);
-        return view('admin.products.edit',compact('Product'));
+        $Vehicles = vehicle_type::get();
+        return view('admin.products.edit',compact('Product','Vehicles'));
     }
 
     public function updateProduct($id){
@@ -45,6 +49,7 @@ class ProductController extends Controller
             $Product->Product_Type = request('Product_Type');
             $Product->Cost_Price = request('Cost_Price');
             $Product->Selling_Price = request('Selling_Price');
+            $Product->Vehicle_id = request('Vehicle_id');
             $Product->save();
             return redirect(route('admin.viewProducts'))->with('success', 'Product Updated Successfully');
         } catch (\Exception $e) {

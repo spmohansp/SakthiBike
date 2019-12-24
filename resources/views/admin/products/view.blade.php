@@ -27,6 +27,7 @@ View Products
               <thead>
                 <tr>
                   <th>S.No</th>
+                  <th>Vehicle Name</th>
                   <th>Product Name</th>
                   <th>Cost Price</th>
                   <th>Selling Price</th>
@@ -38,6 +39,7 @@ View Products
                 @foreach($details as $key=>$detail)
                     <tr>
                       <td> {{ ++$key }}</td>
+                      <td> {{ @$detail->VehicleName->name }}</td>
                       <td> {{ $detail->Product_Name }}</td>
                       <td> {{ $detail->Cost_Price }}</td>
                       <td> {{ $detail->Selling_Price }}</td>
