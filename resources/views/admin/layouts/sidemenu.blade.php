@@ -4,6 +4,13 @@
       <li class="treeview">
         <a class="app-menu__item" href="{{ url('admin/home') }}" ><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a>
       </li>
+       <li class="treeview">
+        <a class="app-menu__item" href="#" data-toggle="treeview"><i class="fa fa-motorcycle"></i><span class="app-menu__label">Vehicle Type</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <ul class="treeview-menu">
+          <li><a class="treeview-item" href="{{ action('BillingController\VehicleTypeController@create') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Vehicle</a></li>
+        </ul>
+      </li>
+
       <li class="treeview">
         <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Customer</span><i class="treeview-indicator fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
