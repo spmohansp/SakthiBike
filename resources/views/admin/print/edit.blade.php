@@ -25,7 +25,7 @@ Edit Print
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Enter Customer name</label>
-                                        <select class="form-control" name="client_id"  id="Customer" style="width: 31em;">
+                                        <select class="form-control CustomerName" name="client_id"  id="Customer" style="width: 31em;">
                                             <optgroup label="Select Customer">
                                                 @foreach($Clients as $Client)
                                                     <option value="{{ $Client->id }}" {{ $Client->id==$Bill->id?'selected':'' }}>{{ $Client->name }} {{ $Client->phone_no }}</option>
@@ -38,6 +38,12 @@ Edit Print
                                     <div class="form-group">
                                         <label>Date</label>
                                         <input class="form-control" type="date" name="date" value="{{ $Bill->date }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Vehicle Name </label>
+                                    <div class="form-group">
+                                        <input class="form-control VehicleName" id="Vehicle_Id" type="text" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -266,7 +272,16 @@ Edit Print
         $('.Product').select2();
         $('.ExtraWorks').select2();
 
+        VehicleDetails();
+
         $(document).ready(function() {
+
+            $(".CustomerName").on('change',function (e) {
+            e.preventDefault();
+                VehicleDetails();
+            });
+
+
             $("#addbillproduct").click(function (e) {
             e.preventDefault();
                 var product_id = $("#product_id").val();
@@ -399,6 +414,24 @@ Edit Print
                 $("#total_amount").show();
                 $("#balance_amount").show();
             }
+        }
+
+        function VehicleDetails()
+        {
+            Customer_Id = $(".CustomerName").val();
+            $.ajax({
+                type: 'get',
+                url: '{{ route('admin.GetVehicleName') }}',
+                data:{Customer_Id:Customer_Id},
+                success:function (data) {
+                    $('#Vehicle_Id').val(data.vehicle_type.name);
+                    var Product = '<option value="">Select</option>';
+                    $.each(data.Products, function (index, value) {
+                        Product += '<option value="'+value.id+'">'+value.Product_Name+'</option>';
+                    });
+                    $('.Product').html(Product);
+                }
+            });
         }
 
     </script>

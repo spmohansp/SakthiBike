@@ -30,13 +30,13 @@ Add Print
                                     <div class="col-lg-6">
                                       <div class="form-group">
                                         <label><b><h5>Customer Name</h5></b></label>
-                                        <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Customer Name" name="name">
+                                        <input class="form-control form-control-lg" type="" aria-describedby="emailHelp" placeholder="Enter Customer Name" name="name">
                                       </div>
                                     </div>
                                     <div class="col-lg-6">
                                       <div class="form-group">
                                         <label><b><h5>Phone Number</h5></b></label>
-                                          <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Phone Number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" value="{{ old('phone_number') }}" name="phone_number" minlength="0" maxlength="10">
+                                          <input class="form-control form-control-lg" type="number" aria-describedby="emailHelp" placeholder="Phone Number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" value="{{ old('phone_number') }}" name="phone_number" minlength="0" maxlength="10">
                                       </div>
                                     </div>
                                   </div>
@@ -44,7 +44,7 @@ Add Print
                                     <div class="col-lg-6">
                                       <div class="form-group">
                                         <label><b><h5>Bike Number</h5></b></label>
-                                        <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Bike Number" name="bike_no">
+                                        <input class="form-control form-control-lg" type="text" aria-describedby="emailHelp" placeholder="Enter Bike Number" name="bike_no">
                                       </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -64,13 +64,13 @@ Add Print
                                     <div class="col-lg-6">
                                       <div class="form-group">
                                         <label><b><h5>Bike Model</h5></b></label>
-                                        <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Bike Model" name="bike_name">
+                                        <input class="form-control form-control-lg" type="" aria-describedby="emailHelp" placeholder="Enter Bike Model" name="bike_name">
                                       </div>
                                     </div>
                                     <div class="col-lg-6">
                                       <div class="form-group">
                                         <label><b><h5>Service Km</h5></b></label>
-                                        <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Service Km" name="service_km">
+                                        <input class="form-control form-control-lg" type="text" aria-describedby="emailHelp" placeholder="Enter Service Km" name="service_km">
                                       </div>
                                     </div>
                                   </div>
@@ -104,7 +104,7 @@ Add Print
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label><h5><b>Enter Name</b></h5></label>
-                                            <input class="form-control form-control-lg" id="" type="text"  placeholder="Enter Name" value="{{ old('name') }}" name="name">
+                                            <input class="form-control form-control-lg" type="text"  placeholder="Enter Name" value="{{ old('name') }}" name="name">
                                         </div>
                                     </div>
                                 </div>
@@ -137,12 +137,11 @@ Add Print
                                 <div style="float:right;">
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add Customer</button>
                                 </div>
-                                <select class="form-control" name="client_id"  id="Customer" >
-                                    <optgroup label="Select Customer">
+                                <select class="form-control CustomerName" name="client_id"  id="Customer" >
+                                        <option selected disabled>Select Customer</option>
                                         @foreach($Clients as $Client)
                                             <option value="{{ $Client->id }}" {{ old('client_id') == $Client->id ? 'selected' : '' }}>{{ $Client->name }} || {{ $Client->phone_number }} || {{ $Client->bike_no }}</option>
                                         @endforeach
-                                    </optgroup>
                                 </select>
                             </div>
                         </div> 
@@ -151,7 +150,13 @@ Add Print
                                 <label>Date</label>
                                 <input class="form-control" type="date" name="date" value="{{ old('date') }}" required>
                             </div>
-                        </div>   
+                        </div> 
+                        <div class="col-md-4">
+                            <label>Vehicle Name </label>
+                            <div class="form-group">
+                                <input class="form-control VehicleName" id="Vehicle_Id" type="text" disabled>
+                            </div>
+                        </div>  
                     </div>
 
                     <div class="row">
@@ -185,11 +190,9 @@ Add Print
                             <label>Add Products</label>
                             <div class="form-group" >
                                 <select class="form-control Product" id="product_id">
-                                    <optgroup label="Select Products">
-                                        @foreach($Products as $Product)
+                                        {{-- @foreach($Products as $Product)
                                             <option value="{{ $Product->id }}">{{ $Product->Product_Name }}</option>
-                                        @endforeach
-                                    </optgroup>
+                                        @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -335,8 +338,11 @@ Add Print
             todayHighlight: true
         });
 
+        $(".CustomerName").trigger("change");
         $('#Customer').select2();
-        $('.Product').select2();
+        $('.Product').select2({
+            placeholder: 'Select a Product',
+        });
         $('.ExtraWorks').select2();
 
         $(document).ready(function() {
@@ -344,6 +350,7 @@ Add Print
             $("#addbillproduct").click(function (e) {
             e.preventDefault();
                 var product_id = $("#product_id").val();
+                console.log(product_id);
                 var qty = $("#qty").val();
                 if(product_id !='' && qty !=''){
                     $.ajax({
@@ -414,7 +421,7 @@ Add Print
                 '           </select>\n' +
                 '       </td>\n' +
                 '       <td colspan="" rowspan="" headers="">\n'+
-                '           <input class="form-control total_amount" id="" type="number" onKeyUp="calculateTotal()" placeholder="Enter Amount" name="amount[]">\n' +
+                '           <input class="form-control total_amount" type="number" onKeyUp="calculateTotal()" placeholder="Enter Amount" name="amount[]">\n' +
                 '       </td>\n' +
                 '       <td colspan="" rowspan="" headers="">\n' +
                 '           <i class="fa fa-close fa-1x RemoveExtraWorkButon btn" style="color:red;"></i>\n' +
@@ -474,6 +481,30 @@ Add Print
                 $("#balance_amount").show();
             }
         }
+
+        $('.vehicleName').select2();
+        $('.CustomerName').select2();
+
+        $(document).ready(function() {
+            $(".CustomerName").on('change',function (e) {
+            e.preventDefault();
+                Customer_Id = $(".CustomerName").val();
+                $.ajax({
+                    type: 'get',
+                    url: '{{ route('admin.GetVehicleName') }}',
+                    data:{Customer_Id:Customer_Id},
+                    success:function (data) {
+                        $('#Vehicle_Id').val(data.vehicle_type.name);
+                        var Product = '<option value="">Select</option>';
+                        $.each(data.Products, function (index, value) {
+                            Product += '<option value="'+value.id+'">'+value.Product_Name+'</option>';
+                        });
+                        $('.Product').html(Product);
+                    }
+                });         
+            });
+        });
+
 
     </script>
 

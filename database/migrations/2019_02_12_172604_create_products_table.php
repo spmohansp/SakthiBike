@@ -19,7 +19,6 @@ class CreateProductsTable extends Migration
             $table->string('Product_Type')->nullable();
             $table->string('Cost_Price');
             $table->string('Selling_Price')->nullable();
-            $table->string('Vehicle_id');
             $table->timestamps();
         });
     }

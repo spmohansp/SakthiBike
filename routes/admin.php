@@ -89,6 +89,7 @@ Route::resource('Extra-Income','BillingController\ExtraIncomeController');
 //Vehicle Type
 
 Route::resource('vehicle_type','BillingController\VehicleTypeController');
+Route::get('/GetVehicleName','BillingController\VehicleTypeController@GetVehicleName')->name('GetVehicleName');
 
 
 

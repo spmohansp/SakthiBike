@@ -5,6 +5,8 @@ namespace App\Http\Controllers\BillingController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\vehicle_type;
+use App\Client;
+use App\Products;
 
 
 class VehicleTypeController extends Controller
@@ -108,5 +110,12 @@ class VehicleTypeController extends Controller
         }catch (\Exception $e){
             return back()->with('danger','Sorry,Something went wrong!.Vehicle Cannot Be Deleted!');
         }
+    }
+
+     public function GetVehicleName(){
+        $Data['Client'] = Client::findorfail(request('Customer_Id'));
+        $Data['vehicle_type'] = vehicle_type::findorfail($Data['Client']->Vehicle_id);
+        $Data['Products'] = Products::where('Vehicle_id',$Data['Client']->Vehicle_id)->get();
+        return $Data;
     }
 }

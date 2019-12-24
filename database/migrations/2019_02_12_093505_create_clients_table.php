@@ -18,7 +18,6 @@ class CreateClientsTable extends Migration
             $table->string('name');
             $table->string('phone_number');
             $table->string('bike_no')->unique();
-            $table->string('Vehicle_id');
             $table->string('service_km')->nullable();
             $table->string('bike_name')->nullable();
             $table->timestamps();
