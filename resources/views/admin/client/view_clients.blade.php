@@ -35,6 +35,7 @@ View Clients
                     <th>Phone Number</th>
                     <th>Bike Number</th>
                     <th>Bike Name</th>
+                    <th>Bike Model</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -45,6 +46,7 @@ View Clients
                         <td>{{ $Client->name }}</td>
                         <td>{{ $Client->phone_number }}</td>
                         <td>{{ $Client->bike_no }}</td>
+                        <td>{{ $Client->VehicleName->name }}</td>
                         <td>{{ $Client->bike_name }}</td>
                         <td>
                           <a href="{{ route('admin.editClient',$Client->id) }}"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>

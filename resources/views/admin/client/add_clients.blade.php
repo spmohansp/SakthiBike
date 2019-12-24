@@ -28,11 +28,13 @@ Add Customer
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
+                    <label><b><h5>Customer Name</h5></b></label>
                     <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Customer Name" name="name">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
+                    <label><b><h5>Phone Number</h5></b></label>
                       <input class="form-control form-control-lg" id="" type="number" aria-describedby="emailHelp" placeholder="Phone Number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" value="{{ old('phone_number') }}" name="phone_number" minlength="0" maxlength="10">
                   </div>
                 </div>
@@ -40,18 +42,33 @@ Add Customer
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
+                    <label><b><h5>Bike Number</h5></b></label>
                     <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Bike Number" name="bike_no">
                   </div>
                 </div>
                 <div class="col-lg-6">
+                <h5 class="pull-left">Select Vehicle Type</h5>
                   <div class="form-group">
-                    <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Bike Name" name="bike_name">
+                     <select class="form-control form-control-lg" name="Vehicle_id" required="">
+                        <option value="">Select Vehicle Type</option>
+                        @foreach($Vehicles as $Vehicle)
+                          <option value={{ $Vehicle->id }}>{{ $Vehicle->name}} </option>
+                        @endforeach 
+                     </select>
+
                   </div>
-                </div>
+               </div>
               </div>
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
+                    <label><b><h5>Bike Model</h5></b></label>
+                    <input class="form-control form-control-lg" id="" type="" aria-describedby="emailHelp" placeholder="Enter Bike Model" name="bike_name">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label><b><h5>Service Km</h5></b></label>
                     <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Enter Service Km" name="service_km">
                   </div>
                 </div>

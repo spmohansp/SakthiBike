@@ -8,6 +8,7 @@ use App\Client;
 use App\Employee;
 use App\ExtraWork;
 use App\BillExtraWork;
+use App\vehicle_type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +19,8 @@ class PrintController extends Controller
 	    $Clients = Client::all();
         $Employees = Employee::all();
         $ExtraWorks = ExtraWork::all();
-		return view('admin.print.add_print',compact('Products','Clients','Employees','ExtraWorks'));
+        $Vehicles = vehicle_type::all();
+		return view('admin.print.add_print',compact('Products','Clients','Employees','ExtraWorks','Vehicles'));
 	}
 
 	public function viewPrint(){

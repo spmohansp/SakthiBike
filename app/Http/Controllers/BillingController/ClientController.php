@@ -4,11 +4,13 @@ namespace App\Http\Controllers\BillingController;
 use App\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\vehicle_type;
 
 class ClientController extends Controller
 {
     public function addClient(){
-    	return view('admin.client.add_clients');
+        $Data['Vehicles'] = vehicle_type::get();
+    	return view('admin.client.add_clients',$Data);
     }
 
     public function saveClient(Request $request){
@@ -22,10 +24,11 @@ class ClientController extends Controller
 	    	$Client->phone_number = request('phone_number');
 	    	$Client->bike_no = request('bike_no');
 	    	$Client->service_km = request('service_km');
+            $Client->Vehicle_id = request('Vehicle_id');
             $Client->bike_name = request('bike_name');
 	    	$Client->save();
 	    	return back()->with('success','Client Added Successfully');
-    	}catch(\Exception $e){
+    	}catch(Exception $e){
     		return back()->with('danger','Something went wrong');
     	}
     	
@@ -39,7 +42,8 @@ class ClientController extends Controller
 
     public function editClient($id){
     	$Client = Client::FindorFail($id);
-    	return view('admin.client.edit_clients',compact('Client'));
+        $Vehicles = vehicle_type::get();
+    	return view('admin.client.edit_clients',compact('Client','Vehicles'));
     }
 
     public function updateClient($id,Request $request){
