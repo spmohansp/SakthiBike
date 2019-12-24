@@ -61,6 +61,8 @@ Income MonthlyWise
 								<th class="csvth">Bill No</th>
 								<th class="csvth">Customer Name</th>
 								<th class="csvth">Total Cost</th>
+								<th class="csvth">Given Amount</th>
+								<th class="csvth">Discount</th>
 								<th class="csvth">Balance</th>
 							</tr>
 						</thead>
@@ -72,6 +74,8 @@ Income MonthlyWise
 									<td>{{ $Income->bill_number }}</td>
 									<td>{{ $Income->Client->name }}</td>
 	                                <td>{{ $Income->bill_amount }}</td>
+	                                <td>{{ $Income->bill_amount_given }}</td>
+	                                <td>{{ $Income->discount_amount }}</td>
 	                                <td>{{ $Income->balance_amount }}</td>
 								</tr>
 							@endforeach
