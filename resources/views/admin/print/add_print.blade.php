@@ -88,41 +88,6 @@ Add Print
         </div>
     </div>
 
-    {{-- <div class="modal fade" id="extraWork" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Add Extra Work</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                           <form action="{{ action('BillingController\ExtraWorkController@store') }}" method="post" enctype="multipart/form-data">
-                              {{ csrf_field() }}
-                                         <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label><h5><b>Enter Name</b></h5></label>
-                                            <input class="form-control form-control-lg" type="text"  placeholder="Enter Name" value="{{ old('name') }}" name="name">
-                                        </div>
-                                    </div>
-                                </div>
-                                  
-                                <div class="">
-                                    <button class="btn btn-primary" type="submit">Add Extra Work</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
     <div class="row">
         <div class="col-md-12">
             <form action="{{ route('admin.saveBill') }}" method="post">
@@ -184,6 +149,33 @@ Add Print
                         </div>
                     </div>
                 </div>
+
+                <div class="tile">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label class="col-form-label col-form-label-lg" for="inputLarge">Extra Work</label>
+                                <div style="float:right;">
+                                    <button type="button" class="btn btn-primary btn-sm AddExtraWork" >Add Extra Work</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Extra Work</th>
+                                    <th>Enter Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="AppendAddExtraWork">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <div class="tile">
                     <div class="row">
                         <div class="col-md-4">
@@ -209,32 +201,6 @@ Add Print
                                 <button type="button" id="addbillproduct"  class="btn btn-primary addbillproduct"  style="padding:10px 20px;" > Add Product</button>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="tile">
-                    <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <label class="col-form-label col-form-label-lg" for="inputLarge">Extra Work</label>
-                                <div style="float:right;">
-                                    <button type="button" class="btn btn-primary btn-sm AddExtraWork" >Add Extra Work</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="body table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Extra Work</th>
-                                    <th>Enter Amount</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody class="AppendAddExtraWork">
-                            </tbody>
-                        </table>
                     </div>
                 </div>
 
@@ -358,7 +324,7 @@ Add Print
                         url: '/admin/product/getProduct',
                         data:{product_id:product_id,qty:qty},
                         success:function (data) {
-                            $('#productbilltable').append(data);
+                            $('#productbilltable').prepend(data);
                             calculateTotal();
                         }
                     });

@@ -170,6 +170,13 @@ class PrintController extends Controller
 	    return view('admin.print.print_bill',compact('Bill','ExtraWorks','BillWork'));
     }
 
+    public function  deleteBill($id){
+        $ExtraWorks = BillExtraWork::where('bill_id',$id)->delete();
+        $BillProduct = BillProduct::where('bill_id',$id)->delete();
+        $Bill = Bill::findorfail($id)->delete();
+        return redirect(route('admin.ViewBill'))->with('success','Bill Deleted Successfully!');
+    }
+
 
 
     public function search_customer_name()

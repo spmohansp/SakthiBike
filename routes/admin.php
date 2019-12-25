@@ -54,6 +54,7 @@ Route::post('/bill/add','BillingController\PrintController@saveBill')->name('sav
 Route::get('/print/{id}/edit', 'BillingController\PrintController@editPrint')->name('editPrint');
 Route::post('/print/{id}/update', 'BillingController\PrintController@UpdateBill')->name('UpdateBill');
 Route::get('/bill/{id}/print','BillingController\PrintController@printBill')->name('printBill');
+Route::get('/bill/{id}/delete','BillingController\PrintController@deleteBill')->name('deleteBill');
 
 Route::get('/bill/autocomplete','BillingController\PrintController@search_customer_name');
 
