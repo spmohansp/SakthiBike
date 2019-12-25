@@ -41,22 +41,20 @@ View Emoloyee
                 </thead>
                 <tbody>
                   @foreach($Employees as $Employee)
-                  <tr>
-                    <td>{{ $Employee->name }}</td>
-                    <td>{{ $Employee->mobile }}</td>
-                    <td>{{ $Employee->employee_id }}</td>
-                    <td>{{ $Employee->address }}</td>
-                    <td>{{ $Employee->amount_per_day }}</td>
-                   
-                    <td>
-                      <form action="{{ action('BillingController\EmployeeController@destroy',$Employee->id) }}" method="POST">
-                          {{ csrf_field() }}
-                          <input type="hidden" name="_method" value="DELETE">
-                          <a href="{{ action('BillingController\EmployeeController@edit',$Employee->id) }}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></a>
-                          <button href="" onclick="return confirm('Are you sure?')" class="btn btn-primary"><i class="fa fa-trash-o"  aria-hidden="true" style="color:#fff" ></i></button>
-                      </form>
-                    </td>
-                  </tr>
+                    <tr>
+                      <td>{{ $Employee->name }}</td>
+                      <td>{{ $Employee->mobile }}</td>
+                      <td>{{ $Employee->address }}</td>
+                      <td>{{ $Employee->amount_per_day }}</td>
+                      <td>
+                        <form action="{{ action('BillingController\EmployeeController@destroy',$Employee->id) }}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <a href="{{ action('BillingController\EmployeeController@edit',$Employee->id) }}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></a>
+                            <button href="" onclick="return confirm('Are you sure?')" class="btn btn-primary"><i class="fa fa-trash-o"  aria-hidden="true" style="color:#fff" ></i></button>
+                        </form>
+                      </td>
+                    </tr>
                   @endforeach
                 </tbody>
               </table>

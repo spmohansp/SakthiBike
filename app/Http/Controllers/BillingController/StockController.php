@@ -6,6 +6,7 @@ use App\Stock;
 use App\StockDetail;
 use App\Shop;
 use App\BillProduct;
+use App\vehicle_type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,8 @@ class StockController extends Controller
    public function addStock(){
    	$Products = Products::all();
       $Shops = Shop::all();
-      return view('admin.stock.add',compact('Products','Shops'));
+      $Vehicles = vehicle_type::get();
+      return view('admin.stock.add',compact('Products','Shops','Vehicles'));
    }
 
    public function saveStock(){

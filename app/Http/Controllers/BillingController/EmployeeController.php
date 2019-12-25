@@ -92,7 +92,6 @@ class EmployeeController extends Controller
             $Employee = Employee::findorfail($id);
             $Employee->name = request('name');  
             $Employee->mobile = request('mobile');
-            $Employee->employee_id = request('employee_id');
             $Employee->address = request('address');
             $Employee->amount_per_day = request('amount_per_day');
             $Employee->save();
