@@ -72,47 +72,6 @@ Edit Print
                                 </div>
                             </div>
                         </div>
-                        <div class="tile">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label>Add Products</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Quantity </label>
-                                </div>
-                                <div class="col-md-2">
-                                    <label></label>
-                                </div>
-                                <div class="col-md-2">
-                                    <label></label>
-                                </div>
-                            </div>
-                            <div id="productsbilllist">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group" >
-                                            <select class="form-control Product" id="product_id" style="width: 31em;">
-                                                <optgroup label="Select Products">
-                                                    @foreach($Products as $Product)
-                                                        <option value="{{ $Product->id }}">{{ $Product->Product_Name }}</option>
-                                                    @endforeach
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <input class="form-control nextrow " type="text" placeholder="Enter Quantity" min="1" id="qty">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <button type="button" id="addbillproduct"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="tile">
                             <div class="col-lg-12">
@@ -157,6 +116,48 @@ Edit Print
                             </div>
                         </div>
 
+                        <div class="tile">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Add Products</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Quantity </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            <div id="productsbilllist">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group" >
+                                            <select class="form-control Product" id="product_id" style="width: 31em;">
+                                                {{-- <optgroup label="Select Products">
+                                                    @foreach($Products as $Product)
+                                                        <option value="{{ $Product->id }}">{{ $Product->Product_Name }}</option>
+                                                    @endforeach
+                                                </optgroup> --}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input class="form-control nextrow " type="text" placeholder="Enter Quantity" min="1" id="qty">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <button type="button" id="addbillproduct"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="tile">
@@ -292,7 +293,7 @@ Edit Print
                         url: '/admin/product/getProduct',
                         data:{product_id:product_id,qty:qty},
                         success:function (data) {
-                            $('#productbilltable').append(data);
+                            $('#productbilltable').prepend(data);
                             calculateTotal();
                         }
                     });
