@@ -20,7 +20,7 @@ class ClientController extends Controller
     	]);
     	try{
 	    	$Client = new Client;
-	    	$Client->name = request('name');
+	    	$Client->name = ucfirst(request('name'));
 	    	$Client->phone_number = request('phone_number');
 	    	$Client->bike_no = request('bike_no');
 	    	$Client->service_km = request('service_km');
@@ -53,7 +53,7 @@ class ClientController extends Controller
         ]);
 	    try{
 	    	$Client = Client::FindorFail($id);
-	    	$Client->name = request('name');
+	    	$Client->name = ucfirst(request('name'));
             $Client->phone_number = request('phone_number');
             $Client->bike_no = request('bike_no');
             $Client->Vehicle_id = request('Vehicle_id');
