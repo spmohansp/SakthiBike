@@ -146,18 +146,19 @@ Edit Print
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <input class="form-control nextrow " type="text" placeholder="Enter Quantity" min="1" id="qty">
+                                            <input class="form-control nextrow Quantity" type="text" placeholder="Enter Quantity" min="1" id="qty">
+                                            <span class="QuantityLimit" style="color:red;font-size: 18px;"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <button type="button" id="addbillproduct"  class="btn btn-primary "  style="padding:10px 20px;" > Add Product</button>
+                                            <button type="button" id="addbillproduct"  class="btn btn-primary addbillproduct"  style="padding:10px 20px;" > Add Product</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="tile">
@@ -317,6 +318,7 @@ Edit Print
                         data:{product_id:product_id},
                         success:function (data) {
                             if(qty>0){
+                            console.log(data);
                                 if(data.BillProduct!= null){
                                     var calc = data.StockDetail.Unit - data.BillProduct;
                                     count(qty,calc);
