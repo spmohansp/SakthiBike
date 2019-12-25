@@ -61,7 +61,7 @@ class ClientController extends Controller
             $Client->bike_name = request('bike_name');
 	    	$Client->save();
 	    	return redirect(url('/admin/clients'))->with('success','Client Updated Successfully');
-    	}catch(\Exception $e){
+    	}catch(Exception $e){
     		return back()->with('danger','Something went wrong');
     	}
     }
