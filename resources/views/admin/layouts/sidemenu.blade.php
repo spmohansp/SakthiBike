@@ -69,7 +69,7 @@
         </ul>
       </li>
       <li class="treeview">
-        <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-exchange"></i><span class="app-menu__label">Extra Income</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-money"></i><span class="app-menu__label">Extra Income</span><i class="treeview-indicator fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
           <li><a class="treeview-item" href="{{ action('BillingController\ExtraIncomeController@create') }}"><i class="icon fa fa-chevron-circle-right"></i> Add Income</a></li>
           <li><a class="treeview-item" href="{{ action('BillingController\ExtraIncomeController@index') }}"><i class="icon fa fa-chevron-circle-right"></i> View Income</a></li>
