@@ -5,6 +5,7 @@ use App\Employee;
 use App\Expense;
 use App\ExtraWork;
 use App\Bill;
+use App\ExtraIncome;
 use App\Attendence;
 
 if (! function_exists('GetExtraWorkDetails')) {
@@ -38,6 +39,8 @@ if (! function_exists('DashboardMonthlyWiseTotalIncomeExpense')) {
         $Data['Income'] = Bill::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('bill_amount_given');
         $Data['OutStanding'] = Bill::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('balance_amount');
         $Data['Expense'] = Expense::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('amount');
+
+        $Data['Extra_Income'] = ExtraIncome::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('amount');
         $OutStandings = Bill::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get();
         return $Data;
     } 
@@ -47,6 +50,7 @@ if (! function_exists('DashboardIncomeDetails')) {
     function DashboardIncomeDetails($Month,$Year) { 
         $Data['Income'] = Bill::whereMonth('date',$Month)->whereYear('date',$Year)->get();
         $Data['Expense'] = Expense::whereMonth('date',$Month)->whereYear('date',$Year)->get();
+        $Data['Extra_Incomes'] = ExtraIncome::whereMonth('date',$Month)->whereYear('date',$Year)->get();
         return $Data;
     } 
 }

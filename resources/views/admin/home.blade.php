@@ -41,7 +41,7 @@ Home
 								<div class="col-8">
 									<h5>{{ date('F', mktime(0, 0, 0, date('m'), 10)) }} - {{ date('Y') }}</h5>
 									<h2 class="d-flex align-items-center mb-0 font-weight-light" id="Income">
-										₹{{ $DashboardMonthlyWiseTotalIncomeExpense['Income'] }}
+										₹{{ $DashboardMonthlyWiseTotalIncomeExpense['Income'] + $DashboardMonthlyWiseTotalIncomeExpense['Extra_Income'] }}  
 									</h2>
 								</div>
 								<div class="col-4 text-right">

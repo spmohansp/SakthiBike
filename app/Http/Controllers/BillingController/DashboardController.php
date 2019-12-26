@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Expense;
 use App\Bill;
+use App\Extra_Income;
 use Auth;
 class DashboardController extends Controller
 {
