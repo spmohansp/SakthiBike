@@ -13,8 +13,6 @@ Edit Product
 @endsection
 
 @section('content')
-
-
     <div class="tile">
         <div class="row">
             <div class="col-lg-12">
@@ -44,15 +42,6 @@ Edit Product
                                       <option value="{{ $Vehicle->id }}" {{ $Product->Vehicle_id == $Vehicle->id ? 'selected' : '' }}>{{ $Vehicle->name }} </option>
                                     @endforeach 
                                  </select>
-
-{{-- 
-                                 <select class="form-control form-control-lg" name="shop_id" required="">
-                          <option value="">Select Shop</option>
-                          @foreach($Shops as $Shop)
-                            <option value="{{ $Shop->id }}" {{ $Stock->shop_id == $Shop->id ? 'selected' : '' }}>{{ $Shop->name}} </option>
-                          @endforeach 
-                       </select> --}}
-
                               </div>
                            </div>
                        </div>

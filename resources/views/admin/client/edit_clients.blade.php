@@ -52,7 +52,7 @@ Add Clients
                      <select class="form-control form-control-lg" name="Vehicle_id">
                         <option value="">Select Vehicle Type</option>
                         @foreach($Vehicles as $Vehicle)
-                          <option value={{ $Vehicle->id }}>{{ $Vehicle->name}} </option>
+                          <option value="{{ $Vehicle->id }}" {{ $Client->Vehicle_id == $Vehicle->id ? 'selected' : '' }}>{{ $Vehicle->name}} </option>
                         @endforeach 
                      </select>
 
