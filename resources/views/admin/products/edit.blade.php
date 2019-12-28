@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('Current-Page')
-Add Clients
+Edit Product
 @endsection
 
 @section('Parent-Menu')
@@ -9,7 +9,7 @@ Clients
 @endsection
 
 @section('Menu')
-Add Clients
+Edit Product
 @endsection
 
 @section('content')
@@ -41,9 +41,17 @@ Add Clients
                                  <select class="form-control form-control-lg" name="Vehicle_id" >
                                     <option value="">Select Vehicle Type</option>
                                     @foreach($Vehicles as $Vehicle)
-                                      <option value={{ $Vehicle->id }}>{{ $Vehicle->name}} </option>
+                                      <option value="{{ $Vehicle->id }}" {{ $Product->Vehicle_id == $Vehicle->id ? 'selected' : '' }}>{{ $Vehicle->name }} </option>
                                     @endforeach 
                                  </select>
+
+{{-- 
+                                 <select class="form-control form-control-lg" name="shop_id" required="">
+                          <option value="">Select Shop</option>
+                          @foreach($Shops as $Shop)
+                            <option value="{{ $Shop->id }}" {{ $Stock->shop_id == $Shop->id ? 'selected' : '' }}>{{ $Shop->name}} </option>
+                          @endforeach 
+                       </select> --}}
 
                               </div>
                            </div>
