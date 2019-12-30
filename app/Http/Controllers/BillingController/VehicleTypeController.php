@@ -118,7 +118,8 @@ class VehicleTypeController extends Controller
         $Data['Client'] = Client::findorfail(request('Customer_Id'));
         $Data['vehicle_type'] = vehicle_type::findorfail($Data['Client']->Vehicle_id);
         $Data['GetProducts'] = collect(Products::where('Vehicle_id',$Data['Client']->Vehicle_id)->get());
-        $Data['GetProduct'] = $Data['GetProducts']->merge(Products::where('Vehicle_id',"=",NULL)->get());
+        $Data['Product'] = $Data['GetProducts']->merge(Products::where('Vehicle_id',"=",NULL)->get());
+        $Data['GetProduct'] = $Data['Product']->merge(Products::where('Vehicle_id',"=",'')->get());
         $Data['Products'] = $Data['GetProduct']->all();
         return $Data;
     }
