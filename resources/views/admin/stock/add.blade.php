@@ -66,7 +66,7 @@ Add Stock
     </div>
 
 
-  
+
   <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
@@ -90,7 +90,7 @@ Add Stock
                                 <div class="col-lg-4">
                                     <h5 class="pull-left">Select Vehicle Type</h5>
                                     <div class="form-group">
-                                        <select class="form-control form-control-lg" name="Vehicle_id" required="">
+                                        <select class="form-control form-control-lg" name="Vehicle_id">
                                             <option value="">Select Vehicle Type</option>
                                             @foreach($Vehicles as $Vehicle)
                                             <option value={{ $Vehicle->id }}>{{ $Vehicle->name}} </option>
@@ -169,7 +169,7 @@ Add Stock
                           <option value="">Select Shop</option>
                           @foreach($Shops as $Shop)
                             <option value={{ $Shop->id }}>{{ $Shop->name}} </option>
-                          @endforeach 
+                          @endforeach
                        </select>
 
                     </div>
@@ -181,7 +181,7 @@ Add Stock
                     </div>
                  </div>
                </div>
-               
+
                 <div class="row">
                     <div class="col-sm-12">
                        <div class="panel-group">
@@ -198,7 +198,7 @@ Add Stock
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add Product</button>
                                 </div>
                                         </th>
-                             
+
                                          <th>Unit</th>
                                          <th>Cost </th>
                                          <th>Selling</th>
@@ -291,7 +291,7 @@ Add Stock
           // setTimeout(function() {
           //   $('.Products').trigger('change');
           // }, 2000);
-          
+
           $('.AddStock').trigger('click');
 
           // $('.Products').select2({
@@ -301,7 +301,7 @@ Add Stock
             e.preventDefault();
             var Unit = $(this).parent().parent().find(".Unit").val();
             var Product = $(this).parent().parent().find(".Products").val();
-            if(Product!= ''){              
+            if(Product!= ''){
               $.ajax({
                 type: "get",
                 url: "{{ route('admin.GetProductDetails') }}",
@@ -310,7 +310,7 @@ Add Stock
                   $(this).parent().parent().find(".Cost").html(data.Cost_Price);
                   $(this).parent().parent().find(".Selling").html(data.Selling_Price);
                   $(this).parent().parent().find(".ProductWiseTotal").html(data.Cost_Price * Unit);
-                  
+
                   var ProductWiseFullTotal = 0;
                   $('.ProductWiseTotal').each(function() {
                     if($(this).text() !=='' && !isNaN($(this).text()))
@@ -323,7 +323,7 @@ Add Stock
             }
            });
 
-      
+
 
         $('body').on('click','.RemoveStockInput',function (e) {
             e.preventDefault();

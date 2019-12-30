@@ -45,7 +45,7 @@ class VehicleTypeController extends Controller
         ]);
         try {
             $VehicleName = new vehicle_type;
-            $VehicleName->name = request('name');  
+            $VehicleName->name = request('name');
             $VehicleName->save();
             return back()->with('success','Vehicle Name Created Successfully');
         }catch (\Exception $e){
@@ -87,14 +87,14 @@ class VehicleTypeController extends Controller
         try {
             // return request()->all();
             $VehicleName = vehicle_type::findorfail($id);
-            $VehicleName->name = request('name');  
+            $VehicleName->name = request('name');
             $VehicleName->save();
             return redirect(action('BillingController\VehicleTypeController@create'))->with('success','Vehicle Name Updated Successfully');
         }catch (\Exception $e){
             return back()->with('danger','Sorry,Something went wrong!.Vehicle Name Cannot Be Updated!');
         }
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -113,9 +113,13 @@ class VehicleTypeController extends Controller
     }
 
      public function GetVehicleName(){
+        $Data['GetProducts'] = "";
+        $Data['GetProduct'] = "";
         $Data['Client'] = Client::findorfail(request('Customer_Id'));
         $Data['vehicle_type'] = vehicle_type::findorfail($Data['Client']->Vehicle_id);
-        $Data['Products'] = Products::where('Vehicle_id',$Data['Client']->Vehicle_id)->get();
+        $Data['GetProducts'] = collect(Products::where('Vehicle_id',$Data['Client']->Vehicle_id)->get());
+        $Data['GetProduct'] = $Data['GetProducts']->merge(Products::where('Vehicle_id',"=",NULL)->get());
+        $Data['Products'] = $Data['GetProduct']->all();
         return $Data;
     }
 }

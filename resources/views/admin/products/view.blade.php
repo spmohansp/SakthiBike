@@ -27,8 +27,8 @@ View Products
               <thead>
                 <tr>
                   <th>S.No</th>
-                  <th>Vehicle Name</th>
                   <th>Product Name</th>
+                  <th>Vehicle Name</th>
                   <th>Cost Price</th>
                   <th>Selling Price</th>
                   <th>Unit</th>
@@ -39,8 +39,8 @@ View Products
                 @foreach($details as $key=>$detail)
                     <tr>
                       <td> {{ ++$key }}</td>
-                      <td> {{ @$detail->VehicleName->name }}</td>
                       <td> {{ $detail->Product_Name }}</td>
+                      <td> {{ isset($detail->VehicleName) ? @$detail->VehicleName->name : '-' }}</td>
                       <td> {{ $detail->Cost_Price }}</td>
                       <td> {{ $detail->Selling_Price }}</td>
                       <td> {{ $detail->StockDetail->sum('Unit') - $detail->BillProduct->sum('quantity') }}</td>

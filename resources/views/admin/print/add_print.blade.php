@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('Current-Page')
-Add Print 
+Add Print
 @endsection
 
 @section('Parent-Menu')
@@ -54,7 +54,7 @@ Add Print
                                             <option value="">Select Vehicle Type</option>
                                             @foreach($Vehicles as $Vehicle)
                                               <option value={{ $Vehicle->id }}>{{ $Vehicle->name}} </option>
-                                            @endforeach 
+                                            @endforeach
                                          </select>
 
                                       </div>
@@ -109,19 +109,19 @@ Add Print
                                         @endforeach
                                 </select>
                             </div>
-                        </div> 
+                        </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Date</label>
                                 <input class="form-control" type="date" name="date" value="{{ old('date') }}" required>
                             </div>
-                        </div> 
+                        </div>
                         <div class="col-md-4">
                             <label>Vehicle Name </label>
                             <div class="form-group">
                                 <input class="form-control VehicleName" id="Vehicle_Id" type="text" disabled>
                             </div>
-                        </div>  
+                        </div>
                     </div>
 
                     <div class="row">
@@ -221,7 +221,7 @@ Add Print
 
                                     <tbody id="productbilltable">
                                     </tbody>
-                                    
+
                                     <tbody id="appendExtraAmount">
                                     </tbody>
 
@@ -271,7 +271,7 @@ Add Print
                             <div class="col-md-8" style="text-align: right">
                                 <button type="submit" name="print" value="1" class="btn btn-primary" style="padding:10px 20px;" >Print Bill</button>
                                 <button type="submit" class="btn btn-success" style="padding:10px 20px;" >Save Bill</button>
-                            </div>  
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -373,9 +373,9 @@ Add Print
                 }
             }
 
-            $('body').on("click", ".AddExtraWork", function (e) { 
+            $('body').on("click", ".AddExtraWork", function (e) {
                 e.preventDefault();
-                var ExtraWork = 
+                var ExtraWork =
                 '     <tr>\n' +
                 '        <td colspan="" rowspan="" headers="">\n' +
                 '           <select class="form-control ExtraWorks" name="extrawork[]">\n' +
@@ -467,7 +467,7 @@ Add Print
                         });
                         $('.Product').html(Product);
                     }
-                });         
+                });
             });
         });
 

@@ -39,7 +39,7 @@ Add Products
                                 <div class="col-lg-4">
                                     <h5 class="pull-left">Select Vehicle Type</h5>
                                     <div class="form-group">
-                                        <select class="form-control form-control-lg" name="Vehicle_id" required="">
+                                        <select class="form-control form-control-lg" name="Vehicle_id">
                                             <option value="">Select Vehicle Type</option>
                                             @foreach($Vehicles as $Vehicle)
                                             <option value={{ $Vehicle->id }}>{{ $Vehicle->name}} </option>

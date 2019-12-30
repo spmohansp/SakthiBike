@@ -14,7 +14,7 @@ class AddVehicleIdToClients extends Migration
     public function up()
     {
         Schema::table('clients', function (Blueprint $table) {
-            $table->string('Vehicle_id');
+            $table->string('Vehicle_id')->nullable();;
         });
     }
 
