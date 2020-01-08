@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Expense;
 use App\Bill;
-use App\Extra_Income;
 use Auth;
 class DashboardController extends Controller
 {
@@ -104,8 +103,8 @@ class DashboardController extends Controller
         $month = $DateMonthYear[1];
         $Months= date('F', mktime(0, 0, 0, $month, 10));
         $DashboardMonthlyWiseTotalIncomeExpense = DashboardMonthlyWiseTotalIncomeExpense($month,$year);
-
-        $MonthlyProfit = $DashboardMonthlyWiseTotalIncomeExpense['Income'] - $DashboardMonthlyWiseTotalIncomeExpense['Expense'];
+        $DashboardMonthlyWiseTotalIncomeExtraIncome = $DashboardMonthlyWiseTotalIncomeExpense['Income'] + $DashboardMonthlyWiseTotalIncomeExpense['Extra_Income'];
+        $MonthlyProfit = $DashboardMonthlyWiseTotalIncomeExpense['Income'] + $DashboardMonthlyWiseTotalIncomeExpense['Extra_Income'] - $DashboardMonthlyWiseTotalIncomeExpense['Expense'];
 
         $MonthlyIncomeBar = $DashboardMonthlyWiseTotalIncomeExpense['Income']/100;
         $MonthlyExpenseBar = $DashboardMonthlyWiseTotalIncomeExpense['Expense']/100;
@@ -126,7 +125,7 @@ class DashboardController extends Controller
                         <div class="col-8">
                             <h5>'.$Months.'-'.$year.'</h5>
                             <h2 class="d-flex align-items-center mb-0 font-weight-light" id="Expense">
-                                 ₹'.$DashboardMonthlyWiseTotalIncomeExpense['Income'].'
+                                 ₹'.$DashboardMonthlyWiseTotalIncomeExtraIncome.'
                             </h2>
                         </div>
                         <div class="col-4 text-right">
