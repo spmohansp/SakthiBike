@@ -1,12 +1,12 @@
 @extends('admin.layouts.master')
 
-@section('Current-Page') 
+@section('Current-Page')
 Dashboard
-@endsection 
+@endsection
 
-@section('Parent-Menu') 
-Home 
-@endsection 
+@section('Parent-Menu')
+Home
+@endsection
 
 @section('Menu')
     Dashboard
@@ -16,7 +16,7 @@ Home
 
 	 <?php
 	    $DashboardMonthlyWiseTotalIncomeExpense = DashboardMonthlyWiseTotalIncomeExpense(date('m'),date('Y'));
-	    $MonthlyProfit = $DashboardMonthlyWiseTotalIncomeExpense['Income'] - $DashboardMonthlyWiseTotalIncomeExpense['Expense'];
+	    $MonthlyProfit = $DashboardMonthlyWiseTotalIncomeExpense['Income'] + $DashboardMonthlyWiseTotalIncomeExpense['Extra_Income'] - $DashboardMonthlyWiseTotalIncomeExpense['Expense'];
 	    $IncomeBar = $DashboardMonthlyWiseTotalIncomeExpense['Income']/100;
 	    $ExpenseBar = $DashboardMonthlyWiseTotalIncomeExpense['Expense']/100;
 	    $MonthlyProfitBar = $MonthlyProfit/100;
@@ -41,7 +41,7 @@ Home
 								<div class="col-8">
 									<h5>{{ date('F', mktime(0, 0, 0, date('m'), 10)) }} - {{ date('Y') }}</h5>
 									<h2 class="d-flex align-items-center mb-0 font-weight-light" id="Income">
-										₹{{ $DashboardMonthlyWiseTotalIncomeExpense['Income'] + $DashboardMonthlyWiseTotalIncomeExpense['Extra_Income'] }}  
+										₹{{ $DashboardMonthlyWiseTotalIncomeExpense['Income'] + $DashboardMonthlyWiseTotalIncomeExpense['Extra_Income'] }}
 									</h2>
 								</div>
 								<div class="col-4 text-right">
@@ -55,7 +55,7 @@ Home
 					</a>
 				</div>
 			</div>
-			
+
 			<div class="col-lg-6 col-xl-3 d-flex">
 				<div class="card flex-fill" id="DashboardExpense">
 					<div class="card-header">

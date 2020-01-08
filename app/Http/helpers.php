@@ -34,7 +34,7 @@ if (! function_exists('GetSalaryDetails')) {
 }
 
 
-if (! function_exists('DashboardMonthlyWiseTotalIncomeExpense')) { 
+if (! function_exists('DashboardMonthlyWiseTotalIncomeExpense')) {
     function DashboardMonthlyWiseTotalIncomeExpense($Month,$Year) {
         $Data['Income'] = Bill::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('bill_amount_given');
         $Data['OutStanding'] = Bill::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('balance_amount');
@@ -43,14 +43,14 @@ if (! function_exists('DashboardMonthlyWiseTotalIncomeExpense')) {
         $Data['Extra_Income'] = ExtraIncome::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('amount');
         $OutStandings = Bill::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get();
         return $Data;
-    } 
+    }
 }
 
-if (! function_exists('DashboardIncomeDetails')) { 
-    function DashboardIncomeDetails($Month,$Year) { 
+if (! function_exists('DashboardIncomeDetails')) {
+    function DashboardIncomeDetails($Month,$Year) {
         $Data['Income'] = Bill::whereMonth('date',$Month)->whereYear('date',$Year)->get();
         $Data['Expense'] = Expense::whereMonth('date',$Month)->whereYear('date',$Year)->get();
         $Data['Extra_Incomes'] = ExtraIncome::whereMonth('date',$Month)->whereYear('date',$Year)->get();
         return $Data;
-    } 
+    }
 }
