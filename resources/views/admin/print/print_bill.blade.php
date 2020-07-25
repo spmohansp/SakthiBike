@@ -114,24 +114,25 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $key = 0; ?>
                                 @foreach($Bill->BillProducts as $key=>$Product)
-                                <tr>
-                                    <th>{{ ++$key }}</th>
-                                    <th>{{ @$Product->Product->Product_Name }}</th>
-                                    <th>{{ @$Product->quantity }}</th>
-                                    <th align="right">{{ number_format(@$Product->Product->Selling_Price,2) }}</th>
-                                    <th align="right">{{ number_format(@$Product->Total_Cost,2) }}</th>
-                                </tr>
+                                    <tr>
+                                        <th>{{ ++$key }}</th>
+                                        <th>{{ @$Product->Product->Product_Name }}</th>
+                                        <th>{{ @$Product->quantity }}</th>
+                                        <th align="right">{{ number_format(@$Product->Product->Selling_Price,2) }}</th>
+                                        <th align="right">{{ number_format(@$Product->Total_Cost,2) }}</th>
+                                    </tr>
                                 @endforeach
-                                @foreach($ExtraWorks as $key=>$Extrawork)
-                                <tr>
-                                    <th colspan="4" style="text-align: right !important;">
-                                        <h5>{{ $Extrawork->BillExtraWork->name }} : </h5>
-                                    </th>
-                                    <th>
-                                        <h5>{{ number_format($Extrawork->amount,2) }}</h5>
-                                    </th>
-                                </tr>
+                                @foreach($ExtraWorks as $key1=>$Extrawork)
+                                    <?php $key2= $key1+$key ?> 
+                                    <tr>
+                                        <th>{{ ++$key2 }}</th>
+                                        <th>{{ $Extrawork->BillExtraWork->name }}</th>
+                                        <th></th>
+                                        <th align="right"></th>
+                                        <th align="right">{{ number_format($Extrawork->amount,2) }}</th>
+                                    </tr>
                                 @endforeach
                                 <tr>
                                     <th></th>
