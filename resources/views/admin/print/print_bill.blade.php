@@ -57,8 +57,8 @@
             <div class="">
                 <div class="row">
                     <div class="col-lg-12 col-sm-12" style="text-align: right !important;">
-                        <h3 align="right">SRI SAKTHI BIKE</h3>
-                        <P>All Two Wheelers Servixe Cente</P>
+                        <h3 align="right">Sri Sakthi Bike</h3>
+                        <P>All Two Wheelers Servixe Center</P>
                         <P style="margin-top: -15px;">Opp SPM Hospital, Rajiv Nagar, Alamarathu Compound,Tiruchengode</P>
                         <p style="margin-top: -15px;">Cell : 9003885959 ,E-mail:srisakthibike@gmail.com</p>
                     </div>
@@ -95,7 +95,7 @@
                             </tr>
                             <tr>
                                 <td>Date</td>
-                                <th>: {{ date("m-d-Y", strtotime($Bill->date)) }}</th>
+                                <th>: {{ date("d-m-Y", strtotime($Bill->date)) }}</th>
                             </tr>
                         </table>
                     </div>
