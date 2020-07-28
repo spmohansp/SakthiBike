@@ -5,6 +5,8 @@ namespace App\Http\Controllers\BillingController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Shop;
+use App\Stock;
+use App\StockIncomePayment;
 
 class ShopController extends Controller
 {
@@ -13,9 +15,8 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $Data['Shops'] = Shop::get();
+    public function index(){
+        $Data['Shops'] = Shop::paginate(10);
         return view('admin.shop.view',$Data);
     }
 
@@ -24,8 +25,7 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         return view('admin.shop.add');
     }
 
@@ -58,7 +58,11 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        //
+        $Data['Shop'] = Shop::findorfail($id);
+        $Stock = Stock::where([['shop_id',$id]])->sum('balance');
+        $StockIncomePayment = StockIncomePayment::where([['shop_id',$id]])->sum('amount');
+       $Data['Balance'] = $Stock - $StockIncomePayment;
+        return view('admin.shop.payment',$Data);
     }
 
     /**
@@ -101,6 +105,20 @@ class ShopController extends Controller
         try{
             Shop::findOrFail($id)->delete();
             return back()->with('success','Shop Deleted Successfully');
+        }catch (\Exception $e){
+            return back()->with('danger','Sorry,Something went wrong!.Shop Cannot Be Deleted!');
+        }
+    }
+
+
+     public function addPayment(){
+        try{
+            $StockIncomePayment  = new StockIncomePayment;
+            $StockIncomePayment->date  = request('date');
+            $StockIncomePayment->shop_id  = request('shop_id');
+            $StockIncomePayment->amount  = request('amount');
+            $StockIncomePayment->save();
+            return back()->with('success','Income Payment Added');
         }catch (\Exception $e){
             return back()->with('danger','Sorry,Something went wrong!.Shop Cannot Be Deleted!');
         }

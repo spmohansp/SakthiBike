@@ -150,6 +150,47 @@ Income MonthlyWise
 				</div>
 			</div>
 		</div>
+
+
+		<div class="tile">
+			<div class="row">
+				<div class="col-lg-12">
+					<h4>&nbsp;&nbsp;Shop Expense</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="card-body table-responsive" id="printdiv">
+					<table class="table table-hover table-bordered" id="reporttable">
+						<thead>
+							<tr>
+								<th class="csvth">S.no</th>
+								<th class="csvth">Date</th>
+								<th class="csvth">Shop</th>
+								<th class="csvth">Amount</th>
+							</tr>
+						</thead>
+						<tbody  id="tablebody">
+							@foreach($DashboardIncomeDetails['Stocks'] as $key=>$Stocks)
+								<tr>
+									<td>{{ ++$key }}</td>
+									<td>{{ date('d-m-Y',strtotime($Stocks->date)) }}</td>
+									<td>{{ $Stocks->Shop->name}}</td>
+									<td>{{ $Stocks->amount_given }}</td>
+								</tr>
+							@endforeach
+							@foreach($DashboardIncomeDetails['StockIncomePayment'] as $key1=>$Stocks)
+								<tr>
+									<td>{{ ++$key1+$key }}</td>
+									<td>{{ date('d-m-Y',strtotime($Stocks->date)) }}</td>
+									<td>{{ $Stocks->Shop->name}}</td>
+									<td>{{ $Stocks->amount }}</td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 								
 @endsection

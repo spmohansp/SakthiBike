@@ -32,6 +32,7 @@ Route::get('/GetProductStock','BillingController\ProductController@GetProductSto
 Route::get('/GetProductCount','BillingController\ProductController@GetProductCount')->name('GetProductCount');
 
 Route::resource('/shop','BillingController\ShopController');
+Route::post('/shop-pay-income','BillingController\ShopController@addPayment');
 
 Route::resource('/Expense-category','BillingController\ExpenseCategoryController');
 

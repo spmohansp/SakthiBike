@@ -17,7 +17,7 @@ class ProductController extends Controller
     }
 
     public function viewproduct(){
-        $details = Products::all();
+        $details = Products::paginate(10);
         return view('admin.products.view',compact('details'));
     }
 

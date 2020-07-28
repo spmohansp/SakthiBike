@@ -55,5 +55,7 @@ View Products
           </div>
         </div>
       </div>
+      <br>
+      {!! $details->links() !!}
     </div>
   @endsection

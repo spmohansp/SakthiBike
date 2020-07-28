@@ -58,9 +58,9 @@
                 <div class="row">
                     <div class="col-lg-12 col-sm-12" style="text-align: right !important;">
                         <h3 align="right">Sri Sakthi Bike</h3>
-                        <P>All Two Wheelers Servixe Center</P>
-                        <P style="margin-top: -15px;">Opp SPM Hospital, Rajiv Nagar, Alamarathu Compound,Tiruchengode</P>
-                        <p style="margin-top: -15px;">Cell : 9003885959 ,E-mail:srisakthibike@gmail.com</p>
+                        <P>All Two Wheelers Service Center</P>
+                        <P style="margin-top: -15px;"> Opp SPM Hospital, Rajiv Nagar, Alamarathu Compound,Tiruchengode</P>
+                        <p style="margin-top: -15px;">Cell : 9003885959 ,E-mail: srisakthibike@gmail.com</p>
                     </div>
                 </div>
                 <hr>
@@ -127,10 +127,8 @@
                                 @foreach($ExtraWorks as $key1=>$Extrawork)
                                     <?php $key2= $key1+$key ?> 
                                     <tr>
-                                        <th>{{ ++$key2 }}</th>
-                                        <th>{{ $Extrawork->BillExtraWork->name }}</th>
-                                        <th></th>
-                                        <th align="right"></th>
+                                        <th colspan="3"></th>
+                                        <th><h5>{{ $Extrawork->BillExtraWork->name }}</h5></th>
                                         <th align="right">{{ number_format($Extrawork->amount,2) }}</th>
                                     </tr>
                                 @endforeach
@@ -154,8 +152,8 @@
                         <h6>Payment Type</h6>
                         <p>Cash</p>
                         <br>
-                        <h6>Terms and conditions:-</h6>
-                        <p>Thanks for doing service with us.</p>
+                       {{--  <h6>Terms and conditions:-</h6>
+                        <p>Thanks for doing service with us.</p> --}}
                     </div>
                     <div class="col-lg-5 col-sm-5"style="text-align: left !important;">
                        <h6>Amount</h6>

@@ -239,6 +239,19 @@ Add Stock
                                         <td colspan="2" rowspan="" headers="" style="width:10em;font-size: 18px;">Total Amount</td>
                                         <td colspan="" rowspan="" headers=""><p class="ProductWiseFullTotal" style="font-size: 18px;">0</p><input type="hidden" name="ProductTotal" class="ProductWiseFullTotal"></td>
                                       </tr>
+                                       <tr>
+                                        <td colspan="" rowspan="" headers="" style="width:15em;"></td>
+                                        <td colspan="" rowspan="" headers="" style="width:20em;font-size: 18px;"></td>
+                                        <td colspan="2" rowspan="" headers="" style="width:10em;font-size: 18px;">Total Amount</td>
+                                        <td style="width:20em;font-size: 18px;" ><input type="text" class="form-control Productamount" name="amount_given" ></td>
+                                      </tr>
+
+                                       <tr>
+                                        <td colspan="" rowspan="" headers="" style="width:15em;"></td>
+                                        <td colspan="" rowspan="" headers="" style="width:20em;font-size: 18px;"></td>
+                                        <td colspan="2" rowspan="" headers="" style="width:10em;font-size: 18px;">Balance</td>
+                                        <td colspan="" rowspan="" headers=""><p class="balanceHtml" style="font-size: 18px;">0</p><input type="hidden" name="balance" class="balanceTotal"></td>
+                                      </tr>
                                 </table>
                              </div>
                           </div>
@@ -287,52 +300,65 @@ Add Stock
            });
 
 
-          // $('.AddStock').trigger('click');
-          // setTimeout(function() {
-          //   $('.Products').trigger('change');
-          // }, 2000);
 
           $('.AddStock').trigger('click');
 
-          // $('.Products').select2({
-          // });
+            $('body').on('change keyup','.Products,.Unit',function(e) {
+                e.preventDefault();
+                var Unit = $(this).parent().parent().find(".Unit").val();
+                var Product = $(this).parent().parent().find(".Products").val();
+                if(Product!= ''){
+                    $.ajax({
+                        type: "get",
+                        url: "{{ route('admin.GetProductDetails') }}",
+                        data: {Product: Product},
+                        success: (data)=> {
+                            $(this).parent().parent().find(".Cost").html(data.Cost_Price);
+                            $(this).parent().parent().find(".Selling").html(data.Selling_Price);
+                            $(this).parent().parent().find(".ProductWiseTotal").html(data.Cost_Price * Unit);
+                            var ProductWiseFullTotal = 0;
+                            $('.ProductWiseTotal').each(function() {
+                                if($(this).text() !=='' && !isNaN($(this).text()))
+                                    ProductWiseFullTotal += parseFloat($(this).text());
+                                $('.ProductWiseFullTotal').html(ProductWiseFullTotal);
+                                $('.ProductWiseFullTotal').val(ProductWiseFullTotal);
+                            });
+                        }
+                    });
+                    setTimeout(function() {
+                        amount();
+                    }, 3000);
+                }
+            });
 
-          $('body').on('change keyup','.Products,.Unit',function(e) {
-            e.preventDefault();
-            var Unit = $(this).parent().parent().find(".Unit").val();
-            var Product = $(this).parent().parent().find(".Products").val();
-            if(Product!= ''){
-              $.ajax({
-                type: "get",
-                url: "{{ route('admin.GetProductDetails') }}",
-                data: {Product: Product},
-                success: (data)=> {
-                  $(this).parent().parent().find(".Cost").html(data.Cost_Price);
-                  $(this).parent().parent().find(".Selling").html(data.Selling_Price);
-                  $(this).parent().parent().find(".ProductWiseTotal").html(data.Cost_Price * Unit);
+            $('body').on('change keyup','.Productamount',function (e) {
+                e.preventDefault();
+                amount();
+            });
 
-                  var ProductWiseFullTotal = 0;
-                  $('.ProductWiseTotal').each(function() {
-                    if($(this).text() !=='' && !isNaN($(this).text()))
+            function amount() {
+                var amount = $('.Productamount').val();
+                var balance = 0;
+                var ProductWiseFullTotal = 0;
+                $('.ProductWiseTotal').each(function() {
+                if($(this).text() !=='' && !isNaN($(this).text()))
                     ProductWiseFullTotal += parseFloat($(this).text());
                     $('.ProductWiseFullTotal').html(ProductWiseFullTotal);
                     $('.ProductWiseFullTotal').val(ProductWiseFullTotal);
-                  });
+                });
+                balance = parseFloat(ProductWiseFullTotal) - parseFloat(amount);
+                $('.balanceHtml').html(balance);
+                $('.balanceTotal').val(balance);
+            }
+
+            $('body').on('click','.RemoveStockInput',function (e) {
+                e.preventDefault();
+                if(x>1){
+                    $(this).parent().remove();
+                    x--;
                 }
-              });
-            }
-           });
-
-
-
-        $('body').on('click','.RemoveStockInput',function (e) {
-            e.preventDefault();
-            if(x>1){
-              $(this).parent().remove();
-              x--;
-            }
-        });
+                amount();
+            });
       });
-
     </script>
 @endsection

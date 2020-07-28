@@ -29,6 +29,8 @@ class StockController extends Controller
       	$Stock->shop_id = request('shop_id');
       	$Stock->date = request('date');
          $Stock->ProductTotal = request('ProductTotal');
+         $Stock->amount_given = request('amount_given');
+         $Stock->balance = request('ProductTotal') - request('amount_given');
       	$Stock->save();
          foreach (request('Stock')['Product'] as $key=>$value) {
             $StockDetails = new StockDetail;
@@ -44,10 +46,7 @@ class StockController extends Controller
    }
 
    public function viewStock(){
-      $Data['Products'] = Products::all();
-   	$Data['Stock'] = Stock::all();
-      $Data['Shops'] = Shop::all();
-      $Data['Bill_product'] = BillProduct::all();
+   	$Data['Stocks'] = Stock::latest('date')->paginate(10);
       return view('admin.stock.view',$Data);
    }
 
@@ -65,6 +64,8 @@ class StockController extends Controller
          $Stock->shop_id = request('shop_id');
          $Stock->date = request('date');
          $Stock->ProductTotal = request('ProductTotal');
+         $Stock->amount_given = request('amount_given');
+         $Stock->balance = request('ProductTotal') - request('amount_given');
          $Stock->save();
          $StockDetail = StockDetail::where('stock_id',$Stock->id)->delete();
          foreach (request('Stock')['Product'] as $key=>$value) {
@@ -89,8 +90,7 @@ class StockController extends Controller
       }
    }
 
-   public function GetProductDetails(Request $request)
-   {
+   public function GetProductDetails(Request $request){
       $data = Products::findorfail(request('Product'));
       return $data;
    }

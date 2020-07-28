@@ -7,6 +7,8 @@ use App\ExtraWork;
 use App\Bill;
 use App\ExtraIncome;
 use App\Attendence;
+use App\Stock;
+use App\StockIncomePayment;
 
 if (! function_exists('GetExtraWorkDetails')) {
     function GetExtraWorkDetails($ExtraworkId)
@@ -38,8 +40,7 @@ if (! function_exists('DashboardMonthlyWiseTotalIncomeExpense')) {
     function DashboardMonthlyWiseTotalIncomeExpense($Month,$Year) {
         $Data['Income'] = Bill::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('bill_amount_given');
         $Data['OutStanding'] = Bill::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('balance_amount');
-        $Data['Expense'] = Expense::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('amount');
-
+        $Data['Expense'] = Expense::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->sum('amount') + Stock::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->sum('amount_given')+ StockIncomePayment::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->sum('amount');
         $Data['Extra_Income'] = ExtraIncome::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('amount');
         $OutStandings = Bill::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get();
         return $Data;
@@ -51,6 +52,17 @@ if (! function_exists('DashboardIncomeDetails')) {
         $Data['Income'] = Bill::whereMonth('date',$Month)->whereYear('date',$Year)->get();
         $Data['Expense'] = Expense::whereMonth('date',$Month)->whereYear('date',$Year)->get();
         $Data['Extra_Incomes'] = ExtraIncome::whereMonth('date',$Month)->whereYear('date',$Year)->get();
+        $Data['Stocks'] = Stock::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get();
+        $Data['StockIncomePayment'] = StockIncomePayment::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get();
         return $Data;
+    }
+}
+
+
+if (! function_exists('ShopBalance')) {
+    function ShopBalance($shop_id) {
+        $Stocks = Stock::where('shop_id',$shop_id)->sum('balance');
+        $StockIncomePayment = StockIncomePayment::where('shop_id',$shop_id)->sum('amount');
+        return $Stocks  - $StockIncomePayment;
     }
 }
