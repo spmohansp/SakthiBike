@@ -24,7 +24,7 @@ class PrintController extends Controller
 	}
 
 	public function viewPrint(){
-        $Bills = Bill::latest()->paginate(10);
+        $Bills = Bill::paginate(30);
 		return view('admin.print.view_bills',compact('Bills'));
 	}
 
