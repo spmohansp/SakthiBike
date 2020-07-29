@@ -21,15 +21,15 @@
         }
         .th,.tp{
             font-family: latha;
-            /*text-align: center;*/
+            text-align: center;
         }
         .tl {
             font-family: latha;
             text-align:left;
         }
-        .tr {
+        tr {
             font-family: latha;
-            text-align:right;
+            line-height: 10px;
         }
         body{
             top: 0 !important;
@@ -64,9 +64,9 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row">
+                <div class="row" style="height: 10px">
                     <div class="col-lg-12 col-sm-12" style="text-align: center !important;">
-                        <h4 class="th"> Bill </h4>
+                        <h5>Bill </h5>
                     </div>
                 </div>
                 <div class="row">
@@ -74,15 +74,11 @@
                         <h6>Bill To</h6>
                         <table class="table">
                             <tr>
-                                <th colspan="2"> {{ $Bill->Client->name }}</th>
-                            </tr>
-                            <tr>
-                                <td>Contact Number</td>
-                                <th>: {{ $Bill->Client->phone_number }}</th>
+                                <th colspan="2"> {{ $Bill->Client->name }} ({{ $Bill->Client->phone_number }})</th>
                             </tr>
                             <tr>
                                 <td>Bike Number</td>
-                                <th>: {{ $Bill->Client->bike_no }}</th>
+                                <th style = "text-transform:uppercase;">: {{ $Bill->Client->bike_no }}</th>
                             </tr>
                         </table>
                     </div>
@@ -118,7 +114,7 @@
                                 @foreach($Bill->BillProducts as $key=>$Product)
                                     <tr>
                                         <th>{{ ++$key }}</th>
-                                        <th>{{ @$Product->Product->Product_Name }}</th>
+                                        <th style = "text-transform:capitalize;">{{ @$Product->Product->Product_Name }}</th>
                                         <th>{{ @$Product->quantity }}</th>
                                         <th align="right">{{ number_format(@$Product->Product->Selling_Price,2) }}</th>
                                         <th align="right">{{ number_format(@$Product->Total_Cost,2) }}</th>
@@ -128,7 +124,7 @@
                                     <?php $key2= $key1+$key ?> 
                                     <tr>
                                         <th colspan="3"></th>
-                                        <th><h5>{{ $Extrawork->BillExtraWork->name }}</h5></th>
+                                        <th style = "text-transform:capitalize;"><h5>{{ $Extrawork->BillExtraWork->name }}</h5></th>
                                         <th align="right">{{ number_format($Extrawork->amount,2) }}</th>
                                     </tr>
                                 @endforeach
@@ -147,7 +143,7 @@
                 <div class="row">
                     <div class="col-lg-7 col-sm-7" style="text-align: left !important;">
                         <h6>Invoice Amount In Words</h6>
-                        <p>{{ displaywords($Bill->bill_amount) }}</p>
+                        <p style = "text-transform:capitalize;">{{ displaywords($Bill->bill_amount) }}</p>
                         <br>
                         <h6>Payment Type</h6>
                         <p>Cash</p>
