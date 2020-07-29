@@ -13,6 +13,7 @@
 @endsection
 
 @section('content')
+
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ta" xml:lang="ta">
     <style media="screen">
         @@font-face {
@@ -29,7 +30,7 @@
         }
         tr {
             font-family: latha;
-            line-height: 10px;
+            line-height: 5px;
         }
         body{
             top: 0 !important;
@@ -64,7 +65,7 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row" style="height: 10px">
+                <div class="row" style="height: 10px;margin-top: -7px;">
                     <div class="col-lg-12 col-sm-12" style="text-align: center !important;">
                         <h5>Bill </h5>
                     </div>
@@ -96,7 +97,6 @@
                         </table>
                     </div>
                 </div>
-                <br>
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-bordered">
@@ -114,26 +114,26 @@
                                 @foreach($Bill->BillProducts as $key=>$Product)
                                     <tr>
                                         <th>{{ ++$key }}</th>
-                                        <th style = "text-transform:capitalize;">{{ @$Product->Product->Product_Name }}</th>
-                                        <th>{{ @$Product->quantity }}</th>
-                                        <th align="right">{{ number_format(@$Product->Product->Selling_Price,2) }}</th>
-                                        <th align="right">{{ number_format(@$Product->Total_Cost,2) }}</th>
+                                        <th style="text-transform:capitalize;">{{ @$Product->Product->Product_Name }}</th>
+                                        <th style="text-align: center">{{ @$Product->quantity }}</th>
+                                        <th style="text-align: right">{{ number_format(@$Product->Product->Selling_Price,2) }}</th>
+                                        <th style="text-align: right">{{ number_format(@$Product->Total_Cost,2) }}</th>
                                     </tr>
                                 @endforeach
                                 @foreach($ExtraWorks as $key1=>$Extrawork)
                                     <?php $key2= $key1+$key ?> 
-                                    <tr>
+                                    <tr style="line-height: 7px;">
                                         <th colspan="3"></th>
-                                        <th style = "text-transform:capitalize;"><h5>{{ $Extrawork->BillExtraWork->name }}</h5></th>
-                                        <th align="right">{{ number_format($Extrawork->amount,2) }}</th>
+                                        <th style = "text-transform:capitalize;"><h6>{{ $Extrawork->BillExtraWork->name }}</h6></th>
+                                        <th style="text-align: right">{{ number_format($Extrawork->amount,2) }}</th>
                                     </tr>
                                 @endforeach
                                 <tr>
                                     <th></th>
                                     <th>Total</th>
-                                    <th>{{ @$Product->sum('quantity') }}</th>
+                                    <th style="text-align: center">{{ @$Product->sum('quantity') }}</th>
                                     <th></th>
-                                    <th align="right">{{ number_format($Bill->bill_amount,2) }}</th>
+                                    <th style="text-align: right">{{ number_format($Bill->bill_amount,2) }}</th>
                                 </tr>
                             </tbody>
                         </table>
@@ -173,7 +173,7 @@
                        </table>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="margin-top: -15px;">
                     <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
                         <br><br><br>
                         <h5 class="th">Customer Signature </h5>
