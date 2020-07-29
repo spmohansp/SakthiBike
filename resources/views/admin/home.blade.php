@@ -114,7 +114,7 @@ Home
 						<span class="badge badge-warning float-right">Monthly</span>
 						<h5 class="card-title mb-0">OutStanding</h5>
 					</div>
-					<a href="{{ route('admin.GetMonthlyIncome',[date('m'),date('Y')]) }}" style="color:black;text-decoration: none;">
+					<a href="{{ url('admin/bills') }}" style="color:black;text-decoration: none;">
 						<div class="card-body my-2">
 							<div class="row d-flex align-items-center mb-4">
 								<div class="col-8">

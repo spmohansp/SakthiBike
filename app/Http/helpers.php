@@ -11,8 +11,7 @@ use App\Stock;
 use App\StockIncomePayment;
 
 if (! function_exists('GetExtraWorkDetails')) {
-    function GetExtraWorkDetails($ExtraworkId)
-    {
+    function GetExtraWorkDetails($ExtraworkId){
         return $Data['ExtraWorks'] = ExtraWork::findorfail($ExtraworkId);
     }
 }
@@ -49,11 +48,11 @@ if (! function_exists('DashboardMonthlyWiseTotalIncomeExpense')) {
 
 if (! function_exists('DashboardIncomeDetails')) {
     function DashboardIncomeDetails($Month,$Year) {
-        $Data['Income'] = Bill::whereMonth('date',$Month)->whereYear('date',$Year)->get();
+        $Data['Income'] = Bill::where('bill_amount_given','!=',0)->whereMonth('date',$Month)->whereYear('date',$Year)->get();
         $Data['Expense'] = Expense::whereMonth('date',$Month)->whereYear('date',$Year)->get();
         $Data['Extra_Incomes'] = ExtraIncome::whereMonth('date',$Month)->whereYear('date',$Year)->get();
-        $Data['Stocks'] = Stock::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get();
-        $Data['StockIncomePayment'] = StockIncomePayment::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get();
+        $Data['Stocks'] = Stock::where('amount_given','!=',0)->whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get();
+        $Data['StockIncomePayment'] = StockIncomePayment::where('amount','!=',0)->whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get();
         return $Data;
     }
 }

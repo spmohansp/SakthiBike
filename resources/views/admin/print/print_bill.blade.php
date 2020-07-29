@@ -79,7 +79,7 @@
                             </tr>
                             <tr>
                                 <td>Bike Number</td>
-                                <th style = "text-transform:uppercase;">: {{ $Bill->Client->bike_no }}</th>
+                                <th style = "text-transform:uppercase;">: {{ $Bill->Client->bike_no }} ( {{ $Bill->Client->bike_name }} )</th>
                             </tr>
                         </table>
                     </div>
@@ -195,47 +195,36 @@
     </body>
     @endsection
 
-      <?php
-    function displaywords($number){
-    $words = array('0' => '', '1' => 'one', '2' => 'two',
-    '3' => 'three', '4' => 'four', '5' => 'five', '6' => 'six',
-    '7' => 'seven', '8' => 'eight', '9' => 'nine',
-    '10' => 'ten', '11' => 'eleven', '12' => 'twelve',
-    '13' => 'thirteen', '14' => 'fourteen',
-    '15' => 'fifteen', '16' => 'sixteen', '17' => 'seventeen',
-    '18' => 'eighteen', '19' =>'nineteen', '20' => 'twenty',
-    '30' => 'thirty', '40' => 'forty', '50' => 'fifty',
-    '60' => 'sixty', '70' => 'seventy',
-    '80' => 'eighty', '90' => 'ninety');
-    $digits = array('', '', 'hundred', 'thousand', 'ten thousand', 'lakh', 'ten lakh' ,'crore');
-
-    $number = explode(".", $number);
-    $result = array("","");
-    $j =0;
-    foreach($number as $val){
-        // loop each part of number, right and left of dot
-        for($i=0;$i<strlen($val);$i++){
-            // look at each part of the number separately  [1] [5] [4] [2]  and  [5] [8]
-
-            $numberpart = str_pad($val[$i], strlen($val)-$i, "0", STR_PAD_RIGHT); // make 1 => 1000, 5 => 500, 4 => 40 etc.
-            if($numberpart <= 20){ // if it's below 20 the number should be one word
-                $numberpart = 1*substr($val, $i,2); // use two digits as the word
-                $i++; // increment i since we used two digits
-                $result[$j] .= $words[$numberpart] ." ";
-            }else{
-                //echo $numberpart . "<br>\n"; //debug
-                if($numberpart > 90){  // more than 90 and it needs a $digit.
-                    $result[$j] .= $words[$val[$i]] . " " . $digits[strlen($numberpart)-1] . " ";
-                }else if($numberpart != 0){ // don't print zero
-                    $result[$j] .= $words[str_pad($val[$i], strlen($val)-$i, "0", STR_PAD_RIGHT)] ." ";
-                }
-            }
-        }
-        $j++;
+<?php function displaywords($number){
+      $decimal = round($number - ($no = floor($number)), 2) * 100;
+    $hundred = null;
+    $digits_length = strlen($no);
+    $i = 0;
+    $str = array();
+    $words = array(0 => '', 1 => 'one', 2 => 'two',
+        3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six',
+        7 => 'seven', 8 => 'eight', 9 => 'nine',
+        10 => 'ten', 11 => 'eleven', 12 => 'twelve',
+        13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen',
+        16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen',
+        19 => 'nineteen', 20 => 'twenty', 30 => 'thirty',
+        40 => 'forty', 50 => 'fifty', 60 => 'sixty',
+        70 => 'seventy', 80 => 'eighty', 90 => 'ninety');
+    $digits = array('', 'hundred','thousand','lakh', 'crore');
+    while( $i < $digits_length ) {
+        $divider = ($i == 2) ? 10 : 100;
+        $number = floor($no % $divider);
+        $no = floor($no / $divider);
+        $i += $divider == 10 ? 1 : 2;
+        if ($number) {
+            $plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+            $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+            $str [] = ($number < 21) ? $words[$number].' '. $digits[$counter]. $plural.' '.$hundred:$words[floor($number / 10) * 10].' '.$words[$number % 10]. ' '.$digits[$counter].$plural.' '.$hundred;
+        } else $str[] = null;
     }
-    if(trim($result[0]) != "") echo $result[0] . "Rupees ";
-    if($result[1] != "") echo $result[1] . "Paise";
-    echo " Only";
+    $Rupees = implode('', array_reverse($str));
+    $paise = ($decimal > 0) ? "." . ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
+    return ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
 }
 
  ?>

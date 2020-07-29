@@ -27,7 +27,6 @@ Add Print
                                 <th class="csvth">Customer Name</th>
                                 <th class="csvth">Total Cost</th>
                                 <th class="csvth">Balance</th>
-                                <th class="csvth">Status</th>
                                 <th class="hidden-print" >
                                     <center>Action</center>
                                 </th>
@@ -42,9 +41,9 @@ Add Print
                                 <td>{{ @$Bill->Client->name }}</td>
                                 <td>{{ @$Bill->bill_amount }}</td>
                                 <td>{{ @$Bill->balance_amount }}</td>
-                                <td>{{ $Bill->payment_status }}</td>
-                                <td><a href="{{ route('admin.editPrint',$Bill->id) }}"><button class="btn btn-primary  btn-sm"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
+                                <td>
                                     <a href="{{ route('admin.printBill',$Bill->id) }}"><button class="btn btn-primary  btn-sm"><i class="fa fa-print" aria-hidden="true" style="color:#fff"></i></button></a>
+                                    <a href="{{ route('admin.editPrint',$Bill->id) }}"><button class="btn btn-primary  btn-sm"><i class="fa fa-pencil" aria-hidden="true" style="color:#fff"></i></button></a>
                                     <a href="{{ route('admin.deleteBill',$Bill->id) }}"><button class="btn btn-primary btn-sm" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true" style="color:#fff"></i></button></a>
                                 </td>
                             </tr>
