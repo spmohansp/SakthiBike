@@ -182,9 +182,6 @@ Add Print
                             <label>Add Products</label>
                             <div class="form-group" >
                                 <select class="form-control Product" id="product_id">
-                                        {{-- @foreach($Products as $Product)
-                                            <option value="{{ $Product->id }}">{{ $Product->Product_Name }}</option>
-                                        @endforeach --}}
                                 </select>
                             </div>
                         </div>

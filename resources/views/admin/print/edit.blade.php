@@ -120,40 +120,22 @@ Edit Print
                             <div class="row">
                                 <div class="col-md-4">
                                     <label>Add Products</label>
+                                    <div class="form-group" >
+                                        <select class="form-control Product" id="product_id">
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label>Quantity </label>
+                                    <div class="form-group">
+                                        <input class="form-control nextrow Quantity" type="number" placeholder="Enter Quantity" min="1" id="qty">
+                                        <span class="QuantityLimit" style="color:red;font-size: 18px;"></span>
+                                    </div>
                                 </div>
                                 <div class="col-md-2">
                                     <label></label>
-                                </div>
-                                <div class="col-md-2">
-                                    <label></label>
-                                </div>
-                            </div>
-                            <div id="productsbilllist">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group" >
-                                            <select class="form-control Product" id="product_id" style="width: 31em;">
-                                                {{-- <optgroup label="Select Products">
-                                                    @foreach($Products as $Product)
-                                                        <option value="{{ $Product->id }}">{{ $Product->Product_Name }}</option>
-                                                    @endforeach
-                                                </optgroup> --}}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <input class="form-control nextrow Quantity" type="text" placeholder="Enter Quantity" min="1" id="qty">
-                                            <span class="QuantityLimit" style="color:red;font-size: 18px;"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <button type="button" id="addbillproduct"  class="btn btn-primary addbillproduct"  style="padding:10px 20px;" > Add Product</button>
-                                        </div>
+                                    <div class="form-group">
+                                        <button type="button" id="addbillproduct"  class="btn btn-primary addbillproduct"  style="padding:10px 20px;" > Add Product</button>
                                     </div>
                                 </div>
                             </div>
