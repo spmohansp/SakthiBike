@@ -56,16 +56,16 @@
     <body class="app sidebar-mini rtl" style="top:0 !important;">
         <div class="tile" >
             <div class="">
-                <div class="row">
+                <div class="row" style="margin-top: -18px">
                     <div class="col-lg-12 col-sm-12" style="text-align: right !important;">
                         <h3 align="right">Sri Sakthi Bike</h3>
-                        <P>All Two Wheelers Service Center</P>
+                        <P style="margin-top: -15px">All Two Wheelers Service Center</P>
                         <P style="margin-top: -15px;"> Opp SPM Hospital, Rajiv Nagar, Alamarathu Compound,Tiruchengode</P>
                         <p style="margin-top: -15px;">Cell : 9003885959 ,E-mail: srisakthibike@gmail.com</p>
                     </div>
                 </div>
-                <hr>
-                <div class="row" style="height: 10px;margin-top: -7px;">
+                <hr style="margin-top: -17px;">
+                <div class="row" style="height: 15px;margin-top: -16px;">
                     <div class="col-lg-12 col-sm-12" style="text-align: center !important;">
                         <h5>Bill </h5>
                     </div>
@@ -124,11 +124,11 @@
                                     <?php $key2= $key1+$key ?> 
                                     <tr style="line-height: 7px;">
                                         <th colspan="3"></th>
-                                        <th style = "text-transform:capitalize;"><h6>{{ $Extrawork->BillExtraWork->name }}</h6></th>
+                                        <th style = "text-transform:capitalize;"><i>{{ $Extrawork->BillExtraWork->name }}</i></th>
                                         <th style="text-align: right">{{ number_format($Extrawork->amount,2) }}</th>
                                     </tr>
                                 @endforeach
-                                <tr>
+                                <tr style="line-height: 7px;">
                                     <th></th>
                                     <th>Total</th>
                                     <th style="text-align: center">{{ @$Product->sum('quantity') }}</th>
@@ -140,19 +140,18 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" style="margin-bottom: -15px">
                     <div class="col-lg-7 col-sm-7" style="text-align: left !important;">
                         <h6>Invoice Amount In Words</h6>
                         <p style = "text-transform:capitalize;">{{ displaywords($Bill->bill_amount) }}</p>
                         <br>
-                        <h6>Payment Type</h6>
+                       {{--  <h6>Payment Type</h6>
                         <p>Cash</p>
-                        <br>
+                        <br> --}}
                        {{--  <h6>Terms and conditions:-</h6>
                         <p>Thanks for doing service with us.</p> --}}
                     </div>
                     <div class="col-lg-5 col-sm-5"style="text-align: left !important;">
-                       <h6>Amount</h6>
                        <table class="table">
                            <tr>
                                <td>Sub Total</td>
@@ -173,7 +172,8 @@
                        </table>
                     </div>
                 </div>
-                <div class="row" style="margin-top: -15px;">
+                <hr>
+                <div class="row" style="margin-top: -10px;">
                     <div class="col-lg-6 col-sm-6" style="text-align: left !important;">
                         <br><br><br>
                         <h5 class="th">Customer Signature </h5>
@@ -184,9 +184,9 @@
                         <p><b><span style="font-size: 14px;">Authorized Signature</span></b></p>
                     </div>
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col-lg-12 col-sm-12"style="text-align: center !important;">
+                <hr style="margin-top: -17px;">
+                <div class="row" style="margin-bottom: -28px;">
+                    <div class="col-lg-12 col-sm-12"style="text-align: center !important;margin-top: -16px;">
                         <h5 class="th">Thanks for doing service with us. !!!</h5>
                     </div>
                 </div>
