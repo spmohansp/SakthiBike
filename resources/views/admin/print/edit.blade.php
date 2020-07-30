@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('Current-Page')
-Edit Print
+Edit Bill
 @endsection
 
 @section('Parent-Menu')
@@ -9,7 +9,7 @@ Bill
 @endsection
 
 @section('Menu')
-Edit Print
+Edit Bill
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@ Edit Print
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Enter Customer name</label>
-                                        <select class="form-control CustomerName" name="client_id"  id="Customer" style="width: 31em;">
+                                        <select class="form-control CustomerName" name="client_id"  id="Customer" >
                                             <optgroup label="Select Customer">
                                                 @foreach($Clients as $Client)
                                                     <option value="{{ $Client->id }}" {{ $Client->id==$Bill->id?'selected':'' }}>{{ $Client->name }} {{ $Client->phone_no }}</option>
@@ -106,7 +106,7 @@ Edit Print
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input class="form-control total_amount" type="number" onKeyUp="calculateTotal()" placeholder="Enter Amount" value="{{ $BillExtraWork->amount }}" name="amount[]" style="width: 40em;">
+                                                    <input class="form-control total_amount" type="number" onKeyUp="calculateTotal()" placeholder="Enter Amount" value="{{ $BillExtraWork->amount }}" name="amount[]">
                                                 </td>
                                                 <td><i class="fa fa-close fa-1x RemoveExtraWorkButon btn" style="color:red;"></i></td>
                                             </tr>
