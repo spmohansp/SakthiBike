@@ -78,7 +78,7 @@
                                 <th colspan="2"> {{ $Bill->Client->name }} ({{ $Bill->Client->phone_number }})</th>
                             </tr>
                             <tr>
-                                <td>Bike Number</td>
+                                <td>Bike Detail</td>
                                 <th style = "text-transform:uppercase;">: {{ $Bill->Client->bike_no }} ( {{ $Bill->Client->bike_name }} )</th>
                             </tr>
                         </table>
@@ -110,18 +110,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $key = 0; ?>
+                                <?php $sno = 0; ?>
                                 @foreach($Bill->BillProducts as $key=>$Product)
                                     <tr>
-                                        <th>{{ ++$key }}</th>
+                                        <th>{{ ++$sno }}</th>
                                         <th style="text-transform:capitalize;">{{ @$Product->Product->Product_Name }}</th>
                                         <th style="text-align: center">{{ @$Product->quantity }}</th>
                                         <th style="text-align: right">{{ number_format(@$Product->Product->Selling_Price,2) }}</th>
                                         <th style="text-align: right">{{ number_format(@$Product->Total_Cost,2) }}</th>
                                     </tr>
                                 @endforeach
+                                   @foreach($Bill->BillAdditionalProduct as $key=>$Product1)
+                                    <tr>
+                                        <th>{{ ++$sno }}</th>
+                                        <th style="text-transform:capitalize;">{{ @$Product1->name }}</th>
+                                        <th style="text-align: center">{{ @$Product1->qty }}</th>
+                                        <th style="text-align: right"></th>
+                                        <th style="text-align: right">{{ number_format(@$Product1->amount,2) }}</th>
+                                    </tr>
+                                @endforeach
                                 @foreach($ExtraWorks as $key1=>$Extrawork)
-                                    <?php $key2= $key1+$key ?> 
                                     <tr style="line-height: 7px;">
                                         <th colspan="3"></th>
                                         <th style = "text-transform:capitalize;"><i>{{ $Extrawork->BillExtraWork->name }}</i></th>
@@ -131,7 +139,7 @@
                                 <tr style="line-height: 7px;">
                                     <th></th>
                                     <th>Total</th>
-                                    <th style="text-align: center">{{ @$Product->sum('quantity') }}</th>
+                                    <th style="text-align: center">{{ $Bill->BillProducts->sum('quantity') + $Bill->BillAdditionalProduct->sum('qty') }}</th>
                                     <th></th>
                                     <th style="text-align: right">{{ number_format($Bill->bill_amount,2) }}</th>
                                 </tr>

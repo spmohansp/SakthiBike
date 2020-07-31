@@ -9,6 +9,7 @@ use App\Employee;
 use App\ExtraWork;
 use App\BillExtraWork;
 use App\vehicle_type;
+use App\BillAdditionalProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,6 +32,7 @@ class PrintController extends Controller
     public function saveBill(){
         $BillTotal=0;
         $TotalBill=0;
+        $TotalAdditional=0;
         if(!empty(request('product_id'))){
             foreach (request('product_id') as $key => $product) {
                 $BillTotal += request('total_amount')[$key];
@@ -42,7 +44,12 @@ class PrintController extends Controller
                 $TotalBill += request('amount')[$key1];
             }
         }
-        $bill_amount = $BillTotal + $TotalBill;
+        if(!empty(request('additionalProduct'))){
+            foreach (request('additionalProduct')['name'] as $key3 => $additionalProduct) {
+                $TotalAdditional +=request('additionalProduct')['amount'][$key3];
+            }
+        }
+        $bill_amount = $BillTotal + $TotalBill + $TotalAdditional;
 
         $Bill = new Bill;
         $LastBill = Bill::orderBy('id', 'DESC')->first();
@@ -61,6 +68,7 @@ class PrintController extends Controller
         $Bill->discount_amount = request('discount_amount');
         $Bill->employee_id = json_encode(request('employees'));
         $Bill->save();
+
         if(!empty(request('product_id'))){
             foreach(request('product_id') as $key=> $product){
                 $BillProduct = new BillProduct;
@@ -71,6 +79,7 @@ class PrintController extends Controller
                 $BillProduct->save();
             }
         }
+
         if(!empty(request('extrawork'))){
             foreach(request('extrawork') as $key1=> $extrawork){
                 $BillExtraWork = new BillExtraWork;
@@ -80,6 +89,18 @@ class PrintController extends Controller
                 $BillExtraWork->save();
             }
         }
+
+        if(!empty(request('additionalProduct'))){
+            foreach (request('additionalProduct')['name'] as $key3 => $additionalProduct) {
+                $BillAdditionalProduct = new BillAdditionalProduct;
+                $BillAdditionalProduct->bill_id = $Bill->id;
+                $BillAdditionalProduct->name = request('additionalProduct')['name'][$key3];
+                $BillAdditionalProduct->qty = request('additionalProduct')['qty'][$key3];
+                $BillAdditionalProduct->amount = request('additionalProduct')['amount'][$key3];
+                $BillAdditionalProduct->save();
+            }
+        }
+
         if(!empty(request('product_id'))){
             if(request('print')){
                 return redirect(route('admin.printBill',$Bill->id));
@@ -105,6 +126,7 @@ class PrintController extends Controller
     public function UpdateBill($id){
         $BillTotal=0;
         $TotalBill=0;
+        $TotalAdditional=0;
         if(!empty(request('product_id'))){
             foreach (request('product_id') as $key => $product) {
                 $BillTotal += request('total_amount')[$key];
@@ -116,8 +138,14 @@ class PrintController extends Controller
                 $TotalBill += request('amount')[$key1];
             }
         }
+        if(!empty(request('additionalProduct'))){
+            foreach (request('additionalProduct')['name'] as $key3 => $additionalProduct) {
+                $TotalAdditional +=request('additionalProduct')['amount'][$key3];
+            }
+        }
+        $bill_amount = $BillTotal + $TotalBill + $TotalAdditional;
 
-        $bill_amount = $BillTotal + $TotalBill;
+
         $Bill = Bill::findorfail($id);
         $Bill->client_id = request('client_id');
         $Bill->date = request('date');
@@ -153,6 +181,19 @@ class PrintController extends Controller
                 $BillExtraWork->save();
             }
         }
+
+        BillAdditionalProduct::where('bill_id',$id)->delete();
+        if(!empty(request('additionalProduct'))){
+            foreach (request('additionalProduct')['name'] as $key3 => $additionalProduct) {
+                $BillAdditionalProduct = new BillAdditionalProduct;
+                $BillAdditionalProduct->bill_id = $Bill->id;
+                $BillAdditionalProduct->name = request('additionalProduct')['name'][$key3];
+                $BillAdditionalProduct->qty = request('additionalProduct')['qty'][$key3];
+                $BillAdditionalProduct->amount = request('additionalProduct')['amount'][$key3];
+                $BillAdditionalProduct->save();
+            }
+        }
+
         if(!empty(request('product_id'))){
             if(request('print')){
                 return redirect(route('admin.printBill',$Bill->id));
@@ -171,18 +212,14 @@ class PrintController extends Controller
     }
 
     public function  deleteBill($id){
-        $ExtraWorks = BillExtraWork::where('bill_id',$id)->delete();
-        $BillProduct = BillProduct::where('bill_id',$id)->delete();
+        BillExtraWork::where('bill_id',$id)->delete();
+        BillProduct::where('bill_id',$id)->delete();
+        BillAdditionalProduct::where('bill_id',$id)->delete();
         $Bill = Bill::findorfail($id)->delete();
         return redirect(route('admin.ViewBill'))->with('success','Bill Deleted Successfully!');
     }
 
-
-
-    public function search_customer_name()
-    {
+    public function search_customer_name(){
         return Client::all();
     }
-
-
 }

@@ -73,6 +73,8 @@ Edit Bill
                             </div>
                         </div>
 
+
+
                         <div class="tile">
                             <div class="col-lg-12">
                                 <div class="row">
@@ -88,8 +90,8 @@ Edit Bill
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Extra Work</th>
-                                            <th>Enter Amount</th>
+                                            <th>Work</th>
+                                            <th>Amount</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -115,6 +117,50 @@ Edit Bill
                                 </table>
                             </div>
                         </div>
+
+
+                <div class="tile">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label class="col-form-label col-form-label-lg" for="inputLarge">Additional Product</label>
+                                <div style="float:right;">
+                                    <button type="button" class="btn btn-primary btn-sm AddAdditionalProducts" >Add Additional Product</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="AppendAddAdditionalProduct">
+                                 @foreach($Bill->BillAdditionalProduct as $Product1)
+                                     <tr>
+                                        <td>
+                                            <input class="form-control" type="text" placeholder="Product" name="additionalProduct[name][]" value="{{ $Product1->name }}">
+                                       </td>
+                                        <td>
+                                            <input class="form-control" type="text" placeholder="Quantity" name="additionalProduct[qty][]" value="{{ $Product1->qty }}">
+                                        </td>
+                                        <td>
+                                            <input class="form-control additionalProductAmount" type="text" placeholder="Amount" name="additionalProduct[amount][]"  onKeyUp="calculateTotal()" value="{{ $Product1->amount }}">
+                                        </td>
+                                        <td><i class="fa fa-close fa-1x RemoveAdditionalProductButon btn" style="color:red;"></i>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
                         <div class="tile">
                             <div class="row">
@@ -349,6 +395,28 @@ Edit Bill
                 $('.AppendAddExtraWork').append(ExtraWork);
             });
 
+            $('body').on("click", ".AddAdditionalProducts", function (e) {
+                e.preventDefault();
+                var AdditionalWork =
+                    '<tr>'+
+                        '<td>'+
+                            '<input class="form-control" type="text" placeholder="Product" name="additionalProduct[name][]">'+
+                       ' </td>'+
+                        '<td>'+
+                            '<input class="form-control" type="text" placeholder="Quantity" name="additionalProduct[qty][]">'+
+                        '</td>'+
+                        '<td>'+
+                            '<input class="form-control additionalProductAmount" type="text" placeholder="Amount" name="additionalProduct[amount][]"  onKeyUp="calculateTotal()">'+
+                        '</td>'+
+                        '<td><i class="fa fa-close fa-1x RemoveAdditionalProductButon btn" style="color:red;"></i>'+
+                        '</td>'+
+                    '</tr>';
+                $('.AppendAddAdditionalProduct').append(AdditionalWork);
+            });
+
+
+
+
             $('body').on("click", ".RemoveExtraWorkButon", function (e) {
                 e.preventDefault();
                 $(this).parent().parent().remove();
@@ -377,6 +445,9 @@ Edit Bill
         function calculateTotal() {
             var total=0;
             $(".total_amount").each(function() {
+                total = parseInt($(this).val()) + parseInt(total);
+            });
+            $(".additionalProductAmount").each(function() {
                 total = parseInt($(this).val()) + parseInt(total);
             });
             $('#TOTALBILL').html(total);

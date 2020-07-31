@@ -102,7 +102,7 @@ Add Print
                                 <div style="float:right;">
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add Customer</button>
                                 </div>
-                                <select class="form-control CustomerName" name="client_id"  id="Customer" >
+                                <select class="form-control CustomerName" name="client_id" required="" id="Customer">
                                         <option selected disabled>Select Customer</option>
                                         @foreach($Clients as $Client)
                                             <option value="{{ $Client->id }}" {{ old('client_id') == $Client->id ? 'selected' : '' }}>{{ $Client->name }} || {{ $Client->phone_number }} || {{ $Client->bike_no }}</option>
@@ -165,12 +165,40 @@ Add Print
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Extra Work</th>
-                                    <th>Enter Amount</th>
+                                    <th>Work</th>
+                                    <th>Amount</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody class="AppendAddExtraWork">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label class="col-form-label col-form-label-lg" for="inputLarge">Additional Product</label>
+                                <div style="float:right;">
+                                    <button type="button" class="btn btn-primary btn-sm AddAdditionalProducts" >Add Additional Product</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="AppendAddAdditionalProduct">
+                                
                             </tbody>
                         </table>
                     </div>
@@ -393,11 +421,41 @@ Add Print
                 $('.AppendAddExtraWork').append(ExtraWork);
             });
 
+
+            $('body').on("click", ".AddAdditionalProducts", function (e) {
+                e.preventDefault();
+                var AdditionalWork =
+                    '<tr>'+
+                        '<td>'+
+                            '<input class="form-control" type="text" placeholder="Product" name="additionalProduct[name][]">'+
+                       ' </td>'+
+                        '<td>'+
+                            '<input class="form-control" type="text" placeholder="Quantity" name="additionalProduct[qty][]">'+
+                        '</td>'+
+                        '<td>'+
+                            '<input class="form-control additionalProductAmount" type="text" placeholder="Amount" name="additionalProduct[amount][]"  onKeyUp="calculateTotal()">'+
+                        '</td>'+
+                        '<td><i class="fa fa-close fa-1x RemoveAdditionalProductButon btn" style="color:red;"></i>'+
+                        '</td>'+
+                    '</tr>';
+                $('.AppendAddAdditionalProduct').append(AdditionalWork);
+            });
+
+
             $('body').on("click", ".RemoveExtraWorkButon", function (e) {
                 e.preventDefault();
                 $(this).parent().parent().remove();
                 calculateTotal();
             });
+
+
+            $('body').on("click", ".RemoveAdditionalProductButon", function (e) {
+                e.preventDefault();
+                $(this).parent().parent().remove();
+                // calculateTotal();
+            });
+
+
 
             $('#total_paid_amount').on('keyup',function (e) {
                 e.preventDefault();
@@ -413,14 +471,15 @@ Add Print
                 e.preventDefault();
                 calculateTotal()
             });
-
-
         });
 
 
         function calculateTotal() {
             var total=0;
             $(".total_amount").each(function() {
+                total = parseInt($(this).val()) + parseInt(total);
+            });
+             $(".additionalProductAmount").each(function() {
                 total = parseInt($(this).val()) + parseInt(total);
             });
             $('#TOTALBILL').html(total);

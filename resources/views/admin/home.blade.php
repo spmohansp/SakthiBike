@@ -134,6 +134,28 @@ Home
 					</a>
 				</div>
 			</div>
+			<div class="col-lg-6 col-xl-3 d-flex">
+				<div class="card flex-fill" id="DashboardMonthlyOutStanding">
+					<div class="card-header">
+						<h5 class="card-title mb-0">Shop Balance</h5>
+					</div>
+					<a href="{{ action('BillingController\ShopController@index')
+					 }}" style="color:black;text-decoration: none;">
+						<div class="card-body my-2">
+							<div class="row d-flex align-items-center mb-4">
+								<div class="col-8">
+									<h2 class="d-flex align-items-center mb-0 font-weight-light">
+										₹{{ $DashboardMonthlyWiseTotalIncomeExpense['shopBalance'] }}
+									</h2>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+
+
+
 		</div>
 	</div>
 @endsection

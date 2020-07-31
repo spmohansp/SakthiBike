@@ -15,6 +15,10 @@ class Bill extends Model
     }
 
 	public function BillExtraWork(){
-	        return $this->hasOne(ExtraWork::class,'id','extra_work_id');
-	    }
+	    return $this->hasOne(ExtraWork::class,'id','extra_work_id');
+	}
+
+	public function BillAdditionalProduct(){
+	    return $this->hasMany(BillAdditionalProduct::class,'bill_id','id');
+	}
 }
