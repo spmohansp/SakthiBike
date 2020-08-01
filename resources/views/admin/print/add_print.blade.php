@@ -365,38 +365,32 @@ Add Print
             $('body').on('change keyup','.Product,.Quantity',function (e) {
                 e.preventDefault();
                 var product_id = $("#product_id").val();
-                var qty = $("#qty").val();
+                var qty = $(".Quantity").val();
                 if(product_id !=''){
                     $.ajax({
                         type: 'get',
                         url: "{{ route('admin.GetProductStock') }}",
                         data:{product_id:product_id},
                         success:function (data) {
-                            if(qty>0){
-                                if(data.BillProduct!= null){
-                                    var calc = data.StockDetail.Unit - data.BillProduct;
-                                    count(qty,calc);
+                            console.log(qty +' '+ data.balance);
+                            if (data != '' && qty != null && qty != '') {
+                                console.log((qty > data)??0)
+                                if (qty > data.balance) {
+                                    $(".addbillproduct").hide();
+                                    $(".QuantityLimit").html('Your Quanity Limit is '+data.balance);
                                 }else{
-                                    var calc = data.StockDetail.Unit;
-                                    count(qty,calc);
+                                    $(".addbillproduct").show();
+                                    $(".QuantityLimit").html('');
                                 }
                             }else{
-                                count(qty,0);
                                 $(".addbillproduct").hide();
+                                $(".QuantityLimit").html('Check Stock');
                             }
                         }
                     });
                 }
-             });
+            });
 
-            function count(qty,calc) {
-                if(qty<=calc){
-                    $(".addbillproduct").show();
-                }else{
-                    $(".addbillproduct").hide();
-                    $(".QuantityLimit").text('Your Quanity Limit is '+calc);
-                }
-            }
 
             $('body').on("click", ".AddExtraWork", function (e) {
                 e.preventDefault();

@@ -17,8 +17,8 @@ Add Print
     <div class="pad">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card-body table-responsive" id="printdiv">
-                    <table class="table table-hover table-bordered" id="reporttable">
+                <div class="card-body table-responsive">
+                    <table class="table table-hover table-bordered DataTable">
                         <thead>
                             <tr>
                                 <th class="csvth">S.no</th>
@@ -53,8 +53,6 @@ Add Print
                 </div>
             </div>
         </div>
-    <br>
-    {!! $Bills->links() !!}
     </div>
 </div>
 @endsection

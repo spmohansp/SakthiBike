@@ -1,5 +1,5 @@
 @include('admin.layouts.header')
- <title>SRI SAKTHI BIKE ZONE</title>
+ <title>SRI SAKTHI BIKE</title>
 </head>
 <body class="app sidebar-mini rtl">
     <main class="app-content">

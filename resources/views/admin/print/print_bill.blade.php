@@ -61,7 +61,7 @@
                         <h3 align="right">Sri Sakthi Bike</h3>
                         <P style="margin-top: -15px">All Two Wheelers Service Center</P>
                         <P style="margin-top: -15px;"> Opp SPM Hospital, Rajiv Nagar, Alamarathu Compound,Tiruchengode</P>
-                        <p style="margin-top: -15px;">Cell : 9003885959 ,E-mail: srisakthibike@gmail.com</p>
+                        <p style="margin-top: -15px;">Cell : <b>9003885959</b> ,E-mail: <b>srisakthibike@gmail.com</b></p>
                     </div>
                 </div>
                 <hr style="margin-top: -17px;">
@@ -87,7 +87,7 @@
                         <br>
                         <table class="table">
                             <tr>
-                                <td>Invoice Number</td>
+                                <td>Invoice</td>
                                 <th>: {{ $Bill->bill_number }}</th>
                             </tr>
                             <tr>

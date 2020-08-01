@@ -24,7 +24,7 @@ View Shops
     <div class="row">
         <div class="col-md-12">
             <div class="tile-body table-responsive">
-                <table class="table ">
+                <table class="table DataTable">
                     <thead>
                         <tr>
                             <th>S.No</th>
@@ -61,7 +61,6 @@ View Shops
         </div>
     </div>
     <br>
-    {!! $Shops->links() !!}
 </div>
 
 @endsection

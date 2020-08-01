@@ -1,5 +1,5 @@
 <header class="app-header"><a class="app-header__logo" href="{{ url('/admin/home') }}">
-        <!--<img class="imglogo" src="url('/images/logo.png')"" alt="User Image">--><h5><font face="Arial" color="Orange">SRI SAKTHI BIKE ZONE<i  class="fa fa-motorcycle"  aria-hidden="true"></i></font></h5>
+        <!--<img class="imglogo" src="url('/images/logo.png')"" alt="User Image">--><h5><font face="Arial" color="Orange">SRI SAKTHI BIKE<i  class="fa fa-motorcycle"  aria-hidden="true"></i></font></h5>
 
   <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
   <!-- Navbar Right Menu-->

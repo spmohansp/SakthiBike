@@ -16,7 +16,7 @@ class ShopController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $Data['Shops'] = Shop::paginate(10);
+        $Data['Shops'] = Shop::get();
         return view('admin.shop.view',$Data);
     }
 

@@ -25,6 +25,8 @@
 
 <!-- sweetalert -->
 <script type="text/javascript" src="{{ url('/billing/js/plugins/sweetalert.min.js') }}"></script>
+
+
 <script>
     $(document).ready(function () {
         $(".calculatevalue").on('keyup change', function (){
@@ -34,6 +36,10 @@
             var CESS = $("#CESS").val();
             console.log(CGST);
             $('#Selling_Price_With_Tax').val((parseInt($('#Selling_Price').val()) / 100) * parseFloat($('#CGST').val()) + (parseInt($('#Selling_Price').val()) / 100) * parseFloat($('#SGST').val()) + (parseInt($('#Selling_Price').val()) / 100) * parseFloat($('#CESS').val()) + parseInt($("#Selling_Price").val()));
+        });
+
+        $('.DataTable').DataTable({
+            "aaSorting": []
         });
     });
 </script>
