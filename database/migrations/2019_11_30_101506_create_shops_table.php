@@ -18,6 +18,7 @@ class CreateShopsTable extends Migration
             $table->string('name');
             $table->string('phone_number')->nullable()->unique();
             $table->longtext('address')->nullable();
+            $table->string('initial_balance')->nullable();
             $table->timestamps();
         });
     }

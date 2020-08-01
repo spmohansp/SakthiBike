@@ -46,6 +46,11 @@ Add Shops
                             <textarea class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Shop Address" name="address">{{ $Shop->address }}</textarea>
                         </div>
                     </div>
+                     <div class="col-lg-6">
+                        <div class="form-group">
+                            <input class="form-control form-control-lg" id="" type="text" aria-describedby="emailHelp" placeholder="Shop Initial Balance" value="{{  $Shop->initial_balance }}" name="initial_balance">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">

@@ -7,6 +7,7 @@ use App\ExtraWork;
 use App\Bill;
 use App\ExtraIncome;
 use App\Attendence;
+use App\Shop;
 use App\Stock;
 use App\StockIncomePayment;
 
@@ -41,8 +42,7 @@ if (! function_exists('DashboardMonthlyWiseTotalIncomeExpense')) {
         $Data['OutStanding'] = Bill::sum('balance_amount');
         $Data['Expense'] = Expense::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->sum('amount') + Stock::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->sum('amount_given')+ StockIncomePayment::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->sum('amount');
         $Data['Extra_Income'] = ExtraIncome::whereYear('date', '=', $Year)->whereMonth('date', '=', $Month)->get()->sum('amount');
-        $Data['shopBalance'] = Stock::where('balance','!=',0)->sum('balance') - StockIncomePayment::where('amount','!=',0)->sum('amount');
-
+        $Data['shopBalance'] = Stock::where('balance','!=',0)->sum('balance') - StockIncomePayment::where('amount','!=',0)->sum('amount') +  Shop::sum('initial_balance');
         return $Data;
     }
 }
@@ -61,8 +61,9 @@ if (! function_exists('DashboardIncomeDetails')) {
 
 if (! function_exists('ShopBalance')) {
     function ShopBalance($shop_id) {
+        $Shop = Shop::findorfail($shop_id);
         $Stocks = Stock::where('shop_id',$shop_id)->sum('balance');
         $StockIncomePayment = StockIncomePayment::where('shop_id',$shop_id)->sum('amount');
-        return $Stocks  - $StockIncomePayment;
+        return $Stocks + $Shop->initial_balance - $StockIncomePayment;
     }
 }
